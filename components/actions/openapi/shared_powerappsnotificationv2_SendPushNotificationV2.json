@@ -1,0 +1,150 @@
+﻿{
+    "id":  "shared_powerappsnotificationv2_SendPushNotificationV2",
+    "connector":  "shared_powerappsnotificationv2",
+    "connectorBase":  "shared_powerappsnotificationv2",
+    "operationId":  "SendPushNotificationV2",
+    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_powerappsnotificationv2",
+    "type":  "OpenApiConnection",
+    "learnedFrom":  [
+                        "01faa258-46fa-f011-8406-0022480a3b0e"
+                    ],
+    "learnedFromName":  [
+                            "Child Flow - Add Processing Log Annotation"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "environment":  [
+                        "org1cd97ca4.crm.dynamics.com"
+                    ],
+    "template":  {
+                     "Send_push_notification_V2":  {
+                                                       "runAfter":  {
+                                                                        "Condition":  [
+                                                                                          "Succeeded"
+                                                                                      ]
+                                                                    },
+                                                       "metadata":  {
+                                                                        "operationMetadataId":  "31addeb8-4076-43b7-aa04-7e859f0dc8f6"
+                                                                    },
+                                                       "type":  "OpenApiConnection",
+                                                       "inputs":  {
+                                                                      "host":  {
+                                                                                   "connectionName":  "shared_powerappsnotificationv2",
+                                                                                   "operationId":  "SendPushNotificationV2",
+                                                                                   "apiId":  "/providers/Microsoft.PowerApps/apis/shared_powerappsnotificationv2"
+                                                                               },
+                                                                      "parameters":  {
+                                                                                         "payload/playerType":  "PowerApps",
+                                                                                         "payload/app":  "{\n  \"appIdentifier\": \"biz_OrderProcessingCenter\",\n  \"displayName\": \"AI Enhanced Document Processing Center\",\n  \"type\": \"AppModule\"\n}",
+                                                                                         "payload/recipients":  [
+                                                                                                                    "@outputs(\u0027Get_data_owner\u0027)?[\u0027body/internalemailaddress\u0027]"
+                                                                                                                ],
+                                                                                         "payload/message":  "@triggerBody()[\u0027text_6\u0027]",
+                                                                                         "payload/openApp":  true,
+                                                                                         "payload/dynamicParams/entityLogicalName":  "biz_importlog",
+                                                                                         "payload/dynamicParams/entityPage":  "{\n  \"id\": \"839c689a-9bfd-45a2-87ec-5087500b022b\",\n  \"displayName\": \"Form - Information\",\n  \"type\": \"entityrecord\"\n}",
+                                                                                         "payload/dynamicParams/recordId":  "@triggerBody()[\u0027text_5\u0027]"
+                                                                                     },
+                                                                      "authentication":  {
+                                                                                             "type":  "Raw",
+                                                                                             "value":  "@json(decodeBase64(triggerOutputs().headers[\u0027X-MS-APIM-Tokens\u0027]))[\u0027$ConnectionKey\u0027]"
+                                                                                         }
+                                                                  }
+                                                   }
+                 },
+    "inputSchema":  [
+                        {
+                            "name":  "connectionId",
+                            "in":  "path",
+                            "required":  true,
+                            "x-ms-visibility":  "internal",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "payload",
+                            "description":  "The message\u0027s JSON or raw string payload.",
+                            "in":  "body",
+                            "required":  true,
+                            "schema":  {
+                                           "type":  "object",
+                                           "properties":  {
+                                                              "playerType":  {
+                                                                                 "x-ms-summary":  "Mobile app",
+                                                                                 "description":  "The mobile app hosting your app.",
+                                                                                 "type":  "string",
+                                                                                 "x-ms-dynamic-list":  {
+                                                                                                           "operationId":  "ListPlayers",
+                                                                                                           "itemsPath":  "items",
+                                                                                                           "itemTitlePath":  "displayName",
+                                                                                                           "itemValuePath":  "playerType",
+                                                                                                           "parameters":  {
+
+                                                                                                                          }
+                                                                                                       }
+                                                                             },
+                                                              "app":  {
+                                                                          "x-ms-summary":  "Your app",
+                                                                          "description":  "Your app receiving the push notification.",
+                                                                          "type":  "string",
+                                                                          "x-ms-dynamic-list":  {
+                                                                                                    "operationId":  "ListApps",
+                                                                                                    "itemsPath":  "items",
+                                                                                                    "itemTitlePath":  "displayName",
+                                                                                                    "parameters":  {
+                                                                                                                       "playerType":  {
+                                                                                                                                          "parameterReference":  "payload/playerType"
+                                                                                                                                      }
+                                                                                                                   }
+                                                                                                }
+                                                                      },
+                                                              "recipients":  {
+                                                                                 "x-ms-summary":  "Recipients",
+                                                                                 "description":  "List of user emails or user principle identifiers.",
+                                                                                 "type":  "array",
+                                                                                 "items":  {
+                                                                                               "type":  "string"
+                                                                                           }
+                                                                             },
+                                                              "message":  {
+                                                                              "x-ms-summary":  "Message",
+                                                                              "description":  "Message body for the push notification.",
+                                                                              "type":  "string"
+                                                                          },
+                                                              "openApp":  {
+                                                                              "x-ms-summary":  "Open app",
+                                                                              "description":  "Whether to open or not the app when user taps on the push notification.",
+                                                                              "type":  "boolean"
+                                                                          },
+                                                              "dynamicParams":  {
+                                                                                    "description":  "The dynamic parameters.",
+                                                                                    "type":  "object",
+                                                                                    "x-ms-dynamic-properties":  {
+                                                                                                                    "operationId":  "GetDynamicSchema",
+                                                                                                                    "parameters":  {
+                                                                                                                                       "app":  {
+                                                                                                                                                   "parameterReference":  "payload/app"
+                                                                                                                                               }
+                                                                                                                                   },
+                                                                                                                    "itemValuePath":  "schema"
+                                                                                                                }
+                                                                                }
+                                                          },
+                                           "required":  [
+                                                            "playerType",
+                                                            "app",
+                                                            "recipients",
+                                                            "message",
+                                                            "openApp",
+                                                            "dynamicParams"
+                                                        ]
+                                       }
+                        }
+                    ],
+    "swaggerLearned":  true,
+    "outputSchema":  {
+                         "type":  "object",
+                         "description":  "No response schema in Swagger"
+                     },
+    "graphConvertible":  true,
+    "graphNodeType":  "connector"
+}

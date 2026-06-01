@@ -1,0 +1,111 @@
+﻿{
+    "id":  "shared_commondataserviceforapps_DeleteRecord",
+    "connector":  "shared_commondataserviceforapps",
+    "connectorBase":  "shared_commondataserviceforapps",
+    "operationId":  "DeleteRecord",
+    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+    "type":  "OpenApiConnection",
+    "learnedFrom":  [
+                        "e55931c1-601f-f011-998a-00224802c180"
+                    ],
+    "learnedFromName":  [
+                            "Conversation Analyzer | Analyze Conversation Based On Prompt"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "environment":  [
+                        "orgdf331f66.crm5.dynamics.com"
+                    ],
+    "template":  {
+                     "Delete_a_row:_Delete_existing_Conversation_Analyzer_records":  {
+                                                                                         "runAfter":  {
+
+                                                                                                      },
+                                                                                         "metadata":  {
+                                                                                                          "operationMetadataId":  "bad0e6fb-7c2e-4d10-8cf7-a6fba8a0e4cc"
+                                                                                                      },
+                                                                                         "type":  "OpenApiConnection",
+                                                                                         "inputs":  {
+                                                                                                        "host":  {
+                                                                                                                     "connectionName":  "shared_commondataserviceforapps",
+                                                                                                                     "operationId":  "DeleteRecord",
+                                                                                                                     "apiId":  "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                                                                                                                 },
+                                                                                                        "parameters":  {
+                                                                                                                           "entityName":  "cat_conversationanalyzers",
+                                                                                                                           "recordId":  "@items(\u0027Apply_to_each:_Conversation_Analyzer\u0027)?[\u0027cat_conversationanalyzerid\u0027]"
+                                                                                                                       },
+                                                                                                        "authentication":  "@parameters(\u0027$authentication\u0027)"
+                                                                                                    }
+                                                                                     }
+                 },
+    "inputSchema":  [
+                        {
+                            "name":  "connectionId",
+                            "in":  "path",
+                            "required":  true,
+                            "x-ms-visibility":  "internal",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "entityName",
+                            "in":  "path",
+                            "description":  "Choose a table",
+                            "required":  true,
+                            "x-ms-url-encoding":  "double",
+                            "x-ms-dynamic-values":  {
+                                                        "operationId":  "GetEntities",
+                                                        "parameters":  {
+
+                                                                       },
+                                                        "value-collection":  "value",
+                                                        "value-path":  "EntitySetName",
+                                                        "value-title":  "DisplayCollectionName/UserLocalizedLabel/Label"
+                                                    },
+                            "x-ms-summary":  "Table name",
+                            "type":  "string",
+                            "x-ms-description-for-model":  "Name of the target Dataverse table (e.g., \u0027accounts\u0027). Use get_tables to discover valid names.",
+                            "x-ms-name-for-model":  "delete_row_entityName"
+                        },
+                        {
+                            "name":  "recordId",
+                            "in":  "path",
+                            "description":  "Enter the row\u0027s globally unique identifier (GUID)",
+                            "required":  true,
+                            "x-ms-url-encoding":  "double",
+                            "x-ms-summary":  "Row ID",
+                            "type":  "string",
+                            "x-ms-description-for-model":  "Primary key (GUID) of the row to delete. Must be a valid ID from the table.",
+                            "x-ms-name-for-model":  "delete_row_recordId"
+                        },
+                        {
+                            "name":  "partitionId",
+                            "in":  "query",
+                            "description":  "An option to specify the partitionId while deleting row for NoSQL tables",
+                            "required":  false,
+                            "x-ms-summary":  "Partition Id",
+                            "x-ms-visibility":  "advanced",
+                            "type":  "string",
+                            "x-ms-description-for-model":  "Optional. Partition key for NoSQL-backed tables. Omit for standard Dataverse tables.",
+                            "x-ms-name-for-model":  "delete_row_partitionId"
+                        }
+                    ],
+    "dynamicValuesRef":  {
+                             "entityName":  {
+                                                "operationId":  "GetEntities",
+                                                "titlePath":  "DisplayCollectionName/UserLocalizedLabel/Label",
+                                                "parameters":  {
+
+                                                               },
+                                                "valueCollection":  "value",
+                                                "valuePath":  "EntitySetName"
+                                            }
+                         },
+    "swaggerLearned":  true,
+    "outputSchema":  {
+                         "type":  "object",
+                         "description":  "No response schema in Swagger"
+                     },
+    "graphConvertible":  true,
+    "graphNodeType":  "connector"
+}

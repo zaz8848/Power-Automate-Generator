@@ -1,0 +1,180 @@
+﻿{
+    "id":  "shared_d365marketingforapps_DataverseDataSource_ResolveBindingsData",
+    "connector":  "shared_d365marketingforapps",
+    "connectorBase":  "shared_d365marketingforapps",
+    "operationId":  "DataverseDataSource_ResolveBindingsData",
+    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_d365marketingforapps",
+    "type":  "OpenApiConnection",
+    "learnedFrom":  [
+                        "cdd6ed42-6394-f011-b4cc-000d3a099cdf",
+                        "e8d6ed42-6394-f011-b4cc-000d3a099cdf",
+                        "f8d6ed42-6394-f011-b4cc-000d3a099cdf",
+                        "08d7ed42-6394-f011-b4cc-000d3a099cdf",
+                        "18d7ed42-6394-f011-b4cc-000d3a099cdf",
+                        "6e5ee200-6694-f011-b4cc-000d3a099cdf",
+                        "765ee200-6694-f011-b4cc-000d3a099cdf",
+                        "7d5ee200-6694-f011-b4cc-000d3a099cdf",
+                        "5ab5d806-6694-f011-b4cc-000d3a099cdf",
+                        "63b5d806-6694-f011-b4cc-000d3a099cdf",
+                        "5df39001-6494-f011-b4cc-000d3ac6a644",
+                        "64f39001-6494-f011-b4cc-000d3ac6a644",
+                        "6bf39001-6494-f011-b4cc-000d3ac6a644",
+                        "73f39001-6494-f011-b4cc-000d3ac6a644",
+                        "7bf39001-6494-f011-b4cc-000d3ac6a644",
+                        "2f54c3d3-6494-f011-b4cc-00224856c036",
+                        "3754c3d3-6494-f011-b4cc-00224856c036",
+                        "3e54c3d3-6494-f011-b4cc-00224856c036",
+                        "4654c3d3-6494-f011-b4cc-00224856c036",
+                        "4d54c3d3-6494-f011-b4cc-00224856c036"
+                    ],
+    "learnedFromName":  [
+                            "CXP_Outbound Call Journey_20250918074416",
+                            "CXP_Outbound Call Journey_20250918074416",
+                            "CXP_Outbound Call Journey_20250918074416",
+                            "CXP_Outbound Call Journey_20250918074416",
+                            "CXP_Outbound Call Journey_20250918074416",
+                            "CXP_Test Journey_20250918080356",
+                            "CXP_Test Journey_20250918080356",
+                            "CXP_Test Journey_20250918080356",
+                            "CXP_Test Journey_20250918080356",
+                            "CXP_Test Journey_20250918080356",
+                            "CXP_Contact Create Outbound Journey_20250918074937",
+                            "CXP_Contact Create Outbound Journey_20250918074937",
+                            "CXP_Contact Create Outbound Journey_20250918074937",
+                            "CXP_Contact Create Outbound Journey_20250918074937",
+                            "CXP_Contact Create Outbound Journey_20250918074937",
+                            "CXP_Outbound CC 01 Journey_20250918075525",
+                            "CXP_Outbound CC 01 Journey_20250918075525",
+                            "CXP_Outbound CC 01 Journey_20250918075525",
+                            "CXP_Outbound CC 01 Journey_20250918075525",
+                            "CXP_Outbound CC 01 Journey_20250918075525"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "environment":  [
+                        "orgdf331f66.crm5.dynamics.com"
+                    ],
+    "template":  {
+                     "DataverseDataSource-13f46e3c-1482-487b-ac51-7afd70ad6426":  {
+                                                                                      "type":  "OpenApiConnection",
+                                                                                      "inputs":  {
+                                                                                                     "host":  {
+                                                                                                                  "connectionName":  "shared_d365marketingforapps",
+                                                                                                                  "operationId":  "DataverseDataSource_ResolveBindingsData",
+                                                                                                                  "apiId":  "/providers/Microsoft.PowerApps/apis/shared_d365marketingforapps"
+                                                                                                              },
+                                                                                                     "retryPolicy":  {
+                                                                                                                         "count":  50,
+                                                                                                                         "interval":  "PT1M",
+                                                                                                                         "maximumInterval":  "PT30M",
+                                                                                                                         "minimumInterval":  "PT1M",
+                                                                                                                         "type":  "Exponential"
+                                                                                                                     },
+                                                                                                     "parameters":  {
+                                                                                                                        "organizationId":  "f419f241-2a06-f011-b015-000d3a086781",
+                                                                                                                        "body/bindings":  {
+                                                                                                                                              "_CXP_Customer_":  "@json(\u0027{\"source\":\"CdsProfileDataSource\",\"outputPath\":\"*\",\"outputType\":\"unspecified\",\"inputs\":{\"sourceType\":{\"type\":[\"string\"],\"value\":\"@{triggerBody()?[\u0027\u0027targetEntity\u0027\u0027]}\"},\"selectAttributes\":{\"value\":[\"mobilephone\"]}},\"outputs\":{}}\u0027)"
+                                                                                                                                          },
+                                                                                                                        "body/resolvedBindings":  {
+                                                                                                                                                      "$[\u0027_CXP_Customer_\u0027].inputs.recordId":  {
+                                                                                                                                                                                                            "data":  {
+                                                                                                                                                                                                                         "recordReferenceType":  "RecordReference",
+                                                                                                                                                                                                                         "id":  "@{triggerBody()?[\u0027profileId\u0027]}",
+                                                                                                                                                                                                                         "logicalName":  "@{triggerBody()?[\u0027targetEntity\u0027]}"
+                                                                                                                                                                                                                     },
+                                                                                                                                                                                                            "dataType":  "lookup",
+                                                                                                                                                                                                            "subPath":  "$.value"
+                                                                                                                                                                                                        },
+                                                                                                                                                      "$[\u0027_CXP_Customer_\u0027].inputs.sourceType":  {
+                                                                                                                                                                                                              "data":  {
+                                                                                                                                                                                                                           "value":  "@{triggerBody()?[\u0027targetEntity\u0027]}"
+                                                                                                                                                                                                                       },
+                                                                                                                                                                                                              "dataType":  "string",
+                                                                                                                                                                                                              "subPath":  "$.value"
+                                                                                                                                                                                                          }
+                                                                                                                                                  },
+                                                                                                                        "body/bindingDataResolutionContext/timeZoneWindowsName":  "UTC",
+                                                                                                                        "x-entity-id":  "@{triggerBody()?[\u0027profileId\u0027]}",
+                                                                                                                        "x-entity-type":  "@{triggerBody()?[\u0027targetEntity\u0027]}",
+                                                                                                                        "x-cj-iteration-id":  "@{triggerBody()?[\u0027journeyInstanceId\u0027]}",
+                                                                                                                        "x-cj-id":  "f1c9fa39-6394-f011-b4cc-00224856c036",
+                                                                                                                        "x-cj-activity-id":  "13f46e3c-1482-487b-ac51-7afd70ad6426"
+                                                                                                                    }
+                                                                                                 }
+                                                                                  }
+                 },
+    "inputSchema":  {
+                        "x-cj-type":  {
+                                          "description":  "Customer journey type",
+                                          "in":  "header",
+                                          "type":  "string",
+                                          "required":  false
+                                      },
+                        "x-entity-type":  {
+                                              "description":  "Logical name of entity that started the customer journey",
+                                              "in":  "header",
+                                              "type":  "string",
+                                              "required":  false
+                                          },
+                        "connectionId":  {
+                                             "description":  null,
+                                             "in":  "path",
+                                             "type":  "string",
+                                             "required":  true
+                                         },
+                        "organizationId":  {
+                                               "description":  null,
+                                               "in":  "path",
+                                               "type":  "string",
+                                               "required":  true
+                                           },
+                        "x-entity-id":  {
+                                            "description":  "Uuid of enity that started the customer journey",
+                                            "in":  "header",
+                                            "type":  "string",
+                                            "required":  false
+                                        },
+                        "x-cj-id":  {
+                                        "description":  "Customer journey identifier",
+                                        "in":  "header",
+                                        "type":  "string",
+                                        "required":  false
+                                    },
+                        "x-cj-iteration-id":  {
+                                                  "description":  "Customer journey iteration identifier",
+                                                  "in":  "header",
+                                                  "type":  "string",
+                                                  "required":  false
+                                              },
+                        "body":  {
+                                     "description":  "Resolve bindings data request",
+                                     "in":  "body",
+                                     "type":  null,
+                                     "required":  true
+                                 },
+                        "x-cj-activity-id":  {
+                                                 "description":  "Customer journey tile identifier",
+                                                 "in":  "header",
+                                                 "type":  "string",
+                                                 "required":  false
+                                             },
+                        "x-cj-version":  {
+                                             "description":  "Customer journey version",
+                                             "in":  "header",
+                                             "type":  "string",
+                                             "required":  false
+                                         }
+                    },
+    "outputSchema":  {
+                         "$ref":  "ResolvePlaceholdersDataResponse",
+                         "properties":  {
+                                            "data":  {
+                                                         "type":  "object",
+                                                         "description":  null
+                                                     }
+                                        }
+                     },
+    "swaggerLearned":  true,
+    "graphConvertible":  true,
+    "graphNodeType":  "connector"
+}

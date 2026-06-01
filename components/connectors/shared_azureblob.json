@@ -1,0 +1,24 @@
+﻿{
+    "id":  "shared_azureblob",
+    "displayName":  "Azure Blob Storage",
+    "connectorId":  "/providers/Microsoft.PowerApps/apis/shared_azureblob",
+    "learnedFrom":  [
+                        "Wells Dev batch"
+                    ],
+    "learnedAt":  "2026-05-26",
+    "operations":  [
+                       {
+                           "operationId":  "CreateFile_V2",
+                           "description":  "鍒涘缓/涓婁紶 blob 鏂囦欢"
+                       },
+                       {
+                           "operationId":  "DeleteFile_V2",
+                           "description":  "鍒犻櫎 blob 鏂囦欢"
+                       },
+                       {
+                           "operationId":  "GetFileContent_V2",
+                           "description":  "鑾峰彇 blob 鏂囦欢鍐呭"
+                       }
+                   ],
+    "swaggerUrl":  "https://api.powerapps.com/providers/Microsoft.PowerApps/apis/shared_azureblob?api-version=2020-06-01\u0026$filter=environment eq \u0027{envId}\u0027\u0026$select=properties.swagger"
+}

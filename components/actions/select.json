@@ -1,0 +1,119 @@
+﻿{
+    "id":  "Select",
+    "type":  "Select",
+    "learnedFrom":  [
+                        "ee87fd77-09fa-f011-8407-000d3a316017",
+                        "f7d564de-0705-f111-8407-000d3a316017",
+                        "15a680d4-1e05-f111-8407-6045bd5777da",
+                        "33afba72-d005-f111-8407-6045bd5777da",
+                        "f1e81397-e146-f111-bec7-6045bd5777da",
+                        "e9e12dad-278d-95b2-26b8-e88389c4b23d",
+                        "b1c1d185-c57c-f011-b4cc-000d3a080cec",
+                        "861bdd5e-bc09-ef11-9f8a-000d3a5cb958",
+                        "fa40c544-9a0b-ef11-9f8a-000d3a5cb958",
+                        "3ddf75ff-1597-f011-b41c-000d3ac6a644",
+                        "fe662b82-0dff-ef11-bae2-00224802c180",
+                        "c7db6d55-e004-f011-bae2-0022480427dd",
+                        "d8a8c388-8a25-f011-8c4e-00224808dbf5",
+                        "98466431-8d25-f011-8c4e-00224808dbf5",
+                        "9e65ce8d-8f25-f011-8c4e-00224808dbf5",
+                        "42853375-172c-f011-8c4e-002248095f4f",
+                        "117db4e1-7dbf-ef11-a72e-0022481efed6",
+                        "290d043b-9fbf-ef11-a72e-0022481efed6",
+                        "09a76655-9fbf-ef11-a72e-0022481efed6",
+                        "bf53b222-1c95-f011-b4cc-00224856c036",
+                        "1a0cb2d6-fc3d-f011-877a-6045bd05e54b",
+                        "5d27b158-cb45-f011-877a-6045bd06efb1",
+                        "af6b06fb-4553-f011-877b-7c1e524ac215"
+                    ],
+    "learnedFromName":  [
+                            "Sharepoint-PO Uploaded-Extract Po Item",
+                            "Sharepoint-Modify-Post Data To Server",
+                            "PowerApps-Validate Invoices",
+                            "Sharepoint-Modified-ExpenseRequest-ExtractInvoice",
+                            "AgentFlow-EmailRounting",
+                            "Untitled flow",
+                            "Automatic - Modify - AI Processing Log",
+                            "Test Automation | Enrich with Azure Application Insights",
+                            "Test Automation | Enrich with Dataverse Conversation Transcripts",
+                            "PowerApps-Generate RFP Proposal ",
+                            "Test Automation | Run Multiturn Tests (Child)",
+                            "Agent Inventory | Agents Data Load (Child)",
+                            "Setup Wizard | Get Solution Environment Variable Definitions Details",
+                            "Setup Wizard | Get Solution Connection References Details",
+                            "Setup Wizard | Get Solution Flows Details",
+                            "Test Automation | Multi Topic Transcripts Enrichment (Child)",
+                            "Conversation KPI | Generate Conversation KPIs Scheduler",
+                            "Conversation KPI | Copy Transcripts (Child)",
+                            "Conversation KPI | Copy Transcripts (Grandchild)",
+                            "AgentFlow-Approval",
+                            "AI Evaluation Flow for Conversation",
+                            "Call custom agent",
+                            "Test Automation | Validate Agent Plans (Child)"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "templates":  [
+                      {
+                          "template":  {
+                                           "type":  "Select",
+                                           "inputs":  {
+                                                          "from":  "@body(\u0027Filter_array-ContentList\u0027)",
+                                                          "select":  "@item()?[\u0027fullPageText\u0027]"
+                                                      },
+                                           "runAfter":  {
+                                                            "Filter_array-ContentList":  [
+                                                                                             "Succeeded"
+                                                                                         ]
+                                                        },
+                                           "metadata":  {
+                                                            "operationMetadataId":  "9b8ff184-79aa-462b-b2f0-b4f4021f841e"
+                                                        }
+                                       },
+                          "name":  "Select-ContentList-Content"
+                      },
+                      {
+                          "template":  {
+                                           "type":  "Select",
+                                           "inputs":  {
+                                                          "from":  "@outputs(\u0027Recognize_text_in_image_or_document\u0027)?[\u0027body/responsev2/predictionOutput/results\u0027]",
+                                                          "select":  {
+                                                                         "page":  "@item()?[\u0027page\u0027]",
+                                                                         "fullPageText":  "@item()?[\u0027fullPageText\u0027]"
+                                                                     }
+                                                      },
+                                           "metadata":  {
+                                                            "operationMetadataId":  "e6c62980-d69e-4de5-8baa-1f7a947ea42b"
+                                                        }
+                                       },
+                          "name":  "Select-DocPagesList"
+                      },
+                      {
+                          "template":  {
+                                           "type":  "Select",
+                                           "inputs":  {
+                                                          "from":  "@outputs(\u0027Compose_-ParseJson\u0027)?[\u0027Data\u0027]",
+                                                          "select":  {
+                                                                         "Pos.":  "@null",
+                                                                         "Order number/Item":  "@null",
+                                                                         "Part Number":  "@item()?[\u0027Part number\u0027]",
+                                                                         "Description":  "@null",
+                                                                         "Ordered qty":  "@int(if(empty(item()?[\u0027China Production\u0027]),\u00270\u0027,item()?[\u0027China Production\u0027]))",
+                                                                         "Destination":  "@null",
+                                                                         "Unit price":  "@null",
+                                                                         "Total value":  "@null",
+                                                                         "Order issue date":  "@item()?[\u0027ITALIA\u0027]",
+                                                                         "Order delivery":  "@addDays(item()?[\u0027CHINA\u0027],15)",
+                                                                         "Remarks":  "@item()?[\u0027Comments\u0027]"
+                                                                     }
+                                                      },
+                                           "metadata":  {
+                                                            "operationMetadataId":  "38e7a66a-0b8c-41d4-8605-d0baad4ca6d3"
+                                                        }
+                                       },
+                          "name":  "Select-PeGOpenTable"
+                      }
+                  ],
+    "graphConvertible":  true,
+    "graphNodeType":  "builtinFunction"
+}

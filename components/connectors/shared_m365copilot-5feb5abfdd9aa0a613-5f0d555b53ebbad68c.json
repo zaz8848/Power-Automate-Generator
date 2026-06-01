@@ -1,0 +1,22 @@
+﻿{
+    "connector":  "shared_m365copilot-5feb5abfdd9aa0a613-5f0d555b53ebbad68c",
+    "learnedAt":  "2026-05-26",
+    "operations":  [
+                       {
+                           "operationId":  "CreateConversation",
+                           "type":  "OpenApiConnection",
+                           "componentFile":  "actions/openapi/shared_m365copilot-5feb5abfdd9aa0a613-5f0d555b53ebbad68c_CreateConversation.json",
+                           "flowCount":  1
+                       },
+                       {
+                           "operationId":  "StartConversation",
+                           "type":  "OpenApiConnection",
+                           "componentFile":  "actions/openapi/shared_m365copilot-5feb5abfdd9aa0a613-5f0d555b53ebbad68c_StartConversation.json",
+                           "flowCount":  1
+                       }
+                   ],
+    "triggers":  [
+
+                 ],
+    "swaggerUrl":  "https://api.powerapps.com/providers/Microsoft.PowerApps/apis/shared_m365copilot-5feb5abfdd9aa0a613-5f0d555b53ebbad68c?api-version=2020-06-01\u0026$filter=environment eq \u0027{envId}\u0027\u0026$select=properties.swagger"
+}

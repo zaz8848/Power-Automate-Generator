@@ -1,0 +1,132 @@
+﻿{
+    "connector":  "shared_sharepointonline",
+    "learnedAt":  "2026-05-26",
+    "operations":  [
+                       {
+                           "operationId":  "GetFileItem",
+                           "type":  "OpenApiConnection",
+                           "componentFile":  "actions/openapi/shared_sharepointonline_GetFileItem.json",
+                           "flowCount":  2
+                       },
+                       {
+                           "operationId":  "PatchItem",
+                           "type":  "OpenApiConnection",
+                           "componentFile":  "actions/openapi/shared_sharepointonline_PatchItem.json",
+                           "flowCount":  5
+                       },
+                       {
+                           "operationId":  "GetFileContent",
+                           "type":  "OpenApiConnection",
+                           "componentFile":  "actions/openapi/shared_sharepointonline_GetFileContent.json",
+                           "flowCount":  2
+                       },
+                       {
+                           "operationId":  "PostItem",
+                           "type":  "OpenApiConnection",
+                           "componentFile":  "actions/openapi/shared_sharepointonline_PostItem.json",
+                           "flowCount":  3
+                       },
+                       {
+                           "operationId":  "GetItemAttachments",
+                           "type":  "OpenApiConnection",
+                           "componentFile":  "actions/openapi/shared_sharepointonline_GetItemAttachments.json",
+                           "flowCount":  2
+                       },
+                       {
+                           "operationId":  "GetFileItems",
+                           "type":  "OpenApiConnection",
+                           "componentFile":  "actions/openapi/shared_sharepointonline-1_GetFileItems.json",
+                           "flowCount":  1
+                       },
+                       {
+                           "operationId":  "HttpRequest",
+                           "type":  "OpenApiConnection",
+                           "componentFile":  "actions/openapi/shared_sharepointonline_HttpRequest.json",
+                           "flowCount":  1
+                       },
+                       {
+                           "operationId":  "GetAllTables",
+                           "type":  "OpenApiConnection",
+                           "componentFile":  "actions/openapi/shared_sharepointonline-1_GetAllTables.json",
+                           "flowCount":  1
+                       },
+                       {
+                           "operationId":  "PostItem",
+                           "type":  "OpenApiConnection",
+                           "componentFile":  "actions/openapi/shared_sharepointonline-1_PostItem.json",
+                           "flowCount":  1
+                       },
+                       {
+                           "operationId":  "GetItemChanges",
+                           "type":  "OpenApiConnection",
+                           "componentFile":  "actions/openapi/shared_sharepointonline_GetItemChanges.json",
+                           "flowCount":  2
+                       },
+                       {
+                           "operationId":  "GetAttachmentContent",
+                           "type":  "OpenApiConnection",
+                           "componentFile":  "actions/openapi/shared_sharepointonline_GetAttachmentContent.json",
+                           "flowCount":  2
+                       },
+                       {
+                           "operationId":  "GetItems",
+                           "type":  "OpenApiConnection",
+                           "componentFile":  "actions/openapi/shared_sharepointonline_GetItems.json",
+                           "flowCount":  4
+                       },
+                       {
+                           "operationId":  "HttpRequest",
+                           "type":  "OpenApiConnection",
+                           "componentFile":  "actions/openapi/shared_sharepointonline-1_HttpRequest.json",
+                           "flowCount":  1
+                       },
+                       {
+                           "operationId":  "GetFileItems",
+                           "type":  "OpenApiConnection",
+                           "componentFile":  "actions/openapi/shared_sharepointonline_GetFileItems.json",
+                           "flowCount":  1
+                       },
+                       {
+                           "operationId":  "CreateFile",
+                           "type":  "OpenApiConnection",
+                           "componentFile":  "actions/openapi/shared_sharepointonline_CreateFile.json",
+                           "flowCount":  1
+                       },
+                       {
+                           "operationId":  "GetItem",
+                           "type":  "OpenApiConnection",
+                           "componentFile":  "actions/openapi/shared_sharepointonline_GetItem.json",
+                           "flowCount":  1
+                       },
+                       {
+                           "operationId":  "GetAllTables",
+                           "type":  "OpenApiConnection",
+                           "componentFile":  "actions/openapi/shared_sharepointonline_GetAllTables.json",
+                           "flowCount":  1
+                       }
+                   ],
+    "triggers":  [
+                     {
+                         "operationId":  "GetOnNewItems",
+                         "type":  "OpenApiConnection",
+                         "isTrigger":  true,
+                         "componentFile":  "triggers/shared_sharepointonline_GetOnNewItems.json",
+                         "flowCount":  1
+                     },
+                     {
+                         "operationId":  "GetOnNewFileItems",
+                         "type":  "OpenApiConnection",
+                         "isTrigger":  true,
+                         "componentFile":  "triggers/shared_sharepointonline_GetOnNewFileItems.json",
+                         "flowCount":  1
+                     },
+                     {
+                         "operationId":  "GetOnChangedItems",
+                         "type":  "OpenApiConnection",
+                         "isTrigger":  true,
+                         "componentFile":  "triggers/shared_sharepointonline_GetOnChangedItems.json",
+                         "flowCount":  2
+                     }
+                 ],
+    "swaggerUrl":  "https://api.powerapps.com/providers/Microsoft.PowerApps/apis/shared_sharepointonline?api-version=2020-06-01\u0026$filter=environment eq \u0027{envId}\u0027\u0026$select=properties.swagger"
+}

@@ -1,0 +1,76 @@
+﻿{
+    "id":  "shared_powerappsforappmakers_Get-Environments",
+    "connector":  "shared_powerappsforappmakers",
+    "connectorBase":  "shared_powerappsforappmakers",
+    "operationId":  "Get-Environments",
+    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_powerappsforappmakers",
+    "type":  "OpenApiConnection",
+    "learnedFrom":  [
+                        "60a2e34b-f824-ef11-840a-000d3a31bd87"
+                    ],
+    "learnedFromName":  [
+                            "Utility Flow - Get Current Environment Profile"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "environment":  [
+                        "org1cd97ca4.crm.dynamics.com"
+                    ],
+    "template":  {
+                     "Get_Environments":  {
+                                              "runAfter":  {
+
+                                                           },
+                                              "metadata":  {
+                                                               "operationMetadataId":  "e9e6a5c9-1c9e-4835-a505-5cd35f92c52e"
+                                                           },
+                                              "type":  "OpenApiConnection",
+                                              "inputs":  {
+                                                             "host":  {
+                                                                          "apiId":  "/providers/Microsoft.PowerApps/apis/shared_powerappsforappmakers",
+                                                                          "connectionName":  "shared_powerappsforappmakers",
+                                                                          "operationId":  "Get-Environments"
+                                                                      },
+                                                             "parameters":  {
+                                                                                "api-version":  "2022-11-01",
+                                                                                "$top":  250
+                                                                            },
+                                                             "authentication":  {
+                                                                                    "value":  "@json(decodeBase64(triggerOutputs().headers[\u0027X-MS-APIM-Tokens\u0027]))[\u0027$ConnectionKey\u0027]",
+                                                                                    "type":  "Raw"
+                                                                                }
+                                                         }
+                                          }
+                 },
+    "inputSchema":  {
+                        "$top":  {
+                                     "description":  "Number of Environments.",
+                                     "in":  "query",
+                                     "type":  "integer",
+                                     "required":  false
+                                 },
+                        "connectionId":  {
+                                             "description":  null,
+                                             "in":  "path",
+                                             "type":  "string",
+                                             "required":  true
+                                         },
+                        "api-version":  {
+                                            "description":  "The date value of the API version.",
+                                            "in":  "query",
+                                            "type":  "string",
+                                            "required":  false
+                                        }
+                    },
+    "outputSchema":  {
+                         "properties":  {
+                                            "value":  {
+                                                          "type":  "array",
+                                                          "description":  "The field value."
+                                                      }
+                                        }
+                     },
+    "swaggerLearned":  true,
+    "graphConvertible":  true,
+    "graphNodeType":  "connector"
+}

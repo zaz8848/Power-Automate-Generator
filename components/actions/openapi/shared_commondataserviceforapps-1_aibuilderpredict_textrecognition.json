@@ -1,0 +1,123 @@
+﻿{
+    "id":  "shared_commondataserviceforapps-1_aibuilderpredict_textrecognition",
+    "connector":  "shared_commondataserviceforapps-1",
+    "connectorBase":  "shared_commondataserviceforapps",
+    "operationId":  "aibuilderpredict_textrecognition",
+    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+    "type":  "OpenApiConnection",
+    "learnedFrom":  [
+                        "7ae5972f-b68e-ee11-8179-000d3a551f03",
+                        "4ed91448-7402-f111-8406-7ced8d3c72c7"
+                    ],
+    "learnedFromName":  [
+                            "Child Flow - Recognize the PDF Document and Return Content in Array",
+                            "Utility Flow - Enhanced Document Extraction"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "environment":  [
+                        "org1cd97ca4.crm.dynamics.com"
+                    ],
+    "template":  {
+                     "Recognize_text_in_an_image_or_a_PDF_document":  {
+                                                                          "runAfter":  {
+                                                                                           "Initialize_variable_-OCR_arry_by_pages":  [
+                                                                                                                                          "Succeeded"
+                                                                                                                                      ]
+                                                                                       },
+                                                                          "metadata":  {
+                                                                                           "operationMetadataId":  "5cc4ef48-c8eb-44e8-9914-eab223948e38",
+                                                                                           "flowSystemMetadata":  {
+                                                                                                                      "portalOperationId":  "aibuilderpredict_textrecognition",
+                                                                                                                      "portalOperationGroup":  "aibuilder",
+                                                                                                                      "portalOperationApiDisplayNameOverride":  "AI Builder",
+                                                                                                                      "portalOperationIconOverride":  "https://content.powerapps.com/resource/makerx/static/pauto/images/designeroperations/aiBuilderNew.51dbdb6b.png",
+                                                                                                                      "portalOperationBrandColorOverride":  "#0A76C4",
+                                                                                                                      "portalOperationApiTierOverride":  "Standard"
+                                                                                                                  }
+                                                                                       },
+                                                                          "type":  "OpenApiConnection",
+                                                                          "inputs":  {
+                                                                                         "parameters":  {
+                                                                                                            "item/requestv2/base64Encoded":  "@triggerBody()?[\u0027file\u0027]?[\u0027contentBytes\u0027]"
+                                                                                                        },
+                                                                                         "host":  {
+                                                                                                      "apiId":  "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                                                                                                      "operationId":  "aibuilderpredict_textrecognition",
+                                                                                                      "connectionName":  "shared_commondataserviceforapps-1"
+                                                                                                  }
+                                                                                     }
+                                                                      }
+                 },
+    "swaggerLearned":  true,
+    "inputSchema":  [
+                        {
+                            "name":  "connectionId",
+                            "in":  "path",
+                            "required":  true,
+                            "x-ms-visibility":  "internal",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "recordId",
+                            "in":  "path",
+                            "description":  "Choose a model",
+                            "required":  true,
+                            "x-ms-summary":  "Model name",
+                            "type":  "string",
+                            "x-ms-dynamic-values":  {
+                                                        "operationId":  "ListRecords",
+                                                        "parameters":  {
+                                                                           "entityName":  "msdyn_aimodels",
+                                                                           "$filter":  "statecode eq 1"
+                                                                       },
+                                                        "value-collection":  "value",
+                                                        "value-path":  "msdyn_aimodelid",
+                                                        "value-title":  "msdyn_name"
+                                                    }
+                        },
+                        {
+                            "name":  "Prefer",
+                            "in":  "header",
+                            "description":  "The header required to allow Dataverse to process the request async with 202 OK and location headers",
+                            "required":  true,
+                            "x-ms-summary":  "Prefer",
+                            "x-ms-visibility":  "internal",
+                            "type":  "string",
+                            "default":  "respond-async"
+                        },
+                        {
+                            "name":  "item",
+                            "in":  "body",
+                            "description":  "Infer request",
+                            "required":  true,
+                            "schema":  {
+                                           "type":  "object",
+                                           "x-ms-dynamic-properties":  {
+                                                                           "operationId":  "GetPredictionSchema",
+                                                                           "parameters":  {
+                                                                                              "recordId":  {
+                                                                                                               "parameterReference":  "recordId"
+                                                                                                           }
+                                                                                          },
+                                                                           "itemValuePath":  "input"
+                                                                       }
+                                       },
+                            "x-ms-summary":  "Infer Request"
+                        }
+                    ],
+    "outputSchema":  {
+                         "type":  "object",
+                         "x-ms-dynamic-properties":  {
+                                                         "operationId":  "GetPredictionSchema",
+                                                         "parameters":  {
+                                                                            "recordId":  {
+                                                                                             "parameterReference":  "recordId"
+                                                                                         }
+                                                                        },
+                                                         "itemValuePath":  "output"
+                                                     }
+                     },
+    "graphConvertible":  true,
+    "graphNodeType":  "connector"
+}

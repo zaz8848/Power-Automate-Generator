@@ -1,0 +1,15 @@
+﻿{
+    "id":  "shared_m365copilotv2",
+    "displayName":  "M365 Copilot V2",
+    "triggers":  [
+
+                 ],
+    "environment":  [
+                        "ZAF Prod"
+                    ],
+    "learnedAt":  "2026-05-29",
+    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_m365copilotv2",
+    "operations":  [
+                       "StartChat"
+                   ]
+}

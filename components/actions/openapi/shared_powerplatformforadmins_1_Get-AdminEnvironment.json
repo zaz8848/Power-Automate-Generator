@@ -1,0 +1,93 @@
+﻿{
+    "id":  "shared_powerplatformforadmins_1_Get-AdminEnvironment",
+    "connector":  "shared_powerplatformforadmins_1",
+    "connectorBase":  "shared_powerplatformforadmins",
+    "operationId":  "Get-AdminEnvironment",
+    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_powerplatformforadmins",
+    "type":  "OpenApiConnection",
+    "learnedFrom":  [
+                        "ae08d194-1903-f011-bae2-0022480427dd"
+                    ],
+    "learnedFromName":  [
+                            "Agent Inventory | Agents Data Load"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "environment":  [
+                        "orgdf331f66.crm5.dynamics.com"
+                    ],
+    "template":  {
+                     "List_Environments_as_Admin:_Fetch_All_Environments":  {
+                                                                                "runAfter":  {
+                                                                                                 "Add_a_new_row:_Add_logs_in_log_table":  [
+                                                                                                                                              "Succeeded"
+                                                                                                                                          ]
+                                                                                             },
+                                                                                "metadata":  {
+                                                                                                 "operationMetadataId":  "cb05df60-bde1-41c4-830d-a15e09039998"
+                                                                                             },
+                                                                                "type":  "OpenApiConnection",
+                                                                                "inputs":  {
+                                                                                               "host":  {
+                                                                                                            "connectionName":  "shared_powerplatformforadmins_1",
+                                                                                                            "operationId":  "Get-AdminEnvironment",
+                                                                                                            "apiId":  "/providers/Microsoft.PowerApps/apis/shared_powerplatformforadmins"
+                                                                                                        },
+                                                                                               "parameters":  {
+                                                                                                                  "api-version":  "2018-10-01"
+                                                                                                              },
+                                                                                               "authentication":  {
+                                                                                                                      "type":  "Raw",
+                                                                                                                      "value":  "@json(decodeBase64(triggerOutputs().headers[\u0027X-MS-APIM-Tokens\u0027]))[\u0027$ConnectionKey\u0027]"
+                                                                                                                  }
+                                                                                           },
+                                                                                "runtimeConfiguration":  {
+                                                                                                             "paginationPolicy":  {
+                                                                                                                                      "minimumItemCount":  100000
+                                                                                                                                  }
+                                                                                                         }
+                                                                            }
+                 },
+    "inputSchema":  {
+                        "$top":  {
+                                     "description":  "Number of Environments in the response.",
+                                     "in":  "query",
+                                     "type":  "integer",
+                                     "required":  false
+                                 },
+                        "$skiptoken":  {
+                                           "description":  "The input used to get the next page of the response.",
+                                           "in":  "query",
+                                           "type":  "string",
+                                           "required":  false
+                                       },
+                        "$expand":  {
+                                        "description":  "Allows access to expand response properties.",
+                                        "in":  "query",
+                                        "type":  "string",
+                                        "required":  false
+                                    },
+                        "connectionId":  {
+                                             "description":  null,
+                                             "in":  "path",
+                                             "type":  "string",
+                                             "required":  true
+                                         }
+                    },
+    "outputSchema":  {
+                         "$ref":  "ResourceArray[Environment]",
+                         "properties":  {
+                                            "value":  {
+                                                          "type":  "array",
+                                                          "description":  "Environment value object array."
+                                                      },
+                                            "nextLink":  {
+                                                             "type":  "string",
+                                                             "description":  "The URL to get the next page of the Environments list."
+                                                         }
+                                        }
+                     },
+    "swaggerLearned":  true,
+    "graphConvertible":  true,
+    "graphNodeType":  "connector"
+}

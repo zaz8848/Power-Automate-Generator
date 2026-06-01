@@ -1,0 +1,177 @@
+﻿{
+    "id":  "shared_azureblob_GetFileContent_V2",
+    "connector":  "shared_azureblob",
+    "connectorBase":  "shared_azureblob",
+    "operationId":  "GetFileContent_V2",
+    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_azureblob",
+    "type":  "OpenApiConnection",
+    "learnedFrom":  [
+                        "f5c05c98-d563-f011-bec3-6045bd00625f"
+                    ],
+    "learnedFromName":  [
+                            "Automatic Flow - Check Document Translation When Translation Log Status Changes to Processing"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "environment":  [
+                        "org1cd97ca4.crm.dynamics.com"
+                    ],
+    "template":  {
+                     "Get_translated_document":  {
+                                                     "type":  "OpenApiConnection",
+                                                     "inputs":  {
+                                                                    "parameters":  {
+                                                                                       "dataset":  "wellsdocumentstorage",
+                                                                                       "id":  "translation/@{triggerOutputs()?[\u0027body/biz_targetlanguage\u0027]}/@{body(\u0027Get_the_translation_log\u0027)?[\u0027biz_sourcedocument_name\u0027]}",
+                                                                                       "inferContentType":  true
+                                                                                   },
+                                                                    "host":  {
+                                                                                 "apiId":  "/providers/Microsoft.PowerApps/apis/shared_azureblob",
+                                                                                 "operationId":  "GetFileContent_V2",
+                                                                                 "connectionName":  "shared_azureblob"
+                                                                             }
+                                                                },
+                                                     "runAfter":  {
+                                                                      "Check_translation_status_until_it_success_within_5_mins":  [
+                                                                                                                                      "Succeeded"
+                                                                                                                                  ]
+                                                                  },
+                                                     "metadata":  {
+                                                                      "operationMetadataId":  "e7f326ed-867b-455f-9709-1868f3b4370a"
+                                                                  }
+                                                 }
+                 },
+    "inputSchema":  [
+                        {
+                            "name":  "connectionId",
+                            "in":  "path",
+                            "required":  true,
+                            "x-ms-visibility":  "internal",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "dataset",
+                            "in":  "path",
+                            "description":  "Azure Storage account name or blob endpoint.",
+                            "required":  true,
+                            "x-ms-summary":  "Storage account name or blob endpoint",
+                            "x-ms-dynamic-values":  {
+                                                        "operationId":  "GetDataSets",
+                                                        "parameters":  {
+
+                                                                       },
+                                                        "value-collection":  "value",
+                                                        "value-path":  "Name",
+                                                        "value-title":  "DisplayName"
+                                                    },
+                            "x-ms-url-encoding":  "double",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "id",
+                            "in":  "path",
+                            "description":  "Specify the blob.",
+                            "required":  true,
+                            "x-ms-summary":  "Blob",
+                            "x-ms-url-encoding":  "double",
+                            "x-ms-dynamic-values":  {
+                                                        "capability":  "file-picker",
+                                                        "parameters":  {
+                                                                           "isFolder":  false,
+                                                                           "fileFilter":  [
+
+                                                                                          ],
+                                                                           "dataset":  {
+                                                                                           "parameter":  "dataset"
+                                                                                       }
+                                                                       },
+                                                        "value-path":  "Id"
+                                                    },
+                            "x-ms-dynamic-tree":  {
+                                                      "settings":  {
+                                                                       "canSelectParentNodes":  false,
+                                                                       "canSelectLeafNodes":  true
+                                                                   },
+                                                      "open":  {
+                                                                   "operationId":  "ListAllRootFolders_V4",
+                                                                   "itemValuePath":  "Id",
+                                                                   "itemTitlePath":  "DisplayName",
+                                                                   "itemIsParent":  "(IsFolder eq true)",
+                                                                   "itemFullTitlePath":  "Path",
+                                                                   "itemsPath":  "value",
+                                                                   "parameters":  {
+                                                                                      "dataset":  {
+                                                                                                      "parameterReference":  "dataset"
+                                                                                                  }
+                                                                                  }
+                                                               },
+                                                      "browse":  {
+                                                                     "operationId":  "ListFolder_V4",
+                                                                     "itemValuePath":  "Id",
+                                                                     "itemTitlePath":  "DisplayName",
+                                                                     "itemIsParent":  "(IsFolder eq true)",
+                                                                     "itemFullTitlePath":  "Path",
+                                                                     "itemsPath":  "value",
+                                                                     "parameters":  {
+                                                                                        "dataset":  {
+                                                                                                        "parameterReference":  "dataset"
+                                                                                                    },
+                                                                                        "id":  {
+                                                                                                   "selectedItemValuePath":  "Id"
+                                                                                               }
+                                                                                    }
+                                                                 }
+                                                  },
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "inferContentType",
+                            "in":  "query",
+                            "description":  "Infer content-type based on extension.",
+                            "required":  false,
+                            "x-ms-summary":  "Infer content type",
+                            "x-ms-visibility":  "advanced",
+                            "type":  "boolean",
+                            "default":  true
+                        },
+                        {
+                            "$ref":  "#/parameters/extractSensitivityLabel"
+                        },
+                        {
+                            "$ref":  "#/parameters/purviewAccountName"
+                        }
+                    ],
+    "dynamicValuesRef":  {
+                             "id":  {
+                                        "operationId":  null,
+                                        "parameters":  {
+                                                           "isFolder":  false,
+                                                           "dataset":  {
+                                                                           "parameter":  "dataset"
+                                                                       },
+                                                           "fileFilter":  [
+
+                                                                          ]
+                                                       },
+                                        "valuePath":  "Id"
+                                    },
+                             "dataset":  {
+                                             "operationId":  "GetDataSets",
+                                             "titlePath":  "DisplayName",
+                                             "parameters":  {
+
+                                                            },
+                                             "valueCollection":  "value",
+                                             "valuePath":  "Name"
+                                         }
+                         },
+    "swaggerLearned":  true,
+    "outputSchema":  {
+                         "format":  "binary",
+                         "description":  "The content of the file.",
+                         "type":  "string",
+                         "x-ms-summary":  "File Content"
+                     },
+    "graphConvertible":  true,
+    "graphNodeType":  "connector"
+}

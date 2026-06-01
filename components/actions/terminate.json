@@ -1,0 +1,136 @@
+﻿{
+    "id":  "Terminate",
+    "type":  "Terminate",
+    "learnedFrom":  [
+                        "ee87fd77-09fa-f011-8407-000d3a316017",
+                        "819831c9-e258-f111-a825-6045bd5777da",
+                        "cdd6ed42-6394-f011-b4cc-000d3a099cdf",
+                        "e8d6ed42-6394-f011-b4cc-000d3a099cdf",
+                        "f8d6ed42-6394-f011-b4cc-000d3a099cdf",
+                        "08d7ed42-6394-f011-b4cc-000d3a099cdf",
+                        "18d7ed42-6394-f011-b4cc-000d3a099cdf",
+                        "6e5ee200-6694-f011-b4cc-000d3a099cdf",
+                        "765ee200-6694-f011-b4cc-000d3a099cdf",
+                        "7d5ee200-6694-f011-b4cc-000d3a099cdf",
+                        "5ab5d806-6694-f011-b4cc-000d3a099cdf",
+                        "63b5d806-6694-f011-b4cc-000d3a099cdf",
+                        "ced4fe0e-a135-f011-8c4e-000d3a3755b8",
+                        "3de5ba35-7d03-ea11-a811-000d3a382874",
+                        "fb46af82-2507-ed11-82e4-000d3a98ae3f",
+                        "5df39001-6494-f011-b4cc-000d3ac6a644",
+                        "64f39001-6494-f011-b4cc-000d3ac6a644",
+                        "6bf39001-6494-f011-b4cc-000d3ac6a644",
+                        "73f39001-6494-f011-b4cc-000d3ac6a644",
+                        "7bf39001-6494-f011-b4cc-000d3ac6a644",
+                        "05e57ac4-dac5-f011-bbd3-000d3ac79569",
+                        "8719e711-6e50-e911-a974-000d3af292f2",
+                        "e3f17f06-9373-f011-b4cc-00224802c180",
+                        "fe662b82-0dff-ef11-bae2-00224802c180",
+                        "6c595a51-ad0c-f011-9988-0022480427dd",
+                        "c7db6d55-e004-f011-bae2-0022480427dd",
+                        "2f54c3d3-6494-f011-b4cc-00224856c036",
+                        "3754c3d3-6494-f011-b4cc-00224856c036",
+                        "3e54c3d3-6494-f011-b4cc-00224856c036",
+                        "4654c3d3-6494-f011-b4cc-00224856c036",
+                        "4d54c3d3-6494-f011-b4cc-00224856c036",
+                        "facc4beb-c9b5-48f7-b709-0b41f6518b22",
+                        "cde64862-0804-453b-b9f4-0ec8ff12d30f",
+                        "1a0cb2d6-fc3d-f011-877a-6045bd05e54b",
+                        "5d27b158-cb45-f011-877a-6045bd06efb1",
+                        "af6b06fb-4553-f011-877b-7c1e524ac215",
+                        "445c9bd8-f21a-49c4-ab13-8f2076a72ad1",
+                        "99b0bd7d-2d4e-4bfa-9120-b9a2cd81a35d",
+                        "333b0082-b97e-4b10-89b2-bdececd4ac34",
+                        "a9373689-25bf-4677-b557-ff4736df8e21"
+                    ],
+    "learnedFromName":  [
+                            "Sharepoint-PO Uploaded-Extract Po Item",
+                            "SLAInstanceMonitoringWarningAndExpiryFlow",
+                            "CXP_Outbound Call Journey_20250918074416",
+                            "CXP_Outbound Call Journey_20250918074416",
+                            "CXP_Outbound Call Journey_20250918074416",
+                            "CXP_Outbound Call Journey_20250918074416",
+                            "CXP_Outbound Call Journey_20250918074416",
+                            "CXP_Test Journey_20250918080356",
+                            "CXP_Test Journey_20250918080356",
+                            "CXP_Test Journey_20250918080356",
+                            "CXP_Test Journey_20250918080356",
+                            "CXP_Test Journey_20250918080356",
+                            "Invoke case management agent",
+                            "Field Service - Flow - Mark Agreement As Expired",
+                            "Auto close expired conversations",
+                            "CXP_Contact Create Outbound Journey_20250918074937",
+                            "CXP_Contact Create Outbound Journey_20250918074937",
+                            "CXP_Contact Create Outbound Journey_20250918074937",
+                            "CXP_Contact Create Outbound Journey_20250918074937",
+                            "CXP_Contact Create Outbound Journey_20250918074937",
+                            "ARC: Intake Service Email (do not delete or rename)",
+                            "Field Service - Flow - Generate Agreement Booking Dates",
+                            "Test Automation | AI Builder Credit Consumption",
+                            "Test Automation | Run Multiturn Tests (Child)",
+                            "Agent Inventory | Agents Data Load (GrandChild)",
+                            "Agent Inventory | Agents Data Load (Child)",
+                            "CXP_Outbound CC 01 Journey_20250918075525",
+                            "CXP_Outbound CC 01 Journey_20250918075525",
+                            "CXP_Outbound CC 01 Journey_20250918075525",
+                            "CXP_Outbound CC 01 Journey_20250918075525",
+                            "CXP_Outbound CC 01 Journey_20250918075525",
+                            "Field Service - Flow - Generate Order Invoicing Setup Dates",
+                            "Field Service - Flow - Generate Agreement Invoice Dates",
+                            "AI Evaluation Flow for Conversation",
+                            "Call custom agent",
+                            "Test Automation | Validate Agent Plans (Child)",
+                            "Field Service - Flow - Generate Invoice For Order Invoicing Date",
+                            "Field Service - Flow - Generate Invoice for Agreement Invoice Date",
+                            "Field Service - Flow - Generate Order Invoicing Dates",
+                            "Field Service - Flow - Generate Work Order for Agreement Booking Date"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "templates":  [
+                      {
+                          "template":  {
+                                           "type":  "Terminate",
+                                           "inputs":  {
+                                                          "runStatus":  "Cancelled"
+                                                      },
+                                           "metadata":  {
+                                                            "operationMetadataId":  "1648d735-07ba-4948-91ab-03c1a0e96003"
+                                                        }
+                                       },
+                          "name":  "Terminate"
+                      },
+                      {
+                          "template":  {
+                                           "runAfter":  {
+
+                                                        },
+                                           "metadata":  {
+                                                            "operationMetadataId":  "3b1c35ae-978c-4bbc-9992-4a8f1654efce"
+                                                        },
+                                           "type":  "Terminate",
+                                           "inputs":  {
+                                                          "runStatus":  "Cancelled"
+                                                      }
+                                       },
+                          "name":  "Terminate_2"
+                      },
+                      {
+                          "template":  {
+                                           "runAfter":  {
+
+                                                        },
+                                           "metadata":  {
+                                                            "operationMetadataId":  "c5952461-5775-473e-9d2a-bef0d07c4dce"
+                                                        },
+                                           "type":  "Terminate",
+                                           "inputs":  {
+                                                          "runStatus":  "Cancelled"
+                                                      }
+                                       },
+                          "name":  "Terminate_after_waiting_till_warning_time_"
+                      }
+                  ],
+    "graphConvertible":  true,
+    "graphNodeType":  "builtinFunction"
+}

@@ -1,0 +1,253 @@
+﻿{
+    "connector":  "shared_commondataserviceforapps",
+    "learnedAt":  "2026-05-26",
+    "operations":  [
+                       {
+                           "operationId":  "GetItem",
+                           "type":  "OpenApiConnection",
+                           "componentFile":  "actions/openapi/shared_commondataserviceforapps-1_GetItem.json",
+                           "flowCount":  1
+                       },
+                       {
+                           "operationId":  "DeleteRecord",
+                           "type":  "OpenApiConnection",
+                           "componentFile":  "actions/openapi/shared_commondataserviceforapps_DeleteRecord.json",
+                           "flowCount":  1
+                       },
+                       {
+                           "operationId":  "UpdateOnlyRecord",
+                           "type":  "OpenApiConnection",
+                           "componentFile":  "actions/openapi/shared_commondataserviceforapps_UpdateOnlyRecord.json",
+                           "flowCount":  11
+                       },
+                       {
+                           "operationId":  "PerformBoundAction",
+                           "type":  "OpenApiConnection",
+                           "componentFile":  "actions/openapi/shared_commondataserviceforapps_1_PerformBoundAction.json",
+                           "flowCount":  1
+                       },
+                       {
+                           "operationId":  "ListRecordsWithOrganization",
+                           "type":  "OpenApiConnection",
+                           "componentFile":  "actions/openapi/shared_commondataserviceforapps_ListRecordsWithOrganization.json",
+                           "flowCount":  3
+                       },
+                       {
+                           "operationId":  "UpdateRecord",
+                           "type":  "OpenApiConnection",
+                           "componentFile":  "actions/openapi/shared_commondataserviceforapps_UpdateRecord.json",
+                           "flowCount":  14
+                       },
+                       {
+                           "operationId":  "ListRecords",
+                           "type":  "OpenApiConnection",
+                           "componentFile":  "actions/openapi/shared_commondataserviceforapps_1_ListRecords.json",
+                           "flowCount":  6
+                       },
+                       {
+                           "operationId":  "CreateRecordWithOrganization",
+                           "type":  "OpenApiConnection",
+                           "componentFile":  "actions/openapi/shared_commondataserviceforapps_1_CreateRecordWithOrganization.json",
+                           "flowCount":  1
+                       },
+                       {
+                           "operationId":  "aibuilderpredict_textrecognition",
+                           "type":  "OpenApiConnection",
+                           "componentFile":  "actions/openapi/shared_commondataserviceforapps_aibuilderpredict_textrecognition.json",
+                           "flowCount":  5
+                       },
+                       {
+                           "operationId":  "UpdateRecord",
+                           "type":  "OpenApiConnection",
+                           "componentFile":  "actions/openapi/shared_commondataserviceforapps_2_UpdateRecord.json",
+                           "flowCount":  1
+                       },
+                       {
+                           "operationId":  "GetEntityFileImageFieldContent",
+                           "type":  "OpenApiConnection",
+                           "componentFile":  "actions/openapi/shared_commondataserviceforapps_GetEntityFileImageFieldContent.json",
+                           "flowCount":  3
+                       },
+                       {
+                           "operationId":  "GetItem",
+                           "type":  "OpenApiConnection",
+                           "componentFile":  "actions/openapi/shared_commondataserviceforapps_1_GetItem.json",
+                           "flowCount":  2
+                       },
+                       {
+                           "operationId":  "CreateRecord",
+                           "type":  "OpenApiConnection",
+                           "componentFile":  "actions/openapi/shared_commondataserviceforapps_2_CreateRecord.json",
+                           "flowCount":  1
+                       },
+                       {
+                           "operationId":  "ListRecords",
+                           "type":  "OpenApiConnection",
+                           "componentFile":  "actions/openapi/shared_commondataserviceforapps_2_ListRecords.json",
+                           "flowCount":  1
+                       },
+                       {
+                           "operationId":  "GetItem",
+                           "type":  "OpenApiConnection",
+                           "componentFile":  "actions/openapi/shared_commondataserviceforapps_GetItem.json",
+                           "flowCount":  14
+                       },
+                       {
+                           "operationId":  "UpdateEntityFileImageFieldContent",
+                           "type":  "OpenApiConnection",
+                           "componentFile":  "actions/openapi/shared_commondataserviceforapps_UpdateEntityFileImageFieldContent.json",
+                           "flowCount":  2
+                       },
+                       {
+                           "operationId":  "PerformUnboundAction",
+                           "type":  "OpenApiConnection",
+                           "componentFile":  "actions/openapi/shared_commondataserviceforapps_PerformUnboundAction.json",
+                           "flowCount":  18
+                       },
+                       {
+                           "operationId":  "GetItemWithOrganization",
+                           "type":  "OpenApiConnection",
+                           "componentFile":  "actions/openapi/shared_commondataserviceforapps_GetItemWithOrganization.json",
+                           "flowCount":  2
+                       },
+                       {
+                           "operationId":  "PerformBoundAction",
+                           "type":  "OpenApiConnection",
+                           "componentFile":  "actions/openapi/shared_commondataserviceforapps_PerformBoundAction.json",
+                           "flowCount":  5
+                       },
+                       {
+                           "operationId":  "aibuilderpredict_customprompt",
+                           "type":  "OpenApiConnection",
+                           "componentFile":  "actions/openapi/shared_commondataserviceforapps_aibuilderpredict_customprompt.json",
+                           "flowCount":  19
+                       },
+                       {
+                           "operationId":  "aibuilderpredict_customprompt",
+                           "type":  "OpenApiConnection",
+                           "componentFile":  "actions/openapi/shared_commondataserviceforapps_1_aibuilderpredict_customprompt.json",
+                           "flowCount":  2
+                       },
+                       {
+                           "operationId":  "AssociateEntities",
+                           "type":  "OpenApiConnection",
+                           "componentFile":  "actions/openapi/shared_commondataserviceforapps_AssociateEntities.json",
+                           "flowCount":  1
+                       },
+                       {
+                           "operationId":  "PerformUnboundAction",
+                           "type":  "OpenApiConnection",
+                           "componentFile":  "actions/openapi/shared_commondataserviceforapps_2_PerformUnboundAction.json",
+                           "flowCount":  1
+                       },
+                       {
+                           "operationId":  "UpdateEntityFileImageFieldContentWithOrganization",
+                           "type":  "OpenApiConnection",
+                           "componentFile":  "actions/openapi/shared_commondataserviceforapps_1_UpdateEntityFileImageFieldContentWithOrganization.json",
+                           "flowCount":  1
+                       },
+                       {
+                           "operationId":  "PerformBoundActionWithOrganization",
+                           "type":  "OpenApiConnection",
+                           "componentFile":  "actions/openapi/shared_commondataserviceforapps_1_PerformBoundActionWithOrganization.json",
+                           "flowCount":  1
+                       },
+                       {
+                           "operationId":  "GetItemWithOrganization",
+                           "type":  "OpenApiConnection",
+                           "componentFile":  "actions/openapi/shared_commondataserviceforapps_1_GetItemWithOrganization.json",
+                           "flowCount":  3
+                       },
+                       {
+                           "operationId":  "PerformUnboundActionWithOrganization",
+                           "type":  "OpenApiConnection",
+                           "componentFile":  "actions/openapi/shared_commondataserviceforapps_PerformUnboundActionWithOrganization.json",
+                           "flowCount":  2
+                       },
+                       {
+                           "operationId":  "ListRecordsWithOrganization",
+                           "type":  "OpenApiConnection",
+                           "componentFile":  "actions/openapi/shared_commondataserviceforapps_1_ListRecordsWithOrganization.json",
+                           "flowCount":  7
+                       },
+                       {
+                           "operationId":  "DeleteRecordWithOrganization",
+                           "type":  "OpenApiConnection",
+                           "componentFile":  "actions/openapi/shared_commondataserviceforapps_1_DeleteRecordWithOrganization.json",
+                           "flowCount":  1
+                       },
+                       {
+                           "operationId":  "DeleteRecord",
+                           "type":  "OpenApiConnection",
+                           "componentFile":  "actions/openapi/shared_commondataserviceforapps_1_DeleteRecord.json",
+                           "flowCount":  3
+                       },
+                       {
+                           "operationId":  "ListRecords",
+                           "type":  "OpenApiConnection",
+                           "componentFile":  "actions/openapi/shared_commondataserviceforapps_ListRecords.json",
+                           "flowCount":  22
+                       },
+                       {
+                           "operationId":  "CreateRecord",
+                           "type":  "OpenApiConnection",
+                           "componentFile":  "actions/openapi/shared_commondataserviceforapps_CreateRecord.json",
+                           "flowCount":  13
+                       },
+                       {
+                           "operationId":  "PerformUnboundAction",
+                           "type":  "OpenApiConnection",
+                           "componentFile":  "actions/openapi/shared_commondataserviceforapps_1_PerformUnboundAction.json",
+                           "flowCount":  3
+                       },
+                       {
+                           "operationId":  "PerformUnboundActionWithOrganization",
+                           "type":  "OpenApiConnection",
+                           "componentFile":  "actions/openapi/shared_commondataserviceforapps_1_PerformUnboundActionWithOrganization.json",
+                           "flowCount":  1
+                       },
+                       {
+                           "operationId":  "UpdateOnlyRecord",
+                           "type":  "OpenApiConnection",
+                           "componentFile":  "actions/openapi/shared_commondataserviceforapps_1_UpdateOnlyRecord.json",
+                           "flowCount":  5
+                       },
+                       {
+                           "operationId":  "CreateRecord",
+                           "type":  "OpenApiConnection",
+                           "componentFile":  "actions/openapi/shared_commondataserviceforapps_1_CreateRecord.json",
+                           "flowCount":  5
+                       }
+                   ],
+    "triggers":  [
+                     {
+                         "operationId":  "BusinessEventsTrigger",
+                         "type":  "OpenApiConnectionWebhook",
+                         "isTrigger":  true,
+                         "componentFile":  "triggers/shared_commondataserviceforapps-1_BusinessEventsTrigger.json",
+                         "flowCount":  1
+                     },
+                     {
+                         "operationId":  "BusinessEventsTrigger",
+                         "type":  "OpenApiConnectionWebhook",
+                         "isTrigger":  true,
+                         "componentFile":  "triggers/shared_commondataserviceforapps_BusinessEventsTrigger.json",
+                         "flowCount":  6
+                     },
+                     {
+                         "operationId":  "SubscribeWebhookTrigger",
+                         "type":  "OpenApiConnectionWebhook",
+                         "isTrigger":  true,
+                         "componentFile":  "triggers/shared_commondataserviceforapps_SubscribeWebhookTrigger.json",
+                         "flowCount":  21
+                     },
+                     {
+                         "operationId":  "SubscribeWebhookTrigger",
+                         "type":  "OpenApiConnectionWebhook",
+                         "isTrigger":  true,
+                         "componentFile":  "triggers/shared_commondataserviceforapps_1_SubscribeWebhookTrigger.json",
+                         "flowCount":  1
+                     }
+                 ],
+    "swaggerUrl":  "https://api.powerapps.com/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps?api-version=2020-06-01\u0026$filter=environment eq \u0027{envId}\u0027\u0026$select=properties.swagger"
+}

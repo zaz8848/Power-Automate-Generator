@@ -1,0 +1,22 @@
+﻿{
+    "connector":  "shared_wordonlinebusiness",
+    "learnedAt":  "2026-05-26",
+    "operations":  [
+                       {
+                           "operationId":  "CreateFileItem",
+                           "type":  "OpenApiConnection",
+                           "componentFile":  "actions/openapi/shared_wordonlinebusiness_CreateFileItem.json",
+                           "flowCount":  1
+                       },
+                       {
+                           "operationId":  "GetFilePDF",
+                           "type":  "OpenApiConnection",
+                           "componentFile":  "actions/openapi/shared_wordonlinebusiness_GetFilePDF.json",
+                           "flowCount":  1
+                       }
+                   ],
+    "triggers":  [
+
+                 ],
+    "swaggerUrl":  "https://api.powerapps.com/providers/Microsoft.PowerApps/apis/shared_wordonlinebusiness?api-version=2020-06-01\u0026$filter=environment eq \u0027{envId}\u0027\u0026$select=properties.swagger"
+}

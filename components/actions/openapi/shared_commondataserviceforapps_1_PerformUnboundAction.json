@@ -1,0 +1,121 @@
+﻿{
+    "id":  "shared_commondataserviceforapps_1_PerformUnboundAction",
+    "connector":  "shared_commondataserviceforapps_1",
+    "connectorBase":  "shared_commondataserviceforapps",
+    "operationId":  "PerformUnboundAction",
+    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+    "type":  "OpenApiConnection",
+    "learnedFrom":  [
+                        "fe662b82-0dff-ef11-bae2-00224802c180",
+                        "c7db6d55-e004-f011-bae2-0022480427dd",
+                        "09a76655-9fbf-ef11-a72e-0022481efed6"
+                    ],
+    "learnedFromName":  [
+                            "Test Automation | Run Multiturn Tests (Child)",
+                            "Agent Inventory | Agents Data Load (Child)",
+                            "Conversation KPI | Copy Transcripts (Grandchild)"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "environment":  [
+                        "orgdf331f66.crm5.dynamics.com"
+                    ],
+    "template":  {
+                     "Initiate_Conversation_For_Multiturn_Test":  {
+                                                                      "type":  "OpenApiConnection",
+                                                                      "inputs":  {
+                                                                                     "parameters":  {
+                                                                                                        "actionName":  "cat_InitiateConversation",
+                                                                                                        "item/cat_Token":  "@triggerBody()[\u0027text_3\u0027]",
+                                                                                                        "item/cat_BotFrameworkUri":  "@triggerBody()[\u0027text_6\u0027]"
+                                                                                                    },
+                                                                                     "host":  {
+                                                                                                  "apiId":  "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                                                                                                  "operationId":  "PerformUnboundAction",
+                                                                                                  "connectionName":  "shared_commondataserviceforapps_1"
+                                                                                              }
+                                                                                 },
+                                                                      "runAfter":  {
+                                                                                       "List_rows:_Get_Child_Agent_Tests":  [
+                                                                                                                                "Succeeded"
+                                                                                                                            ]
+                                                                                   },
+                                                                      "metadata":  {
+                                                                                       "operationMetadataId":  "7af2e74d-db42-4a35-940f-24b9d8e80da4"
+                                                                                   }
+                                                                  }
+                 },
+    "inputSchema":  [
+                        {
+                            "name":  "connectionId",
+                            "in":  "path",
+                            "required":  true,
+                            "x-ms-visibility":  "internal",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "actionName",
+                            "in":  "path",
+                            "description":  "Choose an action",
+                            "required":  true,
+                            "x-ms-url-encoding":  "double",
+                            "x-ms-dynamic-values":  {
+                                                        "operationId":  "GetUnboundActions",
+                                                        "parameters":  {
+
+                                                                       },
+                                                        "value-collection":  "value",
+                                                        "value-path":  "operationId",
+                                                        "value-title":  "operationDisplayName"
+                                                    },
+                            "x-ms-summary":  "Action Name",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "item",
+                            "in":  "body",
+                            "description":  "Action parameters",
+                            "required":  false,
+                            "schema":  {
+                                           "type":  "object",
+                                           "x-ms-dynamic-properties":  {
+                                                                           "operationId":  "GetMetadataForUnboundActionInput",
+                                                                           "parameters":  {
+                                                                                              "actionName":  {
+                                                                                                                 "parameterReference":  "actionName"
+                                                                                                             }
+                                                                                          },
+                                                                           "itemValuePath":  "schema"
+                                                                       }
+                                       },
+                            "x-ms-summary":  "Action parameters"
+                        }
+                    ],
+    "dynamicValuesRef":  {
+                             "actionName":  {
+                                                "operationId":  "GetUnboundActions",
+                                                "titlePath":  "operationDisplayName",
+                                                "parameters":  {
+
+                                                               },
+                                                "valueCollection":  "value",
+                                                "valuePath":  "operationId"
+                                            }
+                         },
+    "swaggerLearned":  true,
+    "outputSchema":  {
+                         "type":  "object",
+                         "x-ms-dynamic-properties":  {
+                                                         "operationId":  "GetMetadataForUnboundActionResponse",
+                                                         "parameters":  {
+                                                                            "actionName":  {
+                                                                                               "parameterReference":  "actionName"
+                                                                                           }
+                                                                        },
+                                                         "itemValuePath":  "schema"
+                                                     }
+                     },
+    "graphConvertible":  "partial",
+    "graphNodeType":  "connector",
+    "graphNotes":  "If used as Classify (QuickTest), needs AI to convert prompt to categories[]. Otherwise convertible."
+}

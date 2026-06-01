@@ -1,0 +1,205 @@
+﻿{
+    "id":  "shared_excelonlinebusiness_GetItems",
+    "connector":  "shared_excelonlinebusiness",
+    "connectorBase":  "shared_excelonlinebusiness",
+    "operationId":  "GetItems",
+    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_excelonlinebusiness",
+    "type":  "OpenApiConnection",
+    "learnedFrom":  [
+                        "cf1db88c-b576-f011-b4cc-000d3a080cec",
+                        "60c177a9-082a-8438-8a3d-a4c4e6e814e3",
+                        "0a035c01-c979-0229-e10f-059dbb7a383f",
+                        "201de22e-033d-8b53-2162-7309a772126e",
+                        "0abb697b-78e1-9b86-9b50-8d8ee1b4908a"
+                    ],
+    "learnedFromName":  [
+                            "Structured issue list",
+                            "Manually -  Run case list",
+                            "AgentFlow-Auto Procesing Excel File To Analysis",
+                            "AgentFlow-AssignTaskByRecordId",
+                            "AgentFlow - Assign Sales Task To Store"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "environment":  [
+                        "orgdf331f66.crm5.dynamics.com",
+                        "org1cd97ca4.crm.dynamics.com"
+                    ],
+    "template":  {
+                     "List_rows_present_in_a_table":  {
+                                                          "runAfter":  {
+
+                                                                       },
+                                                          "metadata":  {
+                                                                           "01UIIDQTSLX3R75BCGSJFLPRQTBMQAWCAX":  "/TCL Servicve 故障知识.xlsx",
+                                                                           "operationMetadataId":  "46020dbd-f861-4642-9e17-dd0e442ce8ae",
+                                                                           "tableId":  "{0AB4DCC3-21E8-4FF8-A926-2D340DB89298}"
+                                                                       },
+                                                          "type":  "OpenApiConnection",
+                                                          "inputs":  {
+                                                                         "host":  {
+                                                                                      "connectionName":  "shared_excelonlinebusiness",
+                                                                                      "operationId":  "GetItems",
+                                                                                      "apiId":  "/providers/Microsoft.PowerApps/apis/shared_excelonlinebusiness"
+                                                                                  },
+                                                                         "parameters":  {
+                                                                                            "source":  "sites/contoso.sharepoint.com,{siteId},{webId}",
+                                                                                            "drive":  "b!Xpt7BekOtUuu-3Ki4NgLH--kViZU7ElKtQL9dWAyWkuMyWS3dYDiQ5ds2SaAOyF_",
+                                                                                            "file":  "01UIIDQTSLX3R75BCGSJFLPRQTBMQAWCAX",
+                                                                                            "table":  "{1A5E3F72-9698-45EF-A464-6A0E97F447C8}"
+                                                                                        },
+                                                                         "authentication":  {
+                                                                                                "type":  "Raw",
+                                                                                                "value":  "@json(decodeBase64(triggerOutputs().headers[\u0027X-MS-APIM-Tokens\u0027]))[\u0027$ConnectionKey\u0027]"
+                                                                                            }
+                                                                     }
+                                                      }
+                 },
+    "inputSchema":  {
+                        "source":  {
+                                       "description":  "Select from the drop-down or specify one of the following:\r\n            - \"me\"\r\n            - \"SharePoint Site URL\"\r\n            - \"users/someone\u0027s UPN\"\r\n            - \"groups/group Id\"\r\n            - \"sites/SharePoint Site URL:/teams/team name:\" (the colons are required)",
+                                       "in":  "query",
+                                       "type":  "string",
+                                       "required":  true
+                                   },
+                        "$filter":  {
+                                        "description":  "An ODATA filter query to restrict the entries returned.",
+                                        "in":  "query",
+                                        "type":  "string",
+                                        "required":  false
+                                    },
+                        "connectionId":  {
+                                             "description":  null,
+                                             "in":  "path",
+                                             "type":  "string",
+                                             "required":  true
+                                         },
+                        "$top":  {
+                                     "description":  "Total number of entries to retrieve (default = all).",
+                                     "in":  "query",
+                                     "type":  "integer",
+                                     "required":  false
+                                 },
+                        "$skip":  {
+                                      "description":  "The number of entries to skip (default = 0).",
+                                      "in":  "query",
+                                      "type":  "integer",
+                                      "required":  false
+                                  },
+                        "table":  {
+                                      "description":  "Select a table from the drop-down.",
+                                      "in":  "path",
+                                      "type":  "string",
+                                      "required":  true
+                                  },
+                        "$orderby":  {
+                                         "description":  "An ODATA orderBy query for specifying the order of entries.",
+                                         "in":  "query",
+                                         "type":  "string",
+                                         "required":  false
+                                     },
+                        "$select":  {
+                                        "description":  "Comma-separated list of columns to retrieve (first 500 by default).",
+                                        "in":  "query",
+                                        "type":  "string",
+                                        "required":  false
+                                    },
+                        "drive":  {
+                                      "description":  "Select a document library from the drop-down.",
+                                      "in":  "path",
+                                      "type":  "string",
+                                      "required":  true
+                                  },
+                        "idColumn":  {
+                                         "description":  "Select a column from the drop-down.",
+                                         "in":  "query",
+                                         "type":  "string",
+                                         "required":  false
+                                     },
+                        "dateTimeFormat":  {
+                                               "description":  "DateTime Format.",
+                                               "in":  "query",
+                                               "type":  "string",
+                                               "required":  false
+                                           },
+                        "file":  {
+                                     "description":  "Select an Excel file through File Browse.",
+                                     "in":  "path",
+                                     "type":  "string",
+                                     "required":  true
+                                 }
+                    },
+    "outputSchema":  {
+                         "$ref":  "ItemsList",
+                         "properties":  {
+                                            "sensitivityLabelInfo":  {
+                                                                         "type":  "array",
+                                                                         "description":  null
+                                                                     },
+                                            "value":  {
+                                                          "type":  "array",
+                                                          "description":  "List of Items"
+                                                      }
+                                        }
+                     },
+    "dynamicValuesRef":  {
+                             "drive":  {
+                                           "operationId":  "GetDrives",
+                                           "titlePath":  "name",
+                                           "parameters":  {
+                                                              "$select":  "id,name",
+                                                              "source":  {
+                                                                             "parameter":  "source"
+                                                                         }
+                                                          },
+                                           "valueCollection":  "value",
+                                           "valuePath":  "id"
+                                       },
+                             "table":  {
+                                           "operationId":  "GetTables",
+                                           "titlePath":  "name",
+                                           "parameters":  {
+                                                              "drive":  {
+                                                                            "parameter":  "drive"
+                                                                        },
+                                                              "source":  {
+                                                                             "parameter":  "source"
+                                                                         },
+                                                              "$select":  "id,name",
+                                                              "file":  {
+                                                                           "parameter":  "file"
+                                                                       }
+                                                          },
+                                           "valueCollection":  "value",
+                                           "valuePath":  "id"
+                                       },
+                             "source":  {
+                                            "operationId":  "GetSources",
+                                            "titlePath":  "displayName",
+                                            "parameters":  {
+                                                               "$select":  "id,displayName",
+                                                               "$top":  "999"
+                                                           },
+                                            "valueCollection":  "value",
+                                            "valuePath":  "id"
+                                        },
+                             "file":  {
+                                          "operationId":  null,
+                                          "parameters":  {
+                                                             "drive":  {
+                                                                           "parameter":  "drive"
+                                                                       },
+                                                             "isFolder":  false,
+                                                             "dataset":  null,
+                                                             "fileFilter":  [
+                                                                                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                                                                                "application/vnd.ms-excel.sheet.binary.macroEnabled.12"
+                                                                            ]
+                                                         },
+                                          "valuePath":  "Id"
+                                      }
+                         },
+    "swaggerLearned":  true,
+    "graphConvertible":  true,
+    "graphNodeType":  "connector"
+}

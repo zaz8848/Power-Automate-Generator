@@ -1,0 +1,82 @@
+﻿{
+    "id":  "shared_teams_PostMessageToConversation",
+    "connector":  "shared_teams",
+    "connectorBase":  "shared_teams",
+    "operationId":  "PostMessageToConversation",
+    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_teams",
+    "type":  "OpenApiConnection",
+    "learnedFrom":  [
+                        "e43ae9eb-84dc-f011-8544-6045bd205ea8"
+                    ],
+    "learnedFromName":  [
+                            "PowerAppsFlow-Test1"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "environment":  [
+                        "orgdf331f66.crm5.dynamics.com"
+                    ],
+    "template":  {
+                     "Post_message_in_a_chat_or_channel":  {
+                                                               "runAfter":  {
+                                                                                "Compose":  [
+                                                                                                "Succeeded"
+                                                                                            ]
+                                                                            },
+                                                               "metadata":  {
+                                                                                "operationMetadataId":  "7021b9c1-4a24-405c-b483-a477c748f7c2"
+                                                                            },
+                                                               "type":  "OpenApiConnection",
+                                                               "inputs":  {
+                                                                              "host":  {
+                                                                                           "connectionName":  "shared_teams",
+                                                                                           "operationId":  "PostMessageToConversation",
+                                                                                           "apiId":  "/providers/Microsoft.PowerApps/apis/shared_teams"
+                                                                                       },
+                                                                              "parameters":  {
+                                                                                                 "poster":  "Flow bot",
+                                                                                                 "location":  "Chat with Flow bot",
+                                                                                                 "body/recipient":  "user@contoso.onmicrosoft.com;",
+                                                                                                 "body/messageBody":  "\u003cp\u003e恭喜你！打卡成功了！\u003cbr\u003e\n你的数据传输为@{outputs(\u0027Compose\u0027)}\u003c/p\u003e"
+                                                                                             },
+                                                                              "authentication":  "@parameters(\u0027$authentication\u0027)"
+                                                                          }
+                                                           }
+                 },
+    "inputSchema":  [
+                        {
+                            "name":  "connectionId",
+                            "in":  "path",
+                            "required":  true,
+                            "x-ms-visibility":  "internal",
+                            "type":  "string"
+                        },
+                        {
+                            "$ref":  "#/parameters/poster__in_path"
+                        },
+                        {
+                            "$ref":  "#/parameters/location__in_path"
+                        },
+                        {
+                            "$ref":  "#/parameters/customizationModifiedTime__in_query"
+                        },
+                        {
+                            "name":  "body",
+                            "x-ms-summary":  "Post message request",
+                            "description":  "The post message request",
+                            "x-ms-name-for-model":  "post_message_to_conversation_body",
+                            "x-ms-description-for-model":  "Set to the message that should be sent to the chat or channel based on user request. HTML is supported. Example: {\"messageBody\": \"\u003cb\u003eAlert:\u003c/b\u003e New incident reported.\"}",
+                            "in":  "body",
+                            "required":  true,
+                            "schema":  {
+                                           "$ref":  "#/definitions/DynamicPostMessageRequest"
+                                       }
+                        }
+                    ],
+    "swaggerLearned":  true,
+    "outputSchema":  {
+                         "$ref":  "#/definitions/PostToConversationResponse"
+                     },
+    "graphConvertible":  true,
+    "graphNodeType":  "connector"
+}

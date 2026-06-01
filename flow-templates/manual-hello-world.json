@@ -1,0 +1,43 @@
+{
+    "_comment": "Complete example: Manual button trigger + Compose action. Simplest possible flow for testing.",
+    "properties": {
+        "displayName": "[AutoGen] Hello World Test",
+        "definition": {
+            "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+            "contentVersion": "1.0.0.0",
+            "parameters": {
+                "$authentication": {
+                    "defaultValue": {},
+                    "type": "SecureObject"
+                },
+                "$connections": {
+                    "defaultValue": {},
+                    "type": "Object"
+                }
+            },
+            "triggers": {
+                "manual": {
+                    "type": "Request",
+                    "kind": "Button",
+                    "inputs": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {},
+                            "required": []
+                        }
+                    }
+                }
+            },
+            "actions": {
+                "Compose_Hello": {
+                    "type": "Compose",
+                    "inputs": "Hello from Automate Generator!",
+                    "runAfter": {}
+                }
+            },
+            "outputs": {}
+        },
+        "connectionReferences": {}
+    },
+    "schemaVersion": "1.0.0.0"
+}

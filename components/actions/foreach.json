@@ -1,0 +1,492 @@
+﻿{
+    "id":  "Foreach",
+    "type":  "Foreach",
+    "learnedFrom":  [
+                        "ee87fd77-09fa-f011-8407-000d3a316017",
+                        "3e048272-81f2-01da-5796-5bddbd0332ff",
+                        "15a680d4-1e05-f111-8407-6045bd5777da",
+                        "33afba72-d005-f111-8407-6045bd5777da",
+                        "cf1db88c-b576-f011-b4cc-000d3a080cec",
+                        "b1c1d185-c57c-f011-b4cc-000d3a080cec",
+                        "a0921697-c07c-f011-b4cc-000d3a099cdf",
+                        "861bdd5e-bc09-ef11-9f8a-000d3a5cb958",
+                        "fa40c544-9a0b-ef11-9f8a-000d3a5cb958",
+                        "ed6a53e3-6012-ef11-9f8a-000d3a5cb958",
+                        "e3e46b57-f936-f011-8c4d-000d3aa1971f",
+                        "3ddf75ff-1597-f011-b41c-000d3ac6a644",
+                        "f1faed1c-a4c5-f011-bbd3-000d3ac79569",
+                        "e55931c1-601f-f011-998a-00224802c180",
+                        "fe662b82-0dff-ef11-bae2-00224802c180",
+                        "6c595a51-ad0c-f011-9988-0022480427dd",
+                        "ae08d194-1903-f011-bae2-0022480427dd",
+                        "c7db6d55-e004-f011-bae2-0022480427dd",
+                        "98466431-8d25-f011-8c4e-00224808dbf5",
+                        "9e65ce8d-8f25-f011-8c4e-00224808dbf5",
+                        "85064fc0-7a4b-f011-877a-002248095f4f",
+                        "59ab6a3a-ba4b-f011-877a-002248095f4f",
+                        "0e2464d1-b350-f011-877a-002248095f4f",
+                        "b6182655-6eac-f011-bbd3-00224809eacc",
+                        "117db4e1-7dbf-ef11-a72e-0022481efed6",
+                        "290d043b-9fbf-ef11-a72e-0022481efed6",
+                        "485c39e3-44fd-59c3-3638-4777211cbc5e",
+                        "1a0cb2d6-fc3d-f011-877a-6045bd05e54b",
+                        "34fad402-8609-f011-bae2-6045bd07d12b",
+                        "7a5c6671-5bc5-f011-bbd3-6045bd205ea8",
+                        "e3742ca3-e086-ef11-ac21-7c1e520158f7",
+                        "af6b06fb-4553-f011-877b-7c1e524ac215",
+                        "60c177a9-082a-8438-8a3d-a4c4e6e814e3"
+                    ],
+    "learnedFromName":  [
+                            "Sharepoint-PO Uploaded-Extract Po Item",
+                            "Untitled flow",
+                            "PowerApps-Validate Invoices",
+                            "Sharepoint-Modified-ExpenseRequest-ExtractInvoice",
+                            "Structured issue list",
+                            "Automatic - Modify - AI Processing Log",
+                            "Child Flow - Extract Content From Document",
+                            "Test Automation | Enrich with Azure Application Insights",
+                            "Test Automation | Enrich with Dataverse Conversation Transcripts",
+                            "Test Automation | Analyze Generated Answers with AI Builder",
+                            "Document Processing - Run Extraction",
+                            "PowerApps-Generate RFP Proposal ",
+                            "Agent Flow - Create a case",
+                            "Conversation Analyzer | Analyze Conversation Based On Prompt",
+                            "Test Automation | Run Multiturn Tests (Child)",
+                            "Agent Inventory | Agents Data Load (GrandChild)",
+                            "Agent Inventory | Agents Data Load",
+                            "Agent Inventory | Agents Data Load (Child)",
+                            "Setup Wizard | Get Solution Connection References Details",
+                            "Setup Wizard | Get Solution Flows Details",
+                            "Value Summary | Initialize agent value inventory",
+                            "Value Summary | New agent classification",
+                            "Sharepoint Synchronization | Validate Connection On Demand",
+                            "Agent Compliance | Check Compliance (Grandchild)",
+                            "Conversation KPI | Generate Conversation KPIs Scheduler",
+                            "Conversation KPI | Copy Transcripts (Child)",
+                            "Query IP Address",
+                            "AI Evaluation Flow for Conversation",
+                            "Expire evaluations",
+                            "Agent Flow - Check SN",
+                            "Sharepoint Synchronization | Synchronize files to Agent (Child)",
+                            "Test Automation | Validate Agent Plans (Child)",
+                            "Manually -  Run case list"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "templates":  [
+                      {
+                          "template":  {
+                                           "type":  "Foreach",
+                                           "foreach":  "@outputs(\u0027Compose_-PoAndItemNo\u0027)",
+                                           "actions":  {
+                                                           "GPT-Extract_Detail_By_Items_No":  {
+                                                                                                  "type":  "OpenApiConnection",
+                                                                                                  "inputs":  {
+                                                                                                                 "parameters":  {
+                                                                                                                                    "recordId":  "4c1defbf-6355-481d-99c9-42db61f61fd8",
+                                                                                                                                    "item/requestv2/OrderItemNumber":  "@item()?[\u0027Order number/Item\u0027]",
+                                                                                                                                    "item/requestv2/Content":  "@body(\u0027Filter_array-ContentList\u0027)"
+                                                                                                                                },
+                                                                                                                 "host":  {
+                                                                                                                              "apiId":  "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                                                                                                                              "operationId":  "aibuilderpredict_customprompt",
+                                                                                                                              "connectionName":  "shared_commondataserviceforapps"
+                                                                                                                          }
+                                                                                                             },
+                                                                                                  "runAfter":  {
+                                                                                                                   "Compose-Content":  [
+                                                                                                                                           "Succeeded"
+                                                                                                                                       ]
+                                                                                                               },
+                                                                                                  "metadata":  {
+                                                                                                                   "operationMetadataId":  "1a14e458-bba4-4709-bcb8-9810df4d9a39",
+                                                                                                                   "flowSystemMetadata":  {
+                                                                                                                                              "portalOperationApiDisplayNameOverride":  "AI Builder",
+                                                                                                                                              "portalOperationIconOverride":  "https://content.powerapps.com/resource/makerx/static/pauto/images/designeroperations/aiBuilderNew.51dbdb6b.png",
+                                                                                                                                              "portalOperationBrandColorOverride":  "#0A76C4",
+                                                                                                                                              "portalOperationApiTierOverride":  "Standard",
+                                                                                                                                              "portalOperationId":  "aibuilderpredict_customprompt",
+                                                                                                                                              "portalOperationGroup":  "aibuilder"
+                                                                                                                                          }
+                                                                                                               }
+                                                                                              },
+                                                           "ExtractIems_Is_Empty":  {
+                                                                                        "type":  "If",
+                                                                                        "expression":  {
+                                                                                                           "and":  [
+                                                                                                                       {
+                                                                                                                           "equals":  [
+                                                                                                                                          "@empty(outputs(\u0027Compose-ExtractedItemsDetails\u0027)?[\u0027Lines\u0027])",
+                                                                                                                                          "@true"
+                                                                                                                                      ]
+                                                                                                                       }
+                                                                                                                   ]
+                                                                                                       },
+                                                                                        "actions":  {
+                                                                                                        "ExtractIems_Is_Empty_1":  {
+                                                                                                                                       "type":  "If",
+                                                                                                                                       "expression":  {
+                                                                                                                                                          "and":  [
+                                                                                                                                                                      {
+                                                                                                                                                                          "equals":  [
+                                                                                                                                                                                         "@empty(outputs(\u0027Compose-ExtractedItemsDetails_1\u0027)?[\u0027Lines\u0027])",
+                                                                                                                                                                                         "@true"
+                                                                                                                                                                                     ]
+                                                                                                                                                                      }
+                                                                                                                                                                  ]
+                                                                                                                                                      },
+                                                                                                                                       "actions":  {
+                                                                                                                                                       "Create_item-PO_Line_Items_Failed_2":  {
+                                                                                                                                                                                                  "type":  "OpenApiConnection",
+                                                                                                                                                                                                  "inputs":  {
+                                                                                                                                                                                                                 "parameters":  {
+                                                                                                                                                                                                                                    "dataset":  "@parameters(\u0027SharepointSite (crdd1_SharepointSite)\u0027)",
+                                                                                                                                                                                                                                    "table":  "@parameters(\u0027List-[Po Line Items] (crdd1_ListPoLineItems)\u0027)",
+                                                                                                                                                                                                                                    "item/Title":  "@items(\u0027Foreach-ItemsNo\u0027)?[\u0027Order number/Item\u0027]",
+                                                                                                                                                                                                                                    "item/PO/Id":  "@outputs(\u0027Create_item-PO\u0027)?[\u0027body/ID\u0027]",
+                                                                                                                                                                                                                                    "item/PoNumber":  "@items(\u0027Foreach-ItemsNo\u0027)?[\u0027PO\u0027]",
+                                                                                                                                                                                                                                    "item/Pos":  "@items(\u0027Foreach-ItemsNo\u0027)?[\u0027Pos.\u0027]",
+                                                                                                                                                                                                                                    "item/PartNumber":  "@items(\u0027Foreach-ItemsNo\u0027)?[\u0027Part Number\u0027]",
+                                                                                                                                                                                                                                    "item/Destination":  "@items(\u0027Foreach-ItemsNo\u0027)?[\u0027Destination\u0027]",
+                                                                                                                                                                                                                                    "item/Status/Value":  "Invalid",
+                                                                                                                                                                                                                                    "item/Remark":  "当前Pos.提取失败，辛苦自主进行填写",
+                                                                                                                                                                                                                                    "item/SystemPoId":  "@outputs(\u0027Create_item-PO\u0027)?[\u0027body/ID\u0027]"
+                                                                                                                                                                                                                                },
+                                                                                                                                                                                                                 "host":  {
+                                                                                                                                                                                                                              "apiId":  "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+                                                                                                                                                                                                                              "operationId":  "PostItem",
+                                                                                                                                                                                                                              "connectionName":  "shared_sharepointonline"
+                                                                                                                                                                                                                          }
+                                                                                                                                                                                                             },
+                                                                                                                                                                                                  "metadata":  {
+                                                                                                                                                                                                                   "operationMetadataId":  "6f91a3cc-82f5-41e9-b4aa-c944a3514ec2"
+                                                                                                                                                                                                               }
+                                                                                                                                                                                              }
+                                                                                                                                                   },
+                                                                                                                                       "else":  {
+                                                                                                                                                    "actions":  {
+                                                                                                                                                                    "Foreach-Extracted_Po_Items_Details_1":  {
+                                                                                                                                                                                                                 "type":  "Foreach",
+                                                                                                                                                                                                                 "foreach":  "@outputs(\u0027Compose-ExtractedItemsDetails_1\u0027)?[\u0027Lines\u0027]",
+                                                                                                                                                                                                                 "actions":  {
+                                                                                                                                                                                                                                 "Create_item-PO_Line_Items_Success_2":  {
+                                                                                                                                                                                                                                                                             "type":  "OpenApiConnection",
+                                                                                                                                                                                                                                                                             "inputs":  {
+                                                                                                                                                                                                                                                                                            "parameters":  {
+                                                                                                                                                                                                                                                                                                               "dataset":  "@parameters(\u0027SharepointSite (crdd1_SharepointSite)\u0027)",
+                                                                                                                                                                                                                                                                                                               "table":  "@parameters(\u0027List-[Po Line Items] (crdd1_ListPoLineItems)\u0027)",
+                                                                                                                                                                                                                                                                                                               "item/Title":  "@items(\u0027Foreach-ItemsNo\u0027)?[\u0027Order number/Item\u0027]",
+                                                                                                                                                                                                                                                                                                               "item/PO/Id":  "@outputs(\u0027Create_item-PO\u0027)?[\u0027body/ID\u0027]",
+                                                                                                                                                                                                                                                                                                               "item/PoNumber":  "@items(\u0027Foreach-ItemsNo\u0027)?[\u0027PO\u0027]",
+                                                                                                                                                                                                                                                                                                               "item/Pos":  "@items(\u0027Foreach-ItemsNo\u0027)?[\u0027Pos.\u0027]",
+                                                                                                                                                                                                                                                                                                               "item/PartNumber":  "@items(\u0027Foreach-ItemsNo\u0027)?[\u0027Part Number\u0027]",
+                                                                                                                                                                                                                                                                                                               "item/Qty":  "@item()?[\u0027Qty\u0027]",
+                                                                                                                                                                                                                                                                                                               "item/Destination":  "@items(\u0027Foreach-ItemsNo\u0027)?[\u0027Destination\u0027]",
+                                                                                                                                                                                                                                                                                                               "item/IssueDate":  "@items(\u0027Foreach-ItemsNo\u0027)?[\u0027Order issue date\u0027]",
+                                                                                                                                                                                                                                                                                                               "item/DeliveryDate":  "@if(empty(item()?[\u0027DeliveryDate\u0027]),null,item()?[\u0027DeliveryDate\u0027])",
+                                                                                                                                                                                                                                                                                                               "item/Status/Value":  "@if(item()?[\u0027IsValid\u0027],\u0027Valid\u0027,\u0027Invalid\u0027)",
+                                                                                                                                                                                                                                                                                                               "item/Remark":  "@item()?[\u0027Remark\u0027]",
+                                                                                                                                                                                                                                                                                                               "item/SystemPoId":  "@outputs(\u0027Create_item-PO\u0027)?[\u0027body/ID\u0027]"
+                                                                                                                                                                                                                                                                                                           },
+                                                                                                                                                                                                                                                                                            "host":  {
+                                                                                                                                                                                                                                                                                                         "apiId":  "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+                                                                                                                                                                                                                                                                                                         "operationId":  "PostItem",
+                                                                                                                                                                                                                                                                                                         "connectionName":  "shared_sharepointonline"
+                                                                                                                                                                                                                                                                                                     }
+                                                                                                                                                                                                                                                                                        },
+                                                                                                                                                                                                                                                                             "metadata":  {
+                                                                                                                                                                                                                                                                                              "operationMetadataId":  "6f91a3cc-82f5-41e9-b4aa-c944a3514ec2"
+                                                                                                                                                                                                                                                                                          }
+                                                                                                                                                                                                                                                                         }
+                                                                                                                                                                                                                             },
+                                                                                                                                                                                                                 "runtimeConfiguration":  {
+                                                                                                                                                                                                                                              "concurrency":  {
+                                                                                                                                                                                                                                                                  "repetitions":  6
+                                                                                                                                                                                                                                                              }
+                                                                                                                                                                                                                                          },
+                                                                                                                                                                                                                 "metadata":  {
+                                                                                                                                                                                                                                  "operationMetadataId":  "86832f8d-62b5-4842-8319-fc2b7f7cab88"
+                                                                                                                                                                                                                              }
+                                                                                                                                                                                                             }
+                                                                                                                                                                }
+                                                                                                                                                },
+                                                                                                                                       "runAfter":  {
+                                                                                                                                                        "Compose-ExtractedItemsDetails_1":  [
+                                                                                                                                                                                                "Succeeded"
+                                                                                                                                                                                            ]
+                                                                                                                                                    },
+                                                                                                                                       "metadata":  {
+                                                                                                                                                        "operationMetadataId":  "3d3c5113-a212-4f6e-a58b-c83726412150"
+                                                                                                                                                    }
+                                                                                                                                   },
+                                                                                                        "GPT-Extract_Detail_By_Items_No_1":  {
+                                                                                                                                                 "type":  "OpenApiConnection",
+                                                                                                                                                 "inputs":  {
+                                                                                                                                                                "parameters":  {
+                                                                                                                                                                                   "recordId":  "4c1defbf-6355-481d-99c9-42db61f61fd8",
+                                                                                                                                                                                   "item/requestv2/OrderItemNumber":  "@item()?[\u0027Order number/Item\u0027]",
+                                                                                                                                                                                   "item/requestv2/Content":  "@body(\u0027Filter_array-ContentList\u0027)"
+                                                                                                                                                                               },
+                                                                                                                                                                "host":  {
+                                                                                                                                                                             "apiId":  "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                                                                                                                                                                             "operationId":  "aibuilderpredict_customprompt",
+                                                                                                                                                                             "connectionName":  "shared_commondataserviceforapps"
+                                                                                                                                                                         }
+                                                                                                                                                            },
+                                                                                                                                                 "metadata":  {
+                                                                                                                                                                  "operationMetadataId":  "1a14e458-bba4-4709-bcb8-9810df4d9a39",
+                                                                                                                                                                  "flowSystemMetadata":  {
+                                                                                                                                                                                             "portalOperationApiDisplayNameOverride":  "AI Builder",
+                                                                                                                                                                                             "portalOperationIconOverride":  "https://content.powerapps.com/resource/makerx/static/pauto/images/designeroperations/aiBuilderNew.51dbdb6b.png",
+                                                                                                                                                                                             "portalOperationBrandColorOverride":  "#0A76C4",
+                                                                                                                                                                                             "portalOperationApiTierOverride":  "Standard",
+                                                                                                                                                                                             "portalOperationId":  "aibuilderpredict_customprompt",
+                                                                                                                                                                                             "portalOperationGroup":  "aibuilder"
+                                                                                                                                                                                         }
+                                                                                                                                                              }
+                                                                                                                                             },
+                                                                                                        "Compose-ExtractedItemsDetails_1":  {
+                                                                                                                                                "type":  "Compose",
+                                                                                                                                                "inputs":  "@json(replace(outputs(\u0027GPT-Extract_Detail_By_Items_No_1\u0027)?[\u0027body/responsev2/predictionOutput/text\u0027],\u0027```json\u0027,\u0027\u0027))",
+                                                                                                                                                "runAfter":  {
+                                                                                                                                                                 "GPT-Extract_Detail_By_Items_No_1":  [
+                                                                                                                                                                                                          "Succeeded"
+                                                                                                                                                                                                      ]
+                                                                                                                                                             },
+                                                                                                                                                "metadata":  {
+                                                                                                                                                                 "operationMetadataId":  "24bbba5e-2035-46ef-8ff6-5127bed2230a"
+                                                                                                                                                             }
+                                                                                                                                            }
+                                                                                                    },
+                                                                                        "else":  {
+                                                                                                     "actions":  {
+                                                                                                                     "Foreach-Extracted_Po_Items_Details":  {
+                                                                                                                                                                "type":  "Foreach",
+                                                                                                                                                                "foreach":  "@outputs(\u0027Compose-ExtractedItemsDetails\u0027)?[\u0027Lines\u0027]",
+                                                                                                                                                                "actions":  {
+                                                                                                                                                                                "Create_item-PO_Line_Items_Success_1":  {
+                                                                                                                                                                                                                            "type":  "OpenApiConnection",
+                                                                                                                                                                                                                            "inputs":  {
+                                                                                                                                                                                                                                           "parameters":  {
+                                                                                                                                                                                                                                                              "dataset":  "@parameters(\u0027SharepointSite (crdd1_SharepointSite)\u0027)",
+                                                                                                                                                                                                                                                              "table":  "@parameters(\u0027List-[Po Line Items] (crdd1_ListPoLineItems)\u0027)",
+                                                                                                                                                                                                                                                              "item/Title":  "@items(\u0027Foreach-ItemsNo\u0027)?[\u0027Order number/Item\u0027]",
+                                                                                                                                                                                                                                                              "item/PO/Id":  "@outputs(\u0027Create_item-PO\u0027)?[\u0027body/ID\u0027]",
+                                                                                                                                                                                                                                                              "item/PoNumber":  "@items(\u0027Foreach-ItemsNo\u0027)?[\u0027PO\u0027]",
+                                                                                                                                                                                                                                                              "item/Pos":  "@items(\u0027Foreach-ItemsNo\u0027)?[\u0027Pos.\u0027]",
+                                                                                                                                                                                                                                                              "item/PartNumber":  "@items(\u0027Foreach-ItemsNo\u0027)?[\u0027Part Number\u0027]",
+                                                                                                                                                                                                                                                              "item/Description":  "@items(\u0027Foreach-ItemsNo\u0027)?[\u0027Description\u0027]",
+                                                                                                                                                                                                                                                              "item/Qty":  "@item()?[\u0027Qty\u0027]",
+                                                                                                                                                                                                                                                              "item/Destination":  "@items(\u0027Foreach-ItemsNo\u0027)?[\u0027Destination\u0027]",
+                                                                                                                                                                                                                                                              "item/IssueDate":  "@items(\u0027Foreach-ItemsNo\u0027)?[\u0027Order issue date\u0027]",
+                                                                                                                                                                                                                                                              "item/DeliveryDate":  "@if(empty(item()?[\u0027DeliveryDate\u0027]),null,item()?[\u0027DeliveryDate\u0027])",
+                                                                                                                                                                                                                                                              "item/Status/Value":  "@if(item()?[\u0027IsValid\u0027],\u0027Valid\u0027,\u0027Invalid\u0027)",
+                                                                                                                                                                                                                                                              "item/Remark":  "@item()?[\u0027Remark\u0027]",
+                                                                                                                                                                                                                                                              "item/SystemPoId":  "@outputs(\u0027Create_item-PO\u0027)?[\u0027body/ID\u0027]"
+                                                                                                                                                                                                                                                          },
+                                                                                                                                                                                                                                           "host":  {
+                                                                                                                                                                                                                                                        "apiId":  "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+                                                                                                                                                                                                                                                        "operationId":  "PostItem",
+                                                                                                                                                                                                                                                        "connectionName":  "shared_sharepointonline"
+                                                                                                                                                                                                                                                    }
+                                                                                                                                                                                                                                       },
+                                                                                                                                                                                                                            "metadata":  {
+                                                                                                                                                                                                                                             "operationMetadataId":  "6f91a3cc-82f5-41e9-b4aa-c944a3514ec2"
+                                                                                                                                                                                                                                         }
+                                                                                                                                                                                                                        }
+                                                                                                                                                                            },
+                                                                                                                                                                "runtimeConfiguration":  {
+                                                                                                                                                                                             "concurrency":  {
+                                                                                                                                                                                                                 "repetitions":  6
+                                                                                                                                                                                                             }
+                                                                                                                                                                                         },
+                                                                                                                                                                "metadata":  {
+                                                                                                                                                                                 "operationMetadataId":  "86832f8d-62b5-4842-8319-fc2b7f7cab88"
+                                                                                                                                                                             }
+                                                                                                                                                            }
+                                                                                                                 }
+                                                                                                 },
+                                                                                        "runAfter":  {
+                                                                                                         "Compose-ExtractedItemsDetails":  [
+                                                                                                                                               "Succeeded"
+                                                                                                                                           ]
+                                                                                                     },
+                                                                                        "metadata":  {
+                                                                                                         "operationMetadataId":  "3d3c5113-a212-4f6e-a58b-c83726412150"
+                                                                                                     }
+                                                                                    },
+                                                           "Compose-ExtractedItemsDetails":  {
+                                                                                                 "type":  "Compose",
+                                                                                                 "inputs":  "@json(replace(outputs(\u0027GPT-Extract_Detail_By_Items_No\u0027)?[\u0027body/responsev2/predictionOutput/text\u0027],\u0027```json\u0027,\u0027\u0027))",
+                                                                                                 "runAfter":  {
+                                                                                                                  "GPT-Extract_Detail_By_Items_No":  [
+                                                                                                                                                         "Succeeded"
+                                                                                                                                                     ]
+                                                                                                              },
+                                                                                                 "metadata":  {
+                                                                                                                  "operationMetadataId":  "24bbba5e-2035-46ef-8ff6-5127bed2230a"
+                                                                                                              }
+                                                                                             },
+                                                           "Compose-Content":  {
+                                                                                   "type":  "Compose",
+                                                                                   "inputs":  "@join(body(\u0027Select-ContentList-Content\u0027),\u0027\u0027)",
+                                                                                   "runAfter":  {
+                                                                                                    "Select-ContentList-Content":  [
+                                                                                                                                       "Succeeded"
+                                                                                                                                   ]
+                                                                                                },
+                                                                                   "metadata":  {
+                                                                                                    "operationMetadataId":  "f9fc477f-3250-4081-9ab4-85aa917c31a0"
+                                                                                                }
+                                                                               },
+                                                           "Filter_array-ContentList":  {
+                                                                                            "type":  "Query",
+                                                                                            "inputs":  {
+                                                                                                           "from":  "@body(\u0027Select-DocPagesList\u0027)",
+                                                                                                           "where":  "@contains(split(items(\u0027Foreach-ItemsNo\u0027)?[\u0027SourcePage\u0027], \u0027;\u0027), string(item()?[\u0027page\u0027]))"
+                                                                                                       },
+                                                                                            "runAfter":  {
+                                                                                                             "Compose-SourcePage":  [
+                                                                                                                                        "Succeeded"
+                                                                                                                                    ]
+                                                                                                         },
+                                                                                            "metadata":  {
+                                                                                                             "operationMetadataId":  "4b509a08-b145-4f31-a770-d7f1b8c08f72"
+                                                                                                         }
+                                                                                        },
+                                                           "Select-ContentList-Content":  {
+                                                                                              "type":  "Select",
+                                                                                              "inputs":  {
+                                                                                                             "from":  "@body(\u0027Filter_array-ContentList\u0027)",
+                                                                                                             "select":  "@item()?[\u0027fullPageText\u0027]"
+                                                                                                         },
+                                                                                              "runAfter":  {
+                                                                                                               "Filter_array-ContentList":  [
+                                                                                                                                                "Succeeded"
+                                                                                                                                            ]
+                                                                                                           },
+                                                                                              "metadata":  {
+                                                                                                               "operationMetadataId":  "9b8ff184-79aa-462b-b2f0-b4f4021f841e"
+                                                                                                           }
+                                                                                          },
+                                                           "Compose-SourcePage":  {
+                                                                                      "type":  "Compose",
+                                                                                      "inputs":  "@items(\u0027Foreach-ItemsNo\u0027)?[\u0027SourcePage\u0027]",
+                                                                                      "metadata":  {
+                                                                                                       "operationMetadataId":  "8df2b8c7-b90b-4fd5-8d14-ab57135f30ea"
+                                                                                                   }
+                                                                                  }
+                                                       },
+                                           "runAfter":  {
+                                                            "Compose_-PoAndItemNo":  [
+                                                                                         "Succeeded"
+                                                                                     ]
+                                                        },
+                                           "runtimeConfiguration":  {
+                                                                        "concurrency":  {
+                                                                                            "repetitions":  4
+                                                                                        }
+                                                                    },
+                                           "metadata":  {
+                                                            "operationMetadataId":  "3e856e6c-258c-4946-8cb6-1b95de01a6e2"
+                                                        }
+                                       },
+                          "name":  "Foreach-ItemsNo"
+                      },
+                      {
+                          "template":  {
+                                           "type":  "Foreach",
+                                           "foreach":  "@outputs(\u0027Compose-ExtractedItemsDetails_1\u0027)?[\u0027Lines\u0027]",
+                                           "actions":  {
+                                                           "Create_item-PO_Line_Items_Success_2":  {
+                                                                                                       "type":  "OpenApiConnection",
+                                                                                                       "inputs":  {
+                                                                                                                      "parameters":  {
+                                                                                                                                         "dataset":  "@parameters(\u0027SharepointSite (crdd1_SharepointSite)\u0027)",
+                                                                                                                                         "table":  "@parameters(\u0027List-[Po Line Items] (crdd1_ListPoLineItems)\u0027)",
+                                                                                                                                         "item/Title":  "@items(\u0027Foreach-ItemsNo\u0027)?[\u0027Order number/Item\u0027]",
+                                                                                                                                         "item/PO/Id":  "@outputs(\u0027Create_item-PO\u0027)?[\u0027body/ID\u0027]",
+                                                                                                                                         "item/PoNumber":  "@items(\u0027Foreach-ItemsNo\u0027)?[\u0027PO\u0027]",
+                                                                                                                                         "item/Pos":  "@items(\u0027Foreach-ItemsNo\u0027)?[\u0027Pos.\u0027]",
+                                                                                                                                         "item/PartNumber":  "@items(\u0027Foreach-ItemsNo\u0027)?[\u0027Part Number\u0027]",
+                                                                                                                                         "item/Qty":  "@item()?[\u0027Qty\u0027]",
+                                                                                                                                         "item/Destination":  "@items(\u0027Foreach-ItemsNo\u0027)?[\u0027Destination\u0027]",
+                                                                                                                                         "item/IssueDate":  "@items(\u0027Foreach-ItemsNo\u0027)?[\u0027Order issue date\u0027]",
+                                                                                                                                         "item/DeliveryDate":  "@if(empty(item()?[\u0027DeliveryDate\u0027]),null,item()?[\u0027DeliveryDate\u0027])",
+                                                                                                                                         "item/Status/Value":  "@if(item()?[\u0027IsValid\u0027],\u0027Valid\u0027,\u0027Invalid\u0027)",
+                                                                                                                                         "item/Remark":  "@item()?[\u0027Remark\u0027]",
+                                                                                                                                         "item/SystemPoId":  "@outputs(\u0027Create_item-PO\u0027)?[\u0027body/ID\u0027]"
+                                                                                                                                     },
+                                                                                                                      "host":  {
+                                                                                                                                   "apiId":  "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+                                                                                                                                   "operationId":  "PostItem",
+                                                                                                                                   "connectionName":  "shared_sharepointonline"
+                                                                                                                               }
+                                                                                                                  },
+                                                                                                       "metadata":  {
+                                                                                                                        "operationMetadataId":  "6f91a3cc-82f5-41e9-b4aa-c944a3514ec2"
+                                                                                                                    }
+                                                                                                   }
+                                                       },
+                                           "runtimeConfiguration":  {
+                                                                        "concurrency":  {
+                                                                                            "repetitions":  6
+                                                                                        }
+                                                                    },
+                                           "metadata":  {
+                                                            "operationMetadataId":  "86832f8d-62b5-4842-8319-fc2b7f7cab88"
+                                                        }
+                                       },
+                          "name":  "Foreach-Extracted_Po_Items_Details_1"
+                      },
+                      {
+                          "template":  {
+                                           "type":  "Foreach",
+                                           "foreach":  "@outputs(\u0027Compose-ExtractedItemsDetails\u0027)?[\u0027Lines\u0027]",
+                                           "actions":  {
+                                                           "Create_item-PO_Line_Items_Success_1":  {
+                                                                                                       "type":  "OpenApiConnection",
+                                                                                                       "inputs":  {
+                                                                                                                      "parameters":  {
+                                                                                                                                         "dataset":  "@parameters(\u0027SharepointSite (crdd1_SharepointSite)\u0027)",
+                                                                                                                                         "table":  "@parameters(\u0027List-[Po Line Items] (crdd1_ListPoLineItems)\u0027)",
+                                                                                                                                         "item/Title":  "@items(\u0027Foreach-ItemsNo\u0027)?[\u0027Order number/Item\u0027]",
+                                                                                                                                         "item/PO/Id":  "@outputs(\u0027Create_item-PO\u0027)?[\u0027body/ID\u0027]",
+                                                                                                                                         "item/PoNumber":  "@items(\u0027Foreach-ItemsNo\u0027)?[\u0027PO\u0027]",
+                                                                                                                                         "item/Pos":  "@items(\u0027Foreach-ItemsNo\u0027)?[\u0027Pos.\u0027]",
+                                                                                                                                         "item/PartNumber":  "@items(\u0027Foreach-ItemsNo\u0027)?[\u0027Part Number\u0027]",
+                                                                                                                                         "item/Description":  "@items(\u0027Foreach-ItemsNo\u0027)?[\u0027Description\u0027]",
+                                                                                                                                         "item/Qty":  "@item()?[\u0027Qty\u0027]",
+                                                                                                                                         "item/Destination":  "@items(\u0027Foreach-ItemsNo\u0027)?[\u0027Destination\u0027]",
+                                                                                                                                         "item/IssueDate":  "@items(\u0027Foreach-ItemsNo\u0027)?[\u0027Order issue date\u0027]",
+                                                                                                                                         "item/DeliveryDate":  "@if(empty(item()?[\u0027DeliveryDate\u0027]),null,item()?[\u0027DeliveryDate\u0027])",
+                                                                                                                                         "item/Status/Value":  "@if(item()?[\u0027IsValid\u0027],\u0027Valid\u0027,\u0027Invalid\u0027)",
+                                                                                                                                         "item/Remark":  "@item()?[\u0027Remark\u0027]",
+                                                                                                                                         "item/SystemPoId":  "@outputs(\u0027Create_item-PO\u0027)?[\u0027body/ID\u0027]"
+                                                                                                                                     },
+                                                                                                                      "host":  {
+                                                                                                                                   "apiId":  "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+                                                                                                                                   "operationId":  "PostItem",
+                                                                                                                                   "connectionName":  "shared_sharepointonline"
+                                                                                                                               }
+                                                                                                                  },
+                                                                                                       "metadata":  {
+                                                                                                                        "operationMetadataId":  "6f91a3cc-82f5-41e9-b4aa-c944a3514ec2"
+                                                                                                                    }
+                                                                                                   }
+                                                       },
+                                           "runtimeConfiguration":  {
+                                                                        "concurrency":  {
+                                                                                            "repetitions":  6
+                                                                                        }
+                                                                    },
+                                           "metadata":  {
+                                                            "operationMetadataId":  "86832f8d-62b5-4842-8319-fc2b7f7cab88"
+                                                        }
+                                       },
+                          "name":  "Foreach-Extracted_Po_Items_Details"
+                      }
+                  ],
+    "graphConvertible":  true,
+    "graphNodeType":  "loop"
+}

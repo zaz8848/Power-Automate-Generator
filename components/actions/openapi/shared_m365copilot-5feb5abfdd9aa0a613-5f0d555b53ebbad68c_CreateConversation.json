@@ -1,0 +1,54 @@
+﻿{
+    "id":  "shared_m365copilot-5feb5abfdd9aa0a613-5f0d555b53ebbad68c_CreateConversation",
+    "connector":  "shared_m365copilot-5feb5abfdd9aa0a613-5f0d555b53ebbad68c",
+    "connectorBase":  "shared_m365copilot-5feb5abfdd9aa0a613-5f0d555b53ebbad68c",
+    "operationId":  "CreateConversation",
+    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_m365copilot-5feb5abfdd9aa0a613-5f0d555b53ebbad68c",
+    "type":  "OpenApiConnection",
+    "learnedFrom":  [
+                        "eee7ab95-bbcd-aea3-60f2-1531a81278f7"
+                    ],
+    "learnedFromName":  [
+                            "Manually-Create Conversation"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "environment":  [
+                        "orgdf331f66.crm5.dynamics.com"
+                    ],
+    "template":  {
+                     "Create_conversation":  {
+                                                 "type":  "OpenApiConnection",
+                                                 "inputs":  {
+                                                                "parameters":  {
+                                                                                   "body":  {
+
+                                                                                            }
+                                                                               },
+                                                                "host":  {
+                                                                             "apiId":  "/providers/Microsoft.PowerApps/apis/shared_m365copilot-5feb5abfdd9aa0a613-5f0d555b53ebbad68c",
+                                                                             "operationId":  "CreateConversation",
+                                                                             "connectionName":  "shared_m365copilot-5feb5abfdd9aa0a613-5f0d555b53ebbad68c"
+                                                                         }
+                                                            },
+                                                 "runAfter":  {
+
+                                                              }
+                                             }
+                 },
+    "swaggerLearned":  false,
+    "inputSchema":  [
+                        {
+                            "name":  "connectionId",
+                            "in":  "path",
+                            "type":  "string",
+                            "required":  true
+                        }
+                    ],
+    "outputSchema":  {
+                         "type":  "object",
+                         "description":  "Custom connector - Swagger unavailable"
+                     },
+    "graphConvertible":  true,
+    "graphNodeType":  "connector"
+}

@@ -1,0 +1,221 @@
+﻿{
+    "id":  "Response",
+    "type":  "Response",
+    "learnedFrom":  [
+                        "80ce4dbe-6b7b-c90b-46b0-3ba101d6f234",
+                        "10aad571-01aa-8ee6-2916-59b3bdd61793",
+                        "15a680d4-1e05-f111-8407-6045bd5777da",
+                        "a39c09e6-2053-f111-bec7-6045bd5777da",
+                        "65993b0e-c87c-5907-ddd6-a7d049633772",
+                        "58198de9-ca29-f011-8c4e-000d3a080cec",
+                        "a0921697-c07c-f011-b4cc-000d3a099cdf",
+                        "e74b3f15-5310-f011-9988-000d3a329ac2",
+                        "66b343c7-63ce-ef11-8eea-000d3a5c1e68",
+                        "d441ccaa-33d2-ef11-8eea-000d3a5c1e68",
+                        "b2199f54-3dd2-ef11-8eea-000d3a5c1e68",
+                        "be974926-47d2-ef11-8eea-000d3a5c1e68",
+                        "5130712d-59d2-ef11-8eea-000d3a5c1e68",
+                        "0f468fd0-1dcf-ef11-8ee9-000d3a5ccf2d",
+                        "a4b63f71-072f-f011-8c4e-000d3aa1971f",
+                        "3b6ea92d-067f-f011-b4cc-000d3aa1971f",
+                        "6c089c39-f681-f011-b4cc-000d3aa3d219",
+                        "3ddf75ff-1597-f011-b41c-000d3ac6a644",
+                        "09985c04-ada5-f011-bbd2-000d3ac79569",
+                        "f1faed1c-a4c5-f011-bbd3-000d3ac79569",
+                        "e55931c1-601f-f011-998a-00224802c180",
+                        "e3f17f06-9373-f011-b4cc-00224802c180",
+                        "fe662b82-0dff-ef11-bae2-00224802c180",
+                        "6c595a51-ad0c-f011-9988-0022480427dd",
+                        "ae08d194-1903-f011-bae2-0022480427dd",
+                        "c7db6d55-e004-f011-bae2-0022480427dd",
+                        "d8a8c388-8a25-f011-8c4e-00224808dbf5",
+                        "98466431-8d25-f011-8c4e-00224808dbf5",
+                        "9e65ce8d-8f25-f011-8c4e-00224808dbf5",
+                        "0e2464d1-b350-f011-877a-002248095f4f",
+                        "42853375-172c-f011-8c4e-002248095f4f",
+                        "b6182655-6eac-f011-bbd3-00224809eacc",
+                        "290d043b-9fbf-ef11-a72e-0022481efed6",
+                        "09a76655-9fbf-ef11-a72e-0022481efed6",
+                        "7eb68ff6-e2a0-ef11-8a69-00224829a66f",
+                        "978f64a3-261a-cb58-edd6-0e2cf4179460",
+                        "83c631fc-3476-4a4a-c15c-0f00dc1e6ed7",
+                        "485c39e3-44fd-59c3-3638-4777211cbc5e",
+                        "d132ba6d-d296-0606-b349-4d4847c361b2",
+                        "e6dac266-bb06-7965-202f-5e23a624e1b8",
+                        "08a22b21-d7d3-ef11-a730-6045bd00cb12",
+                        "7cebd225-e3d3-ef11-a730-6045bd00cb12",
+                        "61dc8bec-f1d3-ef11-a730-6045bd00cb12",
+                        "d06e9f82-b2d7-ef11-a730-6045bd00cb12",
+                        "af2bf60d-0bb0-f011-bbd3-6045bd08568b",
+                        "c5eeb2b4-1974-f011-b4cc-6045bd203130",
+                        "e43ae9eb-84dc-f011-8544-6045bd205ea8",
+                        "7a5c6671-5bc5-f011-bbd3-6045bd205ea8",
+                        "605100f4-ceeb-d447-a2f4-73d9f7b2eeb4",
+                        "b65e4a38-3adc-217b-220a-7ae1505da6f2",
+                        "e3742ca3-e086-ef11-ac21-7c1e520158f7",
+                        "af6b06fb-4553-f011-877b-7c1e524ac215",
+                        "b351d853-121b-213c-56cf-9c584ef3980e",
+                        "3439b768-e1a7-4dab-20ec-a9146c214c81",
+                        "e58b6298-bb3b-6411-c733-b010f8a48674"
+                    ],
+    "learnedFromName":  [
+                            "AgentFlow-Test Http",
+                            "Untitled",
+                            "PowerApps-Validate Invoices",
+                            "Skills -\u003e Respond to Copilot",
+                            "AgentFlow- PolicyIssueRecorder",
+                            "Query Ticket Status",
+                            "Child Flow - Extract Content From Document",
+                            "Global | Get Current Dataverse Url",
+                            "Adaptive Card | Approval Request",
+                            "Adaptive Card | Ticket Information",
+                            "Adaptive Card | Incident Report",
+                            "Adaptive Card | Event Registration",
+                            "Adaptive Card | Product Return",
+                            "Adaptive Card | Account Summary",
+                            "Untitled",
+                            "1.Child Flow - Initial Conversation",
+                            "Utility - Send Message To Bot And Get Response",
+                            "PowerApps-Generate RFP Proposal ",
+                            "BeOne-SendInformationToEmail",
+                            "Agent Flow - Create a case",
+                            "Conversation Analyzer | Analyze Conversation Based On Prompt",
+                            "Test Automation | AI Builder Credit Consumption",
+                            "Test Automation | Run Multiturn Tests (Child)",
+                            "Agent Inventory | Agents Data Load (GrandChild)",
+                            "Agent Inventory | Agents Data Load",
+                            "Agent Inventory | Agents Data Load (Child)",
+                            "Setup Wizard | Get Solution Environment Variable Definitions Details",
+                            "Setup Wizard | Get Solution Connection References Details",
+                            "Setup Wizard | Get Solution Flows Details",
+                            "Sharepoint Synchronization | Validate Connection On Demand",
+                            "Test Automation | Multi Topic Transcripts Enrichment (Child)",
+                            "Agent Compliance | Check Compliance (Grandchild)",
+                            "Conversation KPI | Copy Transcripts (Child)",
+                            "Conversation KPI | Copy Transcripts (Grandchild)",
+                            "Conversation KPI | Get Conversation Transcripts Count",
+                            "SendInfoEmail（Multilingual）",
+                            "Untitled flow",
+                            "Query IP Address",
+                            "GeneratePieChart",
+                            "Untitled flow",
+                            "Adaptive Card | Profile Summary",
+                            "Adaptive Card | Order Confirmation",
+                            "Adaptive Card | Schedule Form",
+                            "Adaptive Card | Approval Request Change Id",
+                            "Agent Inventory | Agents Data Load OnDemand",
+                            "Canvas App - Warranty Status Check",
+                            "PowerAppsFlow-Test1",
+                            "Agent Flow - Check SN",
+                            "Agent Flow - Customer Info Inquiry",
+                            "3.Bot Get Reponse",
+                            "Sharepoint Synchronization | Synchronize files to Agent (Child)",
+                            "Test Automation | Validate Agent Plans (Child)",
+                            "Untitled flow",
+                            "2. Send Message and get Watermark",
+                            "Agent Flow - Warranty Inquiry"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "templates":  [
+                      {
+                          "template":  {
+                                           "runAfter":  {
+                                                            "HTTP":  [
+                                                                         "Succeeded"
+                                                                     ]
+                                                        },
+                                           "metadata":  {
+                                                            "operationMetadataId":  "81c94f73-dd52-465c-ad3b-a4686da63cc3"
+                                                        },
+                                           "type":  "Response",
+                                           "kind":  "Skills",
+                                           "inputs":  {
+                                                          "schema":  {
+                                                                         "type":  "object",
+                                                                         "properties":  {
+                                                                                            "output":  {
+                                                                                                           "title":  "Output",
+                                                                                                           "description":  "",
+                                                                                                           "type":  "string",
+                                                                                                           "x-ms-content-hint":  "TEXT",
+                                                                                                           "x-ms-dynamically-added":  true
+                                                                                                       }
+                                                                                        },
+                                                                         "additionalProperties":  {
+
+                                                                                                  }
+                                                                     },
+                                                          "statusCode":  200,
+                                                          "body":  {
+                                                                       "output":  "@{body(\u0027HTTP\u0027)}"
+                                                                   }
+                                                      }
+                                       },
+                          "name":  "Respond_to_the_agent"
+                      },
+                      {
+                          "template":  {
+                                           "type":  "Response",
+                                           "kind":  "Skills",
+                                           "inputs":  {
+                                                          "schema":  {
+                                                                         "type":  "object",
+                                                                         "properties":  {
+
+                                                                                        },
+                                                                         "additionalProperties":  {
+
+                                                                                                  }
+                                                                     },
+                                                          "statusCode":  200,
+                                                          "body":  {
+
+                                                                   }
+                                                      },
+                                           "runAfter":  {
+                                                            "Hello":  [
+                                                                          "SUCCEEDED"
+                                                                      ]
+                                                        },
+                                           "metadata":  {
+                                                            "operationMetadataId":  "81c94f73-dd52-465c-ad3b-a4686da63cc3"
+                                                        }
+                                       },
+                          "name":  "Respond_to_the_agent"
+                      },
+                      {
+                          "template":  {
+                                           "runAfter":  {
+                                                            "Apply_to_each":  [
+                                                                                  "Succeeded"
+                                                                              ]
+                                                        },
+                                           "metadata":  {
+                                                            "operationMetadataId":  "a91dd811-1db2-4860-bead-f246e5c0e69a"
+                                                        },
+                                           "type":  "Response",
+                                           "kind":  "PowerApp",
+                                           "inputs":  {
+                                                          "statusCode":  200,
+                                                          "body":  {
+                                                                       "output":  "@{outputs(\u0027Compose\u0027)}"
+                                                                   },
+                                                          "schema":  {
+                                                                         "type":  "object",
+                                                                         "properties":  {
+                                                                                            "output":  {
+                                                                                                           "title":  "Output",
+                                                                                                           "x-ms-dynamically-added":  true,
+                                                                                                           "type":  "string"
+                                                                                                       }
+                                                                                        }
+                                                                     }
+                                                      }
+                                       },
+                          "name":  "Respond_to_a_Power_App_or_flow"
+                      }
+                  ],
+    "graphConvertible":  true,
+    "graphNodeType":  "builtinFunction"
+}

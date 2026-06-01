@@ -1,0 +1,168 @@
+﻿{
+    "id":  "shared_commondataserviceforapps_PerformBoundAction",
+    "connector":  "shared_commondataserviceforapps",
+    "connectorBase":  "shared_commondataserviceforapps",
+    "operationId":  "PerformBoundAction",
+    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+    "type":  "OpenApiConnection",
+    "learnedFrom":  [
+                        "01614ff6-17b7-ea11-a812-000d3a1ab78a",
+                        "861bdd5e-bc09-ef11-9f8a-000d3a5cb958",
+                        "fa40c544-9a0b-ef11-9f8a-000d3a5cb958",
+                        "ed6a53e3-6012-ef11-9f8a-000d3a5cb958",
+                        "af6b06fb-4553-f011-877b-7c1e524ac215"
+                    ],
+    "learnedFromName":  [
+                            "IoT - Flow - Parent IoT Alerts",
+                            "Test Automation | Enrich with Azure Application Insights",
+                            "Test Automation | Enrich with Dataverse Conversation Transcripts",
+                            "Test Automation | Analyze Generated Answers with AI Builder",
+                            "Test Automation | Validate Agent Plans (Child)"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "environment":  [
+                        "orgdf331f66.crm5.dynamics.com"
+                    ],
+    "template":  {
+                     "Perform_a_bound_action":  {
+                                                    "runAfter":  {
+
+                                                                 },
+                                                    "type":  "OpenApiConnection",
+                                                    "inputs":  {
+                                                                   "host":  {
+                                                                                "connectionName":  "shared_commondataserviceforapps",
+                                                                                "operationId":  "PerformBoundAction",
+                                                                                "apiId":  "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                                                                            },
+                                                                   "parameters":  {
+                                                                                      "entityName":  "msdyn_iotalerts",
+                                                                                      "actionName":  "Microsoft.Dynamics.CRM.msdyn_ParentIoTAlerts",
+                                                                                      "recordId":  "@triggerOutputs()?[\u0027body/msdyn_iotalertid\u0027]",
+                                                                                      "item/TimespanSeconds":  300
+                                                                                  },
+                                                                   "authentication":  "@parameters(\u0027$authentication\u0027)"
+                                                               }
+                                                }
+                 },
+    "inputSchema":  [
+                        {
+                            "name":  "connectionId",
+                            "in":  "path",
+                            "required":  true,
+                            "x-ms-visibility":  "internal",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "entityName",
+                            "in":  "path",
+                            "description":  "Choose a table",
+                            "required":  true,
+                            "x-ms-url-encoding":  "double",
+                            "x-ms-dynamic-values":  {
+                                                        "operationId":  "GetEntities",
+                                                        "parameters":  {
+
+                                                                       },
+                                                        "value-collection":  "value",
+                                                        "value-path":  "EntitySetName",
+                                                        "value-title":  "DisplayCollectionName/UserLocalizedLabel/Label"
+                                                    },
+                            "x-ms-summary":  "Table name",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "actionName",
+                            "in":  "path",
+                            "description":  "Choose an action",
+                            "required":  true,
+                            "x-ms-url-encoding":  "double",
+                            "x-ms-dynamic-values":  {
+                                                        "operationId":  "GetBoundActions",
+                                                        "parameters":  {
+                                                                           "entityName":  {
+                                                                                              "parameter":  "entityName"
+                                                                                          }
+                                                                       },
+                                                        "value-collection":  "value",
+                                                        "value-path":  "operationId",
+                                                        "value-title":  "operationDisplayName"
+                                                    },
+                            "x-ms-summary":  "Action Name",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "recordId",
+                            "in":  "path",
+                            "description":  "Enter the row\u0027s globally unique identifier (GUID)",
+                            "required":  true,
+                            "x-ms-url-encoding":  "double",
+                            "x-ms-summary":  "Row ID",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "item",
+                            "in":  "body",
+                            "description":  "Action parameters",
+                            "required":  false,
+                            "schema":  {
+                                           "type":  "object",
+                                           "x-ms-dynamic-properties":  {
+                                                                           "operationId":  "GetMetadataForBoundActionInput",
+                                                                           "parameters":  {
+                                                                                              "entityName":  {
+                                                                                                                 "parameterReference":  "entityName"
+                                                                                                             },
+                                                                                              "actionName":  {
+                                                                                                                 "parameterReference":  "actionName"
+                                                                                                             }
+                                                                                          },
+                                                                           "itemValuePath":  "schema"
+                                                                       }
+                                       },
+                            "x-ms-summary":  "Action parameters"
+                        }
+                    ],
+    "dynamicValuesRef":  {
+                             "actionName":  {
+                                                "operationId":  "GetBoundActions",
+                                                "titlePath":  "operationDisplayName",
+                                                "parameters":  {
+                                                                   "entityName":  {
+                                                                                      "parameter":  "entityName"
+                                                                                  }
+                                                               },
+                                                "valueCollection":  "value",
+                                                "valuePath":  "operationId"
+                                            },
+                             "entityName":  {
+                                                "operationId":  "GetEntities",
+                                                "titlePath":  "DisplayCollectionName/UserLocalizedLabel/Label",
+                                                "parameters":  {
+
+                                                               },
+                                                "valueCollection":  "value",
+                                                "valuePath":  "EntitySetName"
+                                            }
+                         },
+    "swaggerLearned":  true,
+    "outputSchema":  {
+                         "type":  "object",
+                         "x-ms-dynamic-properties":  {
+                                                         "operationId":  "GetMetadataForBoundActionResponse",
+                                                         "parameters":  {
+                                                                            "entityName":  {
+                                                                                               "parameterReference":  "entityName"
+                                                                                           },
+                                                                            "actionName":  {
+                                                                                               "parameterReference":  "actionName"
+                                                                                           }
+                                                                        },
+                                                         "itemValuePath":  "schema"
+                                                     }
+                     },
+    "graphConvertible":  "partial",
+    "graphNodeType":  "connector",
+    "graphNotes":  "If used as Classify (QuickTest), needs AI to convert prompt to categories[]. Otherwise convertible."
+}

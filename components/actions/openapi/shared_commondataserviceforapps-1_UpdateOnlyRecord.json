@@ -1,0 +1,173 @@
+﻿{
+    "id":  "shared_commondataserviceforapps-1_UpdateOnlyRecord",
+    "connector":  "shared_commondataserviceforapps-1",
+    "connectorBase":  "shared_commondataserviceforapps",
+    "operationId":  "UpdateOnlyRecord",
+    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+    "type":  "OpenApiConnection",
+    "learnedFrom":  [
+                        "b2538f39-9190-ef11-ac21-0022480c3fe9",
+                        "b99118ab-dd62-f011-bec3-6045bd00625f",
+                        "4cd08b32-8963-f011-bec3-6045bd00625f",
+                        "78830008-a5fb-f011-8406-7ced8d3c72c7"
+                    ],
+    "learnedFromName":  [
+                            "Automatic Flow - Create Processing Log - SharePoint Lib",
+                            "Automatic Flow - Start Document Translation When Translation Log Status Changes to Waiting for Proc",
+                            "Agent Flow - Document Translation",
+                            "Automatic Flow - Content Extraction"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "environment":  [
+                        "org1cd97ca4.crm.dynamics.com"
+                    ],
+    "template":  {
+                     "Update_processing_log_status_to_detect_setting":  {
+                                                                            "type":  "OpenApiConnection",
+                                                                            "inputs":  {
+                                                                                           "parameters":  {
+                                                                                                              "entityName":  "biz_importlogs",
+                                                                                                              "recordId":  "@outputs(\u0027Add_a_new_proccesing_log\u0027)?[\u0027body/activityid\u0027]",
+                                                                                                              "item/statuscode":  757790007
+                                                                                                          },
+                                                                                           "host":  {
+                                                                                                        "apiId":  "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                                                                                                        "operationId":  "UpdateOnlyRecord",
+                                                                                                        "connectionName":  "shared_commondataserviceforapps-1"
+                                                                                                    }
+                                                                                       },
+                                                                            "runAfter":  {
+                                                                                             "Create_import_log_and_upload_document":  [
+                                                                                                                                           "Succeeded"
+                                                                                                                                       ]
+                                                                                         }
+                                                                        }
+                 },
+    "inputSchema":  [
+                        {
+                            "name":  "connectionId",
+                            "in":  "path",
+                            "required":  true,
+                            "x-ms-visibility":  "internal",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "prefer",
+                            "in":  "header",
+                            "description":  "The header parameter required to make Microsoft Dataverse return the created resource",
+                            "required":  true,
+                            "x-ms-summary":  "Prefer",
+                            "x-ms-visibility":  "internal",
+                            "type":  "string",
+                            "default":  "return=representation,odata.include-annotations=*"
+                        },
+                        {
+                            "name":  "accept",
+                            "in":  "header",
+                            "description":  "The header parameter required to make Microsoft Dataverse return the odata id",
+                            "required":  true,
+                            "x-ms-summary":  "Accept",
+                            "x-ms-visibility":  "internal",
+                            "type":  "string",
+                            "default":  "application/json;odata.metadata=full"
+                        },
+                        {
+                            "name":  "x-ms-odata-metadata-full",
+                            "in":  "header",
+                            "description":  "The header parameter to customer to opt-in returning full odata metadata in response.",
+                            "required":  false,
+                            "x-ms-summary":  "Return Full Metadata",
+                            "x-ms-visibility":  "advanced",
+                            "type":  "boolean"
+                        },
+                        {
+                            "name":  "If-Match",
+                            "in":  "header",
+                            "type":  "string",
+                            "description":  "If-Match Header",
+                            "x-ms-summary":  "If-Match",
+                            "x-ms-visibility":  "internal",
+                            "required":  true,
+                            "default":  "*"
+                        },
+                        {
+                            "name":  "entityName",
+                            "in":  "path",
+                            "description":  "Choose a table",
+                            "required":  true,
+                            "x-ms-url-encoding":  "double",
+                            "x-ms-dynamic-values":  {
+                                                        "operationId":  "GetEntities",
+                                                        "parameters":  {
+
+                                                                       },
+                                                        "value-collection":  "value",
+                                                        "value-path":  "EntitySetName",
+                                                        "value-title":  "DisplayCollectionName/UserLocalizedLabel/Label"
+                                                    },
+                            "x-ms-summary":  "Table name",
+                            "type":  "string",
+                            "x-ms-description-for-model":  "Name of the target Dataverse table (e.g., \u0027contacts\u0027, \u0027access_rights\u0027). Use get_tables to discover valid names.",
+                            "x-ms-name-for-model":  "update_row_entityName"
+                        },
+                        {
+                            "name":  "recordId",
+                            "in":  "path",
+                            "description":  "Enter the row\u0027s globally unique identifier (GUID)",
+                            "required":  true,
+                            "x-ms-url-encoding":  "double",
+                            "x-ms-summary":  "Row ID",
+                            "type":  "string",
+                            "x-ms-description-for-model":  "Primary key value of the record to update. Provide exactly one of \u0027recordId\u0027 or \u0027filter\u0027, not both. Value must match the table\u0027s primary key field.",
+                            "x-ms-name-for-model":  "update_row_recordId"
+                        },
+                        {
+                            "name":  "item",
+                            "in":  "body",
+                            "description":  "Row to update",
+                            "required":  true,
+                            "schema":  {
+                                           "type":  "object",
+                                           "x-ms-dynamic-properties":  {
+                                                                           "operationId":  "GetMetadataForPatchEntity",
+                                                                           "parameters":  {
+                                                                                              "entityName":  {
+                                                                                                                 "parameterReference":  "entityName"
+                                                                                                             }
+                                                                                          },
+                                                                           "itemValuePath":  "schema"
+                                                                       }
+                                       },
+                            "x-ms-summary":  "Row Item",
+                            "x-ms-description-for-model":  "REQUIRED. A JSON object of field-value pairs to update. All update values MUST be inside this object -- do not pass them as top-level parameters. Only include fields you want to change.",
+                            "x-ms-name-for-model":  "update_row_item"
+                        }
+                    ],
+    "dynamicValuesRef":  {
+                             "entityName":  {
+                                                "operationId":  "GetEntities",
+                                                "titlePath":  "DisplayCollectionName/UserLocalizedLabel/Label",
+                                                "parameters":  {
+
+                                                               },
+                                                "valueCollection":  "value",
+                                                "valuePath":  "EntitySetName"
+                                            }
+                         },
+    "swaggerLearned":  true,
+    "outputSchema":  {
+                         "type":  "object",
+                         "x-ms-dynamic-properties":  {
+                                                         "operationId":  "GetMetadataForGetEntity",
+                                                         "parameters":  {
+                                                                            "entityName":  {
+                                                                                               "parameterReference":  "entityName"
+                                                                                           }
+                                                                        },
+                                                         "itemValuePath":  "schema"
+                                                     }
+                     },
+    "graphConvertible":  true,
+    "graphNodeType":  "connector"
+}

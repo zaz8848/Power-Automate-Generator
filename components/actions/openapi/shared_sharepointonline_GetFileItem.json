@@ -1,0 +1,121 @@
+﻿{
+    "id":  "shared_sharepointonline_GetFileItem",
+    "connector":  "shared_sharepointonline",
+    "connectorBase":  "shared_sharepointonline",
+    "operationId":  "GetFileItem",
+    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+    "type":  "OpenApiConnection",
+    "learnedFrom":  [
+                        "ee87fd77-09fa-f011-8407-000d3a316017",
+                        "3ddf75ff-1597-f011-b41c-000d3ac6a644"
+                    ],
+    "learnedFromName":  [
+                            "Sharepoint-PO Uploaded-Extract Po Item",
+                            "PowerApps-Generate RFP Proposal "
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "environment":  [
+                        "{dataverseOrg}",
+                        "orgdf331f66.crm5.dynamics.com"
+                    ],
+    "template":  {
+                     "Get_file_properties":  {
+                                                 "type":  "OpenApiConnection",
+                                                 "inputs":  {
+                                                                "parameters":  {
+                                                                                   "dataset":  "@parameters(\u0027SharepointSite (crdd1_SharepointSite)\u0027)",
+                                                                                   "table":  "@parameters(\u0027Document Library (crdd1_DocumentLibrary)\u0027)",
+                                                                                   "id":  "@triggerBody()?[\u0027ID\u0027]"
+                                                                               },
+                                                                "host":  {
+                                                                             "apiId":  "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+                                                                             "operationId":  "GetFileItem",
+                                                                             "connectionName":  "shared_sharepointonline"
+                                                                         }
+                                                            },
+                                                 "metadata":  {
+                                                                  "operationMetadataId":  "5d810e4b-3e2f-454b-9c1e-48b2bd9ab8b4"
+                                                              }
+                                             }
+                 },
+    "inputSchema":  {
+                        "table":  {
+                                      "description":  "SharePoint library name",
+                                      "in":  "path",
+                                      "type":  "string",
+                                      "required":  true
+                                  },
+                        "connectionId":  {
+                                             "description":  null,
+                                             "in":  "path",
+                                             "type":  "string",
+                                             "required":  true
+                                         },
+                        "id":  {
+                                   "description":  "Unique identifier of item to be retrieved",
+                                   "in":  "path",
+                                   "type":  "integer",
+                                   "required":  true
+                               },
+                        "dataset":  {
+                                        "description":  "Example: https://contoso.sharepoint.com/sites/sitename",
+                                        "in":  "path",
+                                        "type":  "string",
+                                        "required":  true
+                                    },
+                        "view":  {
+                                     "description":  "Avoid column threshold issues by only using columns defined in a view",
+                                     "in":  "query",
+                                     "type":  "string",
+                                     "required":  false
+                                 }
+                    },
+    "outputSchema":  {
+                         "$ref":  "Item",
+                         "properties":  {
+                                            "dynamicProperties":  {
+                                                                      "type":  "object",
+                                                                      "description":  null
+                                                                  }
+                                        }
+                     },
+    "dynamicValuesRef":  {
+                             "table":  {
+                                           "operationId":  "GetTablesForLibraries",
+                                           "titlePath":  "DisplayName",
+                                           "parameters":  {
+                                                              "dataset":  {
+                                                                              "parameter":  "dataset"
+                                                                          }
+                                                          },
+                                           "valueCollection":  "value",
+                                           "valuePath":  "Name"
+                                       },
+                             "view":  {
+                                          "operationId":  "GetTableViews",
+                                          "titlePath":  "DisplayName",
+                                          "parameters":  {
+                                                             "table":  {
+                                                                           "parameter":  "table"
+                                                                       },
+                                                             "dataset":  {
+                                                                             "parameter":  "dataset"
+                                                                         }
+                                                         },
+                                          "valuePath":  "Name"
+                                      },
+                             "dataset":  {
+                                             "operationId":  "GetDataSets",
+                                             "titlePath":  "DisplayName",
+                                             "parameters":  {
+
+                                                            },
+                                             "valueCollection":  "value",
+                                             "valuePath":  "Name"
+                                         }
+                         },
+    "swaggerLearned":  true,
+    "graphConvertible":  true,
+    "graphNodeType":  "connector"
+}

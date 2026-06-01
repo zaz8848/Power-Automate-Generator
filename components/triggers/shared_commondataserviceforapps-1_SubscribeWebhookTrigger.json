@@ -1,0 +1,42 @@
+﻿{
+    "id":  "shared_commondataserviceforapps-1_SubscribeWebhookTrigger",
+    "connector":  "shared_commondataserviceforapps-1",
+    "operationId":  "SubscribeWebhookTrigger",
+    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+    "type":  "OpenApiConnectionWebhook",
+    "kind":  null,
+    "learnedFrom":  [
+                        "b99118ab-dd62-f011-bec3-6045bd00625f"
+                    ],
+    "learnedFromName":  [
+                            "Automatic Flow - Start Document Translation When Translation Log Status Changes to Waiting for Proc"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "environment":  [
+                        "org1cd97ca4.crm.dynamics.com"
+                    ],
+    "template":  {
+                     "When_a_row_is_added,_modified_or_deleted":  {
+                                                                      "type":  "OpenApiConnectionWebhook",
+                                                                      "description":  "biz_translationtype eq \u0027Document\u0027 and statuscode eq 757790002 (Waiting for Processing)",
+                                                                      "inputs":  {
+                                                                                     "parameters":  {
+                                                                                                        "subscriptionRequest/message":  4,
+                                                                                                        "subscriptionRequest/entityname":  "biz_translationlog",
+                                                                                                        "subscriptionRequest/scope":  4,
+                                                                                                        "subscriptionRequest/filteringattributes":  "statuscode, biz_translationtype",
+                                                                                                        "subscriptionRequest/filterexpression":  "statuscode eq 757790002 and biz_translationtype eq \u0027Document\u0027"
+                                                                                                    },
+                                                                                     "host":  {
+                                                                                                  "apiId":  "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                                                                                                  "operationId":  "SubscribeWebhookTrigger",
+                                                                                                  "connectionName":  "shared_commondataserviceforapps-1"
+                                                                                              }
+                                                                                 },
+                                                                      "metadata":  {
+                                                                                       "operationMetadataId":  "02e28157-1a8d-4eaf-b051-74b119d22c7d"
+                                                                                   }
+                                                                  }
+                 }
+}

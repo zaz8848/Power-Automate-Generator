@@ -1,0 +1,255 @@
+{
+    "id": "shared_office365_ReplyToV3",
+    "learnedFrom": [
+        "d517dce4-1a5b-f111-a825-6045bd5777da"
+    ],
+    "verified": true,
+    "outputSchema": {
+        "type": "object",
+        "description": "No schema in Swagger"
+    },
+    "operationId": "ReplyToV3",
+    "apiId": "/providers/Microsoft.PowerApps/apis/shared_office365",
+    "type": "OpenApiConnection",
+    "connectorBase": "shared_office365",
+    "swaggerLearned": true,
+    "connector": "shared_office365",
+    "learnedFromName": [
+        "Email Quote Workflow"
+    ],
+    "learnedAt": "2026-05-29",
+    "inputSchema": [
+        {
+            "name": "connectionId",
+            "in": "path",
+            "required": true,
+            "x-ms-visibility": "internal",
+            "type": "string"
+        },
+        {
+            "name": "messageId",
+            "in": "path",
+            "description": "Id of the email to reply to.",
+            "required": true,
+            "x-ms-summary": "Message Id",
+            "type": "string",
+            "x-ms-name-for-model": "reply_to_email_v3_message_id",
+            "x-ms-description-for-model": "Set to the unique ID of the email message to reply to. This is typically obtained from a previous get-email or get-emails action."
+        },
+        {
+            "name": "replyParameters",
+            "in": "body",
+            "description": "Details of the email reply.",
+            "required": true,
+            "schema": {
+                "$ref": "#/definitions/ReplyHtmlMessage"
+            },
+            "x-ms-summary": "Details of the email reply."
+        },
+        {
+            "name": "mailboxAddress",
+            "in": "query",
+            "description": "Address of the shared mailbox to reply from.",
+            "required": false,
+            "x-ms-summary": "Original Mailbox Address",
+            "x-ms-dynamic-values": {
+                "builtInOperation": "AadGraph.GetUsers",
+                "parameters": {},
+                "value-path": "mail"
+            },
+            "type": "string"
+        }
+    ],
+    "parameters": {
+        "replyParameters/Body": {
+            "format": "html",
+            "description": "Reply body content",
+            "type": "string",
+            "required": true
+        },
+        "replyParameters/To": {
+            "format": "email",
+            "description": "Override reply recipients",
+            "type": "string"
+        },
+        "replyParameters/Importance": {
+            "enum": [
+                "Low",
+                "Normal",
+                "High"
+            ],
+            "description": "Email importance",
+            "type": "string"
+        },
+        "replyParameters/Subject": {
+            "type": "string",
+            "description": "Override subject line"
+        },
+        "replyParameters/ReplyAll": {
+            "description": "Reply to all recipients",
+            "default": false,
+            "type": "boolean"
+        },
+        "messageId": {
+            "description": "Message Id of the email to reply to",
+            "type": "string",
+            "required": true
+        }
+    },
+    "environment": [
+        "ZAF Prod"
+    ],
+    "graphConvertible": true,
+    "graphNodeType": "connector",
+    "graphTemplate": {
+        "type": "connector",
+        "config": {
+            "apiName": "shared_office365",
+            "displayName": "Office 365 Outlook",
+            "iconUri": "https://static.powerapps.com/resource/ppcr/releases/v1.0.1812/1.0.1812.4763/office365/icon.png",
+            "brandColor": "#0078D4",
+            "operationName": "ReplyToV3",
+            "operationType": "OpenApiConnection",
+            "parameters": {
+                "replyParameters/Importance": "Normal",
+                "replyParameters/Body": "<div>@{body('agent-680694f4-e0cc-4e43-9ae7-113129dea5dd')?['message']}</div>",
+                "messageId": "@{triggerOutputs()?['body/id']}",
+                "replyParameters/To": "@{triggerOutputs()?['body/from']}",
+                "replyParameters/Subject": "Re:@{triggerOutputs()?['body/subject']}",
+                "replyParameters/ReplyAll": true
+            },
+            "parametersSchema": {
+                "type": "object",
+                "properties": {
+                    "messageId": {
+                        "type": "string",
+                        "title": "消息 ID",
+                        "description": "要答复的电子邮件的 ID。",
+                        "minLength": 1,
+                        "x-ms-property-name-alias": "messageId"
+                    },
+                    "replyParameters": {
+                        "type": "object",
+                        "title": "电子邮件回复的详细信息。",
+                        "properties": {
+                            "To": {
+                                "type": "string",
+                                "title": "到",
+                                "format": "email",
+                                "description": "示例: recipient1@domain.com；recipient2@domain.com",
+                                "x-ms-visibility": "advanced",
+                                "x-ms-property-name-alias": "replyParameters/To"
+                            },
+                            "Cc": {
+                                "type": "string",
+                                "title": "抄送",
+                                "format": "email",
+                                "description": "示例: recipient1@domain.com；recipient2@domain.com",
+                                "x-ms-visibility": "advanced",
+                                "x-ms-property-name-alias": "replyParameters/Cc"
+                            },
+                            "Bcc": {
+                                "type": "string",
+                                "title": "密件抄送",
+                                "format": "email",
+                                "description": "示例: recipient1@domain.com；recipient2@domain.com",
+                                "x-ms-visibility": "advanced",
+                                "x-ms-property-name-alias": "replyParameters/Bcc"
+                            },
+                            "Subject": {
+                                "type": "string",
+                                "title": "主题",
+                                "description": "电子邮件主题(如果为空，则使用原始主题)。",
+                                "x-ms-visibility": "advanced",
+                                "x-ms-property-name-alias": "replyParameters/Subject"
+                            },
+                            "Body": {
+                                "type": "string",
+                                "title": "正文",
+                                "format": "html",
+                                "description": "电子邮件的内容。",
+                                "x-ms-property-name-alias": "replyParameters/Body"
+                            },
+                            "ReplyAll": {
+                                "type": "boolean",
+                                "title": "全部回复",
+                                "description": "设置为 true，回复所有收件人。(默认: false)",
+                                "x-ms-property-name-alias": "replyParameters/ReplyAll"
+                            },
+                            "Importance": {
+                                "type": "string",
+                                "title": "重要性",
+                                "description": "选择重要性。(默认值: 低)",
+                                "enum": [
+                                    "Low",
+                                    "Normal",
+                                    "High"
+                                ],
+                                "x-ms-visibility": "advanced",
+                                "x-ms-property-name-alias": "replyParameters/Importance"
+                            },
+                            "Attachments": {
+                                "type": "array",
+                                "title": "附件",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "Name": {
+                                            "type": "string",
+                                            "title": "名称",
+                                            "description": "附件名",
+                                            "x-ms-property-name-alias": "Name"
+                                        },
+                                        "ContentBytes": {
+                                            "type": "string",
+                                            "title": "内容",
+                                            "format": "byte",
+                                            "description": "附件内容",
+                                            "x-ms-property-name-alias": "ContentBytes"
+                                        }
+                                    },
+                                    "required": [
+                                        "ContentBytes",
+                                        "Name"
+                                    ],
+                                    "description": "附件"
+                                },
+                                "description": "要与回复一同发送的附件的详细信息。",
+                                "x-ms-property-name-alias": "replyParameters/Attachments"
+                            }
+                        },
+                        "required": [],
+                        "description": "电子邮件回复的详细信息。",
+                        "x-ms-property-name-alias": "replyParameters"
+                    },
+                    "mailboxAddress": {
+                        "type": "string",
+                        "title": "原始邮箱地址",
+                        "x-ms-dynamic-list": {
+                            "builtInOperation": "AadGraph.GetUsers",
+                            "parameters": {},
+                            "itemValuePath": "mail"
+                        },
+                        "description": "要从中答复的共享邮箱的地址。",
+                        "x-ms-property-name-alias": "mailboxAddress"
+                    }
+                },
+                "required": [
+                    "messageId",
+                    "replyParameters"
+                ]
+            },
+            "connectionName": "shared_office365"
+        },
+        "outcomes": [
+            {
+                "id": "default",
+                "label": "Default",
+                "outcomeSchema": {
+                    "type": "object",
+                    "properties": {}
+                }
+            }
+        ]
+    }
+}

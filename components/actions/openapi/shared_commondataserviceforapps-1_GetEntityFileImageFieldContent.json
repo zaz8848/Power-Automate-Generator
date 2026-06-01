@@ -1,0 +1,147 @@
+﻿{
+    "id":  "shared_commondataserviceforapps-1_GetEntityFileImageFieldContent",
+    "connector":  "shared_commondataserviceforapps-1",
+    "connectorBase":  "shared_commondataserviceforapps",
+    "operationId":  "GetEntityFileImageFieldContent",
+    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+    "type":  "OpenApiConnection",
+    "learnedFrom":  [
+                        "8457c3f3-9390-ef11-ac21-0022480c3fe9",
+                        "b99118ab-dd62-f011-bec3-6045bd00625f",
+                        "78830008-a5fb-f011-8406-7ced8d3c72c7"
+                    ],
+    "learnedFromName":  [
+                            "Automatic Flow - Data Extraction",
+                            "Automatic Flow - Start Document Translation When Translation Log Status Changes to Waiting for Proc",
+                            "Automatic Flow - Content Extraction"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "environment":  [
+                        "org1cd97ca4.crm.dynamics.com"
+                    ],
+    "template":  {
+                     "Download_a_file_or_an_image":  {
+                                                         "runAfter":  {
+
+                                                                      },
+                                                         "metadata":  {
+                                                                          "operationMetadataId":  "41aebb82-4988-41fd-a75f-cce3d4282d41"
+                                                                      },
+                                                         "type":  "OpenApiConnection",
+                                                         "inputs":  {
+                                                                        "host":  {
+                                                                                     "connectionName":  "shared_commondataserviceforapps-1",
+                                                                                     "operationId":  "GetEntityFileImageFieldContent",
+                                                                                     "apiId":  "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                                                                                 },
+                                                                        "parameters":  {
+                                                                                           "entityName":  "biz_importlogs",
+                                                                                           "recordId":  "@triggerOutputs()?[\u0027body/activityid\u0027]",
+                                                                                           "fileImageFieldName":  "biz_document"
+                                                                                       },
+                                                                        "authentication":  "@parameters(\u0027$authentication\u0027)"
+                                                                    }
+                                                     }
+                 },
+    "inputSchema":  [
+                        {
+                            "name":  "connectionId",
+                            "in":  "path",
+                            "required":  true,
+                            "x-ms-visibility":  "internal",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "Range",
+                            "in":  "header",
+                            "description":  "The header parameter required to make Microsoft Dataverse support chunked downloads",
+                            "required":  true,
+                            "x-ms-summary":  "Range",
+                            "x-ms-visibility":  "internal",
+                            "type":  "string",
+                            "default":  "bytes=0-4194303"
+                        },
+                        {
+                            "name":  "entityName",
+                            "in":  "path",
+                            "description":  "Choose a table",
+                            "required":  true,
+                            "x-ms-url-encoding":  "double",
+                            "x-ms-dynamic-values":  {
+                                                        "operationId":  "GetEntities",
+                                                        "parameters":  {
+
+                                                                       },
+                                                        "value-collection":  "value",
+                                                        "value-path":  "EntitySetName",
+                                                        "value-title":  "DisplayCollectionName/UserLocalizedLabel/Label"
+                                                    },
+                            "x-ms-summary":  "Table name",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "recordId",
+                            "in":  "path",
+                            "description":  "Enter the row\u0027s globally unique identifier (GUID)",
+                            "required":  true,
+                            "x-ms-url-encoding":  "double",
+                            "x-ms-summary":  "Row ID",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "fileImageFieldName",
+                            "in":  "path",
+                            "description":  "Choose a column",
+                            "required":  true,
+                            "x-ms-url-encoding":  "double",
+                            "x-ms-dynamic-list":  {
+                                                      "operationId":  "GetAttributeFilters",
+                                                      "parameters":  {
+                                                                         "entityName":  {
+                                                                                            "parameterReference":  "entityName"
+                                                                                        },
+                                                                         "attributeTypeNames":  {
+                                                                                                    "value":  [
+                                                                                                                  "ImageType",
+                                                                                                                  "FileType"
+                                                                                                              ]
+                                                                                                }
+                                                                     },
+                                                      "itemsPath":  "value",
+                                                      "itemValuePath":  "LogicalName",
+                                                      "itemTitlePath":  "DisplayName/UserLocalizedLabel/Label"
+                                                  },
+                            "x-ms-summary":  "Column name",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "size",
+                            "in":  "query",
+                            "description":  "Enter \u0027full\u0027 for entire image if enabled (default = thumbnail)",
+                            "x-ms-summary":  "Image size",
+                            "x-ms-visibility":  "advanced",
+                            "type":  "string"
+                        }
+                    ],
+    "dynamicValuesRef":  {
+                             "entityName":  {
+                                                "operationId":  "GetEntities",
+                                                "titlePath":  "DisplayCollectionName/UserLocalizedLabel/Label",
+                                                "parameters":  {
+
+                                                               },
+                                                "valueCollection":  "value",
+                                                "valuePath":  "EntitySetName"
+                                            }
+                         },
+    "swaggerLearned":  true,
+    "outputSchema":  {
+                         "format":  "binary",
+                         "description":  "The content of the file or image",
+                         "type":  "string",
+                         "x-ms-summary":  "File or image content"
+                     },
+    "graphConvertible":  true,
+    "graphNodeType":  "connector"
+}

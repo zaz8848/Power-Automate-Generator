@@ -1,0 +1,53 @@
+﻿{
+    "id":  "shared_commondataserviceforapps_BusinessEventsTrigger",
+    "connector":  "shared_commondataserviceforapps",
+    "operationId":  "BusinessEventsTrigger",
+    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+    "type":  "OpenApiConnectionWebhook",
+    "kind":  null,
+    "learnedFrom":  [
+                        "ced4fe0e-a135-f011-8c4e-000d3a3755b8",
+                        "27cf52d8-5812-ef11-9f8a-000d3a5a66f7",
+                        "861bdd5e-bc09-ef11-9f8a-000d3a5cb958",
+                        "fa40c544-9a0b-ef11-9f8a-000d3a5cb958",
+                        "ed6a53e3-6012-ef11-9f8a-000d3a5cb958",
+                        "5d27b158-cb45-f011-877a-6045bd06efb1"
+                    ],
+    "learnedFromName":  [
+                            "Invoke case management agent",
+                            "Test Automation | Update Agent Test Run Rollup Columns",
+                            "Test Automation | Enrich with Azure Application Insights",
+                            "Test Automation | Enrich with Dataverse Conversation Transcripts",
+                            "Test Automation | Analyze Generated Answers with AI Builder",
+                            "Call custom agent"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "environment":  [
+                        "orgdf331f66.crm5.dynamics.com"
+                    ],
+    "template":  {
+                     "Invoke_case_processing_agent":  {
+                                                          "type":  "OpenApiConnectionWebhook",
+                                                          "inputs":  {
+                                                                         "parameters":  {
+                                                                                            "catalog":  "allcatalog",
+                                                                                            "category":  "allcategory",
+                                                                                            "subscriptionRequest/entityname":  "none",
+                                                                                            "subscriptionRequest/sdkmessagename":  "msdyn_invokeCaseProcessingAgent"
+                                                                                        },
+                                                                         "host":  {
+                                                                                      "apiId":  "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                                                                                      "operationId":  "BusinessEventsTrigger",
+                                                                                      "connectionName":  "shared_commondataserviceforapps"
+                                                                                  }
+                                                                     },
+                                                          "conditions":  [
+
+                                                                         ],
+                                                          "metadata":  {
+                                                                           "operationMetadataId":  "016bb8c6-8cc9-4997-985e-6b44b5d6ab25"
+                                                                       }
+                                                      }
+                 }
+}

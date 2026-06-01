@@ -1,0 +1,274 @@
+﻿{
+    "id":  "shared_commondataserviceforapps_1_PerformBoundActionWithOrganization",
+    "connector":  "shared_commondataserviceforapps_1",
+    "connectorBase":  "shared_commondataserviceforapps",
+    "operationId":  "PerformBoundActionWithOrganization",
+    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+    "type":  "OpenApiConnection",
+    "learnedFrom":  [
+                        "e3742ca3-e086-ef11-ac21-7c1e520158f7"
+                    ],
+    "learnedFromName":  [
+                            "Sharepoint Synchronization | Synchronize files to Agent (Child)"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "environment":  [
+                        "orgdf331f66.crm5.dynamics.com"
+                    ],
+    "template":  {
+                     "Publish_Agent":  {
+                                           "runAfter":  {
+                                                            "Delete_existing_files_in_Copilot_Studio":  [
+                                                                                                            "Succeeded"
+                                                                                                        ]
+                                                        },
+                                           "metadata":  {
+                                                            "operationMetadataId":  "4154cd51-e3d9-42c5-9127-bf963c3827ba"
+                                                        },
+                                           "type":  "OpenApiConnection",
+                                           "inputs":  {
+                                                          "host":  {
+                                                                       "connectionName":  "shared_commondataserviceforapps_1",
+                                                                       "operationId":  "PerformBoundActionWithOrganization",
+                                                                       "apiId":  "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                                                                   },
+                                                          "parameters":  {
+                                                                             "organization":  "@items(\u0027Apply_to_each_File_Indexer_Configurations\u0027)?[\u0027parent.cat_dataverseurl\u0027]",
+                                                                             "entityName":  "bots",
+                                                                             "actionName":  "Microsoft.Dynamics.CRM.PvaPublish",
+                                                                             "recordId":  "@items(\u0027Apply_to_each_File_Indexer_Configurations\u0027)?[\u0027parent.cat_copilotid\u0027]"
+                                                                         },
+                                                          "authentication":  {
+                                                                                 "type":  "Raw",
+                                                                                 "value":  "@json(decodeBase64(triggerOutputs().headers[\u0027X-MS-APIM-Tokens\u0027]))[\u0027$ConnectionKey\u0027]"
+                                                                             }
+                                                      }
+                                       }
+                 },
+    "inputSchema":  [
+                        {
+                            "name":  "connectionId",
+                            "in":  "path",
+                            "required":  true,
+                            "x-ms-visibility":  "internal",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "organization",
+                            "in":  "header",
+                            "description":  "Choose an environment",
+                            "required":  true,
+                            "x-ms-dynamic-values":  {
+                                                        "operationId":  "GetOrganizations",
+                                                        "parameters":  {
+
+                                                                       },
+                                                        "value-collection":  "value",
+                                                        "value-path":  "Url",
+                                                        "value-title":  "FriendlyName"
+                                                    },
+                            "x-ms-dynamic-list":  {
+                                                      "operationId":  "GetOrganizations",
+                                                      "parameters":  {
+
+                                                                     },
+                                                      "itemsPath":  "value",
+                                                      "itemValuePath":  "Url",
+                                                      "itemTitlePath":  "FriendlyName"
+                                                  },
+                            "x-ms-summary":  "Environment",
+                            "x-ms-visibility":  "important",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "entityName",
+                            "in":  "path",
+                            "description":  "Choose a table",
+                            "required":  true,
+                            "x-ms-url-encoding":  "double",
+                            "x-ms-dynamic-values":  {
+                                                        "operationId":  "GetEntitiesWithOrganization",
+                                                        "parameters":  {
+                                                                           "organization":  {
+                                                                                                "parameter":  "organization"
+                                                                                            }
+                                                                       },
+                                                        "value-collection":  "value",
+                                                        "value-path":  "EntitySetName",
+                                                        "value-title":  "DisplayCollectionName/UserLocalizedLabel/Label"
+                                                    },
+                            "x-ms-dynamic-list":  {
+                                                      "operationId":  "GetEntitiesWithOrganization",
+                                                      "parameters":  {
+                                                                         "organization":  {
+                                                                                              "parameterReference":  "organization"
+                                                                                          }
+                                                                     },
+                                                      "itemsPath":  "value",
+                                                      "itemValuePath":  "EntitySetName",
+                                                      "itemTitlePath":  "DisplayCollectionName/UserLocalizedLabel/Label"
+                                                  },
+                            "x-ms-summary":  "Table name",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "actionName",
+                            "in":  "path",
+                            "description":  "Choose an action",
+                            "required":  true,
+                            "x-ms-url-encoding":  "double",
+                            "x-ms-dynamic-values":  {
+                                                        "operationId":  "GetBoundActionsWithOrganization",
+                                                        "parameters":  {
+                                                                           "organization":  {
+                                                                                                "parameter":  "organization"
+                                                                                            },
+                                                                           "entityName":  {
+                                                                                              "parameter":  "entityName"
+                                                                                          }
+                                                                       },
+                                                        "value-collection":  "value",
+                                                        "value-path":  "operationId",
+                                                        "value-title":  "operationDisplayName"
+                                                    },
+                            "x-ms-dynamic-list":  {
+                                                      "operationId":  "GetBoundActionsWithOrganization",
+                                                      "parameters":  {
+                                                                         "organization":  {
+                                                                                              "parameterReference":  "organization"
+                                                                                          },
+                                                                         "body/entityName":  {
+                                                                                                 "parameterReference":  "entityName"
+                                                                                             }
+                                                                     },
+                                                      "itemsPath":  "value",
+                                                      "itemValuePath":  "operationId",
+                                                      "itemTitlePath":  "operationDisplayName"
+                                                  },
+                            "x-ms-summary":  "Action Name",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "recordId",
+                            "in":  "path",
+                            "description":  "Enter the row\u0027s globally unique identifier (GUID)",
+                            "required":  true,
+                            "x-ms-url-encoding":  "double",
+                            "x-ms-summary":  "Row ID",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "item",
+                            "in":  "body",
+                            "description":  "Action parameters",
+                            "required":  false,
+                            "schema":  {
+                                           "type":  "object",
+                                           "x-ms-dynamic-schema":  {
+                                                                       "operationId":  "GetMetadataForBoundActionInputWithOrganization",
+                                                                       "parameters":  {
+                                                                                          "organization":  {
+                                                                                                               "parameter":  "organization"
+                                                                                                           },
+                                                                                          "entityName":  {
+                                                                                                             "parameter":  "entityName"
+                                                                                                         },
+                                                                                          "actionName":  {
+                                                                                                             "parameter":  "actionName"
+                                                                                                         }
+                                                                                      },
+                                                                       "value-path":  "schema"
+                                                                   },
+                                           "x-ms-dynamic-properties":  {
+                                                                           "operationId":  "GetMetadataForBoundActionInputWithOrganization",
+                                                                           "parameters":  {
+                                                                                              "organization":  {
+                                                                                                                   "parameterReference":  "organization"
+                                                                                                               },
+                                                                                              "entityName":  {
+                                                                                                                 "parameterReference":  "entityName"
+                                                                                                             },
+                                                                                              "actionName":  {
+                                                                                                                 "parameterReference":  "actionName"
+                                                                                                             }
+                                                                                          },
+                                                                           "itemValuePath":  "schema"
+                                                                       }
+                                       },
+                            "x-ms-summary":  "Action parameters"
+                        }
+                    ],
+    "dynamicValuesRef":  {
+                             "entityName":  {
+                                                "operationId":  "GetEntitiesWithOrganization",
+                                                "titlePath":  "DisplayCollectionName/UserLocalizedLabel/Label",
+                                                "parameters":  {
+                                                                   "organization":  {
+                                                                                        "parameter":  "organization"
+                                                                                    }
+                                                               },
+                                                "valueCollection":  "value",
+                                                "valuePath":  "EntitySetName"
+                                            },
+                             "actionName":  {
+                                                "operationId":  "GetBoundActionsWithOrganization",
+                                                "titlePath":  "operationDisplayName",
+                                                "parameters":  {
+                                                                   "entityName":  {
+                                                                                      "parameter":  "entityName"
+                                                                                  },
+                                                                   "organization":  {
+                                                                                        "parameter":  "organization"
+                                                                                    }
+                                                               },
+                                                "valueCollection":  "value",
+                                                "valuePath":  "operationId"
+                                            },
+                             "organization":  {
+                                                  "operationId":  "GetOrganizations",
+                                                  "titlePath":  "FriendlyName",
+                                                  "parameters":  {
+
+                                                                 },
+                                                  "valueCollection":  "value",
+                                                  "valuePath":  "Url"
+                                              }
+                         },
+    "swaggerLearned":  true,
+    "outputSchema":  {
+                         "type":  "object",
+                         "x-ms-dynamic-schema":  {
+                                                     "operationId":  "GetMetadataForBoundActionResponseWithOrganization",
+                                                     "parameters":  {
+                                                                        "organization":  {
+                                                                                             "parameter":  "organization"
+                                                                                         },
+                                                                        "entityName":  {
+                                                                                           "parameter":  "entityName"
+                                                                                       },
+                                                                        "actionName":  {
+                                                                                           "parameter":  "actionName"
+                                                                                       }
+                                                                    },
+                                                     "value-path":  "schema"
+                                                 },
+                         "x-ms-dynamic-properties":  {
+                                                         "operationId":  "GetMetadataForBoundActionResponseWithOrganization",
+                                                         "parameters":  {
+                                                                            "organization":  {
+                                                                                                 "parameterReference":  "organization"
+                                                                                             },
+                                                                            "entityName":  {
+                                                                                               "parameterReference":  "entityName"
+                                                                                           },
+                                                                            "actionName":  {
+                                                                                               "parameterReference":  "actionName"
+                                                                                           }
+                                                                        },
+                                                         "itemValuePath":  "schema"
+                                                     }
+                     },
+    "graphConvertible":  true,
+    "graphNodeType":  "connector"
+}

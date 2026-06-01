@@ -1,0 +1,24 @@
+{
+    "id": "trigger_request_virtualagent",
+    "type": "Request",
+    "kind": "VirtualAgent",
+    "description": "Virtual Agent 触发器 — Copilot Studio 虚拟代理触发",
+    "learnedFrom": [
+        "Wells Dev batch"
+    ],
+    "learnedAt": "2026-05-26",
+    "verified": true,
+    "template": {
+        "manual": {
+            "type": "Request",
+            "kind": "VirtualAgent",
+            "inputs": {
+                "schema": {
+                    "type": "object",
+                    "properties": {}
+                }
+            }
+        }
+    },
+    "notes": "与 Skills 类似，但为 Virtual Agent（PVA）专用。"
+}

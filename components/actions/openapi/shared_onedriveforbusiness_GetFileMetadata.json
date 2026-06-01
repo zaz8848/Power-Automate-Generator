@@ -1,0 +1,123 @@
+﻿{
+    "id":  "shared_onedriveforbusiness_GetFileMetadata",
+    "connector":  "shared_onedriveforbusiness",
+    "connectorBase":  "shared_onedriveforbusiness",
+    "operationId":  "GetFileMetadata",
+    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_onedriveforbusiness",
+    "type":  "OpenApiConnection",
+    "learnedFrom":  [
+                        "0a035c01-c979-0229-e10f-059dbb7a383f"
+                    ],
+    "learnedFromName":  [
+                            "AgentFlow-Auto Procesing Excel File To Analysis"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "environment":  [
+                        "org1cd97ca4.crm.dynamics.com"
+                    ],
+    "template":  {
+                     "Get_file_metadata":  {
+                                               "type":  "OpenApiConnection",
+                                               "inputs":  {
+                                                              "parameters":  {
+                                                                                 "id":  "b!W5TMYBpW30KlzcNcb-8BfVCtZnaHlQNNmgnShIj4o8MKm36ivRLHQZOufUHGJ2-M.01S3C4UYWSRDT3FTWYUJC27E7VUSRNCRF3"
+                                                                             },
+                                                              "host":  {
+                                                                           "apiId":  "/providers/Microsoft.PowerApps/apis/shared_onedriveforbusiness",
+                                                                           "operationId":  "GetFileMetadata",
+                                                                           "connectionName":  "shared_onedriveforbusiness"
+                                                                       }
+                                                          },
+                                               "runAfter":  {
+
+                                                            },
+                                               "metadata":  {
+                                                                "b!W5TMYBpW30KlzcNcb-8BfVCtZnaHlQNNmgnShIj4o8MKm36ivRLHQZOufUHGJ2-M.01S3C4UYWSRDT3FTWYUJC27E7VUSRNCRF3":  "/AEON Demo Data/生鲜销量Demo.xlsx"
+                                                            }
+                                           }
+                 },
+    "inputSchema":  {
+                        "connectionId":  {
+                                             "description":  null,
+                                             "in":  "path",
+                                             "type":  "string",
+                                             "required":  true
+                                         },
+                        "id":  {
+                                   "description":  "The unique identifier of the file.",
+                                   "in":  "path",
+                                   "type":  "string",
+                                   "required":  true
+                               }
+                    },
+    "outputSchema":  {
+                         "$ref":  "BlobMetadata",
+                         "properties":  {
+                                            "FileLocator":  {
+                                                                "type":  "string",
+                                                                "description":  "The file locator of the file or folder."
+                                                            },
+                                            "Id":  {
+                                                       "type":  "string",
+                                                       "description":  "The unique identifier of the file or folder."
+                                                   },
+                                            "NameNoExt":  {
+                                                              "type":  "string",
+                                                              "description":  "The name of the file or folder, without the file extension."
+                                                          },
+                                            "Size":  {
+                                                         "type":  "integer",
+                                                         "description":  "The file or folder size in bytes."
+                                                     },
+                                            "LastModified":  {
+                                                                 "type":  "string",
+                                                                 "description":  "The date and time the file or folder was last modified."
+                                                             },
+                                            "MediaType":  {
+                                                              "type":  "string",
+                                                              "description":  "The media type of the file or folder."
+                                                          },
+                                            "LastModifiedBy":  {
+                                                                   "type":  "string",
+                                                                   "description":  "The user who last modified the file or folder."
+                                                               },
+                                            "ETag":  {
+                                                         "type":  "string",
+                                                         "description":  "The etag of the file or folder."
+                                                     },
+                                            "Name":  {
+                                                         "type":  "string",
+                                                         "description":  "The name of the file or folder."
+                                                     },
+                                            "IsFolder":  {
+                                                             "type":  "boolean",
+                                                             "description":  "A boolean value (true, false) to indicate whether or not the blob is a folder."
+                                                         },
+                                            "Path":  {
+                                                         "type":  "string",
+                                                         "description":  "The path of the file or folder."
+                                                     },
+                                            "DisplayName":  {
+                                                                "type":  "string",
+                                                                "description":  "The display name of the file or folder."
+                                                            }
+                                        }
+                     },
+    "dynamicValuesRef":  {
+                             "id":  {
+                                        "operationId":  null,
+                                        "parameters":  {
+                                                           "isFolder":  false,
+                                                           "dataset":  null,
+                                                           "fileFilter":  [
+
+                                                                          ]
+                                                       },
+                                        "valuePath":  "Id"
+                                    }
+                         },
+    "swaggerLearned":  true,
+    "graphConvertible":  true,
+    "graphNodeType":  "connector"
+}

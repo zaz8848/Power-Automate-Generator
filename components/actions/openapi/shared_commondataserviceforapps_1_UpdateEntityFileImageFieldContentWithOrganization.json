@@ -1,0 +1,252 @@
+﻿{
+    "id":  "shared_commondataserviceforapps_1_UpdateEntityFileImageFieldContentWithOrganization",
+    "connector":  "shared_commondataserviceforapps_1",
+    "connectorBase":  "shared_commondataserviceforapps",
+    "operationId":  "UpdateEntityFileImageFieldContentWithOrganization",
+    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+    "type":  "OpenApiConnection",
+    "learnedFrom":  [
+                        "e3742ca3-e086-ef11-ac21-7c1e520158f7"
+                    ],
+    "learnedFromName":  [
+                            "Sharepoint Synchronization | Synchronize files to Agent (Child)"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "environment":  [
+                        "orgdf331f66.crm5.dynamics.com"
+                    ],
+    "template":  {
+                     "Upload_a_file":  {
+                                           "runAfter":  {
+                                                            "Create_File_Copilot_Component":  [
+                                                                                                  "Succeeded"
+                                                                                              ]
+                                                        },
+                                           "metadata":  {
+                                                            "operationMetadataId":  "5d0db686-d878-41ad-a606-90dbd19ad229"
+                                                        },
+                                           "type":  "OpenApiConnection",
+                                           "inputs":  {
+                                                          "host":  {
+                                                                       "connectionName":  "shared_commondataserviceforapps_1",
+                                                                       "operationId":  "UpdateEntityFileImageFieldContentWithOrganization",
+                                                                       "apiId":  "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                                                                   },
+                                                          "parameters":  {
+                                                                             "organization":  "@items(\u0027Apply_to_each_File_Indexer_Configurations\u0027)?[\u0027parent.cat_dataverseurl\u0027]",
+                                                                             "entityName":  "botcomponents",
+                                                                             "recordId":  "@outputs(\u0027Create_File_Copilot_Component\u0027)?[\u0027body/botcomponentid\u0027]",
+                                                                             "fileImageFieldName":  "filedata",
+                                                                             "item":  "@body(\u0027Get_file_content\u0027)",
+                                                                             "x-ms-file-name":  "@items(\u0027Apply_to_each_file\u0027)?[\u0027{Link}\u0027]"
+                                                                         },
+                                                          "authentication":  {
+                                                                                 "type":  "Raw",
+                                                                                 "value":  "@json(decodeBase64(triggerOutputs().headers[\u0027X-MS-APIM-Tokens\u0027]))[\u0027$ConnectionKey\u0027]"
+                                                                             }
+                                                      }
+                                       }
+                 },
+    "inputSchema":  [
+                        {
+                            "name":  "connectionId",
+                            "in":  "path",
+                            "required":  true,
+                            "x-ms-visibility":  "internal",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "content-type",
+                            "in":  "header",
+                            "description":  "The header describing the content type",
+                            "required":  true,
+                            "x-ms-summary":  "Content-Type",
+                            "x-ms-visibility":  "internal",
+                            "type":  "string",
+                            "default":  "application/octet-stream"
+                        },
+                        {
+                            "name":  "organization",
+                            "in":  "header",
+                            "description":  "Choose an environment",
+                            "required":  true,
+                            "x-ms-dynamic-values":  {
+                                                        "operationId":  "GetOrganizations",
+                                                        "parameters":  {
+
+                                                                       },
+                                                        "value-collection":  "value",
+                                                        "value-path":  "Url",
+                                                        "value-title":  "FriendlyName"
+                                                    },
+                            "x-ms-dynamic-list":  {
+                                                      "operationId":  "GetOrganizations",
+                                                      "parameters":  {
+
+                                                                     },
+                                                      "itemsPath":  "value",
+                                                      "itemValuePath":  "Url",
+                                                      "itemTitlePath":  "FriendlyName"
+                                                  },
+                            "x-ms-summary":  "Environment",
+                            "x-ms-visibility":  "important",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "entityName",
+                            "in":  "path",
+                            "description":  "Choose a table",
+                            "required":  true,
+                            "x-ms-url-encoding":  "double",
+                            "x-ms-dynamic-values":  {
+                                                        "operationId":  "GetEntitiesWithOrganization",
+                                                        "parameters":  {
+                                                                           "organization":  {
+                                                                                                "parameter":  "organization"
+                                                                                            }
+                                                                       },
+                                                        "value-collection":  "value",
+                                                        "value-path":  "EntitySetName",
+                                                        "value-title":  "DisplayCollectionName/UserLocalizedLabel/Label"
+                                                    },
+                            "x-ms-dynamic-list":  {
+                                                      "operationId":  "GetEntitiesWithOrganization",
+                                                      "parameters":  {
+                                                                         "organization":  {
+                                                                                              "parameterReference":  "organization"
+                                                                                          }
+                                                                     },
+                                                      "itemsPath":  "value",
+                                                      "itemValuePath":  "EntitySetName",
+                                                      "itemTitlePath":  "DisplayCollectionName/UserLocalizedLabel/Label"
+                                                  },
+                            "x-ms-summary":  "Table name",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "recordId",
+                            "in":  "path",
+                            "description":  "Enter the row\u0027s globally unique identifier (GUID)",
+                            "required":  true,
+                            "x-ms-url-encoding":  "double",
+                            "x-ms-summary":  "Row ID",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "fileImageFieldName",
+                            "in":  "path",
+                            "description":  "Choose a column",
+                            "required":  true,
+                            "x-ms-url-encoding":  "double",
+                            "x-ms-dynamic-values":  {
+                                                        "operationId":  "GetAttributeFiltersWithOrganization",
+                                                        "parameters":  {
+                                                                           "organization":  {
+                                                                                                "parameter":  "organization"
+                                                                                            },
+                                                                           "entityName":  {
+                                                                                              "parameter":  "entityName"
+                                                                                          },
+                                                                           "attributeTypeNames":  [
+                                                                                                      "ImageType",
+                                                                                                      "FileType"
+                                                                                                  ]
+                                                                       },
+                                                        "value-collection":  "value",
+                                                        "value-path":  "LogicalName",
+                                                        "value-title":  "DisplayName/UserLocalizedLabel/Label"
+                                                    },
+                            "x-ms-dynamic-list":  {
+                                                      "operationId":  "GetAttributeFiltersWithOrganization",
+                                                      "parameters":  {
+                                                                         "organization":  {
+                                                                                              "parameterReference":  "organization"
+                                                                                          },
+                                                                         "body/entityName":  {
+                                                                                                 "parameterReference":  "entityName"
+                                                                                             },
+                                                                         "body/attributeTypeNames":  {
+                                                                                                         "value":  [
+                                                                                                                       "ImageType",
+                                                                                                                       "FileType"
+                                                                                                                   ]
+                                                                                                     }
+                                                                     },
+                                                      "itemsPath":  "value",
+                                                      "itemValuePath":  "LogicalName",
+                                                      "itemTitlePath":  "DisplayName/UserLocalizedLabel/Label"
+                                                  },
+                            "x-ms-summary":  "Column name",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "item",
+                            "in":  "body",
+                            "description":  "Add file or image content",
+                            "required":  true,
+                            "schema":  {
+                                           "format":  "binary",
+                                           "type":  "string"
+                                       },
+                            "x-ms-summary":  "Content"
+                        },
+                        {
+                            "name":  "x-ms-file-name",
+                            "in":  "query",
+                            "description":  "Enter a name for the file or image",
+                            "required":  true,
+                            "x-ms-summary":  "Content name",
+                            "x-ms-visibility":  "advanced",
+                            "type":  "string",
+                            "default":  "Untitled"
+                        }
+                    ],
+    "dynamicValuesRef":  {
+                             "entityName":  {
+                                                "operationId":  "GetEntitiesWithOrganization",
+                                                "titlePath":  "DisplayCollectionName/UserLocalizedLabel/Label",
+                                                "parameters":  {
+                                                                   "organization":  {
+                                                                                        "parameter":  "organization"
+                                                                                    }
+                                                               },
+                                                "valueCollection":  "value",
+                                                "valuePath":  "EntitySetName"
+                                            },
+                             "fileImageFieldName":  {
+                                                        "operationId":  "GetAttributeFiltersWithOrganization",
+                                                        "titlePath":  "DisplayName/UserLocalizedLabel/Label",
+                                                        "parameters":  {
+                                                                           "entityName":  {
+                                                                                              "parameter":  "entityName"
+                                                                                          },
+                                                                           "attributeTypeNames":  [
+                                                                                                      "ImageType",
+                                                                                                      "FileType"
+                                                                                                  ],
+                                                                           "organization":  {
+                                                                                                "parameter":  "organization"
+                                                                                            }
+                                                                       },
+                                                        "valueCollection":  "value",
+                                                        "valuePath":  "LogicalName"
+                                                    },
+                             "organization":  {
+                                                  "operationId":  "GetOrganizations",
+                                                  "titlePath":  "FriendlyName",
+                                                  "parameters":  {
+
+                                                                 },
+                                                  "valueCollection":  "value",
+                                                  "valuePath":  "Url"
+                                              }
+                         },
+    "swaggerLearned":  true,
+    "outputSchema":  {
+                         "type":  "object",
+                         "description":  "No response schema in Swagger"
+                     },
+    "graphConvertible":  true,
+    "graphNodeType":  "connector"
+}

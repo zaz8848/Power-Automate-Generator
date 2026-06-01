@@ -1,0 +1,157 @@
+﻿{
+    "id":  "shared_commondataserviceforapps-1_UpdateEntityFileImageFieldContent",
+    "connector":  "shared_commondataserviceforapps-1",
+    "connectorBase":  "shared_commondataserviceforapps",
+    "operationId":  "UpdateEntityFileImageFieldContent",
+    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+    "type":  "OpenApiConnection",
+    "learnedFrom":  [
+                        "4cd08b32-8963-f011-bec3-6045bd00625f"
+                    ],
+    "learnedFromName":  [
+                            "Agent Flow - Document Translation"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "environment":  [
+                        "org1cd97ca4.crm.dynamics.com"
+                    ],
+    "template":  {
+                     "Upload_source_document_to_translation_log":  {
+                                                                       "type":  "OpenApiConnection",
+                                                                       "inputs":  {
+                                                                                      "parameters":  {
+                                                                                                         "x-ms-file-name":  "@triggerBody()[\u0027file\u0027][\u0027name\u0027]",
+                                                                                                         "entityName":  "biz_translationlogs",
+                                                                                                         "recordId":  "@outputs(\u0027Add_a_new_translation_log\u0027)?[\u0027body/biz_translationlogid\u0027]",
+                                                                                                         "fileImageFieldName":  "biz_sourcedocument",
+                                                                                                         "item":  "@base64ToBinary(triggerBody()[\u0027file\u0027][\u0027contentBytes\u0027])"
+                                                                                                     },
+                                                                                      "host":  {
+                                                                                                   "apiId":  "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                                                                                                   "operationId":  "UpdateEntityFileImageFieldContent",
+                                                                                                   "connectionName":  "shared_commondataserviceforapps-1"
+                                                                                               }
+                                                                                  },
+                                                                       "runAfter":  {
+                                                                                        "Add_a_new_translation_log":  [
+                                                                                                                          "Succeeded"
+                                                                                                                      ]
+                                                                                    },
+                                                                       "metadata":  {
+                                                                                        "operationMetadataId":  "d10862d1-0e23-4349-845f-1a017e5e8e0f"
+                                                                                    }
+                                                                   }
+                 },
+    "inputSchema":  [
+                        {
+                            "name":  "connectionId",
+                            "in":  "path",
+                            "required":  true,
+                            "x-ms-visibility":  "internal",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "content-type",
+                            "in":  "header",
+                            "description":  "The header describing the content type",
+                            "required":  true,
+                            "x-ms-summary":  "Content-Type",
+                            "x-ms-visibility":  "internal",
+                            "type":  "string",
+                            "default":  "application/octet-stream"
+                        },
+                        {
+                            "name":  "entityName",
+                            "in":  "path",
+                            "description":  "Choose a table",
+                            "required":  true,
+                            "x-ms-url-encoding":  "double",
+                            "x-ms-dynamic-values":  {
+                                                        "operationId":  "GetEntities",
+                                                        "parameters":  {
+
+                                                                       },
+                                                        "value-collection":  "value",
+                                                        "value-path":  "EntitySetName",
+                                                        "value-title":  "DisplayCollectionName/UserLocalizedLabel/Label"
+                                                    },
+                            "x-ms-summary":  "Table name",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "recordId",
+                            "in":  "path",
+                            "description":  "Enter the row\u0027s globally unique identifier (GUID)",
+                            "required":  true,
+                            "x-ms-url-encoding":  "double",
+                            "x-ms-summary":  "Row ID",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "fileImageFieldName",
+                            "in":  "path",
+                            "description":  "Choose a column",
+                            "required":  true,
+                            "x-ms-url-encoding":  "double",
+                            "x-ms-dynamic-list":  {
+                                                      "operationId":  "GetAttributeFilters",
+                                                      "parameters":  {
+                                                                         "entityName":  {
+                                                                                            "parameterReference":  "entityName"
+                                                                                        },
+                                                                         "attributeTypeNames":  {
+                                                                                                    "value":  [
+                                                                                                                  "ImageType",
+                                                                                                                  "FileType"
+                                                                                                              ]
+                                                                                                }
+                                                                     },
+                                                      "itemsPath":  "value",
+                                                      "itemValuePath":  "LogicalName",
+                                                      "itemTitlePath":  "DisplayName/UserLocalizedLabel/Label"
+                                                  },
+                            "x-ms-summary":  "Column name",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "item",
+                            "in":  "body",
+                            "description":  "Add file or image content",
+                            "required":  true,
+                            "schema":  {
+                                           "format":  "binary",
+                                           "type":  "string"
+                                       },
+                            "x-ms-summary":  "Content"
+                        },
+                        {
+                            "name":  "x-ms-file-name",
+                            "in":  "query",
+                            "description":  "Enter a name for the file or image",
+                            "required":  true,
+                            "x-ms-summary":  "Content name",
+                            "x-ms-visibility":  "advanced",
+                            "type":  "string",
+                            "default":  "Untitled"
+                        }
+                    ],
+    "dynamicValuesRef":  {
+                             "entityName":  {
+                                                "operationId":  "GetEntities",
+                                                "titlePath":  "DisplayCollectionName/UserLocalizedLabel/Label",
+                                                "parameters":  {
+
+                                                               },
+                                                "valueCollection":  "value",
+                                                "valuePath":  "EntitySetName"
+                                            }
+                         },
+    "swaggerLearned":  true,
+    "outputSchema":  {
+                         "type":  "object",
+                         "description":  "No response schema in Swagger"
+                     },
+    "graphConvertible":  true,
+    "graphNodeType":  "connector"
+}

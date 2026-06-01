@@ -1,0 +1,121 @@
+﻿{
+    "id":  "shared_commondataserviceforapps-1_aibuilderpredict_customprompt",
+    "connector":  "shared_commondataserviceforapps-1",
+    "connectorBase":  "shared_commondataserviceforapps",
+    "operationId":  "aibuilderpredict_customprompt",
+    "apiId":  "providers/Microsoft.ProcessSimple/operationGroups/aibuilder",
+    "type":  "OpenApiConnection",
+    "learnedFrom":  [
+                        "da9a071f-539c-ef11-8a6a-0022480c3fe9",
+                        "ed9b0768-3f9e-ef11-8a6a-0022480c3fe9",
+                        "8457c3f3-9390-ef11-ac21-0022480c3fe9",
+                        "b99118ab-dd62-f011-bec3-6045bd00625f",
+                        "8171693a-afdb-ef11-a730-6045bd010cd6",
+                        "78830008-a5fb-f011-8406-7ced8d3c72c7",
+                        "df3b0113-7e03-f111-8406-7ced8d3c72c7"
+                    ],
+    "learnedFromName":  [
+                            "Child Flow - Assign Process Setting to Import Log",
+                            "Automatic Flow - Sending Data when Log Status is Sending Data",
+                            "Automatic Flow - Data Extraction",
+                            "Automatic Flow - Start Document Translation When Translation Log Status Changes to Waiting for Proc",
+                            "Utility Flow - Log Exception",
+                            "Automatic Flow - Content Extraction",
+                            "Power Apps Flow - Executre Instruction"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "environment":  [
+                        "org1cd97ca4.crm.dynamics.com"
+                    ],
+    "template":  {
+                     "Run_a_prompt_1":  {
+                                            "type":  "OpenApiConnection",
+                                            "inputs":  {
+                                                           "parameters":  {
+                                                                              "recordId":  "d9453463-6518-4d6c-b124-b29539baa815",
+                                                                              "item/requestv2/Text_20input":  "@outputs(\u0027Get_import_log_by_ID\u0027)?[\u0027body/biz_extractedcontent\u0027]"
+                                                                          },
+                                                           "host":  {
+                                                                        "apiId":  "providers/Microsoft.ProcessSimple/operationGroups/aibuilder",
+                                                                        "operationId":  "aibuilderpredict_customprompt",
+                                                                        "connectionName":  "shared_commondataserviceforapps-1"
+                                                                    },
+                                                           "retryPolicy":  {
+                                                                               "type":  "none"
+                                                                           }
+                                                       }
+                                        }
+                 },
+    "swaggerLearned":  true,
+    "inputSchema":  [
+                        {
+                            "name":  "connectionId",
+                            "in":  "path",
+                            "required":  true,
+                            "x-ms-visibility":  "internal",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "recordId",
+                            "in":  "path",
+                            "description":  "Choose a model",
+                            "required":  true,
+                            "x-ms-summary":  "Model name",
+                            "type":  "string",
+                            "x-ms-dynamic-values":  {
+                                                        "operationId":  "ListRecords",
+                                                        "parameters":  {
+                                                                           "entityName":  "msdyn_aimodels",
+                                                                           "$filter":  "statecode eq 1"
+                                                                       },
+                                                        "value-collection":  "value",
+                                                        "value-path":  "msdyn_aimodelid",
+                                                        "value-title":  "msdyn_name"
+                                                    }
+                        },
+                        {
+                            "name":  "Prefer",
+                            "in":  "header",
+                            "description":  "The header required to allow Dataverse to process the request async with 202 OK and location headers",
+                            "required":  true,
+                            "x-ms-summary":  "Prefer",
+                            "x-ms-visibility":  "internal",
+                            "type":  "string",
+                            "default":  "respond-async"
+                        },
+                        {
+                            "name":  "item",
+                            "in":  "body",
+                            "description":  "Infer request",
+                            "required":  true,
+                            "schema":  {
+                                           "type":  "object",
+                                           "x-ms-dynamic-properties":  {
+                                                                           "operationId":  "GetPredictionSchema",
+                                                                           "parameters":  {
+                                                                                              "recordId":  {
+                                                                                                               "parameterReference":  "recordId"
+                                                                                                           }
+                                                                                          },
+                                                                           "itemValuePath":  "input"
+                                                                       }
+                                       },
+                            "x-ms-summary":  "Infer Request"
+                        }
+                    ],
+    "outputSchema":  {
+                         "type":  "object",
+                         "x-ms-dynamic-properties":  {
+                                                         "operationId":  "GetPredictionSchema",
+                                                         "parameters":  {
+                                                                            "recordId":  {
+                                                                                             "parameterReference":  "recordId"
+                                                                                         }
+                                                                        },
+                                                         "itemValuePath":  "output"
+                                                     }
+                     },
+    "graphConvertible":  true,
+    "graphNodeType":  "connector"
+}

@@ -1,0 +1,16 @@
+﻿{
+    "connector":  "shared_webcontents",
+    "learnedAt":  "2026-05-26",
+    "operations":  [
+                       {
+                           "operationId":  "InvokeHttp",
+                           "type":  "OpenApiConnection",
+                           "componentFile":  "actions/openapi/shared_webcontents_InvokeHttp.json",
+                           "flowCount":  1
+                       }
+                   ],
+    "triggers":  [
+
+                 ],
+    "swaggerUrl":  "https://api.powerapps.com/providers/Microsoft.PowerApps/apis/shared_webcontents?api-version=2020-06-01\u0026$filter=environment eq \u0027{envId}\u0027\u0026$select=properties.swagger"
+}

@@ -1,0 +1,101 @@
+﻿{
+    "id":  "shared_sharepointonline_HttpRequest",
+    "connector":  "shared_sharepointonline",
+    "connectorBase":  "shared_sharepointonline",
+    "operationId":  "HttpRequest",
+    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+    "type":  "OpenApiConnection",
+    "learnedFrom":  [
+                        "e3742ca3-e086-ef11-ac21-7c1e520158f7"
+                    ],
+    "learnedFromName":  [
+                            "Sharepoint Synchronization | Synchronize files to Agent (Child)"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "environment":  [
+                        "orgdf331f66.crm5.dynamics.com"
+                    ],
+    "template":  {
+                     "Get_pages":  {
+                                       "runAfter":  {
+
+                                                    },
+                                       "metadata":  {
+                                                        "operationMetadataId":  "4051de34-a512-4538-b0d2-5ef9c48a4daa"
+                                                    },
+                                       "type":  "OpenApiConnection",
+                                       "inputs":  {
+                                                      "host":  {
+                                                                   "connectionName":  "shared_sharepointonline",
+                                                                   "operationId":  "HttpRequest",
+                                                                   "apiId":  "/providers/Microsoft.PowerApps/apis/shared_sharepointonline"
+                                                               },
+                                                      "parameters":  {
+                                                                         "dataset":  "@items(\u0027Apply_to_each_File_Indexer_Configurations\u0027)?[\u0027cat_siteaddress\u0027]",
+                                                                         "parameters/method":  "GET",
+                                                                         "parameters/uri":  "_api/web/lists/getbytitle(\u0027Site Pages\u0027)/items?$select=Title,CanvasContent1,FileLeafRef\u0026$filter=Title ne null and FileLeafRef ne null@{if(empty(items(\u0027Apply_to_each_File_Indexer_Configurations\u0027)?[\u0027cat_sharepointpagesfilterquery\u0027]), \u0027\u0027, concat(\u0027 and \u0027, items(\u0027Apply_to_each_File_Indexer_Configurations\u0027)?[\u0027cat_sharepointpagesfilterquery\u0027]))}"
+                                                                     },
+                                                      "authentication":  {
+                                                                             "type":  "Raw",
+                                                                             "value":  "@json(decodeBase64(triggerOutputs().headers[\u0027X-MS-APIM-Tokens\u0027]))[\u0027$ConnectionKey\u0027]"
+                                                                         }
+                                                  }
+                                   }
+                 },
+    "inputSchema":  [
+                        {
+                            "name":  "connectionId",
+                            "in":  "path",
+                            "required":  true,
+                            "x-ms-visibility":  "internal",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "dataset",
+                            "in":  "path",
+                            "description":  "Example: https://contoso.sharepoint.com/sites/sitename.",
+                            "required":  true,
+                            "x-ms-summary":  "Site Address",
+                            "x-ms-dynamic-values":  {
+                                                        "operationId":  "GetDataSets",
+                                                        "parameters":  {
+
+                                                                       },
+                                                        "value-collection":  "value",
+                                                        "value-path":  "Name",
+                                                        "value-title":  "DisplayName"
+                                                    },
+                            "x-ms-url-encoding":  "double",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "parameters",
+                            "in":  "body",
+                            "description":  "Parameters to this operation passed in the body.",
+                            "required":  true,
+                            "schema":  {
+                                           "$ref":  "#/definitions/SharePointHttpRequestBodyParameters"
+                                       },
+                            "x-ms-summary":  "Parameters to this operation passed in the body"
+                        }
+                    ],
+    "dynamicValuesRef":  {
+                             "dataset":  {
+                                             "operationId":  "GetDataSets",
+                                             "titlePath":  "DisplayName",
+                                             "parameters":  {
+
+                                                            },
+                                             "valueCollection":  "value",
+                                             "valuePath":  "Name"
+                                         }
+                         },
+    "swaggerLearned":  true,
+    "outputSchema":  {
+                         "type":  "object",
+                         "description":  "Dynamic response - schema varies by request"
+                     },
+    "graphConvertible":  true,
+    "graphNodeType":  "connector"
+}

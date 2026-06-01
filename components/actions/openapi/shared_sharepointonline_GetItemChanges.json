@@ -1,0 +1,208 @@
+﻿{
+    "id":  "shared_sharepointonline_GetItemChanges",
+    "connector":  "shared_sharepointonline",
+    "connectorBase":  "shared_sharepointonline",
+    "operationId":  "GetItemChanges",
+    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+    "type":  "OpenApiConnection",
+    "learnedFrom":  [
+                        "f7d564de-0705-f111-8407-000d3a316017",
+                        "33afba72-d005-f111-8407-6045bd5777da"
+                    ],
+    "learnedFromName":  [
+                            "Sharepoint-Modify-Post Data To Server",
+                            "Sharepoint-Modified-ExpenseRequest-ExtractInvoice"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "environment":  [
+                        "{dataverseOrg}"
+                    ],
+    "template":  {
+                     "Get_changes_for_an_item_or_a_file_(properties_only)":  {
+                                                                                 "type":  "OpenApiConnection",
+                                                                                 "inputs":  {
+                                                                                                "parameters":  {
+                                                                                                                   "dataset":  "@parameters(\u0027SharepointSite (crdd1_SharepointSite)\u0027)",
+                                                                                                                   "table":  "@parameters(\u0027List-[Purchase Orders] (crdd1_ListPurchaseOrders)\u0027)",
+                                                                                                                   "id":  "@triggerBody()?[\u0027ID\u0027]",
+                                                                                                                   "since":  "@triggerBody()?[\u0027{TriggerWindowStartToken}\u0027]",
+                                                                                                                   "until":  "@triggerBody()?[\u0027{TriggerWindowEndToken}\u0027]"
+                                                                                                               },
+                                                                                                "host":  {
+                                                                                                             "apiId":  "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+                                                                                                             "operationId":  "GetItemChanges",
+                                                                                                             "connectionName":  "shared_sharepointonline"
+                                                                                                         }
+                                                                                            },
+                                                                                 "runAfter":  {
+
+                                                                                              },
+                                                                                 "metadata":  {
+                                                                                                  "operationMetadataId":  "9b4972f7-0d69-4d45-860b-d625a6f8cb38"
+                                                                                              }
+                                                                             }
+                 },
+    "inputSchema":  [
+                        {
+                            "name":  "connectionId",
+                            "in":  "path",
+                            "required":  true,
+                            "x-ms-visibility":  "internal",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "dataset",
+                            "in":  "path",
+                            "description":  "Example: https://contoso.sharepoint.com/sites/sitename.",
+                            "required":  true,
+                            "x-ms-summary":  "Site Address",
+                            "x-ms-dynamic-values":  {
+                                                        "operationId":  "GetDataSets",
+                                                        "parameters":  {
+
+                                                                       },
+                                                        "value-collection":  "value",
+                                                        "value-path":  "Name",
+                                                        "value-title":  "DisplayName"
+                                                    },
+                            "x-ms-url-encoding":  "double",
+                            "x-ms-ai-sensitivity":  "high",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "table",
+                            "in":  "path",
+                            "description":  "SharePoint list or library name.",
+                            "required":  true,
+                            "x-ms-summary":  "List or Library Name",
+                            "x-ms-dynamic-values":  {
+                                                        "operationId":  "GetTablesForListsAndLibraries",
+                                                        "parameters":  {
+                                                                           "dataset":  {
+                                                                                           "parameter":  "dataset"
+                                                                                       }
+                                                                       },
+                                                        "value-collection":  "value",
+                                                        "value-path":  "Name",
+                                                        "value-title":  "DisplayName"
+                                                    },
+                            "x-ms-url-encoding":  "double",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "id",
+                            "in":  "path",
+                            "description":  "Id of the item you want to fetch changes for.",
+                            "required":  true,
+                            "x-ms-summary":  "Id",
+                            "x-ms-url-encoding":  "double",
+                            "type":  "integer",
+                            "format":  "int64"
+                        },
+                        {
+                            "name":  "since",
+                            "in":  "query",
+                            "description":  "Trigger Window Start token or an item version label (ex: 3.0) or an ISO 8601 date (YYYY-MM-DDThh:mmZ).",
+                            "required":  true,
+                            "x-ms-summary":  "Since",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "until",
+                            "in":  "query",
+                            "description":  "Trigger Window End token or an item version label (ex: 3.0) or an ISO 8601 date (YYYY-MM-DDThh:mmZ). If blank, defaults to latest version.",
+                            "required":  false,
+                            "x-ms-summary":  "Until",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "includeDrafts",
+                            "in":  "query",
+                            "description":  "Boolean for whether to consider changes from minor (draft) versions.",
+                            "required":  false,
+                            "x-ms-summary":  "Include Minor Versions",
+                            "x-ms-visibility":  "advanced",
+                            "type":  "boolean",
+                            "default":  false
+                        },
+                        {
+                            "name":  "view",
+                            "in":  "query",
+                            "description":  "Returns only columns defined in a view.",
+                            "required":  false,
+                            "x-ms-summary":  "Limit Columns by View",
+                            "x-ms-visibility":  "advanced",
+                            "x-ms-dynamic-values":  {
+                                                        "operationId":  "GetTableViews",
+                                                        "parameters":  {
+                                                                           "dataset":  {
+                                                                                           "parameter":  "dataset"
+                                                                                       },
+                                                                           "table":  {
+                                                                                         "parameter":  "table"
+                                                                                     }
+                                                                       },
+                                                        "value-path":  "Name",
+                                                        "value-title":  "DisplayName"
+                                                    },
+                            "type":  "string"
+                        }
+                    ],
+    "dynamicValuesRef":  {
+                             "table":  {
+                                           "operationId":  "GetTablesForListsAndLibraries",
+                                           "titlePath":  "DisplayName",
+                                           "parameters":  {
+                                                              "dataset":  {
+                                                                              "parameter":  "dataset"
+                                                                          }
+                                                          },
+                                           "valueCollection":  "value",
+                                           "valuePath":  "Name"
+                                       },
+                             "view":  {
+                                          "operationId":  "GetTableViews",
+                                          "titlePath":  "DisplayName",
+                                          "parameters":  {
+                                                             "table":  {
+                                                                           "parameter":  "table"
+                                                                       },
+                                                             "dataset":  {
+                                                                             "parameter":  "dataset"
+                                                                         }
+                                                         },
+                                          "valuePath":  "Name"
+                                      },
+                             "dataset":  {
+                                             "operationId":  "GetDataSets",
+                                             "titlePath":  "DisplayName",
+                                             "parameters":  {
+
+                                                            },
+                                             "valueCollection":  "value",
+                                             "valuePath":  "Name"
+                                         }
+                         },
+    "swaggerLearned":  true,
+    "outputSchema":  {
+                         "type":  "object",
+                         "additionalProperties":  {
+                                                      "$ref":  "#/definitions/Object"
+                                                  },
+                         "x-ms-dynamic-schema":  {
+                                                     "operationId":  "GetItemChangesMetadata",
+                                                     "parameters":  {
+                                                                        "dataset":  {
+                                                                                        "parameter":  "dataset"
+                                                                                    },
+                                                                        "table":  {
+                                                                                      "parameter":  "table"
+                                                                                  }
+                                                                    },
+                                                     "value-path":  "schema"
+                                                 }
+                     },
+    "graphConvertible":  true,
+    "graphNodeType":  "connector"
+}

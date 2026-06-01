@@ -1,0 +1,34 @@
+﻿{
+    "connector":  "shared_excelonlinebusiness",
+    "learnedAt":  "2026-05-26",
+    "operations":  [
+                       {
+                           "operationId":  "AddRowV2",
+                           "type":  "OpenApiConnection",
+                           "componentFile":  "actions/openapi/shared_excelonlinebusiness_AddRowV2.json",
+                           "flowCount":  1
+                       },
+                       {
+                           "operationId":  "GetItems",
+                           "type":  "OpenApiConnection",
+                           "componentFile":  "actions/openapi/shared_excelonlinebusiness_GetItems.json",
+                           "flowCount":  2
+                       },
+                       {
+                           "operationId":  "RunScriptProd",
+                           "type":  "OpenApiConnection",
+                           "componentFile":  "actions/openapi/shared_excelonlinebusiness_RunScriptProd.json",
+                           "flowCount":  4
+                       },
+                       {
+                           "operationId":  "PatchItem",
+                           "type":  "OpenApiConnection",
+                           "componentFile":  "actions/openapi/shared_excelonlinebusiness_PatchItem.json",
+                           "flowCount":  2
+                       }
+                   ],
+    "triggers":  [
+
+                 ],
+    "swaggerUrl":  "https://api.powerapps.com/providers/Microsoft.PowerApps/apis/shared_excelonlinebusiness?api-version=2020-06-01\u0026$filter=environment eq \u0027{envId}\u0027\u0026$select=properties.swagger"
+}

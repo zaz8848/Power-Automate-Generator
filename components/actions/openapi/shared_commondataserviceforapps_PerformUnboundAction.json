@@ -1,0 +1,148 @@
+﻿{
+    "id":  "shared_commondataserviceforapps_PerformUnboundAction",
+    "connector":  "shared_commondataserviceforapps",
+    "connectorBase":  "shared_commondataserviceforapps",
+    "operationId":  "PerformUnboundAction",
+    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+    "type":  "OpenApiConnection",
+    "learnedFrom":  [
+                        "829d9bbc-0fb7-ea11-a812-000d3a1ab88b",
+                        "ced4fe0e-a135-f011-8c4e-000d3a3755b8",
+                        "27cf52d8-5812-ef11-9f8a-000d3a5a66f7",
+                        "861bdd5e-bc09-ef11-9f8a-000d3a5cb958",
+                        "fb46af82-2507-ed11-82e4-000d3a98ae3f",
+                        "05e57ac4-dac5-f011-bbd3-000d3ac79569",
+                        "8719e711-6e50-e911-a974-000d3af292f2",
+                        "5ef0982e-ab7a-ec11-8d21-0022482a65f0",
+                        "4ffa33c2-c12e-ed11-9db1-0022482aea7b",
+                        "facc4beb-c9b5-48f7-b709-0b41f6518b22",
+                        "cde64862-0804-453b-b9f4-0ec8ff12d30f",
+                        "1a0cb2d6-fc3d-f011-877a-6045bd05e54b",
+                        "5d27b158-cb45-f011-877a-6045bd06efb1",
+                        "5439e6c3-3e4d-f011-877b-6045bd0937a6",
+                        "445c9bd8-f21a-49c4-ab13-8f2076a72ad1",
+                        "99b0bd7d-2d4e-4bfa-9120-b9a2cd81a35d",
+                        "333b0082-b97e-4b10-89b2-bdececd4ac34",
+                        "a9373689-25bf-4677-b557-ff4736df8e21"
+                    ],
+    "learnedFromName":  [
+                            "IoT - Flow - Schedule Device Data Pulls",
+                            "Invoke case management agent",
+                            "Test Automation | Update Agent Test Run Rollup Columns",
+                            "Test Automation | Enrich with Azure Application Insights",
+                            "Auto close expired conversations",
+                            "ARC: Intake Service Email (do not delete or rename)",
+                            "Field Service - Flow - Generate Agreement Booking Dates",
+                            "Sales Insights sequence daily usage flow",
+                            "Integrated Search API trigger flow",
+                            "Field Service - Flow - Generate Order Invoicing Setup Dates",
+                            "Field Service - Flow - Generate Agreement Invoice Dates",
+                            "AI Evaluation Flow for Conversation",
+                            "Call custom agent",
+                            "QEA On Demand Evaluation Case",
+                            "Field Service - Flow - Generate Invoice For Order Invoicing Date",
+                            "Field Service - Flow - Generate Invoice for Agreement Invoice Date",
+                            "Field Service - Flow - Generate Order Invoicing Dates",
+                            "Field Service - Flow - Generate Work Order for Agreement Booking Date"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "environment":  [
+                        "orgdf331f66.crm5.dynamics.com"
+                    ],
+    "template":  {
+                     "Perform_an_unbound_action":  {
+                                                       "runAfter":  {
+                                                                        "Delay_until":  [
+                                                                                            "Succeeded"
+                                                                                        ]
+                                                                    },
+                                                       "type":  "OpenApiConnection",
+                                                       "inputs":  {
+                                                                      "host":  {
+                                                                                   "connectionName":  "shared_commondataserviceforapps",
+                                                                                   "operationId":  "PerformUnboundAction",
+                                                                                   "apiId":  "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                                                                               },
+                                                                      "parameters":  {
+                                                                                         "actionName":  "msdyn_PullDataForIoTDevice",
+                                                                                         "item/IsScheduledDataPull":  true
+                                                                                     },
+                                                                      "authentication":  "@parameters(\u0027$authentication\u0027)"
+                                                                  }
+                                                   }
+                 },
+    "inputSchema":  [
+                        {
+                            "name":  "connectionId",
+                            "in":  "path",
+                            "required":  true,
+                            "x-ms-visibility":  "internal",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "actionName",
+                            "in":  "path",
+                            "description":  "Choose an action",
+                            "required":  true,
+                            "x-ms-url-encoding":  "double",
+                            "x-ms-dynamic-values":  {
+                                                        "operationId":  "GetUnboundActions",
+                                                        "parameters":  {
+
+                                                                       },
+                                                        "value-collection":  "value",
+                                                        "value-path":  "operationId",
+                                                        "value-title":  "operationDisplayName"
+                                                    },
+                            "x-ms-summary":  "Action Name",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "item",
+                            "in":  "body",
+                            "description":  "Action parameters",
+                            "required":  false,
+                            "schema":  {
+                                           "type":  "object",
+                                           "x-ms-dynamic-properties":  {
+                                                                           "operationId":  "GetMetadataForUnboundActionInput",
+                                                                           "parameters":  {
+                                                                                              "actionName":  {
+                                                                                                                 "parameterReference":  "actionName"
+                                                                                                             }
+                                                                                          },
+                                                                           "itemValuePath":  "schema"
+                                                                       }
+                                       },
+                            "x-ms-summary":  "Action parameters"
+                        }
+                    ],
+    "dynamicValuesRef":  {
+                             "actionName":  {
+                                                "operationId":  "GetUnboundActions",
+                                                "titlePath":  "operationDisplayName",
+                                                "parameters":  {
+
+                                                               },
+                                                "valueCollection":  "value",
+                                                "valuePath":  "operationId"
+                                            }
+                         },
+    "swaggerLearned":  true,
+    "outputSchema":  {
+                         "type":  "object",
+                         "x-ms-dynamic-properties":  {
+                                                         "operationId":  "GetMetadataForUnboundActionResponse",
+                                                         "parameters":  {
+                                                                            "actionName":  {
+                                                                                               "parameterReference":  "actionName"
+                                                                                           }
+                                                                        },
+                                                         "itemValuePath":  "schema"
+                                                     }
+                     },
+    "graphConvertible":  "partial",
+    "graphNodeType":  "connector",
+    "graphNotes":  "If used as Classify (QuickTest), needs AI to convert prompt to categories[]. Otherwise convertible."
+}

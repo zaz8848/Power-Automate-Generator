@@ -1,0 +1,16 @@
+﻿{
+    "id":  "shared_flowmanagement",
+    "displayName":  "Power Automate Management",
+    "connectorId":  "/providers/Microsoft.PowerApps/apis/shared_flowmanagement",
+    "learnedFrom":  [
+                        "Wells Dev batch"
+                    ],
+    "learnedAt":  "2026-05-26",
+    "operations":  [
+                       {
+                           "operationId":  "GetFlow",
+                           "description":  "鑾峰彇 flow 瀹氫箟鍜屽厓鏁版嵁"
+                       }
+                   ],
+    "swaggerUrl":  "https://api.powerapps.com/providers/Microsoft.PowerApps/apis/shared_flowmanagement?api-version=2020-06-01\u0026$filter=environment eq \u0027{envId}\u0027\u0026$select=properties.swagger"
+}

@@ -1,0 +1,171 @@
+﻿{
+    "id":  "shared_azureblob_DeleteFile_V2",
+    "connector":  "shared_azureblob",
+    "connectorBase":  "shared_azureblob",
+    "operationId":  "DeleteFile_V2",
+    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_azureblob",
+    "type":  "OpenApiConnection",
+    "learnedFrom":  [
+                        "b99118ab-dd62-f011-bec3-6045bd00625f"
+                    ],
+    "learnedFromName":  [
+                            "Automatic Flow - Start Document Translation When Translation Log Status Changes to Waiting for Proc"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "environment":  [
+                        "org1cd97ca4.crm.dynamics.com"
+                    ],
+    "template":  {
+                     "Delete_the_possible_duplicated_translated_document":  {
+                                                                                "type":  "OpenApiConnection",
+                                                                                "inputs":  {
+                                                                                               "parameters":  {
+                                                                                                                  "dataset":  "wellsdocumentstorage",
+                                                                                                                  "id":  "translation/@{outputs(\u0027Run_a_prompt\u0027)?[\u0027body/responsev2/predictionOutput/text\u0027]}/@{outputs(\u0027Upload_document_to_Blob_storage\u0027)?[\u0027body/Name\u0027]}"
+                                                                                                              },
+                                                                                               "host":  {
+                                                                                                            "apiId":  "/providers/Microsoft.PowerApps/apis/shared_azureblob",
+                                                                                                            "operationId":  "DeleteFile_V2",
+                                                                                                            "connectionName":  "shared_azureblob"
+                                                                                                        },
+                                                                                               "retryPolicy":  {
+                                                                                                                   "type":  "none"
+                                                                                                               }
+                                                                                           },
+                                                                                "runAfter":  {
+                                                                                                 "Upload_document_to_Blob_storage":  [
+                                                                                                                                         "Succeeded"
+                                                                                                                                     ]
+                                                                                             },
+                                                                                "metadata":  {
+                                                                                                 "operationMetadataId":  "d94dd998-1629-4870-b491-15bd58b82468"
+                                                                                             }
+                                                                            }
+                 },
+    "inputSchema":  [
+                        {
+                            "name":  "connectionId",
+                            "in":  "path",
+                            "required":  true,
+                            "x-ms-visibility":  "internal",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "dataset",
+                            "in":  "path",
+                            "description":  "Azure Storage account name or blob endpoint.",
+                            "required":  true,
+                            "x-ms-summary":  "Storage account name or blob endpoint",
+                            "x-ms-dynamic-values":  {
+                                                        "operationId":  "GetDataSets",
+                                                        "parameters":  {
+
+                                                                       },
+                                                        "value-collection":  "value",
+                                                        "value-path":  "Name",
+                                                        "value-title":  "DisplayName"
+                                                    },
+                            "x-ms-url-encoding":  "double",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "id",
+                            "in":  "path",
+                            "description":  "Specify the blob to delete.",
+                            "required":  true,
+                            "x-ms-summary":  "Blob",
+                            "x-ms-url-encoding":  "double",
+                            "x-ms-dynamic-values":  {
+                                                        "capability":  "file-picker",
+                                                        "parameters":  {
+                                                                           "isFolder":  false,
+                                                                           "fileFilter":  [
+
+                                                                                          ],
+                                                                           "dataset":  {
+                                                                                           "parameter":  "dataset"
+                                                                                       }
+                                                                       },
+                                                        "value-path":  "Id"
+                                                    },
+                            "x-ms-dynamic-tree":  {
+                                                      "settings":  {
+                                                                       "canSelectParentNodes":  false,
+                                                                       "canSelectLeafNodes":  true
+                                                                   },
+                                                      "open":  {
+                                                                   "operationId":  "ListAllRootFolders_V4",
+                                                                   "itemValuePath":  "Id",
+                                                                   "itemTitlePath":  "DisplayName",
+                                                                   "itemIsParent":  "(IsFolder eq true)",
+                                                                   "itemFullTitlePath":  "Path",
+                                                                   "itemsPath":  "value",
+                                                                   "parameters":  {
+                                                                                      "dataset":  {
+                                                                                                      "parameterReference":  "dataset"
+                                                                                                  }
+                                                                                  }
+                                                               },
+                                                      "browse":  {
+                                                                     "operationId":  "ListFolder_V4",
+                                                                     "itemValuePath":  "Id",
+                                                                     "itemTitlePath":  "DisplayName",
+                                                                     "itemIsParent":  "(IsFolder eq true)",
+                                                                     "itemFullTitlePath":  "Path",
+                                                                     "itemsPath":  "value",
+                                                                     "parameters":  {
+                                                                                        "dataset":  {
+                                                                                                        "parameterReference":  "dataset"
+                                                                                                    },
+                                                                                        "id":  {
+                                                                                                   "selectedItemValuePath":  "Id"
+                                                                                               }
+                                                                                    }
+                                                                 }
+                                                  },
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "SkipDeleteIfFileNotFoundOnServer",
+                            "in":  "header",
+                            "description":  "Skips the deletion if a file is not found on the server.",
+                            "required":  false,
+                            "x-ms-summary":  "SkipDeleteIfFileNotFoundOnServer",
+                            "x-ms-visibility":  "internal",
+                            "type":  "boolean",
+                            "default":  false
+                        }
+                    ],
+    "dynamicValuesRef":  {
+                             "id":  {
+                                        "operationId":  null,
+                                        "parameters":  {
+                                                           "isFolder":  false,
+                                                           "dataset":  {
+                                                                           "parameter":  "dataset"
+                                                                       },
+                                                           "fileFilter":  [
+
+                                                                          ]
+                                                       },
+                                        "valuePath":  "Id"
+                                    },
+                             "dataset":  {
+                                             "operationId":  "GetDataSets",
+                                             "titlePath":  "DisplayName",
+                                             "parameters":  {
+
+                                                            },
+                                             "valueCollection":  "value",
+                                             "valuePath":  "Name"
+                                         }
+                         },
+    "swaggerLearned":  true,
+    "outputSchema":  {
+                         "type":  "object",
+                         "description":  "No response schema in Swagger"
+                     },
+    "graphConvertible":  true,
+    "graphNodeType":  "connector"
+}

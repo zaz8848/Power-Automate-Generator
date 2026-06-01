@@ -1,0 +1,133 @@
+﻿{
+    "id":  "shared_d365marketingforapps_Orchestration_EmitJourneyCreateRecordActionAnalyticEvent",
+    "connector":  "shared_d365marketingforapps",
+    "connectorBase":  "shared_d365marketingforapps",
+    "operationId":  "Orchestration_EmitJourneyCreateRecordActionAnalyticEvent",
+    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_d365marketingforapps",
+    "type":  "OpenApiConnection",
+    "learnedFrom":  [
+                        "6e5ee200-6694-f011-b4cc-000d3a099cdf",
+                        "765ee200-6694-f011-b4cc-000d3a099cdf",
+                        "7d5ee200-6694-f011-b4cc-000d3a099cdf",
+                        "5ab5d806-6694-f011-b4cc-000d3a099cdf",
+                        "63b5d806-6694-f011-b4cc-000d3a099cdf"
+                    ],
+    "learnedFromName":  [
+                            "CXP_Test Journey_20250918080356",
+                            "CXP_Test Journey_20250918080356",
+                            "CXP_Test Journey_20250918080356",
+                            "CXP_Test Journey_20250918080356",
+                            "CXP_Test Journey_20250918080356"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "environment":  [
+                        "orgdf331f66.crm5.dynamics.com"
+                    ],
+    "template":  {
+                     "5435ffff-e649-4504-a1da-63d005ca5072-Emit_Processed":  {
+                                                                                 "runAfter":  {
+                                                                                                  "5435ffff-e649-4504-a1da-63d005ca5072-CreateRecord":  [
+                                                                                                                                                            "Succeeded"
+                                                                                                                                                        ]
+                                                                                              },
+                                                                                 "type":  "OpenApiConnection",
+                                                                                 "inputs":  {
+                                                                                                "host":  {
+                                                                                                             "connectionName":  "shared_d365marketingforapps",
+                                                                                                             "operationId":  "Orchestration_EmitJourneyCreateRecordActionAnalyticEvent",
+                                                                                                             "apiId":  "/providers/Microsoft.PowerApps/apis/shared_d365marketingforapps"
+                                                                                                         },
+                                                                                                "retryPolicy":  {
+                                                                                                                    "count":  50,
+                                                                                                                    "interval":  "PT1M",
+                                                                                                                    "maximumInterval":  "PT30M",
+                                                                                                                    "minimumInterval":  "PT1M",
+                                                                                                                    "type":  "Exponential"
+                                                                                                                },
+                                                                                                "parameters":  {
+                                                                                                                   "organizationId":  "f419f241-2a06-f011-b015-000d3a086781",
+                                                                                                                   "EmitCreateRecordAnalyticEventRequest/Status":  2,
+                                                                                                                   "EmitCreateRecordAnalyticEventRequest/AnalyticalProfileId":  "@{triggerBody()?[\u0027profileId\u0027]}",
+                                                                                                                   "EmitCreateRecordAnalyticEventRequest/entityType":  "@{triggerBody()?[\u0027targetEntity\u0027]}",
+                                                                                                                   "EmitCreateRecordAnalyticEventRequest/recordId":  "@outputs(\u00275435ffff-e649-4504-a1da-63d005ca5072-CreateRecord\u0027)?[\u0027body\u0027]?[\u0027activityid\u0027]",
+                                                                                                                   "EmitCreateRecordAnalyticEventRequest/actionName":  "taskCreated",
+                                                                                                                   "x-cj-id":  "8560c9a3-6594-f011-b4cc-00224856c036",
+                                                                                                                   "x-cj-activity-id":  "5435ffff-e649-4504-a1da-63d005ca5072"
+                                                                                                               }
+                                                                                            }
+                                                                             }
+                 },
+    "inputSchema":  [
+                        {
+                            "name":  "connectionId",
+                            "in":  "path",
+                            "required":  true,
+                            "x-ms-visibility":  "internal",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "organizationId",
+                            "type":  "string",
+                            "in":  "path",
+                            "required":  true,
+                            "x-nullable":  false,
+                            "x-ms-summary":  "Organization Id",
+                            "description":  "The CDS organization identifier."
+                        },
+                        {
+                            "name":  "x-cj-id",
+                            "type":  "string",
+                            "in":  "header",
+                            "required":  true,
+                            "x-ms-summary":  "Customer Journey Id",
+                            "description":  "Customer journey identifier"
+                        },
+                        {
+                            "name":  "x-cj-version",
+                            "type":  "string",
+                            "in":  "header",
+                            "x-ms-summary":  "Customer Journey Version",
+                            "description":  "Customer journey version"
+                        },
+                        {
+                            "name":  "x-cj-activity-id",
+                            "type":  "string",
+                            "in":  "header",
+                            "x-ms-summary":  "Customer Journey Tile Id",
+                            "description":  "Customer journey tile identifier"
+                        },
+                        {
+                            "name":  "x-cj-iteration-id",
+                            "type":  "string",
+                            "in":  "header",
+                            "x-ms-summary":  "Customer Journey Iteration Id",
+                            "description":  "This header is used to represent the customer journey definition iteration"
+                        },
+                        {
+                            "name":  "x-ms-client-tracking-id",
+                            "type":  "string",
+                            "in":  "header",
+                            "x-ms-summary":  "Journey Run Id",
+                            "description":  "This header is used to represent the customer journey run Id."
+                        },
+                        {
+                            "name":  "EmitCreateRecordAnalyticEventRequest",
+                            "in":  "body",
+                            "required":  true,
+                            "description":  "Details required for emitting the create record analytic event",
+                            "schema":  {
+                                           "$ref":  "#/definitions/EmitCreateRecordAnalyticEventRequest"
+                                       },
+                            "x-nullable":  false,
+                            "x-ms-summary":  "EmitCreateRecordAnalyticEventRequest"
+                        }
+                    ],
+    "swaggerLearned":  true,
+    "outputSchema":  {
+                         "type":  "object",
+                         "description":  "No response schema in Swagger"
+                     },
+    "graphConvertible":  true,
+    "graphNodeType":  "connector"
+}

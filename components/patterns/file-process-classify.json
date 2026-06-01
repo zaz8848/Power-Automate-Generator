@@ -1,0 +1,93 @@
+{
+    "id": "pattern_file_process_classify",
+    "name": "文件触发 → 读取数据 → AI 分类 → 写回结果",
+    "description": "用户选中文件触发 flow，读取 Excel 数据，用 AI 对每行分类，结果写入新文件",
+    "learnedFrom": [
+        "55ecf82a-b5e3-f011-8406-7ced8db59fd8"
+    ],
+    "learnedAt": "2026-05-26",
+    "verified": true,
+    "trigger": "request-apiconnection (ForASelectedFile)",
+    "steps": [
+        {
+            "order": 1,
+            "component": "shared_onedriveforbusiness/GetFileMetadataByPath",
+            "purpose": "获取源文件元数据"
+        },
+        {
+            "order": 2,
+            "component": "compose",
+            "purpose": "存储 Document Library ID 常量"
+        },
+        {
+            "order": 3,
+            "component": "shared_excelonlinebusiness/RunScriptProd",
+            "purpose": "运行 Office Script 预处理数据",
+            "dependsOn": [
+                1,
+                2
+            ]
+        },
+        {
+            "order": 4,
+            "component": "shared_excelonlinebusiness/GetItems",
+            "purpose": "读取 Excel 表所有行",
+            "dependsOn": [
+                3
+            ]
+        },
+        {
+            "order": 5,
+            "component": "filter-array",
+            "purpose": "筛选需要处理的行",
+            "dependsOn": [
+                4
+            ]
+        },
+        {
+            "order": 6,
+            "component": "condition",
+            "purpose": "检查是否有需要处理的数据",
+            "dependsOn": [
+                5
+            ],
+            "branches": {
+                "true": "跳过（无数据）",
+                "false": [
+                    {
+                        "order": "6a",
+                        "component": "shared_onedriveforbusiness/GetFileMetadataByPath",
+                        "purpose": "获取模板文件元数据"
+                    },
+                    {
+                        "order": "6b",
+                        "component": "shared_onedriveforbusiness/CopyDriveFile",
+                        "purpose": "复制模板文件作为结果文件"
+                    },
+                    {
+                        "order": "6c",
+                        "component": "foreach",
+                        "purpose": "遍历每行数据",
+                        "concurrency": 4,
+                        "innerSteps": [
+                            {
+                                "component": "shared_commondataserviceforapps/aibuilderpredict_customprompt",
+                                "purpose": "用 AI 对描述进行分类"
+                            },
+                            {
+                                "component": "shared_excelonlinebusiness/AddRowV2",
+                                "purpose": "将分类结果写入结果文件"
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    ],
+    "connectors": [
+        "shared_onedriveforbusiness",
+        "shared_excelonlinebusiness",
+        "shared_commondataserviceforapps"
+    ],
+    "notes": "复杂模式：文件驱动 + 数据过滤 + AI 分类 + 结果输出。Foreach 并发度设为 4 加速处理。"
+}

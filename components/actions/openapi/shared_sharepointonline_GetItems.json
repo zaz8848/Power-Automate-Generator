@@ -1,0 +1,174 @@
+﻿{
+    "id":  "shared_sharepointonline_GetItems",
+    "connector":  "shared_sharepointonline",
+    "connectorBase":  "shared_sharepointonline",
+    "operationId":  "GetItems",
+    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+    "type":  "OpenApiConnection",
+    "learnedFrom":  [
+                        "f7d564de-0705-f111-8407-000d3a316017",
+                        "3e048272-81f2-01da-5796-5bddbd0332ff",
+                        "15a680d4-1e05-f111-8407-6045bd5777da",
+                        "33afba72-d005-f111-8407-6045bd5777da"
+                    ],
+    "learnedFromName":  [
+                            "Sharepoint-Modify-Post Data To Server",
+                            "Untitled flow",
+                            "PowerApps-Validate Invoices",
+                            "Sharepoint-Modified-ExpenseRequest-ExtractInvoice"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "environment":  [
+                        "{dataverseOrg}"
+                    ],
+    "template":  {
+                     "Get_items":  {
+                                       "type":  "OpenApiConnection",
+                                       "inputs":  {
+                                                      "parameters":  {
+                                                                         "dataset":  "@parameters(\u0027SharepointSite (crdd1_SharepointSite)\u0027)",
+                                                                         "table":  "@parameters(\u0027List-[Po Line Items] (crdd1_ListPoLineItems)\u0027)",
+                                                                         "$filter":  "SystemPoId eq @{triggerBody()?[\u0027ID\u0027]}"
+                                                                     },
+                                                      "host":  {
+                                                                   "apiId":  "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+                                                                   "operationId":  "GetItems",
+                                                                   "connectionName":  "shared_sharepointonline"
+                                                               }
+                                                  },
+                                       "runtimeConfiguration":  {
+                                                                    "paginationPolicy":  {
+                                                                                             "minimumItemCount":  5000
+                                                                                         }
+                                                                },
+                                       "metadata":  {
+                                                        "operationMetadataId":  "02dd8752-e770-4301-8341-4eacc6926b56"
+                                                    }
+                                   }
+                 },
+    "inputSchema":  {
+                        "dataset":  {
+                                        "description":  "Example: https://contoso.sharepoint.com/sites/sitename",
+                                        "in":  "path",
+                                        "type":  "string",
+                                        "required":  true
+                                    },
+                        "$filter":  {
+                                        "description":  "An ODATA filter query to restrict the entries returned (e.g. stringColumn eq \u0027string\u0027 OR numberColumn lt 123).",
+                                        "in":  "query",
+                                        "type":  "string",
+                                        "required":  false
+                                    },
+                        "connectionId":  {
+                                             "description":  null,
+                                             "in":  "path",
+                                             "type":  "string",
+                                             "required":  true
+                                         },
+                        "viewScopeOption":  {
+                                                "description":  "Return entries contained in sub-folders (default = true)",
+                                                "in":  "query",
+                                                "type":  "string",
+                                                "required":  false
+                                            },
+                        "table":  {
+                                      "description":  "SharePoint list name",
+                                      "in":  "path",
+                                      "type":  "string",
+                                      "required":  true
+                                  },
+                        "$orderby":  {
+                                         "description":  "An ODATA orderBy query for specifying the order of entries.",
+                                         "in":  "query",
+                                         "type":  "string",
+                                         "required":  false
+                                     },
+                        "view":  {
+                                     "description":  "Avoid column threshold issues by only using columns defined in a view",
+                                     "in":  "query",
+                                     "type":  "string",
+                                     "required":  false
+                                 },
+                        "folderPath":  {
+                                           "description":  "Select a folder, or leave blank for the whole list",
+                                           "in":  "query",
+                                           "type":  "string",
+                                           "required":  false
+                                       },
+                        "$top":  {
+                                     "description":  "Total number of entries to retrieve (default = all).",
+                                     "in":  "query",
+                                     "type":  "integer",
+                                     "required":  false
+                                 }
+                    },
+    "outputSchema":  {
+                         "$ref":  "ItemsList",
+                         "properties":  {
+                                            "value":  {
+                                                          "type":  "array",
+                                                          "description":  "List of Items"
+                                                      }
+                                        }
+                     },
+    "dynamicValuesRef":  {
+                             "viewScopeOption":  {
+                                                     "operationId":  "GetViewScopeOptions",
+                                                     "titlePath":  "name",
+                                                     "parameters":  {
+
+                                                                    },
+                                                     "valuePath":  "value"
+                                                 },
+                             "table":  {
+                                           "operationId":  "GetTables",
+                                           "titlePath":  "DisplayName",
+                                           "parameters":  {
+                                                              "dataset":  {
+                                                                              "parameter":  "dataset"
+                                                                          }
+                                                          },
+                                           "valueCollection":  "value",
+                                           "valuePath":  "Name"
+                                       },
+                             "folderPath":  {
+                                                "operationId":  null,
+                                                "parameters":  {
+                                                                   "isFolder":  true,
+                                                                   "dataset":  {
+                                                                                   "parameter":  "dataset"
+                                                                               },
+                                                                   "fileFilter":  [
+
+                                                                                  ]
+                                                               },
+                                                "valuePath":  "Path"
+                                            },
+                             "dataset":  {
+                                             "operationId":  "GetDataSets",
+                                             "titlePath":  "DisplayName",
+                                             "parameters":  {
+
+                                                            },
+                                             "valueCollection":  "value",
+                                             "valuePath":  "Name"
+                                         },
+                             "view":  {
+                                          "operationId":  "GetTableViews",
+                                          "titlePath":  "DisplayName",
+                                          "parameters":  {
+                                                             "table":  {
+                                                                           "parameter":  "table"
+                                                                       },
+                                                             "dataset":  {
+                                                                             "parameter":  "dataset"
+                                                                         }
+                                                         },
+                                          "valuePath":  "Name"
+                                      }
+                         },
+    "swaggerLearned":  true,
+    "graphConvertible":  true,
+    "graphNodeType":  "connector"
+}

@@ -1,0 +1,67 @@
+﻿{
+    "id":  "shared_flowmanagement_GetFlow",
+    "connector":  "shared_flowmanagement",
+    "connectorBase":  "shared_flowmanagement",
+    "operationId":  "GetFlow",
+    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_flowmanagement",
+    "type":  "OpenApiConnection",
+    "learnedFrom":  [
+                        "8171693a-afdb-ef11-a730-6045bd010cd6"
+                    ],
+    "learnedFromName":  [
+                            "Utility Flow - Log Exception"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "environment":  [
+                        "org1cd97ca4.crm.dynamics.com"
+                    ],
+    "template":  {
+                     "Get_Flow":  {
+                                      "type":  "OpenApiConnection",
+                                      "inputs":  {
+                                                     "parameters":  {
+                                                                        "environmentName":  "@workflow()?[\u0027tags\u0027][\u0027environmentName\u0027]",
+                                                                        "flowName":  "@triggerBody()?[\u0027text_4\u0027]"
+                                                                    },
+                                                     "host":  {
+                                                                  "apiId":  "/providers/Microsoft.PowerApps/apis/shared_flowmanagement",
+                                                                  "operationId":  "GetFlow",
+                                                                  "connectionName":  "shared_flowmanagement"
+                                                              }
+                                                 },
+                                      "runAfter":  {
+                                                       "Initialize_variable_WorkflowRunUrl":  [
+                                                                                                  "Succeeded"
+                                                                                              ]
+                                                   },
+                                      "metadata":  {
+                                                       "operationMetadataId":  "306fdab5-77a8-41e8-a04c-6a028eb096de"
+                                                   }
+                                  }
+                 },
+    "inputSchema":  {
+                        "connectionId":  {
+                                             "description":  null,
+                                             "in":  "path",
+                                             "type":  "string",
+                                             "required":  true
+                                         }
+                    },
+    "outputSchema":  {
+                         "$ref":  "FlowWithConnectionReferences",
+                         "properties":  {
+                                            "properties":  {
+                                                               "type":  null,
+                                                               "description":  null
+                                                           },
+                                            "name":  {
+                                                         "type":  "string",
+                                                         "description":  null
+                                                     }
+                                        }
+                     },
+    "swaggerLearned":  true,
+    "graphConvertible":  true,
+    "graphNodeType":  "connector"
+}

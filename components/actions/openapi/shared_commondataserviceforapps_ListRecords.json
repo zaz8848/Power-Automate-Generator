@@ -1,0 +1,209 @@
+﻿{
+    "id":  "shared_commondataserviceforapps_ListRecords",
+    "connector":  "shared_commondataserviceforapps",
+    "connectorBase":  "shared_commondataserviceforapps",
+    "operationId":  "ListRecords",
+    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+    "type":  "OpenApiConnection",
+    "learnedFrom":  [
+                        "c86f37cf-0558-f111-a825-6045bd5777da",
+                        "7fee9680-1058-f111-a825-6045bd5777da",
+                        "b1c1d185-c57c-f011-b4cc-000d3a080cec",
+                        "e74b3f15-5310-f011-9988-000d3a329ac2",
+                        "861bdd5e-bc09-ef11-9f8a-000d3a5cb958",
+                        "fa40c544-9a0b-ef11-9f8a-000d3a5cb958",
+                        "ed6a53e3-6012-ef11-9f8a-000d3a5cb958",
+                        "e3e46b57-f936-f011-8c4d-000d3aa1971f",
+                        "3ddf75ff-1597-f011-b41c-000d3ac6a644",
+                        "f1faed1c-a4c5-f011-bbd3-000d3ac79569",
+                        "e55931c1-601f-f011-998a-00224802c180",
+                        "d8a8c388-8a25-f011-8c4e-00224808dbf5",
+                        "98466431-8d25-f011-8c4e-00224808dbf5",
+                        "9e65ce8d-8f25-f011-8c4e-00224808dbf5",
+                        "290d043b-9fbf-ef11-a72e-0022481efed6",
+                        "bf53b222-1c95-f011-b4cc-00224856c036",
+                        "485c39e3-44fd-59c3-3638-4777211cbc5e",
+                        "1a0cb2d6-fc3d-f011-877a-6045bd05e54b",
+                        "34fad402-8609-f011-bae2-6045bd07d12b",
+                        "c5eeb2b4-1974-f011-b4cc-6045bd203130",
+                        "7a5c6671-5bc5-f011-bbd3-6045bd205ea8",
+                        "af6b06fb-4553-f011-877b-7c1e524ac215",
+                        "86850285-dc35-ef11-8409-000d3a31bd87",
+                        "44b31d34-ef80-eb11-a812-000d3a4f53f6",
+                        "5f216841-158f-f011-b4cc-0022480aa253",
+                        "98483f15-718d-ef11-ac21-0022480c3fe9",
+                        "664ba7a3-738d-ef11-ac21-0022480c3fe9",
+                        "0a035c01-c979-0229-e10f-059dbb7a383f",
+                        "9cdd78db-7e4d-f011-877a-6045bd00625f",
+                        "91604ac2-af4d-f011-877a-6045bd00625f",
+                        "201de22e-033d-8b53-2162-7309a772126e",
+                        "0abb697b-78e1-9b86-9b50-8d8ee1b4908a"
+                    ],
+    "learnedFromName":  [
+                            "EmailRouting-WebhookDispatch",
+                            "EmailRouting-AlertDetection",
+                            "Automatic - Modify - AI Processing Log",
+                            "Global | Get Current Dataverse Url",
+                            "Test Automation | Enrich with Azure Application Insights",
+                            "Test Automation | Enrich with Dataverse Conversation Transcripts",
+                            "Test Automation | Analyze Generated Answers with AI Builder",
+                            "Document Processing - Run Extraction",
+                            "PowerApps-Generate RFP Proposal ",
+                            "Agent Flow - Create a case",
+                            "Conversation Analyzer | Analyze Conversation Based On Prompt",
+                            "Setup Wizard | Get Solution Environment Variable Definitions Details",
+                            "Setup Wizard | Get Solution Connection References Details",
+                            "Setup Wizard | Get Solution Flows Details",
+                            "Conversation KPI | Copy Transcripts (Child)",
+                            "AgentFlow-Approval",
+                            "Query IP Address",
+                            "AI Evaluation Flow for Conversation",
+                            "Expire evaluations",
+                            "Canvas App - Warranty Status Check",
+                            "Agent Flow - Check SN",
+                            "Test Automation | Validate Agent Plans (Child)",
+                            "Automatic Flow - Create Processing Log - Email",
+                            "Document Automation Email Importer",
+                            "Button -\u003e List rows",
+                            "Child Flow - Insert or Update the Account",
+                            "Child Flow - Insert or Update Contact",
+                            "AgentFlow-Auto Procesing Excel File To Analysis",
+                            "HTTP Flow - TextTranslate",
+                            "HTTP Flow - BatchTextTranslate",
+                            "AgentFlow-AssignTaskByRecordId",
+                            "AgentFlow - Assign Sales Task To Store"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "environment":  [
+                        "{dataverseOrg}",
+                        "orgdf331f66.crm5.dynamics.com",
+                        "org1cd97ca4.crm.dynamics.com"
+                    ],
+    "template":  {
+                     "List_rows":  {
+                                       "type":  "OpenApiConnection",
+                                       "inputs":  {
+                                                      "parameters":  {
+                                                                         "entityName":  "cre47_routingrules",
+                                                                         "$filter":  "cre47_webhookenabled eq true and cre47_active eq true"
+                                                                     },
+                                                      "host":  {
+                                                                   "apiId":  "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                                                                   "operationId":  "ListRecords",
+                                                                   "connectionName":  "shared_commondataserviceforapps"
+                                                               }
+                                                  },
+                                       "runAfter":  {
+
+                                                    }
+                                   }
+                 },
+    "inputSchema":  {
+                        "fetchXml":  {
+                                         "description":  "Enter a Fetch XML query for advanced customization",
+                                         "in":  "query",
+                                         "type":  "string",
+                                         "required":  false
+                                     },
+                        "$orderby":  {
+                                         "description":  "Columns to sort by in OData orderBy style (excluding lookups)",
+                                         "in":  "query",
+                                         "type":  "string",
+                                         "required":  false
+                                     },
+                        "$filter":  {
+                                        "description":  "Enter an OData style filter expression to limit which rows are listed",
+                                        "in":  "query",
+                                        "type":  "string",
+                                        "required":  false
+                                    },
+                        "$top":  {
+                                     "description":  "Enter the number of rows to be listed (default = 5000)",
+                                     "in":  "query",
+                                     "type":  "integer",
+                                     "required":  false
+                                 },
+                        "x-ms-odata-metadata-full":  {
+                                                         "description":  "The header parameter to customer to opt-in returning full odata metadata in response.",
+                                                         "in":  "header",
+                                                         "type":  "boolean",
+                                                         "required":  false
+                                                     },
+                        "connectionId":  {
+                                             "description":  null,
+                                             "in":  "path",
+                                             "type":  "string",
+                                             "required":  true
+                                         },
+                        "prefer":  {
+                                       "description":  "The header parameter required to make Microsoft Dataverse return the created resource",
+                                       "in":  "header",
+                                       "type":  "string",
+                                       "required":  false
+                                   },
+                        "partitionId":  {
+                                            "description":  "An option to specify the partitionId while retrieving data for NoSQL tables",
+                                            "in":  "query",
+                                            "type":  "string",
+                                            "required":  false
+                                        },
+                        "$skiptoken":  {
+                                           "description":  "Enter the skip token obtained from a previous run to list rows from the next page",
+                                           "in":  "query",
+                                           "type":  "string",
+                                           "required":  false
+                                       },
+                        "accept":  {
+                                       "description":  "The header parameter required to make Microsoft Dataverse return the odata id",
+                                       "in":  "header",
+                                       "type":  "string",
+                                       "required":  false
+                                   },
+                        "$expand":  {
+                                        "description":  "Enter an Odata style expand query to list related rows",
+                                        "in":  "query",
+                                        "type":  "string",
+                                        "required":  false
+                                    },
+                        "entityName":  {
+                                           "description":  "Choose a table",
+                                           "in":  "path",
+                                           "type":  "string",
+                                           "required":  true
+                                       },
+                        "$select":  {
+                                        "description":  "Enter a comma-separated list of column unique names to limit which columns are listed",
+                                        "in":  "query",
+                                        "type":  "string",
+                                        "required":  false
+                                    }
+                    },
+    "outputSchema":  {
+                         "$ref":  "EntityItemList",
+                         "properties":  {
+                                            "@odata.nextLink":  {
+                                                                    "type":  "string",
+                                                                    "description":  "The url to fetch next page data."
+                                                                },
+                                            "value":  {
+                                                          "type":  "array",
+                                                          "description":  "List of Items"
+                                                      }
+                                        }
+                     },
+    "dynamicValuesRef":  {
+                             "entityName":  {
+                                                "operationId":  "GetEntities",
+                                                "titlePath":  "DisplayCollectionName/UserLocalizedLabel/Label",
+                                                "parameters":  {
+
+                                                               },
+                                                "valueCollection":  "value",
+                                                "valuePath":  "EntitySetName"
+                                            }
+                         },
+    "swaggerLearned":  true,
+    "graphConvertible":  true,
+    "graphNodeType":  "connector"
+}

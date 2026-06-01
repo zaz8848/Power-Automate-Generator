@@ -1,0 +1,96 @@
+﻿{
+    "id":  "shared_wordonlinebusiness_CreateFileItem",
+    "connector":  "shared_wordonlinebusiness",
+    "connectorBase":  "shared_wordonlinebusiness",
+    "operationId":  "CreateFileItem",
+    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_wordonlinebusiness",
+    "type":  "OpenApiConnection",
+    "learnedFrom":  [
+                        "3ddf75ff-1597-f011-b41c-000d3ac6a644"
+                    ],
+    "learnedFromName":  [
+                            "PowerApps-Generate RFP Proposal "
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "environment":  [
+                        "orgdf331f66.crm5.dynamics.com"
+                    ],
+    "template":  {
+                     "Populate_a_Microsoft_Word_template":  {
+                                                                "type":  "OpenApiConnection",
+                                                                "inputs":  {
+                                                                               "parameters":  {
+                                                                                                  "source":  "me",
+                                                                                                  "drive":  "b!W5TMYBpW30KlzcNcb-8BfVCtZnaHlQNNmgnShIj4o8MKm36ivRLHQZOufUHGJ2-M",
+                                                                                                  "file":  "01S3C4UYXQOCVKY7BPX5AKIFSWIUQFXS7G",
+                                                                                                  "dynamicFileSchema/-28877990":  "@body(\u0027Select\u0027)"
+                                                                                              },
+                                                                               "host":  {
+                                                                                            "apiId":  "/providers/Microsoft.PowerApps/apis/shared_wordonlinebusiness",
+                                                                                            "operationId":  "CreateFileItem",
+                                                                                            "connectionName":  "shared_wordonlinebusiness"
+                                                                                        }
+                                                                           },
+                                                                "runAfter":  {
+                                                                                 "Select":  [
+                                                                                                "Succeeded"
+                                                                                            ]
+                                                                             },
+                                                                "metadata":  {
+                                                                                 "01S3C4UYXQOCVKY7BPX5AKIFSWIUQFXS7G":  "/RFP Project/RFP proposal Template.docx",
+                                                                                 "operationMetadataId":  "d5a474cb-cfb6-4cfe-a627-7d889ab5b5be"
+                                                                             }
+                                                            }
+                 },
+    "inputSchema":  [
+                        {
+                            "name":  "connectionId",
+                            "in":  "path",
+                            "required":  true,
+                            "x-ms-visibility":  "internal",
+                            "type":  "string"
+                        },
+                        {
+                            "$ref":  "#/parameters/source"
+                        },
+                        {
+                            "$ref":  "#/parameters/queryDrive"
+                        },
+                        {
+                            "$ref":  "#/parameters/file"
+                        },
+                        {
+                            "name":  "dynamicFileSchema",
+                            "in":  "body",
+                            "description":  "Dynamic Schema of items in selected File",
+                            "schema":  {
+                                           "type":  "object",
+                                           "x-ms-dynamic-schema":  {
+                                                                       "operationId":  "GetFileSchema",
+                                                                       "parameters":  {
+                                                                                          "source":  {
+                                                                                                         "parameter":  "source"
+                                                                                                     },
+                                                                                          "drive":  {
+                                                                                                        "parameter":  "drive"
+                                                                                                    },
+                                                                                          "file":  {
+                                                                                                       "parameter":  "file"
+                                                                                                   }
+                                                                                      },
+                                                                       "value-path":  "items"
+                                                                   }
+                                       }
+                        }
+                    ],
+    "swaggerLearned":  true,
+    "outputSchema":  {
+                         "format":  "binary",
+                         "title":  "Microsoft Word document",
+                         "type":  "string",
+                         "x-ms-visibility":  "important"
+                     },
+    "graphConvertible":  true,
+    "graphNodeType":  "connector"
+}

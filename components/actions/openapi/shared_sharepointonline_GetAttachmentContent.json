@@ -1,0 +1,136 @@
+﻿{
+    "id":  "shared_sharepointonline_GetAttachmentContent",
+    "connector":  "shared_sharepointonline",
+    "connectorBase":  "shared_sharepointonline",
+    "operationId":  "GetAttachmentContent",
+    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+    "type":  "OpenApiConnection",
+    "learnedFrom":  [
+                        "3e048272-81f2-01da-5796-5bddbd0332ff",
+                        "33afba72-d005-f111-8407-6045bd5777da"
+                    ],
+    "learnedFromName":  [
+                            "Untitled flow",
+                            "Sharepoint-Modified-ExpenseRequest-ExtractInvoice"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "environment":  [
+                        "{dataverseOrg}"
+                    ],
+    "template":  {
+                     "Get_attachment_content":  {
+                                                    "type":  "OpenApiConnection",
+                                                    "inputs":  {
+                                                                   "parameters":  {
+                                                                                      "dataset":  "https://contoso.sharepoint.com/sites/test",
+                                                                                      "table":  "d62bfda9-eadf-4a77-9b55-3964d5566fc4",
+                                                                                      "itemId":  "@items(\u0027For_each_1\u0027)?[\u0027ID\u0027]",
+                                                                                      "attachmentId":  "@items(\u0027For_each\u0027)?[\u0027Id\u0027]"
+                                                                                  },
+                                                                   "host":  {
+                                                                                "apiId":  "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+                                                                                "operationId":  "GetAttachmentContent",
+                                                                                "connectionName":  "shared_sharepointonline"
+                                                                            }
+                                                               }
+                                                }
+                 },
+    "inputSchema":  [
+                        {
+                            "name":  "connectionId",
+                            "in":  "path",
+                            "required":  true,
+                            "x-ms-visibility":  "internal",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "dataset",
+                            "in":  "path",
+                            "description":  "Example: https://contoso.sharepoint.com/sites/sitename.",
+                            "required":  true,
+                            "x-ms-summary":  "Site Address",
+                            "x-ms-dynamic-values":  {
+                                                        "operationId":  "GetDataSets",
+                                                        "parameters":  {
+
+                                                                       },
+                                                        "value-collection":  "value",
+                                                        "value-path":  "Name",
+                                                        "value-title":  "DisplayName"
+                                                    },
+                            "x-ms-url-encoding":  "double",
+                            "x-ms-ai-sensitivity":  "high",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "table",
+                            "in":  "path",
+                            "description":  "SharePoint list name.",
+                            "required":  true,
+                            "x-ms-summary":  "List Name",
+                            "x-ms-dynamic-values":  {
+                                                        "operationId":  "GetTables",
+                                                        "parameters":  {
+                                                                           "dataset":  {
+                                                                                           "parameter":  "dataset"
+                                                                                       }
+                                                                       },
+                                                        "value-collection":  "value",
+                                                        "value-path":  "Name",
+                                                        "value-title":  "DisplayName"
+                                                    },
+                            "x-ms-url-encoding":  "double",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "itemId",
+                            "in":  "path",
+                            "description":  "Id of the list item the file is attached to.",
+                            "required":  true,
+                            "x-ms-summary":  "Id",
+                            "x-ms-url-encoding":  "double",
+                            "type":  "integer",
+                            "format":  "int64"
+                        },
+                        {
+                            "name":  "attachmentId",
+                            "in":  "path",
+                            "description":  "File identifier for the attachment.",
+                            "required":  true,
+                            "x-ms-summary":  "File Identifier",
+                            "type":  "string"
+                        }
+                    ],
+    "dynamicValuesRef":  {
+                             "table":  {
+                                           "operationId":  "GetTables",
+                                           "titlePath":  "DisplayName",
+                                           "parameters":  {
+                                                              "dataset":  {
+                                                                              "parameter":  "dataset"
+                                                                          }
+                                                          },
+                                           "valueCollection":  "value",
+                                           "valuePath":  "Name"
+                                       },
+                             "dataset":  {
+                                             "operationId":  "GetDataSets",
+                                             "titlePath":  "DisplayName",
+                                             "parameters":  {
+
+                                                            },
+                                             "valueCollection":  "value",
+                                             "valuePath":  "Name"
+                                         }
+                         },
+    "swaggerLearned":  true,
+    "outputSchema":  {
+                         "format":  "binary",
+                         "description":  "The content of the attachment.",
+                         "type":  "string",
+                         "x-ms-summary":  "Attachment Content"
+                     },
+    "graphConvertible":  true,
+    "graphNodeType":  "connector"
+}

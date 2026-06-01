@@ -1,0 +1,25 @@
+# .gitignore for Automate Generator Public
+
+# Internal project docs (contain credentials + internal notes)
+PROJECT_BLUEPRINT.md
+PROJECT_STATUS.md
+
+# Profiles contain secrets - do NOT commit
+profiles/*.json
+!profiles/profile-template.json
+
+# Token cache
+.token-cache.json
+
+# Node modules (if MCP server is added later)
+node_modules/
+mcp-server-demo/
+
+# Temp files
+temp_*.json
+*.pyc
+__pycache__/
+
+# OS files
+.DS_Store
+Thumbs.db

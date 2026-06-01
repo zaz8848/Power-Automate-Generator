@@ -1,0 +1,117 @@
+﻿{
+    "id":  "shared_commondataserviceforapps_1_aibuilderpredict_languagedetection",
+    "connector":  "shared_commondataserviceforapps_1",
+    "connectorBase":  "shared_commondataserviceforapps",
+    "operationId":  "aibuilderpredict_languagedetection",
+    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+    "type":  "OpenApiConnection",
+    "learnedFrom":  [
+                        "5c5a8805-42dd-ed11-a7c7-002248293674"
+                    ],
+    "learnedFromName":  [
+                            "Utility Flow - Call AI Builder GPT"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "environment":  [
+                        "org1cd97ca4.crm.dynamics.com"
+                    ],
+    "template":  {
+                     "Detect_the_language_being_used_in_text":  {
+                                                                    "metadata":  {
+                                                                                     "operationMetadataId":  "fbfbd694-c257-4afe-a4f6-6efee1bef1bc",
+                                                                                     "flowSystemMetadata":  {
+                                                                                                                "portalOperationId":  "aibuilderpredict_languagedetection",
+                                                                                                                "portalOperationGroup":  "aibuilder",
+                                                                                                                "portalOperationApiDisplayNameOverride":  "AI Builder",
+                                                                                                                "portalOperationIconOverride":  "https://content.powerapps.com/resource/makerx/static/pauto/images/designeroperations/aiBuilderNew.51dbdb6b.png",
+                                                                                                                "portalOperationBrandColorOverride":  "#0A76C4",
+                                                                                                                "portalOperationApiTierOverride":  "Standard"
+                                                                                                            }
+                                                                                 },
+                                                                    "type":  "OpenApiConnection",
+                                                                    "inputs":  {
+                                                                                   "parameters":  {
+                                                                                                      "item/requestv2/text":  "@first(chunk(triggerBody()?[\u0027text_1\u0027],5000))",
+                                                                                                      "recordId":  "17a6f893-5b0b-4867-8fac-fb2eda9080b2"
+                                                                                                  },
+                                                                                   "host":  {
+                                                                                                "apiId":  "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                                                                                                "operationId":  "aibuilderpredict_languagedetection",
+                                                                                                "connectionName":  "shared_commondataserviceforapps_1"
+                                                                                            }
+                                                                               }
+                                                                }
+                 },
+    "swaggerLearned":  true,
+    "inputSchema":  [
+                        {
+                            "name":  "connectionId",
+                            "in":  "path",
+                            "required":  true,
+                            "x-ms-visibility":  "internal",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "recordId",
+                            "in":  "path",
+                            "description":  "Choose a model",
+                            "required":  true,
+                            "x-ms-summary":  "Model name",
+                            "type":  "string",
+                            "x-ms-dynamic-values":  {
+                                                        "operationId":  "ListRecords",
+                                                        "parameters":  {
+                                                                           "entityName":  "msdyn_aimodels",
+                                                                           "$filter":  "statecode eq 1"
+                                                                       },
+                                                        "value-collection":  "value",
+                                                        "value-path":  "msdyn_aimodelid",
+                                                        "value-title":  "msdyn_name"
+                                                    }
+                        },
+                        {
+                            "name":  "Prefer",
+                            "in":  "header",
+                            "description":  "The header required to allow Dataverse to process the request async with 202 OK and location headers",
+                            "required":  true,
+                            "x-ms-summary":  "Prefer",
+                            "x-ms-visibility":  "internal",
+                            "type":  "string",
+                            "default":  "respond-async"
+                        },
+                        {
+                            "name":  "item",
+                            "in":  "body",
+                            "description":  "Infer request",
+                            "required":  true,
+                            "schema":  {
+                                           "type":  "object",
+                                           "x-ms-dynamic-properties":  {
+                                                                           "operationId":  "GetPredictionSchema",
+                                                                           "parameters":  {
+                                                                                              "recordId":  {
+                                                                                                               "parameterReference":  "recordId"
+                                                                                                           }
+                                                                                          },
+                                                                           "itemValuePath":  "input"
+                                                                       }
+                                       },
+                            "x-ms-summary":  "Infer Request"
+                        }
+                    ],
+    "outputSchema":  {
+                         "type":  "object",
+                         "x-ms-dynamic-properties":  {
+                                                         "operationId":  "GetPredictionSchema",
+                                                         "parameters":  {
+                                                                            "recordId":  {
+                                                                                             "parameterReference":  "recordId"
+                                                                                         }
+                                                                        },
+                                                         "itemValuePath":  "output"
+                                                     }
+                     },
+    "graphConvertible":  true,
+    "graphNodeType":  "connector"
+}

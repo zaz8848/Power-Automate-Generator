@@ -1,0 +1,115 @@
+﻿{
+    "id":  "Http",
+    "type":  "Http",
+    "learnedFrom":  [
+                        "f7d564de-0705-f111-8407-000d3a316017",
+                        "80ce4dbe-6b7b-c90b-46b0-3ba101d6f234",
+                        "c86f37cf-0558-f111-a825-6045bd5777da",
+                        "3b6ea92d-067f-f011-b4cc-000d3aa1971f",
+                        "ba0ce1dc-dd50-9c7c-faf1-025b5d49917d",
+                        "e43ae9eb-84dc-f011-8544-6045bd205ea8",
+                        "b65e4a38-3adc-217b-220a-7ae1505da6f2",
+                        "3439b768-e1a7-4dab-20ec-a9146c214c81"
+                    ],
+    "learnedFromName":  [
+                            "Sharepoint-Modify-Post Data To Server",
+                            "AgentFlow-Test Http",
+                            "EmailRouting-WebhookDispatch",
+                            "1.Child Flow - Initial Conversation",
+                            "Untitled flow",
+                            "PowerAppsFlow-Test1",
+                            "3.Bot Get Reponse",
+                            "2. Send Message and get Watermark"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "templates":  [
+                      {
+                          "template":  {
+                                           "type":  "Http",
+                                           "inputs":  {
+                                                          "uri":  "http://fpmc.mtcsys.com:8022/api/system/DataInterface/801334716954312645/Actions/Response",
+                                                          "method":  "POST",
+                                                          "headers":  {
+                                                                          "Authorization":  "MicrosoftOrderAI::f8a3bf6c34d94fb5ab77d72bf34936c6",
+                                                                          "YmDate":  "@{formatDateTime(addHours(utcNow(),8),\u0027yyyy-MM-dd\u0027)}",
+                                                                          "UserKey":  "hxmf8b6pk5y2ws5d",
+                                                                          "Content-Type":  "application/json",
+                                                                          "Accept":  "*/*",
+                                                                          "Host":  "fpmc.mtcsys.com:8022",
+                                                                          "Connection":  "keep-alive"
+                                                                      },
+                                                          "body":  "@outputs(\u0027Compose\u0027)"
+                                                      },
+                                           "runAfter":  {
+                                                            "Compose":  [
+                                                                            "Succeeded"
+                                                                        ]
+                                                        },
+                                           "runtimeConfiguration":  {
+                                                                        "contentTransfer":  {
+                                                                                                "transferMode":  "Chunked"
+                                                                                            }
+                                                                    }
+                                       },
+                          "name":  "HTTP"
+                      },
+                      {
+                          "template":  {
+                                           "runAfter":  {
+
+                                                        },
+                                           "type":  "Http",
+                                           "inputs":  {
+                                                          "uri":  "https://copilotstudio.preview.microsoft.com/environments/9ffec6fe-9e60-eaf8-921d-be20e366a19b/flows/new?template=8966f0978a80430098d992ce322095e3\u0026gallery=public",
+                                                          "method":  "POST",
+                                                          "body":  {
+                                                                       "CardId":  "@{triggerBody()?[\u0027text\u0027]}"
+                                                                   }
+                                                      },
+                                           "runtimeConfiguration":  {
+                                                                        "contentTransfer":  {
+                                                                                                "transferMode":  "Chunked"
+                                                                                            }
+                                                                    }
+                                       },
+                          "name":  "HTTP"
+                      },
+                      {
+                          "template":  {
+                                           "type":  "Http",
+                                           "inputs":  {
+                                                          "uri":  "https://httpbin.org/post",
+                                                          "method":  "POST",
+                                                          "headers":  {
+                                                                          "Content-Type":  "application/json"
+                                                                      },
+                                                          "body":  {
+                                                                       "event":  "email_routed",
+                                                                       "subject":  "placeholder - use dynamic content",
+                                                                       "category":  "placeholder",
+                                                                       "priority":  "placeholder",
+                                                                       "confidence":  "placeholder",
+                                                                       "status":  "placeholder",
+                                                                       "sender":  "placeholder",
+                                                                       "mailbox":  "placeholder",
+                                                                       "timestamp":  "placeholder"
+                                                                   }
+                                                      },
+                                           "runAfter":  {
+                                                            "List_rows":  [
+                                                                              "SUCCEEDED"
+                                                                          ]
+                                                        },
+                                           "runtimeConfiguration":  {
+                                                                        "contentTransfer":  {
+                                                                                                "transferMode":  "Chunked"
+                                                                                            }
+                                                                    }
+                                       },
+                          "name":  "HTTP"
+                      }
+                  ],
+    "graphConvertible":  true,
+    "graphNodeType":  "builtinFunction"
+}

@@ -1,0 +1,93 @@
+﻿{
+    "id":  "shared_excelonlinebusiness_AddRowV2",
+    "connector":  "shared_excelonlinebusiness",
+    "connectorBase":  "shared_excelonlinebusiness",
+    "operationId":  "AddRowV2",
+    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_excelonlinebusiness",
+    "type":  "OpenApiConnection",
+    "learnedFrom":  [
+                        "33afba72-d005-f111-8407-6045bd5777da"
+                    ],
+    "learnedFromName":  [
+                            "Sharepoint-Modified-ExpenseRequest-ExtractInvoice"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "environment":  [
+                        "{dataverseOrg}"
+                    ],
+    "template":  {
+                     "Add_a_row_into_a_table":  {
+                                                    "runAfter":  {
+
+                                                                 },
+                                                    "metadata":  {
+                                                                     "01JA3D45WRDSQN37F2RJFKPUDV3FNLVWUI":  "/General/数字普票入账统计表/VPP Reimbursement.xlsx",
+                                                                     "tableId":  "{E762129B-88CD-48FD-ADB6-98F67F593A64}",
+                                                                     "operationMetadataId":  "b92413e3-e897-4dd3-a002-9141ce862435"
+                                                                 },
+                                                    "type":  "OpenApiConnection",
+                                                    "inputs":  {
+                                                                   "parameters":  {
+                                                                                      "source":  "@parameters(\u0027SharepointSite (crdd1_SharepointSite)\u0027)",
+                                                                                      "drive":  "b!kM2fg_r8nkKo_nadWD4WVGiok0QPYUtDow8cDNnlftu6mfYdtqkyTK2L2HqpqMiB",
+                                                                                      "file":  "01JA3D45WRDSQN37F2RJFKPUDV3FNLVWUI",
+                                                                                      "table":  "{E762129B-88CD-48FD-ADB6-98F67F593A64}",
+                                                                                      "item/申请人":  "@triggerBody()?[\u0027Title\u0027]",
+                                                                                      "item/申请时间":  "@\r\nif(empty(triggerBody()?[\u0027ApplicationTime\u0027]),json(\u0027\u0027),formatDateTime(triggerBody()?[\u0027ApplicationTime\u0027],\u0027yyyy-MM-dd\u0027))",
+                                                                                      "item/费用发生时间":  "@item()?[\u0027ExpenseDate\u0027]",
+                                                                                      "item/费用类型":  "@item()?[\u0027Category/Value\u0027]",
+                                                                                      "item/费用金额":  "@items(\u0027For_each_2\u0027)?[\u0027Amount\u0027]",
+                                                                                      "item/审批完成时间":  "@triggerBody()?[\u0027ApprovalCompletionTime\u0027]",
+                                                                                      "item/发票名称(销售方)":  "@item()?[\u0027InvoiceNameSeller\u0027]",
+                                                                                      "item/发票号码":  "@item()?[\u0027InvoiceNumber\u0027]",
+                                                                                      "item/发票金额":  "@item()?[\u0027InvoiceAmount\u0027]",
+                                                                                      "item/发票税额":  "@item()?[\u0027InvoiceTaxAmount\u0027]",
+                                                                                      "item/发票类型（普通发票 or 增值税专用发票 or 铁路电子客票）":  "@item()?[\u0027InvoiceType\u0027]"
+                                                                                  },
+                                                                   "host":  {
+                                                                                "connectionName":  "shared_excelonlinebusiness",
+                                                                                "operationId":  "AddRowV2",
+                                                                                "apiId":  "/providers/Microsoft.PowerApps/apis/shared_excelonlinebusiness"
+                                                                            },
+                                                                   "authentication":  "@parameters(\u0027$authentication\u0027)"
+                                                               }
+                                                }
+                 },
+    "dynamicValuesRef":  {
+                             "dynamicParameters":  "source,drive,file,table",
+                             "note":  "Dynamic: location + drive + file + table"
+                         },
+    "inputSchema":  {
+                        "dateTimeFormat":  {
+                                               "description":  "DateTime Format.",
+                                               "in":  "query",
+                                               "type":  "string",
+                                               "required":  false
+                                           },
+                        "connectionId":  {
+                                             "description":  null,
+                                             "in":  "path",
+                                             "type":  "string",
+                                             "required":  true
+                                         },
+                        "item":  {
+                                     "description":  "Row to add into the specified Excel table.",
+                                     "in":  "body",
+                                     "type":  null,
+                                     "required":  true
+                                 }
+                    },
+    "outputSchema":  {
+                         "$ref":  "Item",
+                         "properties":  {
+                                            "dynamicProperties":  {
+                                                                      "type":  "object",
+                                                                      "description":  null
+                                                                  }
+                                        }
+                     },
+    "swaggerLearned":  true,
+    "graphConvertible":  true,
+    "graphNodeType":  "connector"
+}

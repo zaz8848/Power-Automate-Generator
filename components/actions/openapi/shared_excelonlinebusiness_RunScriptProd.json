@@ -1,0 +1,109 @@
+﻿{
+    "id":  "shared_excelonlinebusiness_RunScriptProd",
+    "connector":  "shared_excelonlinebusiness",
+    "connectorBase":  "shared_excelonlinebusiness",
+    "operationId":  "RunScriptProd",
+    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_excelonlinebusiness",
+    "type":  "OpenApiConnection",
+    "learnedFrom":  [
+                        "ee87fd77-09fa-f011-8407-000d3a316017",
+                        "15a680d4-1e05-f111-8407-6045bd5777da",
+                        "33afba72-d005-f111-8407-6045bd5777da",
+                        "b26ce4cd-3606-f111-8407-6045bd5777da",
+                        "0a035c01-c979-0229-e10f-059dbb7a383f",
+                        "0abb697b-78e1-9b86-9b50-8d8ee1b4908a"
+                    ],
+    "learnedFromName":  [
+                            "Sharepoint-PO Uploaded-Extract Po Item",
+                            "PowerApps-Validate Invoices",
+                            "Sharepoint-Modified-ExpenseRequest-ExtractInvoice",
+                            "Schedule-1Day-Sync Concur Data",
+                            "AgentFlow-Auto Procesing Excel File To Analysis",
+                            "AgentFlow - Assign Sales Task To Store"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "environment":  [
+                        "{dataverseOrg}",
+                        "org1cd97ca4.crm.dynamics.com"
+                    ],
+    "template":  {
+                     "Run_script":  {
+                                        "type":  "OpenApiConnection",
+                                        "inputs":  {
+                                                       "parameters":  {
+                                                                          "source":  "@parameters(\u0027SharepointSite (crdd1_SharepointSite)\u0027)",
+                                                                          "drive":  "@outputs(\u0027Get_file_properties\u0027)?[\u0027body/{DriveId}\u0027]",
+                                                                          "file":  "@outputs(\u0027Get_file_properties\u0027)?[\u0027body/{DriveItemId}\u0027]",
+                                                                          "scriptId":  "ms-officescript%3A%2F%2Fonedrive_business_itemlink%2F01S3C4UYSS65BKDLSIF5F23ACJNNIRBZ6A"
+                                                                      },
+                                                       "host":  {
+                                                                    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_excelonlinebusiness",
+                                                                    "operationId":  "RunScriptProd",
+                                                                    "connectionName":  "shared_excelonlinebusiness"
+                                                                }
+                                                   },
+                                        "metadata":  {
+                                                         "operationMetadataId":  "f577d4ea-404a-430b-8a32-9a60b0ee255b",
+                                                         "tableId":  null
+                                                     }
+                                    }
+                 },
+    "inputSchema":  {
+                        "scriptId":  {
+                                         "description":  "Select the Office Script you want to run from the drop-down.",
+                                         "in":  "query",
+                                         "type":  "string",
+                                         "required":  true
+                                     },
+                        "connectionId":  {
+                                             "description":  null,
+                                             "in":  "path",
+                                             "type":  "string",
+                                             "required":  true
+                                         },
+                        "file":  {
+                                     "description":  "Select an Excel file through File Browse.",
+                                     "in":  "path",
+                                     "type":  "string",
+                                     "required":  true
+                                 },
+                        "ScriptParameters":  {
+                                                 "description":  "Provide the Office Script\u0027s parameters.",
+                                                 "in":  "body",
+                                                 "type":  null,
+                                                 "required":  true
+                                             }
+                    },
+    "outputSchema":  {
+                         "$ref":  "ScriptReturnValues",
+                         "properties":  {
+
+                                        }
+                     },
+    "dynamicValuesRef":  {
+                             "scriptId":  {
+                                              "operationId":  "GetScripts",
+                                              "titlePath":  "name",
+                                              "valuePath":  "id"
+                                          },
+                             "file":  {
+                                          "operationId":  null,
+                                          "parameters":  {
+                                                             "drive":  {
+                                                                           "parameter":  "drive"
+                                                                       },
+                                                             "isFolder":  false,
+                                                             "fileFilter":  [
+                                                                                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                                                                                "application/vnd.ms-excel.sheet.macroEnabled.12",
+                                                                                "application/vnd.ms-excel.sheet.binary.macroEnabled.12"
+                                                                            ]
+                                                         },
+                                          "valuePath":  "id"
+                                      }
+                         },
+    "swaggerLearned":  true,
+    "graphConvertible":  true,
+    "graphNodeType":  "connector"
+}

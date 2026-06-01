@@ -1,0 +1,51 @@
+﻿{
+    "id":  "Recurrence_",
+    "type":  "Recurrence",
+    "kind":  "none",
+    "learnedFrom":  [
+                        "b26ce4cd-3606-f111-8407-6045bd5777da",
+                        "7fee9680-1058-f111-a825-6045bd5777da",
+                        "fb46af82-2507-ed11-82e4-000d3a98ae3f",
+                        "117db4e1-7dbf-ef11-a72e-0022481efed6",
+                        "5ef0982e-ab7a-ec11-8d21-0022482a65f0",
+                        "4ffa33c2-c12e-ed11-9db1-0022482aea7b",
+                        "1a0cb2d6-fc3d-f011-877a-6045bd05e54b",
+                        "34fad402-8609-f011-bae2-6045bd07d12b",
+                        "19525a87-35b4-f011-bbd3-6045bd0a953b",
+                        "6b11f28d-a07c-ef11-a671-7c1e520158f7",
+                        "197368f9-da8b-ef11-ac21-7c1e520cbfa3"
+                    ],
+    "learnedFromName":  [
+                            "Schedule-1Day-Sync Concur Data",
+                            "EmailRouting-AlertDetection",
+                            "Auto close expired conversations",
+                            "Conversation KPI | Generate Conversation KPIs Scheduler",
+                            "Sales Insights sequence daily usage flow",
+                            "Integrated Search API trigger flow",
+                            "AI Evaluation Flow for Conversation",
+                            "Expire evaluations",
+                            "Agent Inventory | Agents Data Load Scheduler",
+                            "Conversation KPI | Copy Agent Transcripts Scheduler",
+                            "Sharepoint Synchronization | Scheduler"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "template":  {
+                     "Recurrence":  {
+                                        "recurrence":  {
+                                                           "frequency":  "Day",
+                                                           "interval":  1,
+                                                           "startTime":  "2026-02-10T02:00:00.000Z"
+                                                       },
+                                        "evaluatedRecurrence":  {
+                                                                    "frequency":  "Day",
+                                                                    "interval":  1,
+                                                                    "startTime":  "2026-02-10T02:00:00.000Z"
+                                                                },
+                                        "metadata":  {
+                                                         "operationMetadataId":  "a1a4ce7c-7bf0-4e94-8e06-7c284b37d94a"
+                                                     },
+                                        "type":  "Recurrence"
+                                    }
+                 }
+}

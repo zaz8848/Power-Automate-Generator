@@ -1,0 +1,99 @@
+﻿{
+    "id":  "shared_onedriveforbusiness_GetFileThumbnail",
+    "connector":  "shared_onedriveforbusiness",
+    "connectorBase":  "shared_onedriveforbusiness",
+    "operationId":  "GetFileThumbnail",
+    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_onedriveforbusiness",
+    "type":  "OpenApiConnection",
+    "learnedFrom":  [
+                        "d6881287-da41-f111-bec6-6045bd5777da"
+                    ],
+    "learnedFromName":  [
+                            "Button -\u003e Get file thumbnail,Recognize text in image or document"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "environment":  [
+                        "{dataverseOrg}"
+                    ],
+    "template":  {
+                     "Get_file_thumbnail":  {
+                                                "runAfter":  {
+
+                                                             },
+                                                "metadata":  {
+                                                                 "b!W5TMYBpW30KlzcNcb-8BfVCtZnaHlQNNmgnShIj4o8MKm36ivRLHQZOufUHGJ2-M.01S3C4UYU32UYTUGCKZVA2YQKDJG4TKPBP":  "/Temp Files/0648A_╣·─┌Mindray A9麻醉剂服务手册zh-CN.pdf",
+                                                                 "operationMetadataId":  "fbe08128-2456-457b-b314-c9d06e650707"
+                                                             },
+                                                "type":  "OpenApiConnection",
+                                                "inputs":  {
+                                                               "host":  {
+                                                                            "connectionName":  "shared_onedriveforbusiness",
+                                                                            "operationId":  "GetFileThumbnail",
+                                                                            "apiId":  "/providers/Microsoft.PowerApps/apis/shared_onedriveforbusiness"
+                                                                        },
+                                                               "parameters":  {
+                                                                                  "id":  "b!W5TMYBpW30KlzcNcb-8BfVCtZnaHlQNNmgnShIj4o8MKm36ivRLHQZOufUHGJ2-M.01S3C4UYU32UYTUGCKZVA2YQKDJG4TKPBP",
+                                                                                  "size":  "Medium"
+                                                                              },
+                                                               "authentication":  {
+                                                                                      "type":  "Raw",
+                                                                                      "value":  "@json(decodeBase64(triggerOutputs().headers[\u0027X-MS-APIM-Tokens\u0027]))[\u0027$ConnectionKey\u0027]"
+                                                                                  }
+                                                           }
+                                            }
+                 },
+    "inputSchema":  {
+                        "connectionId":  {
+                                             "description":  null,
+                                             "in":  "path",
+                                             "type":  "string",
+                                             "required":  true
+                                         },
+                        "id":  {
+                                   "description":  "The unique identifier of the file.",
+                                   "in":  "path",
+                                   "type":  "string",
+                                   "required":  true
+                               },
+                        "size":  {
+                                     "description":  "The size of the thumbnail to retrieve.",
+                                     "in":  "query",
+                                     "type":  "string",
+                                     "required":  true
+                                 }
+                    },
+    "outputSchema":  {
+                         "$ref":  "Thumbnail",
+                         "properties":  {
+                                            "Url":  {
+                                                        "type":  "string",
+                                                        "description":  "A URL that points to the thumbnail."
+                                                    },
+                                            "Width":  {
+                                                          "type":  "integer",
+                                                          "description":  "The thumbnail width in pixels."
+                                                      },
+                                            "Height":  {
+                                                           "type":  "integer",
+                                                           "description":  "The thumbnail height in pixels."
+                                                       }
+                                        }
+                     },
+    "dynamicValuesRef":  {
+                             "id":  {
+                                        "operationId":  null,
+                                        "parameters":  {
+                                                           "isFolder":  false,
+                                                           "dataset":  null,
+                                                           "fileFilter":  [
+
+                                                                          ]
+                                                       },
+                                        "valuePath":  "Id"
+                                    }
+                         },
+    "swaggerLearned":  true,
+    "graphConvertible":  true,
+    "graphNodeType":  "connector"
+}

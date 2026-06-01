@@ -1,0 +1,447 @@
+﻿{
+    "id":  "Until",
+    "type":  "Until",
+    "learnedFrom":  [
+                        "8719e711-6e50-e911-a974-000d3af292f2",
+                        "fe662b82-0dff-ef11-bae2-00224802c180",
+                        "09a76655-9fbf-ef11-a72e-0022481efed6",
+                        "facc4beb-c9b5-48f7-b709-0b41f6518b22",
+                        "cde64862-0804-453b-b9f4-0ec8ff12d30f",
+                        "34fad402-8609-f011-bae2-6045bd07d12b",
+                        "b65e4a38-3adc-217b-220a-7ae1505da6f2",
+                        "445c9bd8-f21a-49c4-ab13-8f2076a72ad1",
+                        "99b0bd7d-2d4e-4bfa-9120-b9a2cd81a35d",
+                        "333b0082-b97e-4b10-89b2-bdececd4ac34",
+                        "a9373689-25bf-4677-b557-ff4736df8e21"
+                    ],
+    "learnedFromName":  [
+                            "Field Service - Flow - Generate Agreement Booking Dates",
+                            "Test Automation | Run Multiturn Tests (Child)",
+                            "Conversation KPI | Copy Transcripts (Grandchild)",
+                            "Field Service - Flow - Generate Order Invoicing Setup Dates",
+                            "Field Service - Flow - Generate Agreement Invoice Dates",
+                            "Expire evaluations",
+                            "3.Bot Get Reponse",
+                            "Field Service - Flow - Generate Invoice For Order Invoicing Date",
+                            "Field Service - Flow - Generate Invoice for Agreement Invoice Date",
+                            "Field Service - Flow - Generate Order Invoicing Dates",
+                            "Field Service - Flow - Generate Work Order for Agreement Booking Date"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "templates":  [
+                      {
+                          "template":  {
+                                           "actions":  {
+                                                           "Set_InputParameter_as_OutputParameter_of_Action":  {
+                                                                                                                   "runAfter":  {
+                                                                                                                                    "Call_Field_Service_-_System_Action":  [
+                                                                                                                                                                               "Succeeded"
+                                                                                                                                                                           ]
+                                                                                                                                },
+                                                                                                                   "type":  "SetVariable",
+                                                                                                                   "inputs":  {
+                                                                                                                                  "name":  "InputParameter",
+                                                                                                                                  "value":  "@outputs(\u0027Call_Field_Service_-_System_Action\u0027)?[\u0027body/OutputParameter\u0027]"
+                                                                                                                              }
+                                                                                                               },
+                                                           "Call_Field_Service_-_System_Action":  {
+                                                                                                      "runAfter":  {
+
+                                                                                                                   },
+                                                                                                      "type":  "OpenApiConnection",
+                                                                                                      "inputs":  {
+                                                                                                                     "host":  {
+                                                                                                                                  "apiId":  "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                                                                                                                                  "connectionName":  "shared_commondataserviceforapps",
+                                                                                                                                  "operationId":  "PerformUnboundAction"
+                                                                                                                              },
+                                                                                                                     "parameters":  {
+                                                                                                                                        "actionName":  "msdyn_FieldServiceSystemAction",
+                                                                                                                                        "item/Type":  460,
+                                                                                                                                        "item/InputParameter":  "@variables(\u0027InputParameter\u0027)"
+                                                                                                                                    },
+                                                                                                                     "authentication":  "@parameters(\u0027$authentication\u0027)"
+                                                                                                                 }
+                                                                                                  },
+                                                           "Set_Result_to_false":  {
+                                                                                       "runAfter":  {
+                                                                                                        "Set_InputParameter_to_exit":  [
+                                                                                                                                           "Succeeded"
+                                                                                                                                       ]
+                                                                                                    },
+                                                                                       "type":  "SetVariable",
+                                                                                       "inputs":  {
+                                                                                                      "name":  "Result",
+                                                                                                      "value":  "@false"
+                                                                                                  }
+                                                                                   },
+                                                           "Set_InputParameter_to_exit":  {
+                                                                                              "runAfter":  {
+                                                                                                               "Call_Field_Service_-_System_Action":  [
+                                                                                                                                                          "Failed",
+                                                                                                                                                          "Skipped",
+                                                                                                                                                          "TimedOut"
+                                                                                                                                                      ]
+                                                                                                           },
+                                                                                              "type":  "SetVariable",
+                                                                                              "inputs":  {
+                                                                                                             "name":  "InputParameter",
+                                                                                                             "value":  "exit"
+                                                                                                         }
+                                                                                          }
+                                                       },
+                                           "runAfter":  {
+                                                            "Initialize_Result_as_true":  [
+                                                                                              "Succeeded"
+                                                                                          ]
+                                                        },
+                                           "expression":  "@equals(variables(\u0027InputParameter\u0027), \u0027exit\u0027)",
+                                           "limit":  {
+                                                         "count":  10,
+                                                         "timeout":  "PT20M"
+                                                     },
+                                           "type":  "Until"
+                                       },
+                          "name":  "Call_Field_Service_-_System_Action_until_output_parameter_is_exit"
+                      },
+                      {
+                          "template":  {
+                                           "type":  "Until",
+                                           "expression":  "@if(equals(items(\u0027Apply_to_each:_Child_Test\u0027)?[\u0027cat_isstartconversationeventsent\u0027], true), greater(length(body(\u0027Filter_array:_Messages_from_Bot_for_child_test\u0027)), 1), greater(length(body(\u0027Filter_array:_Messages_from_Bot_for_child_test\u0027)), 0))",
+                                           "limit":  {
+                                                         "count":  25,
+                                                         "timeout":  "PT3M"
+                                                     },
+                                           "actions":  {
+                                                           "Delay_before_fetching_responses_for_child_test":  {
+                                                                                                                  "type":  "Wait",
+                                                                                                                  "inputs":  {
+                                                                                                                                 "interval":  {
+                                                                                                                                                  "count":  "@if(equals(items(\u0027Apply_to_each:_Child_Test\u0027)?[\u0027cat_secondsbeforegettinganswer\u0027], null),\n\tif( equals(items(\u0027Apply_to_each:_Child_Test\u0027)?[\u0027cat_testtypecode\u0027], 4),\n\t\t10,\n\t\t5\n\t),\n\titems(\u0027Apply_to_each:_Child_Test\u0027)?[\u0027cat_secondsbeforegettinganswer\u0027]\n)",
+                                                                                                                                                  "unit":  "Second"
+                                                                                                                                              }
+                                                                                                                             },
+                                                                                                                  "metadata":  {
+                                                                                                                                   "operationMetadataId":  "4c00dfa0-1ae9-4896-a472-0546a41ffdc8"
+                                                                                                                               }
+                                                                                                              },
+                                                           "Get_Activities_for_child_test":  {
+                                                                                                 "type":  "OpenApiConnection",
+                                                                                                 "inputs":  {
+                                                                                                                "parameters":  {
+                                                                                                                                   "actionName":  "cat_GetResponse",
+                                                                                                                                   "item/cat_ConverationId":  "@triggerBody()[\u0027text_4\u0027]",
+                                                                                                                                   "item/cat_BotFrameworkUri":  "@triggerBody()[\u0027text_6\u0027]",
+                                                                                                                                   "item/cat_Token":  "@triggerBody()[\u0027text_3\u0027]"
+                                                                                                                               },
+                                                                                                                "host":  {
+                                                                                                                             "apiId":  "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                                                                                                                             "operationId":  "PerformUnboundAction",
+                                                                                                                             "connectionName":  "shared_commondataserviceforapps_1"
+                                                                                                                         }
+                                                                                                            },
+                                                                                                 "runAfter":  {
+                                                                                                                  "Delay_before_fetching_responses_for_child_test":  [
+                                                                                                                                                                         "Succeeded"
+                                                                                                                                                                     ]
+                                                                                                              },
+                                                                                                 "metadata":  {
+                                                                                                                  "operationMetadataId":  "72c0569d-987b-4416-a1da-36ace14c56f5"
+                                                                                                              }
+                                                                                             },
+                                                           "Parse_Activities_Response_for_child_test":  {
+                                                                                                            "type":  "ParseJson",
+                                                                                                            "inputs":  {
+                                                                                                                           "content":  "@outputs(\u0027Get_Activities_for_child_test\u0027)?[\u0027body/cat_Response\u0027]",
+                                                                                                                           "schema":  {
+                                                                                                                                          "type":  "object",
+                                                                                                                                          "properties":  {
+                                                                                                                                                             "activities":  {
+                                                                                                                                                                                "type":  "array",
+                                                                                                                                                                                "items":  {
+                                                                                                                                                                                              "type":  "object",
+                                                                                                                                                                                              "properties":  {
+                                                                                                                                                                                                                 "type":  {
+                                                                                                                                                                                                                              "type":  "string"
+                                                                                                                                                                                                                          },
+                                                                                                                                                                                                                 "from":  {
+                                                                                                                                                                                                                              "type":  "object",
+                                                                                                                                                                                                                              "properties":  {
+                                                                                                                                                                                                                                                 "role":  {
+                                                                                                                                                                                                                                                              "type":  "string"
+                                                                                                                                                                                                                                                          },
+                                                                                                                                                                                                                                                 "id":  {
+                                                                                                                                                                                                                                                            "type":  "string"
+                                                                                                                                                                                                                                                        }
+                                                                                                                                                                                                                                             }
+                                                                                                                                                                                                                          },
+                                                                                                                                                                                                                 "text":  {
+                                                                                                                                                                                                                              "type":  "string"
+                                                                                                                                                                                                                          },
+                                                                                                                                                                                                                 "timestamp":  {
+                                                                                                                                                                                                                                   "type":  "string"
+                                                                                                                                                                                                                               },
+                                                                                                                                                                                                                 "attachments":  {
+                                                                                                                                                                                                                                     "type":  "array",
+                                                                                                                                                                                                                                     "items":  {
+                                                                                                                                                                                                                                                   "type":  "object",
+                                                                                                                                                                                                                                                   "properties":  {
+                                                                                                                                                                                                                                                                      "contentType":  {
+                                                                                                                                                                                                                                                                                          "type":  "string"
+                                                                                                                                                                                                                                                                                      },
+                                                                                                                                                                                                                                                                      "content":  {
+                                                                                                                                                                                                                                                                                      "oneOf":  [
+                                                                                                                                                                                                                                                                                                    {
+                                                                                                                                                                                                                                                                                                        "type":  "object"
+                                                                                                                                                                                                                                                                                                    },
+                                                                                                                                                                                                                                                                                                    {
+                                                                                                                                                                                                                                                                                                        "type":  "array",
+                                                                                                                                                                                                                                                                                                        "items":  {
+                                                                                                                                                                                                                                                                                                                      "type":  "object",
+                                                                                                                                                                                                                                                                                                                      "properties":  "@{type=; id=; timestamp=; serviceUrl=; channelId=; from=; conversation=; recipient=; membersAdded=; membersRemoved=; reactionsAdded=; reactionsRemoved=; text=; attachments=; entities=; replyToId=; value=; name=; listenFor=; textHighlights=}"
+                                                                                                                                                                                                                                                                                                                  }
+                                                                                                                                                                                                                                                                                                    }
+                                                                                                                                                                                                                                                                                                ]
+                                                                                                                                                                                                                                                                                  }
+                                                                                                                                                                                                                                                                  }
+                                                                                                                                                                                                                                               }
+                                                                                                                                                                                                                                 },
+                                                                                                                                                                                                                 "suggestedActions":  {
+                                                                                                                                                                                                                                          "type":  "object",
+                                                                                                                                                                                                                                          "properties":  {
+                                                                                                                                                                                                                                                             "to":  {
+                                                                                                                                                                                                                                                                        "type":  "array",
+                                                                                                                                                                                                                                                                        "items":  {
+                                                                                                                                                                                                                                                                                      "type":  "string"
+                                                                                                                                                                                                                                                                                  }
+                                                                                                                                                                                                                                                                    },
+                                                                                                                                                                                                                                                             "actions":  {
+                                                                                                                                                                                                                                                                             "type":  "array",
+                                                                                                                                                                                                                                                                             "items":  {
+                                                                                                                                                                                                                                                                                           "type":  "object",
+                                                                                                                                                                                                                                                                                           "properties":  {
+                                                                                                                                                                                                                                                                                                              "type":  {
+                                                                                                                                                                                                                                                                                                                           "type":  "string"
+                                                                                                                                                                                                                                                                                                                       },
+                                                                                                                                                                                                                                                                                                              "title":  {
+                                                                                                                                                                                                                                                                                                                            "type":  "string"
+                                                                                                                                                                                                                                                                                                                        },
+                                                                                                                                                                                                                                                                                                              "text":  {
+                                                                                                                                                                                                                                                                                                                           "type":  "string"
+                                                                                                                                                                                                                                                                                                                       },
+                                                                                                                                                                                                                                                                                                              "value":  {
+                                                                                                                                                                                                                                                                                                                            "type":  "string"
+                                                                                                                                                                                                                                                                                                                        }
+                                                                                                                                                                                                                                                                                                          }
+                                                                                                                                                                                                                                                                                       }
+                                                                                                                                                                                                                                                                         }
+                                                                                                                                                                                                                                                         }
+                                                                                                                                                                                                                                      }
+                                                                                                                                                                                                             }
+                                                                                                                                                                                          }
+                                                                                                                                                                            }
+                                                                                                                                                         }
+                                                                                                                                      }
+                                                                                                                       },
+                                                                                                            "runAfter":  {
+                                                                                                                             "Get_Activities_for_child_test":  [
+                                                                                                                                                                   "Succeeded"
+                                                                                                                                                               ]
+                                                                                                                         },
+                                                                                                            "metadata":  {
+                                                                                                                             "operationMetadataId":  "488c476d-25f0-40c4-af46-e09b56f26102"
+                                                                                                                         }
+                                                                                                        },
+                                                           "Filter_array:_Activities_of_type_Message_for_child_test":  {
+                                                                                                                           "type":  "Query",
+                                                                                                                           "inputs":  {
+                                                                                                                                          "from":  "@body(\u0027Parse_Activities_Response_for_child_test\u0027)?[\u0027activities\u0027]",
+                                                                                                                                          "where":  "@equals(item()?[\u0027type\u0027], \u0027message\u0027)"
+                                                                                                                                      },
+                                                                                                                           "runAfter":  {
+                                                                                                                                            "Parse_Activities_Response_for_child_test":  [
+                                                                                                                                                                                             "Succeeded"
+                                                                                                                                                                                         ]
+                                                                                                                                        },
+                                                                                                                           "metadata":  {
+                                                                                                                                            "operationMetadataId":  "83d3803e-42d9-4d1b-8963-78732c59190a"
+                                                                                                                                        }
+                                                                                                                       },
+                                                           "Filter_array:_Messages_from_Bot_for_child_test":  {
+                                                                                                                  "type":  "Query",
+                                                                                                                  "inputs":  {
+                                                                                                                                 "from":  "@body(\u0027Filter_array:_Activities_of_type_Message_for_child_test\u0027)",
+                                                                                                                                 "where":  "@and(\r\n    equals(item()?[\u0027from\u0027]?[\u0027role\u0027], \u0027bot\u0027),\r\n    greaterOrEquals(item()?[\u0027timestamp\u0027], outputs(\u0027Compose:_CurrentTimestamp\u0027)),\r\n    empty(first(item()?[\u0027attachments\u0027])?[\u0027content\u0027]?[\u0027tokenExchangeResource\u0027]?[\u0027id\u0027]),\r\n    or(\r\n        equals(first(item()?[\u0027attachments\u0027])?[\u0027contentType\u0027], \u0027application/vnd.microsoft.card.adaptive\u0027),\r\n        and(\r\n            not(empty(item()?[\u0027text\u0027])), \r\n            not(\r\n                or(\r\n                    contains(toLower(item()?[\u0027text\u0027]), \u0027need you to sign in\u0027),\r\n                    contains(toLower(item()?[\u0027text\u0027]), \u0027please sign in\u0027),\r\n                    contains(toLower(item()?[\u0027text\u0027]), \u0027sign in to continue\u0027),\r\n                    contains(toLower(item()?[\u0027text\u0027]), \u0027log in to access\u0027),\r\n                    contains(toLower(item()?[\u0027text\u0027]), \u0027sign-in required\u0027),\r\n                    contains(toLower(item()?[\u0027text\u0027]), \u0027click here to log in\u0027)\r\n                )\r\n            )\r\n        )\r\n    )\r\n)"
+                                                                                                                             },
+                                                                                                                  "runAfter":  {
+                                                                                                                                   "Filter_array:_Activities_of_type_Message_for_child_test":  [
+                                                                                                                                                                                                   "Succeeded"
+                                                                                                                                                                                               ]
+                                                                                                                               },
+                                                                                                                  "metadata":  {
+                                                                                                                                   "operationMetadataId":  "2e772575-37e2-42f7-ba6d-e3e5c92a5136"
+                                                                                                                               }
+                                                                                                              }
+                                                       },
+                                           "runAfter":  {
+                                                            "Send_Test_Utterance_for_child_test":  [
+                                                                                                       "Succeeded"
+                                                                                                   ]
+                                                        },
+                                           "metadata":  {
+                                                            "operationMetadataId":  "5a6cbf30-8aba-4d78-8839-f23760e40e57"
+                                                        }
+                                       },
+                          "name":  "Do_until_bot_responds_or_till_timeout_for_child_test"
+                      },
+                      {
+                          "template":  {
+                                           "type":  "Until",
+                                           "expression":  "@equals(variables(\u0027MoreRecords\u0027), false)",
+                                           "limit":  {
+                                                         "count":  335,
+                                                         "timeout":  "PT24H"
+                                                     },
+                                           "actions":  {
+                                                           "List_rows_from_selected_environment:_Conversation_Transcripts":  {
+                                                                                                                                 "type":  "OpenApiConnection",
+                                                                                                                                 "inputs":  {
+                                                                                                                                                "parameters":  {
+                                                                                                                                                                   "organization":  "@triggerBody()[\u0027text_5\u0027]",
+                                                                                                                                                                   "entityName":  "conversationtranscripts",
+                                                                                                                                                                   "fetchXml":  "\u003cfetch version=\"1.0\" output-format=\"xml-platform\" mapping=\"logical\" distinct=\"false\" count=\"300\" page=\"@{variables(\u0027PageNumber\u0027)}\" paging-cookie=\"@{variables(\u0027PagingCookie\u0027)}\"\u003e\n  \u003centity name=\"conversationtranscript\"\u003e\n    \u003cattribute name=\"name\" /\u003e\n    \u003cattribute name=\"content\" /\u003e\n    \u003cattribute name=\"conversationstarttime\" /\u003e\n    \u003cattribute name=\"bot_conversationtranscriptid\" /\u003e\n    \u003cfilter type=\"and\"\u003e\n      \u003ccondition attribute=\"bot_conversationtranscriptid\" operator=\"eq\" value=\"{@{triggerBody()[\u0027text\u0027]}}\" /\u003e\n     \u003ccondition attribute=\"statecode\" operator=\"eq\" value=\"0\" /\u003e\n@{triggerBody()[\u0027text_2\u0027]}\n    \u003c/filter\u003e\n  \u003c/entity\u003e\n\u003c/fetch\u003e"
+                                                                                                                                                               },
+                                                                                                                                                "host":  {
+                                                                                                                                                             "apiId":  "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                                                                                                                                                             "operationId":  "ListRecordsWithOrganization",
+                                                                                                                                                             "connectionName":  "shared_commondataserviceforapps_1"
+                                                                                                                                                         }
+                                                                                                                                            },
+                                                                                                                                 "metadata":  {
+                                                                                                                                                  "operationMetadataId":  "d7967cd0-0d23-4a98-a1f3-c6e52d87dbc9"
+                                                                                                                                              }
+                                                                                                                             },
+                                                           "Select:_Conversation_Transcripts":  {
+                                                                                                    "type":  "Select",
+                                                                                                    "inputs":  {
+                                                                                                                   "from":  "@outputs(\u0027List_rows_from_selected_environment:_Conversation_Transcripts\u0027)?[\u0027body/value\u0027]",
+                                                                                                                   "select":  {
+                                                                                                                                  "ConversationId":  "@split(item()?[\u0027name\u0027], \u0027_\u0027)[0]",
+                                                                                                                                  "Content":  "@item()?[\u0027content\u0027]",
+                                                                                                                                  "ConversationStartTime":  "@item()?[\u0027conversationstarttime\u0027]",
+                                                                                                                                  "AgentId":  "@triggerBody()[\u0027text\u0027]",
+                                                                                                                                  "AgentConfigurationId":  "@triggerBody()[\u0027text_1\u0027]",
+                                                                                                                                  "ConversationTranscriptId":  "@item()?[\u0027conversationtranscriptid\u0027]",
+                                                                                                                                  "TrackedVariables":  "@triggerBody()[\u0027text_3\u0027]",
+                                                                                                                                  "Name":  "@item()?[\u0027name\u0027]",
+                                                                                                                                  "CopyFullTranscript":  "@triggerBody()?[\u0027boolean\u0027]"
+                                                                                                                              }
+                                                                                                               },
+                                                                                                    "runAfter":  {
+                                                                                                                     "List_rows_from_selected_environment:_Conversation_Transcripts":  [
+                                                                                                                                                                                           "Succeeded"
+                                                                                                                                                                                       ]
+                                                                                                                 },
+                                                                                                    "metadata":  {
+                                                                                                                     "operationMetadataId":  "db6fdcbe-7f97-43ff-b0ad-7287961703e1"
+                                                                                                                 }
+                                                                                                },
+                                                           "Set_variable:_MoreRecords":  {
+                                                                                             "type":  "SetVariable",
+                                                                                             "inputs":  {
+                                                                                                            "name":  "MoreRecords",
+                                                                                                            "value":  "@if(\r\n\tempty(\r\n\t\tstring( body(\u0027List_rows_from_selected_environment:_Conversation_Transcripts\u0027)?[\u0027@Microsoft.Dynamics.CRM.morerecords\u0027] )\r\n\t), false, \r\n\tbody(\u0027List_rows_from_selected_environment:_Conversation_Transcripts\u0027)?[\u0027@Microsoft.Dynamics.CRM.morerecords\u0027]\r\n)"
+                                                                                                        },
+                                                                                             "runAfter":  {
+                                                                                                              "Condition:_Check_if_Agent_has_transcripts":  [
+                                                                                                                                                                "Succeeded"
+                                                                                                                                                            ]
+                                                                                                          },
+                                                                                             "metadata":  {
+                                                                                                              "operationMetadataId":  "a5e824f2-b099-41f8-a157-114260c844a1"
+                                                                                                          }
+                                                                                         },
+                                                           "Set_variable:_PagingCookie":  {
+                                                                                              "type":  "SetVariable",
+                                                                                              "inputs":  {
+                                                                                                             "name":  "PagingCookie",
+                                                                                                             "value":  "@{if(\r\n    empty(\r\n        body(\u0027List_rows_from_selected_environment:_Conversation_Transcripts\u0027)?[\u0027@Microsoft.Dynamics.CRM.fetchxmlpagingcookie\u0027]\r\n    ),\r\n    \u0027\u0027,\r\n    replace(\r\n        replace(\r\n            replace(\r\n                decodeUriComponent(\r\n                    decodeUriComponent(\r\n                        first(\r\n                            split(\r\n                                last(\r\n                                    split(\r\n                                        body(\u0027List_rows_from_selected_environment:_Conversation_Transcripts\u0027)?[\u0027@Microsoft.Dynamics.CRM.fetchxmlpagingcookie\u0027],\r\n                                        \u0027pagingcookie=\"\u0027\r\n                                    )\r\n                                ),\r\n                                \u0027\" \u0027\r\n                            )\r\n                        )\r\n                    )\r\n                ),\r\n                \u0027\u003c\u0027, \u0027\u0026lt;\u0027\r\n            ),\r\n            \u0027\u003e\u0027, \u0027\u0026gt;\u0027\r\n        ),\r\n        \u0027\"\u0027, \u0027\u0026quot;\u0027\r\n    )\r\n)\r\n}"
+                                                                                                         },
+                                                                                              "runAfter":  {
+                                                                                                               "Increment_variable:_PageNumber":  [
+                                                                                                                                                      "Succeeded"
+                                                                                                                                                  ]
+                                                                                                           },
+                                                                                              "metadata":  {
+                                                                                                               "operationMetadataId":  "159fb35c-726f-4f7d-af70-9f5cb73505b3"
+                                                                                                           }
+                                                                                          },
+                                                           "Increment_variable:_PageNumber":  {
+                                                                                                  "type":  "IncrementVariable",
+                                                                                                  "inputs":  {
+                                                                                                                 "name":  "PageNumber",
+                                                                                                                 "value":  1
+                                                                                                             },
+                                                                                                  "runAfter":  {
+                                                                                                                   "Set_variable:_MoreRecords":  [
+                                                                                                                                                     "Succeeded"
+                                                                                                                                                 ]
+                                                                                                               },
+                                                                                                  "metadata":  {
+                                                                                                                   "operationMetadataId":  "0b984473-6a37-4104-bd4a-7ac3a137c37c"
+                                                                                                               }
+                                                                                              },
+                                                           "Condition:_Check_if_Agent_has_transcripts":  {
+                                                                                                             "type":  "If",
+                                                                                                             "expression":  {
+                                                                                                                                "greater":  [
+                                                                                                                                                "@length(body(\u0027Select:_Conversation_Transcripts\u0027))",
+                                                                                                                                                0
+                                                                                                                                            ]
+                                                                                                                            },
+                                                                                                             "actions":  {
+                                                                                                                             "Perform_an_unbound_action:_Generate_Agent_Transcripts":  {
+                                                                                                                                                                                           "type":  "OpenApiConnection",
+                                                                                                                                                                                           "inputs":  {
+                                                                                                                                                                                                          "parameters":  {
+                                                                                                                                                                                                                             "actionName":  "cat_GenerateAgentTranscripts",
+                                                                                                                                                                                                                             "item/cat_ErrorLogId":  "@triggerBody()[\u0027text_4\u0027]",
+                                                                                                                                                                                                                             "item/cat_ConversationTranscriptsList":  "@body(\u0027Select:_Conversation_Transcripts\u0027)"
+                                                                                                                                                                                                                         },
+                                                                                                                                                                                                          "host":  {
+                                                                                                                                                                                                                       "apiId":  "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                                                                                                                                                                                                                       "operationId":  "PerformUnboundAction",
+                                                                                                                                                                                                                       "connectionName":  "shared_commondataserviceforapps_1"
+                                                                                                                                                                                                                   }
+                                                                                                                                                                                                      },
+                                                                                                                                                                                           "metadata":  {
+                                                                                                                                                                                                            "operationMetadataId":  "c08d60af-472f-4e5e-ae3a-69349c0767b3"
+                                                                                                                                                                                                        }
+                                                                                                                                                                                       }
+                                                                                                                         },
+                                                                                                             "else":  {
+                                                                                                                          "actions":  {
+
+                                                                                                                                      }
+                                                                                                                      },
+                                                                                                             "runAfter":  {
+                                                                                                                              "Select:_Conversation_Transcripts":  [
+                                                                                                                                                                       "Succeeded"
+                                                                                                                                                                   ]
+                                                                                                                          },
+                                                                                                             "metadata":  {
+                                                                                                                              "operationMetadataId":  "270f2ed4-2f25-42ca-bab9-1214d0814731"
+                                                                                                                          }
+                                                                                                         }
+                                                       },
+                                           "metadata":  {
+                                                            "operationMetadataId":  "aa618155-6f03-4d6c-8178-90b8b4c43fa4"
+                                                        }
+                                       },
+                          "name":  "Do_until"
+                      }
+                  ],
+    "graphConvertible":  true,
+    "graphNodeType":  "loop"
+}

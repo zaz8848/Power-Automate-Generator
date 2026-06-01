@@ -1,0 +1,38 @@
+{
+    "_comment": "Example output from scan-environment skill. Replace with your own tenant data.",
+    "tenant": {
+        "tenantId": "00000000-0000-0000-0000-000000000000",
+        "domain": "contoso.onmicrosoft.com",
+        "displayName": "Contoso"
+    },
+    "generatedAt": "2026-06-01T00:00:00Z",
+    "totalEnvironments": 2,
+    "environments": [
+        {
+            "id": "00000000-0000-0000-0000-000000000001",
+            "displayName": "Production",
+            "sku": "Production",
+            "region": "westus",
+            "createdTime": "2026-01-01T00:00:00Z",
+            "linkedEnvironmentMetadata": {
+                "instanceUrl": "https://org12345.crm.dynamics.com/",
+                "uniqueName": "unq12345",
+                "domainName": "org12345",
+                "version": "9.2.26053.126"
+            }
+        },
+        {
+            "id": "00000000-0000-0000-0000-000000000002",
+            "displayName": "Development",
+            "sku": "Sandbox",
+            "region": "westus",
+            "createdTime": "2026-01-15T00:00:00Z",
+            "linkedEnvironmentMetadata": {
+                "instanceUrl": "https://org67890.crm.dynamics.com/",
+                "uniqueName": "unq67890",
+                "domainName": "org67890",
+                "version": "9.2.26053.126"
+            }
+        }
+    ]
+}

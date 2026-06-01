@@ -1,0 +1,59 @@
+﻿{
+    "id":  "shared_conversionservice_HtmlToText",
+    "connector":  "shared_conversionservice",
+    "connectorBase":  "shared_conversionservice",
+    "operationId":  "HtmlToText",
+    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_conversionservice",
+    "type":  "OpenApiConnection",
+    "learnedFrom":  [
+                        "ee87fd77-09fa-f011-8407-000d3a316017",
+                        "f1e81397-e146-f111-bec7-6045bd5777da"
+                    ],
+    "learnedFromName":  [
+                            "Sharepoint-PO Uploaded-Extract Po Item",
+                            "AgentFlow-EmailRounting"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "environment":  [
+                        "{dataverseOrg}"
+                    ],
+    "template":  {
+                     "Html_to_text_1":  {
+                                            "type":  "OpenApiConnection",
+                                            "inputs":  {
+                                                           "parameters":  {
+                                                                              "Content":  "\u003cp class=\"editor-paragraph\"\u003e@{body(\u0027Get_file_content\u0027)}\u003c/p\u003e"
+                                                                          },
+                                                           "host":  {
+                                                                        "apiId":  "/providers/Microsoft.PowerApps/apis/shared_conversionservice",
+                                                                        "operationId":  "HtmlToText",
+                                                                        "connectionName":  "shared_conversionservice"
+                                                                    }
+                                                       }
+                                        }
+                 },
+    "inputSchema":  {
+                        "connectionId":  {
+                                             "description":  null,
+                                             "in":  "path",
+                                             "type":  "string",
+                                             "required":  true
+                                         },
+                        "Content":  {
+                                        "description":  "The HTML document to be converted to plain text.",
+                                        "in":  "body",
+                                        "type":  null,
+                                        "required":  true
+                                    }
+                    },
+    "outputSchema":  {
+                         "$ref":  "HtmlToTextResponse",
+                         "properties":  {
+
+                                        }
+                     },
+    "swaggerLearned":  true,
+    "graphConvertible":  true,
+    "graphNodeType":  "connector"
+}

@@ -1,0 +1,77 @@
+﻿{
+    "id":  "shared_sharepointonline-1_GetAllTables",
+    "connector":  "shared_sharepointonline-1",
+    "connectorBase":  "shared_sharepointonline",
+    "operationId":  "GetAllTables",
+    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+    "type":  "OpenApiConnection",
+    "learnedFrom":  [
+                        "0e2464d1-b350-f011-877a-002248095f4f"
+                    ],
+    "learnedFromName":  [
+                            "Sharepoint Synchronization | Validate Connection On Demand"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "environment":  [
+                        "orgdf331f66.crm5.dynamics.com"
+                    ],
+    "template":  {
+                     "Get_all_lists_and_libraries":  {
+                                                         "type":  "OpenApiConnection",
+                                                         "inputs":  {
+                                                                        "parameters":  {
+                                                                                           "dataset":  "@outputs(\u0027Get_a_row_by_ID\u0027)?[\u0027body/cat_siteaddress\u0027]"
+                                                                                       },
+                                                                        "host":  {
+                                                                                     "apiId":  "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+                                                                                     "operationId":  "GetAllTables",
+                                                                                     "connectionName":  "shared_sharepointonline-1"
+                                                                                 },
+                                                                        "retryPolicy":  {
+                                                                                            "type":  "none"
+                                                                                        }
+                                                                    },
+                                                         "metadata":  {
+                                                                          "operationMetadataId":  "3cf3a7f1-f8f2-4dbb-b9f6-3cbcbde4e787"
+                                                                      }
+                                                     }
+                 },
+    "inputSchema":  {
+                        "connectionId":  {
+                                             "description":  null,
+                                             "in":  "path",
+                                             "type":  "string",
+                                             "required":  true
+                                         },
+                        "dataset":  {
+                                        "description":  "Example: https://contoso.sharepoint.com/sites/sitename.",
+                                        "in":  "path",
+                                        "type":  "string",
+                                        "required":  true
+                                    }
+                    },
+    "outputSchema":  {
+                         "$ref":  "TablesList",
+                         "properties":  {
+                                            "value":  {
+                                                          "type":  "array",
+                                                          "description":  "List of Tables"
+                                                      }
+                                        }
+                     },
+    "dynamicValuesRef":  {
+                             "dataset":  {
+                                             "operationId":  "GetDataSets",
+                                             "titlePath":  "DisplayName",
+                                             "parameters":  {
+
+                                                            },
+                                             "valueCollection":  "value",
+                                             "valuePath":  "Name"
+                                         }
+                         },
+    "swaggerLearned":  true,
+    "graphConvertible":  true,
+    "graphNodeType":  "connector"
+}

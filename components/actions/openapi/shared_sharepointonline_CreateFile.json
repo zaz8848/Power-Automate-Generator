@@ -1,0 +1,161 @@
+﻿{
+    "id":  "shared_sharepointonline_CreateFile",
+    "connector":  "shared_sharepointonline",
+    "connectorBase":  "shared_sharepointonline",
+    "operationId":  "CreateFile",
+    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+    "type":  "OpenApiConnection",
+    "learnedFrom":  [
+                        "3ddf75ff-1597-f011-b41c-000d3ac6a644"
+                    ],
+    "learnedFromName":  [
+                            "PowerApps-Generate RFP Proposal "
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "environment":  [
+                        "orgdf331f66.crm5.dynamics.com"
+                    ],
+    "template":  {
+                     "Create_file_1":  {
+                                           "type":  "OpenApiConnection",
+                                           "inputs":  {
+                                                          "parameters":  {
+                                                                             "dataset":  "https://contoso.sharepoint.com/sites/TestKnowledgeHubSite",
+                                                                             "folderPath":  "/Shared Documents",
+                                                                             "name":  "@{ticks(utcNow())}.docx",
+                                                                             "body":  "@body(\u0027Populate_a_Microsoft_Word_template\u0027)"
+                                                                         },
+                                                          "host":  {
+                                                                       "apiId":  "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+                                                                       "operationId":  "CreateFile",
+                                                                       "connectionName":  "shared_sharepointonline"
+                                                                   }
+                                                      },
+                                           "runAfter":  {
+                                                            "Populate_a_Microsoft_Word_template":  [
+                                                                                                       "Succeeded"
+                                                                                                   ]
+                                                        },
+                                           "runtimeConfiguration":  {
+                                                                        "contentTransfer":  {
+                                                                                                "transferMode":  "Chunked"
+                                                                                            }
+                                                                    }
+                                       }
+                 },
+    "inputSchema":  {
+                        "dataset":  {
+                                        "description":  "Example: https://contoso.sharepoint.com/sites/sitename.",
+                                        "in":  "path",
+                                        "type":  "string",
+                                        "required":  true
+                                    },
+                        "connectionId":  {
+                                             "description":  null,
+                                             "in":  "path",
+                                             "type":  "string",
+                                             "required":  true
+                                         },
+                        "queryParametersSingleEncoded":  {
+                                                             "description":  null,
+                                                             "in":  "query",
+                                                             "type":  "boolean",
+                                                             "required":  false
+                                                         },
+                        "name":  {
+                                     "description":  "Name of the file.",
+                                     "in":  "query",
+                                     "type":  "string",
+                                     "required":  true
+                                 },
+                        "body":  {
+                                     "description":  "Content of the file.",
+                                     "in":  "body",
+                                     "type":  null,
+                                     "required":  true
+                                 },
+                        "folderPath":  {
+                                           "description":  "Must start with an existing library. Add folders if needed.",
+                                           "in":  "query",
+                                           "type":  "string",
+                                           "required":  true
+                                       }
+                    },
+    "outputSchema":  {
+                         "$ref":  "SPBlobMetadataResponse",
+                         "properties":  {
+                                            "FileLocator":  {
+                                                                "type":  "string",
+                                                                "description":  "The filelocator of the file or folder."
+                                                            },
+                                            "ItemId":  {
+                                                           "type":  "integer",
+                                                           "description":  "The value that can be used to Get or Update file properties in libraries."
+                                                       },
+                                            "Id":  {
+                                                       "type":  "string",
+                                                       "description":  "The unique id of the file or folder."
+                                                   },
+                                            "Size":  {
+                                                         "type":  "integer",
+                                                         "description":  "The size of the file or folder."
+                                                     },
+                                            "LastModified":  {
+                                                                 "type":  "string",
+                                                                 "description":  "The date and time the file or folder was last modified."
+                                                             },
+                                            "MediaType":  {
+                                                              "type":  "string",
+                                                              "description":  "The media type of the file or folder."
+                                                          },
+                                            "ETag":  {
+                                                         "type":  "string",
+                                                         "description":  "The etag of the file or folder."
+                                                     },
+                                            "Name":  {
+                                                         "type":  "string",
+                                                         "description":  "The name of the file or folder."
+                                                     },
+                                            "IsFolder":  {
+                                                             "type":  "boolean",
+                                                             "description":  "A boolean value (true, false) to indicate whether or not the blob is a folder."
+                                                         },
+                                            "Path":  {
+                                                         "type":  "string",
+                                                         "description":  "The path of the file or folder."
+                                                     },
+                                            "DisplayName":  {
+                                                                "type":  "string",
+                                                                "description":  "The display name of the file or folder."
+                                                            }
+                                        }
+                     },
+    "dynamicValuesRef":  {
+                             "folderPath":  {
+                                                "operationId":  null,
+                                                "parameters":  {
+                                                                   "isFolder":  true,
+                                                                   "dataset":  {
+                                                                                   "parameter":  "dataset"
+                                                                               },
+                                                                   "fileFilter":  [
+
+                                                                                  ]
+                                                               },
+                                                "valuePath":  "Path"
+                                            },
+                             "dataset":  {
+                                             "operationId":  "GetDataSets",
+                                             "titlePath":  "DisplayName",
+                                             "parameters":  {
+
+                                                            },
+                                             "valueCollection":  "value",
+                                             "valuePath":  "Name"
+                                         }
+                         },
+    "swaggerLearned":  true,
+    "graphConvertible":  true,
+    "graphNodeType":  "connector"
+}

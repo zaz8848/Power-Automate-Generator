@@ -1,0 +1,87 @@
+﻿{
+    "id":  "shared_microsofttranslatorv-1_StartDocumentTranslation",
+    "connector":  "shared_microsofttranslatorv-1",
+    "connectorBase":  "shared_microsofttranslatorv",
+    "operationId":  "StartDocumentTranslation",
+    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_microsofttranslatorv",
+    "type":  "OpenApiConnection",
+    "learnedFrom":  [
+                        "b99118ab-dd62-f011-bec3-6045bd00625f"
+                    ],
+    "learnedFromName":  [
+                            "Automatic Flow - Start Document Translation When Translation Log Status Changes to Waiting for Proc"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "environment":  [
+                        "org1cd97ca4.crm.dynamics.com"
+                    ],
+    "template":  {
+                     "Start_document_translation":  {
+                                                        "type":  "OpenApiConnection",
+                                                        "inputs":  {
+                                                                       "parameters":  {
+                                                                                          "Input/storageType":  "File",
+                                                                                          "Input/sourceURL":  "@{variables(\u0027blobStorageEndPoint\u0027)}@{outputs(\u0027Upload_document_to_Blob_storage\u0027)?[\u0027body/Path\u0027]}",
+                                                                                          "Input/targetContainerURL":  "@{variables(\u0027blobStorageEndPoint\u0027)}/translation",
+                                                                                          "Input/targetLanguage":  "@outputs(\u0027Run_a_prompt\u0027)?[\u0027body/responsev2/predictionOutput/text\u0027]",
+                                                                                          "Input/sourceLanguage":  "Auto-detect",
+                                                                                          "Input/glossaryUrl":  "@outputs(\u0027Get_glossary\u0027)?[\u0027body/biz_externalglossaryurl\u0027]",
+                                                                                          "Input/glossaryFormatVersion":  "CSV"
+                                                                                      },
+                                                                       "host":  {
+                                                                                    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_microsofttranslatorv",
+                                                                                    "operationId":  "StartDocumentTranslation",
+                                                                                    "connectionName":  "shared_microsofttranslatorv-1"
+                                                                                }
+                                                                   },
+                                                        "runAfter":  {
+                                                                         "Delete_the_possible_duplicated_translated_document":  [
+                                                                                                                                    "Succeeded",
+                                                                                                                                    "Failed"
+                                                                                                                                ]
+                                                                     },
+                                                        "metadata":  {
+                                                                         "operationMetadataId":  "4900e240-ebfb-43bc-b706-c8ec87ec9132"
+                                                                     }
+                                                    }
+                 },
+    "inputSchema":  [
+                        {
+                            "name":  "connectionId",
+                            "in":  "path",
+                            "required":  true,
+                            "x-ms-visibility":  "internal",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "Content-Type",
+                            "description":  "Content type like application/json.",
+                            "default":  "application/json",
+                            "in":  "header",
+                            "required":  true,
+                            "type":  "string",
+                            "x-ms-visibility":  "internal"
+                        },
+                        {
+                            "name":  "Input",
+                            "in":  "body",
+                            "required":  true,
+                            "schema":  {
+                                           "$ref":  "#/definitions/DocumentTranslationRequest"
+                                       }
+                        }
+                    ],
+    "swaggerLearned":  true,
+    "outputSchema":  {
+                         "type":  "object",
+                         "properties":  {
+                                            "operationID":  {
+                                                                "description":  "Operation ID.",
+                                                                "type":  "string"
+                                                            }
+                                        }
+                     },
+    "graphConvertible":  true,
+    "graphNodeType":  "connector"
+}

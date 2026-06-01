@@ -1,0 +1,199 @@
+﻿{
+    "id":  "shared_office365_GetEmailsV3",
+    "connector":  "shared_office365",
+    "connectorBase":  "shared_office365",
+    "operationId":  "GetEmailsV3",
+    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_office365",
+    "type":  "OpenApiConnection",
+    "learnedFrom":  [
+                        "9e5b20be-e75e-d408-0bfb-1e42ad9ef5da"
+                    ],
+    "learnedFromName":  [
+                            "Untitled flow"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "environment":  [
+                        "orgdf331f66.crm5.dynamics.com"
+                    ],
+    "template":  {
+                     "Get_emails_(V3)":  {
+                                             "type":  "OpenApiConnection",
+                                             "inputs":  {
+                                                            "parameters":  {
+                                                                               "importance":  "Any",
+                                                                               "fetchOnlyWithAttachment":  false,
+                                                                               "folderPath":  "Inbox",
+                                                                               "fetchOnlyUnread":  true,
+                                                                               "includeAttachments":  false,
+                                                                               "searchQuery":  "尊敬的普洛斯投标团队：\n",
+                                                                               "top":  10
+                                                                           },
+                                                            "host":  {
+                                                                         "apiId":  "/providers/Microsoft.PowerApps/apis/shared_office365",
+                                                                         "operationId":  "GetEmailsV3",
+                                                                         "connectionName":  "shared_office365"
+                                                                     }
+                                                        },
+                                             "runAfter":  {
+
+                                                          }
+                                         }
+                 },
+    "inputSchema":  {
+                        "to":  {
+                                   "description":  "Recipient email addresses separated by semicolons (If any match, the trigger will run).",
+                                   "in":  "query",
+                                   "type":  "string",
+                                   "required":  false
+                               },
+                        "importance":  {
+                                           "description":  "Importance of the email (Any, High, Normal, Low).",
+                                           "in":  "query",
+                                           "type":  "string",
+                                           "required":  false
+                                       },
+                        "fetchOnlyFlagged":  {
+                                                 "description":  "Retrieve only flagged emails?.",
+                                                 "in":  "query",
+                                                 "type":  "boolean",
+                                                 "required":  false
+                                             },
+                        "fetchOnlyUnread":  {
+                                                "description":  "Retrieve only unread emails?.",
+                                                "in":  "query",
+                                                "type":  "boolean",
+                                                "required":  false
+                                            },
+                        "cc":  {
+                                   "description":  "CC recipient email addresses separated by semicolons (If any match, the trigger will run).",
+                                   "in":  "query",
+                                   "type":  "string",
+                                   "required":  false
+                               },
+                        "connectionId":  {
+                                             "description":  null,
+                                             "in":  "path",
+                                             "type":  "string",
+                                             "required":  true
+                                         },
+                        "searchQuery":  {
+                                            "description":  "Search query to filter emails. How to use \u0027$search\u0027 parameter please refer to: https://docs.microsoft.com/graph/query-parameters#search-parameter.",
+                                            "in":  "query",
+                                            "type":  "string",
+                                            "required":  false
+                                        },
+                        "includeAttachments":  {
+                                                   "description":  "If set to true, attachments content will also be retrieved along with the email.",
+                                                   "in":  "query",
+                                                   "type":  "boolean",
+                                                   "required":  false
+                                               },
+                        "mailboxAddress":  {
+                                               "description":  "Address of the shared mailbox to retrieve mails from.",
+                                               "in":  "query",
+                                               "type":  "string",
+                                               "required":  false
+                                           },
+                        "top":  {
+                                    "description":  "Number of emails to retrieve (default: 10, max: 1000).",
+                                    "in":  "query",
+                                    "type":  "integer",
+                                    "required":  false
+                                },
+                        "folderPath":  {
+                                           "description":  "Mail folder to retrieve emails from (default: \u0027Inbox\u0027).",
+                                           "in":  "query",
+                                           "type":  "string",
+                                           "required":  false
+                                       },
+                        "subjectFilter":  {
+                                              "description":  "String to look for in the subject line.",
+                                              "in":  "query",
+                                              "type":  "string",
+                                              "required":  false
+                                          },
+                        "from":  {
+                                     "description":  "Sender email addresses separated by semicolons (If any match, the trigger will run).",
+                                     "in":  "query",
+                                     "type":  "string",
+                                     "required":  false
+                                 },
+                        "fetchOnlyWithAttachment":  {
+                                                        "description":  "If set to true, only emails with an attachment will be retrieved. Emails without any attachments will be skipped. If set to false, all emails will be retrieved.",
+                                                        "in":  "query",
+                                                        "type":  "boolean",
+                                                        "required":  false
+                                                    },
+                        "toOrCc":  {
+                                       "description":  "To or CC recipient email addresses separated by semicolons (If any match, the trigger will run).",
+                                       "in":  "query",
+                                       "type":  "string",
+                                       "required":  false
+                                   }
+                    },
+    "outputSchema":  {
+                         "$ref":  "BatchResponse[GraphClientReceiveMessage]",
+                         "properties":  {
+                                            "value":  {
+                                                          "type":  "array",
+                                                          "description":  "A list of the response objects"
+                                                      }
+                                        }
+                     },
+    "dynamicValuesRef":  {
+                             "mailboxAddress":  {
+                                                    "operationId":  null,
+                                                    "parameters":  {
+
+                                                                   },
+                                                    "valuePath":  "mail"
+                                                },
+                             "toOrCc":  {
+                                            "operationId":  null,
+                                            "parameters":  {
+
+                                                           },
+                                            "valuePath":  "mail"
+                                        },
+                             "to":  {
+                                        "operationId":  null,
+                                        "parameters":  {
+
+                                                       },
+                                        "valuePath":  "mail"
+                                    },
+                             "from":  {
+                                          "operationId":  null,
+                                          "parameters":  {
+
+                                                         },
+                                          "valuePath":  "mail"
+                                      },
+                             "folderPath":  {
+                                                "operationId":  null,
+                                                "parameters":  {
+                                                                   "operation":  "MailFolders",
+                                                                   "isFolder":  true,
+                                                                   "dataset":  null,
+                                                                   "fileFilter":  [
+
+                                                                                  ],
+                                                                   "mailboxAddress":  {
+                                                                                          "parameter":  "mailboxAddress"
+                                                                                      }
+                                                               },
+                                                "valuePath":  "Id"
+                                            },
+                             "cc":  {
+                                        "operationId":  null,
+                                        "parameters":  {
+
+                                                       },
+                                        "valuePath":  "mail"
+                                    }
+                         },
+    "swaggerLearned":  true,
+    "graphConvertible":  true,
+    "graphNodeType":  "connector"
+}

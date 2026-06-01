@@ -1,0 +1,63 @@
+﻿{
+    "id":  "shared_testapi-5fdee4da8cd15b1326-5f0d555b53ebbad68c_Hello",
+    "connector":  "shared_testapi-5fdee4da8cd15b1326-5f0d555b53ebbad68c",
+    "connectorBase":  "shared_testapi-5fdee4da8cd15b1326-5f0d555b53ebbad68c",
+    "operationId":  "Hello",
+    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_testapi-5fdee4da8cd15b1326-5f0d555b53ebbad68c",
+    "type":  "OpenApiConnection",
+    "learnedFrom":  [
+                        "503bafc6-0de3-6f4c-3e1a-53cc5eb736d6",
+                        "10aad571-01aa-8ee6-2916-59b3bdd61793"
+                    ],
+    "learnedFromName":  [
+                            "Untitled flow",
+                            "Untitled"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "environment":  [
+                        "{dataverseOrg}"
+                    ],
+    "template":  {
+                     "Hello":  {
+                                   "type":  "OpenApiConnection",
+                                   "inputs":  {
+                                                  "host":  {
+                                                               "apiId":  "/providers/Microsoft.PowerApps/apis/shared_testapi-5fdee4da8cd15b1326-5f0d555b53ebbad68c",
+                                                               "operationId":  "Hello",
+                                                               "connectionName":  "shared_testapi-5fdee4da8cd15b1326-5f0d555b53ebbad68c"
+                                                           }
+                                              },
+                                   "runAfter":  {
+
+                                                }
+                               }
+                 },
+    "inputSchema":  {
+                        "connectionId":  {
+                                             "description":  null,
+                                             "in":  "path",
+                                             "type":  "string",
+                                             "required":  true
+                                         }
+                    },
+    "outputSchema":  {
+                         "properties":  {
+                                            "ok":  {
+                                                       "type":  "boolean",
+                                                       "description":  null
+                                                   },
+                                            "path":  {
+                                                         "type":  "string",
+                                                         "description":  null
+                                                     },
+                                            "message":  {
+                                                            "type":  "string",
+                                                            "description":  null
+                                                        }
+                                        }
+                     },
+    "swaggerLearned":  true,
+    "graphConvertible":  true,
+    "graphNodeType":  "connector"
+}

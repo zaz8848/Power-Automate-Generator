@@ -1,0 +1,34 @@
+﻿{
+    "id":  "Join",
+    "type":  "Join",
+    "learnedFrom":  [
+                        "42853375-172c-f011-8c4e-002248095f4f"
+                    ],
+    "learnedFromName":  [
+                            "Test Automation | Multi Topic Transcripts Enrichment (Child)"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "templates":  [
+                      {
+                          "template":  {
+                                           "runAfter":  {
+                                                            "Select:_Trim_extra_spaces":  [
+                                                                                              "Succeeded"
+                                                                                          ]
+                                                        },
+                                           "metadata":  {
+                                                            "operationMetadataId":  "a7442837-2acb-40a4-a659-d71f3a49755d"
+                                                        },
+                                           "type":  "Join",
+                                           "inputs":  {
+                                                          "from":  "@body(\u0027Select:_Trim_extra_spaces\u0027)",
+                                                          "joinWith":  "\u0027 or name eq \u0027"
+                                                      }
+                                       },
+                          "name":  "Join:_Create_OData_Expression"
+                      }
+                  ],
+    "graphConvertible":  true,
+    "graphNodeType":  "builtinFunction"
+}

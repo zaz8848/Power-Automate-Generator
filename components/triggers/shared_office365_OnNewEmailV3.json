@@ -1,0 +1,42 @@
+﻿{
+    "id":  "shared_office365_OnNewEmailV3",
+    "connector":  "shared_office365",
+    "operationId":  "OnNewEmailV3",
+    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_office365",
+    "type":  "OpenApiConnectionNotification",
+    "kind":  null,
+    "learnedFrom":  [
+                        "f1e81397-e146-f111-bec7-6045bd5777da",
+                        "932d6c81-6c67-f011-bec3-000d3aa1971f",
+                        "620b16f5-f5be-f011-bbd3-6045bd205ea8"
+                    ],
+    "learnedFromName":  [
+                            "AgentFlow-EmailRounting",
+                            "When a new email arrives (V3)",
+                            "当收到客服公共邮箱电邮时"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "environment":  [
+                        "{dataverseOrg}",
+                        "orgdf331f66.crm5.dynamics.com"
+                    ],
+    "template":  {
+                     "When_a_new_email_arrives_(V3)":  {
+                                                           "type":  "OpenApiConnectionNotification",
+                                                           "inputs":  {
+                                                                          "parameters":  {
+                                                                                             "folderPath":  "Inbox"
+                                                                                         },
+                                                                          "host":  {
+                                                                                       "apiId":  "/providers/Microsoft.PowerApps/apis/shared_office365",
+                                                                                       "operationId":  "OnNewEmailV3",
+                                                                                       "connectionName":  "shared_office365"
+                                                                                   }
+                                                                      },
+                                                           "metadata":  {
+                                                                            "operationMetadataId":  "7fd8d387-b2a2-4837-af5b-e74b37e587fd"
+                                                                        }
+                                                       }
+                 }
+}

@@ -1,0 +1,148 @@
+﻿{
+    "id":  "shared_onedriveforbusiness_CreateFile",
+    "connector":  "shared_onedriveforbusiness",
+    "connectorBase":  "shared_onedriveforbusiness",
+    "operationId":  "CreateFile",
+    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_onedriveforbusiness",
+    "type":  "OpenApiConnection",
+    "learnedFrom":  [
+                        "ee87fd77-09fa-f011-8407-000d3a316017",
+                        "702c1ebc-fdf8-f011-8406-0022480a3b0e",
+                        "0a035c01-c979-0229-e10f-059dbb7a383f",
+                        "38aa543f-f20d-1475-ebb9-44311524b24a",
+                        "9d505454-5d1d-f111-88b1-7ced8d3c7b0f"
+                    ],
+    "learnedFromName":  [
+                            "Sharepoint-PO Uploaded-Extract Po Item",
+                            "Utility Flow - Convert Document to PDF through OneDrive",
+                            "AgentFlow-Auto Procesing Excel File To Analysis",
+                            "Schedule-1 week-PPT Generator",
+                            "Agent Flow - Forecast Sales"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "environment":  [
+                        "{dataverseOrg}",
+                        "org1cd97ca4.crm.dynamics.com"
+                    ],
+    "template":  {
+                     "Create_file":  {
+                                         "type":  "OpenApiConnection",
+                                         "inputs":  {
+                                                        "parameters":  {
+                                                                           "folderPath":  "/",
+                                                                           "name":  "@{ticks(utcNow())}.html",
+                                                                           "body":  "@body(\u0027Get_file_content\u0027)"
+                                                                       },
+                                                        "host":  {
+                                                                     "apiId":  "/providers/Microsoft.PowerApps/apis/shared_onedriveforbusiness",
+                                                                     "operationId":  "CreateFile",
+                                                                     "connectionName":  "shared_onedriveforbusiness"
+                                                                 }
+                                                    },
+                                         "runtimeConfiguration":  {
+                                                                      "contentTransfer":  {
+                                                                                              "transferMode":  "Chunked"
+                                                                                          }
+                                                                  },
+                                         "metadata":  {
+                                                          "operationMetadataId":  "b02c05ee-540e-4bf5-a101-c8828c8787af"
+                                                      }
+                                     }
+                 },
+    "inputSchema":  {
+                        "name":  {
+                                     "description":  "The name of the file. Certain characters are disallowed by OneDrive and will be replaced by underscores.",
+                                     "in":  "query",
+                                     "type":  "string",
+                                     "required":  true
+                                 },
+                        "body":  {
+                                     "description":  "The content of the file.",
+                                     "in":  "body",
+                                     "type":  null,
+                                     "required":  true
+                                 },
+                        "folderPath":  {
+                                           "description":  "The unique path of the folder.",
+                                           "in":  "query",
+                                           "type":  "string",
+                                           "required":  true
+                                       },
+                        "connectionId":  {
+                                             "description":  null,
+                                             "in":  "path",
+                                             "type":  "string",
+                                             "required":  true
+                                         }
+                    },
+    "outputSchema":  {
+                         "$ref":  "BlobMetadata",
+                         "properties":  {
+                                            "FileLocator":  {
+                                                                "type":  "string",
+                                                                "description":  "The file locator of the file or folder."
+                                                            },
+                                            "Id":  {
+                                                       "type":  "string",
+                                                       "description":  "The unique identifier of the file or folder."
+                                                   },
+                                            "NameNoExt":  {
+                                                              "type":  "string",
+                                                              "description":  "The name of the file or folder, without the file extension."
+                                                          },
+                                            "Size":  {
+                                                         "type":  "integer",
+                                                         "description":  "The file or folder size in bytes."
+                                                     },
+                                            "LastModified":  {
+                                                                 "type":  "string",
+                                                                 "description":  "The date and time the file or folder was last modified."
+                                                             },
+                                            "MediaType":  {
+                                                              "type":  "string",
+                                                              "description":  "The media type of the file or folder."
+                                                          },
+                                            "LastModifiedBy":  {
+                                                                   "type":  "string",
+                                                                   "description":  "The user who last modified the file or folder."
+                                                               },
+                                            "ETag":  {
+                                                         "type":  "string",
+                                                         "description":  "The etag of the file or folder."
+                                                     },
+                                            "Name":  {
+                                                         "type":  "string",
+                                                         "description":  "The name of the file or folder."
+                                                     },
+                                            "IsFolder":  {
+                                                             "type":  "boolean",
+                                                             "description":  "A boolean value (true, false) to indicate whether or not the blob is a folder."
+                                                         },
+                                            "Path":  {
+                                                         "type":  "string",
+                                                         "description":  "The path of the file or folder."
+                                                     },
+                                            "DisplayName":  {
+                                                                "type":  "string",
+                                                                "description":  "The display name of the file or folder."
+                                                            }
+                                        }
+                     },
+    "dynamicValuesRef":  {
+                             "folderPath":  {
+                                                "operationId":  null,
+                                                "parameters":  {
+                                                                   "isFolder":  true,
+                                                                   "dataset":  null,
+                                                                   "fileFilter":  [
+
+                                                                                  ]
+                                                               },
+                                                "valuePath":  "Path"
+                                            }
+                         },
+    "swaggerLearned":  true,
+    "graphConvertible":  true,
+    "graphNodeType":  "connector"
+}

@@ -1,0 +1,102 @@
+﻿{
+    "id":  "Request_Button",
+    "type":  "Request",
+    "kind":  "Button",
+    "learnedFrom":  [
+                        "503bafc6-0de3-6f4c-3e1a-53cc5eb736d6",
+                        "3e048272-81f2-01da-5796-5bddbd0332ff",
+                        "d6881287-da41-f111-bec6-6045bd5777da",
+                        "e9b4168c-f73b-d611-8b80-a76e16c3c130",
+                        "d1b9f638-6896-4cc0-4be7-b18c0623feaa",
+                        "e9e12dad-278d-95b2-26b8-e88389c4b23d",
+                        "edb4f03c-eda4-d3c0-2858-4f8d9f9a2421",
+                        "cf1db88c-b576-f011-b4cc-000d3a080cec",
+                        "a0921697-c07c-f011-b4cc-000d3a099cdf",
+                        "e3e46b57-f936-f011-8c4d-000d3aa1971f",
+                        "3b6ea92d-067f-f011-b4cc-000d3aa1971f",
+                        "6c089c39-f681-f011-b4cc-000d3aa3d219",
+                        "e3f17f06-9373-f011-b4cc-00224802c180",
+                        "fe662b82-0dff-ef11-bae2-00224802c180",
+                        "6c595a51-ad0c-f011-9988-0022480427dd",
+                        "ae08d194-1903-f011-bae2-0022480427dd",
+                        "c7db6d55-e004-f011-bae2-0022480427dd",
+                        "85064fc0-7a4b-f011-877a-002248095f4f",
+                        "42853375-172c-f011-8c4e-002248095f4f",
+                        "b6182655-6eac-f011-bbd3-00224809eacc",
+                        "290d043b-9fbf-ef11-a72e-0022481efed6",
+                        "09a76655-9fbf-ef11-a72e-0022481efed6",
+                        "ba0ce1dc-dd50-9c7c-faf1-025b5d49917d",
+                        "daca827a-dc66-d78e-207d-073f046832c7",
+                        "c4d4422f-d08a-c579-ceb2-1169b9467b14",
+                        "eee7ab95-bbcd-aea3-60f2-1531a81278f7",
+                        "aed4e501-b9b9-10e6-f430-161cb23447b8",
+                        "9e5b20be-e75e-d408-0bfb-1e42ad9ef5da",
+                        "3f2be75e-a103-6cb5-e222-4610920bbf93",
+                        "0572346a-edd2-1b8f-b7a3-611a6d63356e",
+                        "b65e4a38-3adc-217b-220a-7ae1505da6f2",
+                        "e3742ca3-e086-ef11-ac21-7c1e520158f7",
+                        "af6b06fb-4553-f011-877b-7c1e524ac215",
+                        "60c177a9-082a-8438-8a3d-a4c4e6e814e3",
+                        "3439b768-e1a7-4dab-20ec-a9146c214c81",
+                        "2db9fcad-71bb-76a7-4b48-d0a01836f4f9",
+                        "68e9ef49-d682-d68a-d78e-d1baa790f05b"
+                    ],
+    "learnedFromName":  [
+                            "Untitled flow",
+                            "Untitled flow",
+                            "Button -\u003e Get file thumbnail,Recognize text in image or document",
+                            "Get file content and Execute Agent and wait",
+                            "Untitled flow",
+                            "Untitled flow",
+                            "Untitled flow",
+                            "Structured issue list",
+                            "Child Flow - Extract Content From Document",
+                            "Document Processing - Run Extraction",
+                            "1.Child Flow - Initial Conversation",
+                            "Utility - Send Message To Bot And Get Response",
+                            "Test Automation | AI Builder Credit Consumption",
+                            "Test Automation | Run Multiturn Tests (Child)",
+                            "Agent Inventory | Agents Data Load (GrandChild)",
+                            "Agent Inventory | Agents Data Load",
+                            "Agent Inventory | Agents Data Load (Child)",
+                            "Value Summary | Initialize agent value inventory",
+                            "Test Automation | Multi Topic Transcripts Enrichment (Child)",
+                            "Agent Compliance | Check Compliance (Grandchild)",
+                            "Conversation KPI | Copy Transcripts (Child)",
+                            "Conversation KPI | Copy Transcripts (Grandchild)",
+                            "Untitled flow",
+                            "Untitled flow",
+                            "Untitled flow",
+                            "Manually-Create Conversation",
+                            "Untitled flow",
+                            "Untitled flow",
+                            "M365 Agent API-Conversation",
+                            "Untitled flow",
+                            "3.Bot Get Reponse",
+                            "Sharepoint Synchronization | Synchronize files to Agent (Child)",
+                            "Test Automation | Validate Agent Plans (Child)",
+                            "Manually -  Run case list",
+                            "2. Send Message and get Watermark",
+                            "Untitled flow",
+                            "Powerbi"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "template":  {
+                     "manual":  {
+                                    "type":  "Request",
+                                    "kind":  "Button",
+                                    "inputs":  {
+                                                   "schema":  {
+                                                                  "type":  "object",
+                                                                  "properties":  {
+
+                                                                                 },
+                                                                  "required":  [
+
+                                                                               ]
+                                                              }
+                                               }
+                                }
+                 }
+}

@@ -1,0 +1,249 @@
+﻿{
+    "id":  "shared_commondataserviceforapps_1_GetItemWithOrganization",
+    "connector":  "shared_commondataserviceforapps_1",
+    "connectorBase":  "shared_commondataserviceforapps",
+    "operationId":  "GetItemWithOrganization",
+    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+    "type":  "OpenApiConnection",
+    "learnedFrom":  [
+                        "6c595a51-ad0c-f011-9988-0022480427dd",
+                        "c7db6d55-e004-f011-bae2-0022480427dd",
+                        "e3742ca3-e086-ef11-ac21-7c1e520158f7"
+                    ],
+    "learnedFromName":  [
+                            "Agent Inventory | Agents Data Load (GrandChild)",
+                            "Agent Inventory | Agents Data Load (Child)",
+                            "Sharepoint Synchronization | Synchronize files to Agent (Child)"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "environment":  [
+                        "orgdf331f66.crm5.dynamics.com"
+                    ],
+    "template":  {
+                     "Get_a_row_by_ID_from_selected_environment:_Get_AiModel_of_prompts":  {
+                                                                                               "type":  "OpenApiConnection",
+                                                                                               "inputs":  {
+                                                                                                              "parameters":  {
+                                                                                                                                 "organization":  "@triggerBody()[\u0027text\u0027]",
+                                                                                                                                 "entityName":  "msdyn_aimodels",
+                                                                                                                                 "recordId":  "@items(\u0027Apply_to_each:_For_all_the_prompts\u0027)?[\u0027Value\u0027]",
+                                                                                                                                 "$select":  "msdyn_name,_msdyn_templateid_value"
+                                                                                                                             },
+                                                                                                              "host":  {
+                                                                                                                           "apiId":  "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                                                                                                                           "operationId":  "GetItemWithOrganization",
+                                                                                                                           "connectionName":  "shared_commondataserviceforapps_1"
+                                                                                                                       }
+                                                                                                          },
+                                                                                               "metadata":  {
+                                                                                                                "operationMetadataId":  "a39c74e0-d7d8-4e7d-a8bd-41bf7b8736c3"
+                                                                                                            }
+                                                                                           }
+                 },
+    "inputSchema":  [
+                        {
+                            "name":  "connectionId",
+                            "in":  "path",
+                            "required":  true,
+                            "x-ms-visibility":  "internal",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "prefer",
+                            "in":  "header",
+                            "description":  "The header parameter required to make Microsoft Dataverse return the created resource",
+                            "required":  true,
+                            "x-ms-summary":  "Prefer",
+                            "x-ms-visibility":  "internal",
+                            "type":  "string",
+                            "default":  "odata.include-annotations=*"
+                        },
+                        {
+                            "name":  "accept",
+                            "in":  "header",
+                            "description":  "The header parameter required to make Microsoft Dataverse return the odata id",
+                            "required":  true,
+                            "x-ms-summary":  "Accept",
+                            "x-ms-visibility":  "internal",
+                            "type":  "string",
+                            "default":  "application/json;odata.metadata=full"
+                        },
+                        {
+                            "name":  "x-ms-odata-metadata-full",
+                            "in":  "header",
+                            "description":  "The header parameter to customer to opt-in returning full odata metadata in response.",
+                            "required":  false,
+                            "x-ms-summary":  "Return Full Metadata",
+                            "x-ms-visibility":  "advanced",
+                            "type":  "boolean"
+                        },
+                        {
+                            "name":  "organization",
+                            "in":  "header",
+                            "description":  "Choose an environment",
+                            "required":  true,
+                            "x-ms-dynamic-values":  {
+                                                        "operationId":  "GetOrganizations",
+                                                        "parameters":  {
+
+                                                                       },
+                                                        "value-collection":  "value",
+                                                        "value-path":  "Url",
+                                                        "value-title":  "FriendlyName"
+                                                    },
+                            "x-ms-dynamic-list":  {
+                                                      "operationId":  "GetOrganizations",
+                                                      "parameters":  {
+
+                                                                     },
+                                                      "itemsPath":  "value",
+                                                      "itemValuePath":  "Url",
+                                                      "itemTitlePath":  "FriendlyName"
+                                                  },
+                            "x-ms-summary":  "Environment",
+                            "x-ms-visibility":  "important",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "MSCRM.IncludeMipSensitivityLabel",
+                            "in":  "header",
+                            "description":  "Select if you want to fetch Sensitivity Label ID",
+                            "required":  false,
+                            "x-ms-summary":  "Extract Sensitivity Label",
+                            "x-ms-visibility":  "advanced",
+                            "type":  "boolean"
+                        },
+                        {
+                            "name":  "entityName",
+                            "in":  "path",
+                            "description":  "Choose a table",
+                            "required":  true,
+                            "x-ms-url-encoding":  "double",
+                            "x-ms-dynamic-values":  {
+                                                        "operationId":  "GetEntitiesWithOrganization",
+                                                        "parameters":  {
+                                                                           "organization":  {
+                                                                                                "parameter":  "organization"
+                                                                                            }
+                                                                       },
+                                                        "value-collection":  "value",
+                                                        "value-path":  "EntitySetName",
+                                                        "value-title":  "DisplayCollectionName/UserLocalizedLabel/Label"
+                                                    },
+                            "x-ms-dynamic-list":  {
+                                                      "operationId":  "GetEntitiesWithOrganization",
+                                                      "parameters":  {
+                                                                         "organization":  {
+                                                                                              "parameterReference":  "organization"
+                                                                                          }
+                                                                     },
+                                                      "itemsPath":  "value",
+                                                      "itemValuePath":  "EntitySetName",
+                                                      "itemTitlePath":  "DisplayCollectionName/UserLocalizedLabel/Label"
+                                                  },
+                            "x-ms-summary":  "Table name",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "recordId",
+                            "in":  "path",
+                            "description":  "Enter the row\u0027s globally unique identifier (GUID)",
+                            "required":  true,
+                            "x-ms-url-encoding":  "double",
+                            "x-ms-summary":  "Row ID",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "$select",
+                            "in":  "query",
+                            "description":  "Enter a comma-separated list of column unique names to limit which columns are listed",
+                            "required":  false,
+                            "x-ms-summary":  "Select columns",
+                            "x-ms-visibility":  "advanced",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "$expand",
+                            "in":  "query",
+                            "description":  "Enter an Odata style expand query to list related rows",
+                            "required":  false,
+                            "x-ms-summary":  "Expand Query",
+                            "x-ms-visibility":  "advanced",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "partitionId",
+                            "in":  "query",
+                            "description":  "An option to specify the partitionId while retrieving data for NoSQL tables",
+                            "required":  false,
+                            "x-ms-summary":  "Partition Id",
+                            "x-ms-visibility":  "advanced",
+                            "type":  "string"
+                        }
+                    ],
+    "dynamicValuesRef":  {
+                             "entityName":  {
+                                                "operationId":  "GetEntitiesWithOrganization",
+                                                "titlePath":  "DisplayCollectionName/UserLocalizedLabel/Label",
+                                                "parameters":  {
+                                                                   "organization":  {
+                                                                                        "parameter":  "organization"
+                                                                                    }
+                                                               },
+                                                "valueCollection":  "value",
+                                                "valuePath":  "EntitySetName"
+                                            },
+                             "organization":  {
+                                                  "operationId":  "GetOrganizations",
+                                                  "titlePath":  "FriendlyName",
+                                                  "parameters":  {
+
+                                                                 },
+                                                  "valueCollection":  "value",
+                                                  "valuePath":  "Url"
+                                              }
+                         },
+    "swaggerLearned":  true,
+    "outputSchema":  {
+                         "type":  "object",
+                         "x-ms-dynamic-schema":  {
+                                                     "operationId":  "GetMetadataForGetEntityWithOrganization",
+                                                     "parameters":  {
+                                                                        "organization":  {
+                                                                                             "parameter":  "organization"
+                                                                                         },
+                                                                        "entityName":  {
+                                                                                           "parameter":  "entityName"
+                                                                                       },
+                                                                        "selectedEntityAttributes":  {
+                                                                                                         "parameter":  "$select"
+                                                                                                     },
+                                                                        "expandEntityAttributes":  {
+                                                                                                       "parameter":  "$expand"
+                                                                                                   }
+                                                                    },
+                                                     "value-path":  "schema"
+                                                 },
+                         "x-ms-dynamic-properties":  {
+                                                         "operationId":  "GetMetadataForGetEntityWithOrganization",
+                                                         "parameters":  {
+                                                                            "organization":  {
+                                                                                                 "parameterReference":  "organization"
+                                                                                             },
+                                                                            "entityName":  {
+                                                                                               "parameterReference":  "entityName"
+                                                                                           },
+                                                                            "selectedEntityAttributes":  {
+                                                                                                             "parameterReference":  "$select"
+                                                                                                         },
+                                                                            "expandEntityAttributes":  {
+                                                                                                           "parameterReference":  "$expand"
+                                                                                                       }
+                                                                        },
+                                                         "itemValuePath":  "schema"
+                                                     }
+                     },
+    "graphConvertible":  true,
+    "graphNodeType":  "connector"
+}

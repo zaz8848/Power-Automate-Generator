@@ -1,0 +1,96 @@
+﻿{
+    "id":  "shared_wordonlinebusiness_GetFilePDF",
+    "connector":  "shared_wordonlinebusiness",
+    "connectorBase":  "shared_wordonlinebusiness",
+    "operationId":  "GetFilePDF",
+    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_wordonlinebusiness",
+    "type":  "OpenApiConnection",
+    "learnedFrom":  [
+                        "3ddf75ff-1597-f011-b41c-000d3ac6a644"
+                    ],
+    "learnedFromName":  [
+                            "PowerApps-Generate RFP Proposal "
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "environment":  [
+                        "orgdf331f66.crm5.dynamics.com"
+                    ],
+    "template":  {
+                     "Convert_Word_Document_to_PDF":  {
+                                                          "type":  "OpenApiConnection",
+                                                          "inputs":  {
+                                                                         "parameters":  {
+                                                                                            "source":  "sites/contoso.sharepoint.com,{siteId},{webId}",
+                                                                                            "drive":  "b!xYZqbJEdT0eIJnBHG_cxx4WOLtAfynZGi30KUo8WTL_1mg9lvT3_R7nm-uq1fHMf",
+                                                                                            "file":  "@outputs(\u0027Get_file_properties\u0027)?[\u0027body/{DriveItemId}\u0027]"
+                                                                                        },
+                                                                         "host":  {
+                                                                                      "apiId":  "/providers/Microsoft.PowerApps/apis/shared_wordonlinebusiness",
+                                                                                      "operationId":  "GetFilePDF",
+                                                                                      "connectionName":  "shared_wordonlinebusiness"
+                                                                                  }
+                                                                     },
+                                                          "runAfter":  {
+                                                                           "Get_file_properties":  [
+                                                                                                       "SUCCEEDED"
+                                                                                                   ]
+                                                                       },
+                                                          "metadata":  {
+                                                                           "01EITVBG3VTBA7FAT34NDI7KR7OJCRLHWA":  "/638941199169399046.docx"
+                                                                       }
+                                                      }
+                 },
+    "inputSchema":  [
+                        {
+                            "name":  "connectionId",
+                            "in":  "path",
+                            "required":  true,
+                            "x-ms-visibility":  "internal",
+                            "type":  "string"
+                        },
+                        {
+                            "$ref":  "#/parameters/source"
+                        },
+                        {
+                            "$ref":  "#/parameters/queryDrive"
+                        },
+                        {
+                            "$ref":  "#/parameters/file"
+                        },
+                        {
+                            "name":  "extractSensitivityLabel",
+                            "in":  "query",
+                            "description":  "Select if you want to extract Sensitivity label ( false, true).",
+                            "required":  false,
+                            "x-ms-summary":  "Extract Sensitivity Label",
+                            "type":  "boolean"
+                        },
+                        {
+                            "name":  "fetchSensitivityLabelMetadata",
+                            "in":  "query",
+                            "required":  false,
+                            "description":  "A boolean whether to fetch sensitivity label Metadata for associated LabelId.",
+                            "x-ms-summary":  "Sensitivity Label Metadata",
+                            "type":  "boolean"
+                        },
+                        {
+                            "name":  "format",
+                            "in":  "query",
+                            "description":  "Format of the content",
+                            "required":  true,
+                            "type":  "string",
+                            "default":  "pdf",
+                            "x-ms-visibility":  "internal"
+                        }
+                    ],
+    "swaggerLearned":  true,
+    "outputSchema":  {
+                         "format":  "binary",
+                         "title":  "PDF document",
+                         "type":  "string",
+                         "x-ms-visibility":  "important"
+                     },
+    "graphConvertible":  true,
+    "graphNodeType":  "connector"
+}

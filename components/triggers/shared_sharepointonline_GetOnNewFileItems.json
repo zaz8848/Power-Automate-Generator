@@ -1,0 +1,44 @@
+﻿{
+    "id":  "shared_sharepointonline_GetOnNewFileItems",
+    "connector":  "shared_sharepointonline",
+    "operationId":  "GetOnNewFileItems",
+    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+    "type":  "OpenApiConnection",
+    "kind":  null,
+    "learnedFrom":  [
+                        "ee87fd77-09fa-f011-8407-000d3a316017"
+                    ],
+    "learnedFromName":  [
+                            "Sharepoint-PO Uploaded-Extract Po Item"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "environment":  [
+                        "{dataverseOrg}"
+                    ],
+    "template":  {
+                     "When_a_file_is_created_(properties_only)":  {
+                                                                      "type":  "OpenApiConnection",
+                                                                      "inputs":  {
+                                                                                     "parameters":  {
+                                                                                                        "dataset":  "@parameters(\u0027SharepointSite (crdd1_SharepointSite)\u0027)",
+                                                                                                        "table":  "@parameters(\u0027Document Library (crdd1_DocumentLibrary)\u0027)",
+                                                                                                        "folderPath":  "/Shared Documents/General/PO Sample"
+                                                                                                    },
+                                                                                     "host":  {
+                                                                                                  "apiId":  "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+                                                                                                  "operationId":  "GetOnNewFileItems",
+                                                                                                  "connectionName":  "shared_sharepointonline"
+                                                                                              }
+                                                                                 },
+                                                                      "recurrence":  {
+                                                                                         "interval":  1,
+                                                                                         "frequency":  "Minute"
+                                                                                     },
+                                                                      "splitOn":  "@triggerOutputs()?[\u0027body/value\u0027]",
+                                                                      "metadata":  {
+                                                                                       "operationMetadataId":  "17dfc6ce-bc08-4d6c-9045-2446d68c7877"
+                                                                                   }
+                                                                  }
+                 }
+}

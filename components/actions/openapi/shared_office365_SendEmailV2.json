@@ -1,0 +1,78 @@
+﻿{
+    "id":  "shared_office365_SendEmailV2",
+    "connector":  "shared_office365",
+    "connectorBase":  "shared_office365",
+    "operationId":  "SendEmailV2",
+    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_office365",
+    "type":  "OpenApiConnection",
+    "learnedFrom":  [
+                        "c6080ca7-f274-8901-960a-c23f63a84ab1",
+                        "09985c04-ada5-f011-bbd2-000d3ac79569",
+                        "978f64a3-261a-cb58-edd6-0e2cf4179460",
+                        "23f83b71-ede8-f1e8-f573-5938648561e9",
+                        "91fbfdcc-d863-f011-bec3-6045bd00625f"
+                    ],
+    "learnedFromName":  [
+                            "Untitled flow",
+                            "BeOne-SendInformationToEmail",
+                            "SendInfoEmail（Multilingual）",
+                            "Untitled flow",
+                            "Automatic Flow - Send Translated Document When Translation Log Status Changes to Success"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "environment":  [
+                        "{dataverseOrg}",
+                        "orgdf331f66.crm5.dynamics.com",
+                        "org1cd97ca4.crm.dynamics.com"
+                    ],
+    "template":  {
+                     "Send_an_email_(V2)":  {
+                                                "type":  "OpenApiConnection",
+                                                "inputs":  {
+                                                               "parameters":  {
+                                                                                  "emailMessage/To":  "@outputs(\u0027Get_a_row_by_ID-Dog\u0027)?[\u0027body/internalemailaddress\u0027]",
+                                                                                  "emailMessage/Subject":  "工单已分配，请及时处理",
+                                                                                  "emailMessage/Body":  "\u003cp class=\"editor-paragraph\"\u003e工单已分配，请及时处理\u003c/p\u003e\u003cbr\u003e\u003cp class=\"editor-paragraph\"\u003e@{triggerOutputs()?[\u0027body/cre47_workordername\u0027]}\u003c/p\u003e",
+                                                                                  "emailMessage/Importance":  "Normal"
+                                                                              },
+                                                               "host":  {
+                                                                            "apiId":  "/providers/Microsoft.PowerApps/apis/shared_office365",
+                                                                            "operationId":  "SendEmailV2",
+                                                                            "connectionName":  "shared_office365"
+                                                                        }
+                                                           },
+                                                "runAfter":  {
+                                                                 "Get_a_row_by_ID-Dog":  [
+                                                                                             "SUCCEEDED"
+                                                                                         ]
+                                                             }
+                                            }
+                 },
+    "inputSchema":  [
+                        {
+                            "name":  "connectionId",
+                            "in":  "path",
+                            "required":  true,
+                            "x-ms-visibility":  "internal",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "emailMessage",
+                            "in":  "body",
+                            "description":  "Email.",
+                            "required":  true,
+                            "schema":  {
+                                           "$ref":  "#/definitions/ClientSendHtmlMessage"
+                                       },
+                            "x-ms-summary":  "Email"
+                        }
+                    ],
+    "swaggerLearned":  true,
+    "outputSchema":  {
+                         "type":  "object",
+                         "description":  "No response schema in Swagger"
+                     },
+    "graphConvertible":  true,
+    "graphNodeType":  "connector"
+}

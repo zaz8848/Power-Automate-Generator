@@ -1,0 +1,27 @@
+{
+    "id": "trigger_notification",
+    "type": "OpenApiConnectionNotification",
+    "description": "通知触发器 — 推送式事件（如新邮件到达）",
+    "learnedFrom": [
+        "728257ff-93f6-f011-8406-0022480a3b0e"
+    ],
+    "learnedAt": "2026-05-26",
+    "verified": true,
+    "template": {
+        "When_a_new_email_arrives_(V3)": {
+            "type": "OpenApiConnectionNotification",
+            "inputs": {
+                "host": {
+                    "connectionName": "shared_office365",
+                    "operationId": "OnNewEmailV3",
+                    "apiId": "/providers/Microsoft.PowerApps/apis/shared_office365"
+                },
+                "parameters": {
+                    "folderPath": "Id::..."
+                },
+                "authentication": "@parameters('$authentication')"
+            }
+        }
+    },
+    "notes": "平台管理轮询的推送触发器。与 Webhook 不同，这是 Office 365 等连接器的事件通知机制。"
+}

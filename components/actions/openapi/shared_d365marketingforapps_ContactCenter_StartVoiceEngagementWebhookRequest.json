@@ -1,0 +1,189 @@
+﻿{
+    "id":  "shared_d365marketingforapps_ContactCenter_StartVoiceEngagementWebhookRequest",
+    "connector":  "shared_d365marketingforapps",
+    "connectorBase":  "shared_d365marketingforapps",
+    "operationId":  "ContactCenter_StartVoiceEngagementWebhookRequest",
+    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_d365marketingforapps",
+    "type":  "OpenApiConnectionWebhook",
+    "learnedFrom":  [
+                        "cdd6ed42-6394-f011-b4cc-000d3a099cdf",
+                        "e8d6ed42-6394-f011-b4cc-000d3a099cdf",
+                        "f8d6ed42-6394-f011-b4cc-000d3a099cdf",
+                        "08d7ed42-6394-f011-b4cc-000d3a099cdf",
+                        "18d7ed42-6394-f011-b4cc-000d3a099cdf",
+                        "5df39001-6494-f011-b4cc-000d3ac6a644",
+                        "64f39001-6494-f011-b4cc-000d3ac6a644",
+                        "6bf39001-6494-f011-b4cc-000d3ac6a644",
+                        "73f39001-6494-f011-b4cc-000d3ac6a644",
+                        "7bf39001-6494-f011-b4cc-000d3ac6a644",
+                        "2f54c3d3-6494-f011-b4cc-00224856c036",
+                        "3754c3d3-6494-f011-b4cc-00224856c036",
+                        "3e54c3d3-6494-f011-b4cc-00224856c036",
+                        "4654c3d3-6494-f011-b4cc-00224856c036",
+                        "4d54c3d3-6494-f011-b4cc-00224856c036"
+                    ],
+    "learnedFromName":  [
+                            "CXP_Outbound Call Journey_20250918074416",
+                            "CXP_Outbound Call Journey_20250918074416",
+                            "CXP_Outbound Call Journey_20250918074416",
+                            "CXP_Outbound Call Journey_20250918074416",
+                            "CXP_Outbound Call Journey_20250918074416",
+                            "CXP_Contact Create Outbound Journey_20250918074937",
+                            "CXP_Contact Create Outbound Journey_20250918074937",
+                            "CXP_Contact Create Outbound Journey_20250918074937",
+                            "CXP_Contact Create Outbound Journey_20250918074937",
+                            "CXP_Contact Create Outbound Journey_20250918074937",
+                            "CXP_Outbound CC 01 Journey_20250918075525",
+                            "CXP_Outbound CC 01 Journey_20250918075525",
+                            "CXP_Outbound CC 01 Journey_20250918075525",
+                            "CXP_Outbound CC 01 Journey_20250918075525",
+                            "CXP_Outbound CC 01 Journey_20250918075525"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "environment":  [
+                        "orgdf331f66.crm5.dynamics.com"
+                    ],
+    "template":  {
+                     "13f46e3c-1482-487b-ac51-7afd70ad6426-Call_ContactCenterVoice":  {
+                                                                                          "runAfter":  {
+                                                                                                           "DataRetrieval-13f46e3c-1482-487b-ac51-7afd70ad6426":  [
+                                                                                                                                                                      "Succeeded"
+                                                                                                                                                                  ]
+                                                                                                       },
+                                                                                          "type":  "OpenApiConnectionWebhook",
+                                                                                          "inputs":  {
+                                                                                                         "host":  {
+                                                                                                                      "connectionName":  "shared_d365marketingforapps",
+                                                                                                                      "operationId":  "ContactCenter_StartVoiceEngagementWebhookRequest",
+                                                                                                                      "apiId":  "/providers/Microsoft.PowerApps/apis/shared_d365marketingforapps"
+                                                                                                                  },
+                                                                                                         "retryPolicy":  {
+                                                                                                                             "count":  50,
+                                                                                                                             "interval":  "PT1M",
+                                                                                                                             "maximumInterval":  "PT30M",
+                                                                                                                             "minimumInterval":  "PT1M",
+                                                                                                                             "type":  "Exponential"
+                                                                                                                         },
+                                                                                                         "parameters":  {
+                                                                                                                            "organizationId":  "f419f241-2a06-f011-b015-000d3a086781",
+                                                                                                                            "body/proactiveEngagementConfigId":  "1bedc234-5e94-f011-b4cc-00224856c036",
+                                                                                                                            "body/to":  "@body(\u0027DataverseDataSource-13f46e3c-1482-487b-ac51-7afd70ad6426\u0027)?[\u0027data\u0027]?[\u0027_CXP_Customer_\u0027]?[\u0027mobilephone\u0027]",
+                                                                                                                            "x-entity-id":  "@{triggerBody()?[\u0027profileId\u0027]}",
+                                                                                                                            "x-entity-type":  "@{triggerBody()?[\u0027targetEntity\u0027]}",
+                                                                                                                            "x-cj-iteration-id":  "@{triggerBody()?[\u0027journeyInstanceId\u0027]}",
+                                                                                                                            "x-cj-id":  "f1c9fa39-6394-f011-b4cc-00224856c036",
+                                                                                                                            "x-cj-activity-id":  "13f46e3c-1482-487b-ac51-7afd70ad6426",
+                                                                                                                            "body/quietTimeSettingsId":  "00000000-0000-0000-0000-000000000000",
+                                                                                                                            "body/quietTimeSettingsSelectedOption":  0,
+                                                                                                                            "x-compliance-settings-id":  "7f4a6355-1811-4cde-bde3-fee8c85f56b1",
+                                                                                                                            "x-purpose-id":  "10000000-0000-0000-0000-000000000001",
+                                                                                                                            "x-topic-id":  null,
+                                                                                                                            "body/triggerEvent/name":  "msdynmkt_casecreate_074013734",
+                                                                                                                            "body/triggerEvent/data":  "@json(triggerBody()?[\u0027event\u0027])",
+                                                                                                                            "body/owner/id":  "81baaecd-2320-f011-998a-000d3aa3d219",
+                                                                                                                            "body/owner/recordReferenceType":  "RecordReference",
+                                                                                                                            "body/owner/logicalName":  "systemuser"
+                                                                                                                        }
+                                                                                                     },
+                                                                                          "limit":  {
+                                                                                                        "timeout":  "P30D"
+                                                                                                    }
+                                                                                      }
+                 },
+    "inputSchema":  [
+                        {
+                            "name":  "connectionId",
+                            "in":  "path",
+                            "required":  true,
+                            "x-ms-visibility":  "internal",
+                            "type":  "string"
+                        },
+                        {
+                            "in":  "path",
+                            "name":  "organizationId",
+                            "required":  true,
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "x-cj-id",
+                            "in":  "header",
+                            "type":  "string",
+                            "required":  false,
+                            "x-ms-summary":  "Customer Journey Id",
+                            "description":  "Customer journey identifier"
+                        },
+                        {
+                            "name":  "x-cj-activity-id",
+                            "in":  "header",
+                            "type":  "string",
+                            "required":  false,
+                            "x-ms-summary":  "Customer Journey Tile Id",
+                            "description":  "Customer journey tile identifier"
+                        },
+                        {
+                            "name":  "x-cj-iteration-id",
+                            "in":  "header",
+                            "type":  "string",
+                            "required":  false,
+                            "x-ms-summary":  "Customer Journey Iteration Id",
+                            "description":  "Customer journey iteration identifier"
+                        },
+                        {
+                            "name":  "x-entity-id",
+                            "in":  "header",
+                            "type":  "string",
+                            "required":  false,
+                            "x-ms-summary":  "Entity Id",
+                            "description":  "Uuid of enity that started the customer journey"
+                        },
+                        {
+                            "name":  "x-entity-type",
+                            "in":  "header",
+                            "type":  "string",
+                            "required":  false,
+                            "x-ms-summary":  "Entity Type",
+                            "description":  "Logical name of entity that started the customer journey"
+                        },
+                        {
+                            "name":  "x-compliance-settings-id",
+                            "in":  "header",
+                            "type":  "string",
+                            "required":  false,
+                            "x-ms-summary":  "ComplianceSettings id",
+                            "description":  "Uuid of ComplianceSettings entity selected, or null when none was selected."
+                        },
+                        {
+                            "name":  "x-purpose-id",
+                            "in":  "header",
+                            "type":  "string",
+                            "required":  false,
+                            "x-ms-summary":  "Purpose id",
+                            "description":  "Uuid of Purpose entity selected, or null when none was selected."
+                        },
+                        {
+                            "name":  "x-topic-id",
+                            "in":  "header",
+                            "type":  "string",
+                            "required":  false,
+                            "x-ms-summary":  "Topic id",
+                            "description":  "Uuid of Topic entity selected, or null when none was selected."
+                        },
+                        {
+                            "description":  "Voice engagement request webhook parameters",
+                            "in":  "body",
+                            "name":  "body",
+                            "required":  true,
+                            "schema":  {
+                                           "$ref":  "#/definitions/VoiceEngagementWebhookRequestParameters"
+                                       }
+                        }
+                    ],
+    "swaggerLearned":  true,
+    "outputSchema":  {
+                         "type":  "object",
+                         "description":  "No response schema in Swagger"
+                     },
+    "graphConvertible":  true,
+    "graphNodeType":  "connector"
+}

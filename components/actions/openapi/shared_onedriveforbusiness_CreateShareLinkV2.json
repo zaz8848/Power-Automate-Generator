@@ -1,0 +1,99 @@
+﻿{
+    "id":  "shared_onedriveforbusiness_CreateShareLinkV2",
+    "connector":  "shared_onedriveforbusiness",
+    "connectorBase":  "shared_onedriveforbusiness",
+    "operationId":  "CreateShareLinkV2",
+    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_onedriveforbusiness",
+    "type":  "OpenApiConnection",
+    "learnedFrom":  [
+                        "0a035c01-c979-0229-e10f-059dbb7a383f",
+                        "38aa543f-f20d-1475-ebb9-44311524b24a",
+                        "9d505454-5d1d-f111-88b1-7ced8d3c7b0f"
+                    ],
+    "learnedFromName":  [
+                            "AgentFlow-Auto Procesing Excel File To Analysis",
+                            "Schedule-1 week-PPT Generator",
+                            "Agent Flow - Forecast Sales"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "environment":  [
+                        "org1cd97ca4.crm.dynamics.com"
+                    ],
+    "template":  {
+                     "Create_share_link":  {
+                                               "type":  "OpenApiConnection",
+                                               "inputs":  {
+                                                              "parameters":  {
+                                                                                 "id":  "@outputs(\u0027Create_file\u0027)?[\u0027body/Id\u0027]",
+                                                                                 "type":  "Edit",
+                                                                                 "scope":  "Anonymous"
+                                                                             },
+                                                              "host":  {
+                                                                           "apiId":  "/providers/Microsoft.PowerApps/apis/shared_onedriveforbusiness",
+                                                                           "operationId":  "CreateShareLinkV2",
+                                                                           "connectionName":  "shared_onedriveforbusiness"
+                                                                       }
+                                                          },
+                                               "runAfter":  {
+                                                                "Create_file":  [
+                                                                                    "Succeeded"
+                                                                                ]
+                                                            },
+                                               "metadata":  {
+                                                                "operationMetadataId":  "d81cdae6-cd2d-4f62-ac26-bed871cba792"
+                                                            }
+                                           }
+                 },
+    "inputSchema":  {
+                        "scope":  {
+                                      "description":  "The scope of the link",
+                                      "in":  "query",
+                                      "type":  "string",
+                                      "required":  false
+                                  },
+                        "connectionId":  {
+                                             "description":  null,
+                                             "in":  "path",
+                                             "type":  "string",
+                                             "required":  true
+                                         },
+                        "id":  {
+                                   "description":  "The unique identifier of the file.",
+                                   "in":  "path",
+                                   "type":  "string",
+                                   "required":  true
+                               },
+                        "type":  {
+                                     "description":  "The type of link",
+                                     "in":  "query",
+                                     "type":  "string",
+                                     "required":  true
+                                 }
+                    },
+    "outputSchema":  {
+                         "$ref":  "SharingLink",
+                         "properties":  {
+                                            "WebUrl":  {
+                                                           "type":  "string",
+                                                           "description":  "A URL that points to the file or folder."
+                                                       }
+                                        }
+                     },
+    "dynamicValuesRef":  {
+                             "id":  {
+                                        "operationId":  null,
+                                        "parameters":  {
+                                                           "isFolder":  false,
+                                                           "dataset":  null,
+                                                           "fileFilter":  [
+
+                                                                          ]
+                                                       },
+                                        "valuePath":  "Id"
+                                    }
+                         },
+    "swaggerLearned":  true,
+    "graphConvertible":  true,
+    "graphNodeType":  "connector"
+}

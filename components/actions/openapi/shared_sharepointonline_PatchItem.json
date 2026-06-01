@@ -1,0 +1,220 @@
+﻿{
+    "id":  "shared_sharepointonline_PatchItem",
+    "connector":  "shared_sharepointonline",
+    "connectorBase":  "shared_sharepointonline",
+    "operationId":  "PatchItem",
+    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+    "type":  "OpenApiConnection",
+    "learnedFrom":  [
+                        "ee87fd77-09fa-f011-8407-000d3a316017",
+                        "f7d564de-0705-f111-8407-000d3a316017",
+                        "15a680d4-1e05-f111-8407-6045bd5777da",
+                        "33afba72-d005-f111-8407-6045bd5777da",
+                        "23f83b71-ede8-f1e8-f573-5938648561e9"
+                    ],
+    "learnedFromName":  [
+                            "Sharepoint-PO Uploaded-Extract Po Item",
+                            "Sharepoint-Modify-Post Data To Server",
+                            "PowerApps-Validate Invoices",
+                            "Sharepoint-Modified-ExpenseRequest-ExtractInvoice",
+                            "Untitled flow"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "environment":  [
+                        "{dataverseOrg}",
+                        "orgdf331f66.crm5.dynamics.com"
+                    ],
+    "template":  {
+                     "Update_item-PO":  {
+                                            "type":  "OpenApiConnection",
+                                            "inputs":  {
+                                                           "parameters":  {
+                                                                              "dataset":  "@parameters(\u0027SharepointSite (crdd1_SharepointSite)\u0027)",
+                                                                              "table":  "@parameters(\u0027List-[Purchase Orders] (crdd1_ListPurchaseOrders)\u0027)",
+                                                                              "id":  "@outputs(\u0027Create_item-PO\u0027)?[\u0027body/ID\u0027]",
+                                                                              "item/Status/Value":  "Completed"
+                                                                          },
+                                                           "host":  {
+                                                                        "apiId":  "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+                                                                        "operationId":  "PatchItem",
+                                                                        "connectionName":  "shared_sharepointonline"
+                                                                    }
+                                                       },
+                                            "runAfter":  {
+                                                             "IS_File":  [
+                                                                             "Succeeded"
+                                                                         ]
+                                                         },
+                                            "metadata":  {
+                                                             "operationMetadataId":  "c447c892-a021-4f23-8e82-595316ef1160"
+                                                         }
+                                        }
+                 },
+    "inputSchema":  [
+                        {
+                            "name":  "connectionId",
+                            "in":  "path",
+                            "required":  true,
+                            "x-ms-visibility":  "internal",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "dataset",
+                            "in":  "path",
+                            "description":  "Example: https://contoso.sharepoint.com/sites/sitename",
+                            "required":  true,
+                            "x-ms-summary":  "Site Address",
+                            "x-ms-url-encoding":  "double",
+                            "x-ms-ai-sensitivity":  "high",
+                            "x-ms-dynamic-values":  {
+                                                        "operationId":  "GetDataSets",
+                                                        "parameters":  {
+
+                                                                       },
+                                                        "value-collection":  "value",
+                                                        "value-path":  "Name",
+                                                        "value-title":  "DisplayName"
+                                                    },
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "table",
+                            "in":  "path",
+                            "description":  "SharePoint list name",
+                            "required":  true,
+                            "x-ms-summary":  "List Name",
+                            "x-ms-url-encoding":  "double",
+                            "x-ms-dynamic-values":  {
+                                                        "operationId":  "GetTables",
+                                                        "parameters":  {
+                                                                           "dataset":  {
+                                                                                           "parameter":  "dataset"
+                                                                                       }
+                                                                       },
+                                                        "value-collection":  "value",
+                                                        "value-path":  "Name",
+                                                        "value-title":  "DisplayName"
+                                                    },
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "id",
+                            "in":  "path",
+                            "description":  "Unique identifier of item to be updated",
+                            "required":  true,
+                            "x-ms-summary":  "Id",
+                            "type":  "integer",
+                            "format":  "int64"
+                        },
+                        {
+                            "name":  "item",
+                            "in":  "body",
+                            "description":  "Item with changed properties",
+                            "required":  true,
+                            "schema":  {
+                                           "type":  "object",
+                                           "additionalProperties":  {
+                                                                        "$ref":  "#/definitions/Item"
+                                                                    },
+                                           "x-ms-dynamic-schema":  {
+                                                                       "operationId":  "GetTable",
+                                                                       "parameters":  {
+                                                                                          "dataset":  {
+                                                                                                          "parameter":  "dataset"
+                                                                                                      },
+                                                                                          "table":  {
+                                                                                                        "parameter":  "table"
+                                                                                                    },
+                                                                                          "view":  {
+                                                                                                       "parameter":  "view"
+                                                                                                   }
+                                                                                      },
+                                                                       "value-path":  "Schema/Items"
+                                                                   }
+                                       },
+                            "x-ms-summary":  "Item"
+                        },
+                        {
+                            "name":  "view",
+                            "in":  "query",
+                            "description":  "Avoid column threshold issues by only using columns defined in a view",
+                            "required":  false,
+                            "x-ms-summary":  "Limit Columns by View",
+                            "x-ms-visibility":  "advanced",
+                            "x-ms-dynamic-values":  {
+                                                        "operationId":  "GetTableViews",
+                                                        "parameters":  {
+                                                                           "dataset":  {
+                                                                                           "parameter":  "dataset"
+                                                                                       },
+                                                                           "table":  {
+                                                                                         "parameter":  "table"
+                                                                                     }
+                                                                       },
+                                                        "value-path":  "Name",
+                                                        "value-title":  "DisplayName"
+                                                    },
+                            "type":  "string"
+                        }
+                    ],
+    "dynamicValuesRef":  {
+                             "table":  {
+                                           "operationId":  "GetTables",
+                                           "titlePath":  "DisplayName",
+                                           "parameters":  {
+                                                              "dataset":  {
+                                                                              "parameter":  "dataset"
+                                                                          }
+                                                          },
+                                           "valueCollection":  "value",
+                                           "valuePath":  "Name"
+                                       },
+                             "view":  {
+                                          "operationId":  "GetTableViews",
+                                          "titlePath":  "DisplayName",
+                                          "parameters":  {
+                                                             "table":  {
+                                                                           "parameter":  "table"
+                                                                       },
+                                                             "dataset":  {
+                                                                             "parameter":  "dataset"
+                                                                         }
+                                                         },
+                                          "valuePath":  "Name"
+                                      },
+                             "dataset":  {
+                                             "operationId":  "GetDataSets",
+                                             "titlePath":  "DisplayName",
+                                             "parameters":  {
+
+                                                            },
+                                             "valueCollection":  "value",
+                                             "valuePath":  "Name"
+                                         }
+                         },
+    "swaggerLearned":  true,
+    "outputSchema":  {
+                         "type":  "object",
+                         "additionalProperties":  {
+                                                      "$ref":  "#/definitions/Item"
+                                                  },
+                         "x-ms-dynamic-schema":  {
+                                                     "operationId":  "GetTable",
+                                                     "parameters":  {
+                                                                        "dataset":  {
+                                                                                        "parameter":  "dataset"
+                                                                                    },
+                                                                        "table":  {
+                                                                                      "parameter":  "table"
+                                                                                  },
+                                                                        "view":  {
+                                                                                     "parameter":  "view"
+                                                                                 }
+                                                                    },
+                                                     "value-path":  "Schema/Items"
+                                                 }
+                     },
+    "graphConvertible":  true,
+    "graphNodeType":  "connector"
+}

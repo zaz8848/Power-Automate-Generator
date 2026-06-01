@@ -1,0 +1,59 @@
+{
+    "id": "trigger_recurrence",
+    "type": "Recurrence",
+    "description": "定时触发器 — 按固定频率自动运行 flow",
+    "learnedFrom": [
+        "2901c842-91f9-f011-8406-00224859581e",
+        "667cb8b3-1bdd-e38d-8411-7f868f09c427"
+    ],
+    "learnedAt": "2026-05-26",
+    "verified": true,
+    "template": {
+        "trigger": {
+            "type": "Recurrence",
+            "recurrence": {
+                "frequency": "Day",
+                "interval": 1,
+                "timeZone": "China Standard Time"
+            }
+        }
+    },
+    "parameters": {
+        "frequency": {
+            "type": "string",
+            "enum": [
+                "Minute",
+                "Hour",
+                "Day",
+                "Week",
+                "Month"
+            ],
+            "required": true
+        },
+        "interval": {
+            "type": "integer",
+            "required": true,
+            "description": "频率间隔（每 N 个频率单位）"
+        },
+        "timeZone": {
+            "type": "string",
+            "example": "China Standard Time",
+            "description": "可选，指定时区"
+        }
+    },
+    "variants": [
+        {
+            "name": "daily",
+            "frequency": "Day",
+            "interval": 1,
+            "source": "近10天邮件总结并发送Teams"
+        },
+        {
+            "name": "weekly",
+            "frequency": "Week",
+            "interval": 1,
+            "source": "Untitled (email)"
+        }
+    ],
+    "notes": "最常见的触发器类型。可选字段：startTime, schedule（指定具体时间点）"
+}

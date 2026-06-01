@@ -1,0 +1,175 @@
+﻿{
+    "id":  "shared_sharepointonline_GetFileContentByPath",
+    "connector":  "shared_sharepointonline",
+    "connectorBase":  "shared_sharepointonline",
+    "operationId":  "GetFileContentByPath",
+    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+    "type":  "OpenApiConnection",
+    "learnedFrom":  [
+                        "b2538f39-9190-ef11-ac21-0022480c3fe9"
+                    ],
+    "learnedFromName":  [
+                            "Automatic Flow - Create Processing Log - SharePoint Lib"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "environment":  [
+                        "org1cd97ca4.crm.dynamics.com"
+                    ],
+    "template":  {
+                     "Get_file_content_using_path":  {
+                                                         "type":  "OpenApiConnection",
+                                                         "inputs":  {
+                                                                        "parameters":  {
+                                                                                           "dataset":  "https://contoso.sharepoint.com/sites/AIBusinessProcessPortal",
+                                                                                           "path":  "@triggerOutputs()?[\u0027body/{FullPath}\u0027]",
+                                                                                           "inferContentType":  true
+                                                                                       },
+                                                                        "host":  {
+                                                                                     "apiId":  "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+                                                                                     "operationId":  "GetFileContentByPath",
+                                                                                     "connectionName":  "shared_sharepointonline"
+                                                                                 }
+                                                                    },
+                                                         "runAfter":  {
+
+                                                                      },
+                                                         "metadata":  {
+                                                                          "operationMetadataId":  "33e2a97d-83e4-4f6b-87d4-d83a2812f688"
+                                                                      }
+                                                     }
+                 },
+    "inputSchema":  [
+                        {
+                            "name":  "connectionId",
+                            "in":  "path",
+                            "required":  true,
+                            "x-ms-visibility":  "internal",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "dataset",
+                            "in":  "path",
+                            "description":  "Example: https://contoso.sharepoint.com/sites/sitename.",
+                            "required":  true,
+                            "x-ms-summary":  "Site Address",
+                            "x-ms-dynamic-values":  {
+                                                        "operationId":  "GetDataSets",
+                                                        "parameters":  {
+
+                                                                       },
+                                                        "value-collection":  "value",
+                                                        "value-path":  "Name",
+                                                        "value-title":  "DisplayName"
+                                                    },
+                            "x-ms-url-encoding":  "double",
+                            "x-ms-ai-sensitivity":  "high",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "path",
+                            "in":  "query",
+                            "description":  "Select a file.",
+                            "required":  true,
+                            "x-ms-summary":  "File Path",
+                            "x-ms-dynamic-values":  {
+                                                        "capability":  "file-picker",
+                                                        "parameters":  {
+                                                                           "isFolder":  false,
+                                                                           "fileFilter":  [
+
+                                                                                          ],
+                                                                           "dataset":  {
+                                                                                           "parameter":  "dataset"
+                                                                                       }
+                                                                       },
+                                                        "value-path":  "Path"
+                                                    },
+                            "x-ms-dynamic-tree":  {
+                                                      "settings":  {
+                                                                       "canSelectParentNodes":  false,
+                                                                       "canSelectLeafNodes":  true
+                                                                   },
+                                                      "open":  {
+                                                                   "operationId":  "ListAllRootFolders",
+                                                                   "itemValuePath":  "Path",
+                                                                   "itemTitlePath":  "DisplayName",
+                                                                   "itemIsParent":  "(IsFolder eq true)",
+                                                                   "itemFullTitlePath":  "Path",
+                                                                   "parameters":  {
+                                                                                      "dataset":  {
+                                                                                                      "parameterReference":  "dataset"
+                                                                                                  }
+                                                                                  }
+                                                               },
+                                                      "browse":  {
+                                                                     "operationId":  "ListFolder",
+                                                                     "itemValuePath":  "Path",
+                                                                     "itemTitlePath":  "DisplayName",
+                                                                     "itemIsParent":  "(IsFolder eq true)",
+                                                                     "itemFullTitlePath":  "Path",
+                                                                     "parameters":  {
+                                                                                        "dataset":  {
+                                                                                                        "parameterReference":  "dataset"
+                                                                                                    },
+                                                                                        "id":  {
+                                                                                                   "selectedItemValuePath":  "Id"
+                                                                                               }
+                                                                                    }
+                                                                 }
+                                                  },
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "inferContentType",
+                            "in":  "query",
+                            "description":  "Infer content-type based on extension.",
+                            "required":  false,
+                            "x-ms-summary":  "Infer Content Type",
+                            "x-ms-visibility":  "advanced",
+                            "type":  "boolean",
+                            "default":  true
+                        },
+                        {
+                            "name":  "queryParametersSingleEncoded",
+                            "in":  "query",
+                            "required":  false,
+                            "x-ms-visibility":  "internal",
+                            "type":  "boolean",
+                            "default":  true
+                        }
+                    ],
+    "dynamicValuesRef":  {
+                             "path":  {
+                                          "operationId":  null,
+                                          "parameters":  {
+                                                             "isFolder":  false,
+                                                             "dataset":  {
+                                                                             "parameter":  "dataset"
+                                                                         },
+                                                             "fileFilter":  [
+
+                                                                            ]
+                                                         },
+                                          "valuePath":  "Path"
+                                      },
+                             "dataset":  {
+                                             "operationId":  "GetDataSets",
+                                             "titlePath":  "DisplayName",
+                                             "parameters":  {
+
+                                                            },
+                                             "valueCollection":  "value",
+                                             "valuePath":  "Name"
+                                         }
+                         },
+    "swaggerLearned":  true,
+    "outputSchema":  {
+                         "format":  "binary",
+                         "description":  "The content of the file.",
+                         "type":  "string",
+                         "x-ms-summary":  "File Content"
+                     },
+    "graphConvertible":  true,
+    "graphNodeType":  "connector"
+}

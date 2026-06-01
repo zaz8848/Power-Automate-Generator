@@ -1,0 +1,73 @@
+{
+    "_comment": "Example: Email trigger + Compose + Reply. Shows OpenAPI connector pattern with connectionReferences. Replace connection IDs with your own.",
+    "properties": {
+        "displayName": "[AutoGen] Email Auto-Reply Example",
+        "definition": {
+            "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+            "contentVersion": "1.0.0.0",
+            "parameters": {
+                "$authentication": {
+                    "defaultValue": {},
+                    "type": "SecureObject"
+                },
+                "$connections": {
+                    "defaultValue": {},
+                    "type": "Object"
+                }
+            },
+            "triggers": {
+                "When_a_new_email_arrives": {
+                    "type": "OpenApiConnectionNotification",
+                    "inputs": {
+                        "parameters": {
+                            "folderPath": "Inbox"
+                        },
+                        "host": {
+                            "apiId": "/providers/Microsoft.PowerApps/apis/shared_office365",
+                            "operationId": "OnNewEmailV3",
+                            "connectionName": "shared_office365"
+                        }
+                    },
+                    "splitOn": "@triggerOutputs()?['body/value']"
+                }
+            },
+            "actions": {
+                "Compose_Subject": {
+                    "type": "Compose",
+                    "inputs": "@triggerOutputs()?['body/subject']",
+                    "runAfter": {}
+                },
+                "Reply_to_Email": {
+                    "type": "OpenApiConnection",
+                    "inputs": {
+                        "parameters": {
+                            "messageId": "@triggerOutputs()?['body/id']",
+                            "replyParameters/Body": "<p>Thank you for your email regarding: @{outputs('Compose_Subject')}. We will get back to you shortly.</p>",
+                            "replyParameters/Importance": "Normal"
+                        },
+                        "host": {
+                            "apiId": "/providers/Microsoft.PowerApps/apis/shared_office365",
+                            "operationId": "ReplyToV3",
+                            "connectionName": "shared_office365"
+                        }
+                    },
+                    "runAfter": {
+                        "Compose_Subject": [
+                            "Succeeded"
+                        ]
+                    }
+                }
+            },
+            "outputs": {}
+        },
+        "connectionReferences": {
+            "shared_office365": {
+                "connectionName": "{YOUR_CONNECTION_ID}",
+                "source": "Embedded",
+                "id": "/providers/Microsoft.PowerApps/apis/shared_office365",
+                "tier": "NotSpecified"
+            }
+        }
+    },
+    "schemaVersion": "1.0.0.0"
+}

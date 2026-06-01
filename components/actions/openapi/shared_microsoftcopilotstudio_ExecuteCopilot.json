@@ -1,0 +1,117 @@
+﻿{
+    "id":  "shared_microsoftcopilotstudio_ExecuteCopilot",
+    "connector":  "shared_microsoftcopilotstudio",
+    "connectorBase":  "shared_microsoftcopilotstudio",
+    "operationId":  "ExecuteCopilot",
+    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_microsoftcopilotstudio",
+    "type":  "OpenApiConnection",
+    "learnedFrom":  [
+                        "f1e81397-e146-f111-bec7-6045bd5777da",
+                        "932d6c81-6c67-f011-bec3-000d3aa1971f",
+                        "c4d4422f-d08a-c579-ceb2-1169b9467b14",
+                        "620b16f5-f5be-f011-bbd3-6045bd205ea8",
+                        "4e37fe81-979a-f011-bbd3-000d3a5cd8d3",
+                        "728257ff-93f6-f011-8406-0022480a3b0e",
+                        "38aa543f-f20d-1475-ebb9-44311524b24a",
+                        "707b856a-9320-f111-88b3-7ced8d3c72c7",
+                        "725f12eb-4053-f111-a825-7ced8d3c72c7",
+                        "2ef8f403-7322-f111-88b3-7ced8d3c7b0f"
+                    ],
+    "learnedFromName":  [
+                            "AgentFlow-EmailRounting",
+                            "When a new email arrives (V3)",
+                            "Untitled flow",
+                            "当收到客服公共邮箱电邮时",
+                            "test-copilot",
+                            "When a new email arrives (V3)",
+                            "Schedule-1 week-PPT Generator",
+                            "Recurring Copilot Trigger",
+                            "When a file is created (properties only)",
+                            "Agent Flow- Task Modified"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "environment":  [
+                        "{dataverseOrg}",
+                        "orgdf331f66.crm5.dynamics.com",
+                        "org1cd97ca4.crm.dynamics.com"
+                    ],
+    "template":  {
+                     "Sends_a_prompt_to_the_specified_copilot_for_processing":  {
+                                                                                    "type":  "OpenApiConnection",
+                                                                                    "inputs":  {
+                                                                                                   "parameters":  {
+                                                                                                                      "Copilot":  "cre47_agentR_VtwP",
+                                                                                                                      "body/message":  "你是邮件路由触发流程。收到新邮件后，请严格按以下规则处理这封邮件：\n1. 使用 Dataverse MCP 先查询 Active 的 Routing Rule，再根据规则和默认分类判断 Category 与 Assigned Team。\n2. 提取 Subject、Sender、Received Time、Detected Language、Summary、Category、Assigned Team、Priority、Confidence、Reason、Needs Human Review、Review Reason、Status。\n3. 如果可以明确分配，Status=Routed；如果涉及金额、合同、合规、权限、客户承诺、多个类别或置信度低于 0.75，Status=Needs Review 且 Needs Human Review=true。\n4. 处理完成后，允许使用 Dataverse MCP 创建 Email Routing Log 记录，也可以按需更新该记录；不要删除任何 Dataverse 数据。\n5. 如果 Teams 工具可用，请向负责团队或人工审核团队发送通知，内容包含主题、类别、优先级、状态、负责人/团队、摘要和审核原因。\n6. 默认用中文输出结构化处理结果；如果邮件语言是英文或日文，也要记录 Detected Language 并保留关键原文。\n\n【已经包含了MessageId（@{outputs(\u0027Compose\u0027)?[\u0027id\u0027]}），你需要创建记录的时候自动填写上去 】\n所有邮件信息如下\nMailBox:\nuser@contoso.onmicrosoft.com\n\n@{outputs(\u0027Compose\u0027)}\n\nFrom:@{outputs(\u0027Compose\u0027)?[\u0027from\u0027]}\n主题：@{outputs(\u0027Compose\u0027)?[\u0027subject\u0027]}\n接收时间：@{outputs(\u0027Compose\u0027)?[\u0027receivedDateTime\u0027]}\n\n\n邮件正文如下：\nUse content from @{body(\u0027Html_to_text\u0027)}"
+                                                                                                                  },
+                                                                                                   "host":  {
+                                                                                                                "apiId":  "/providers/Microsoft.PowerApps/apis/shared_microsoftcopilotstudio",
+                                                                                                                "operationId":  "ExecuteCopilot",
+                                                                                                                "connectionName":  "shared_microsoftcopilotstudio"
+                                                                                                            }
+                                                                                               },
+                                                                                    "runAfter":  {
+                                                                                                     "Compose":  [
+                                                                                                                     "Succeeded"
+                                                                                                                 ]
+                                                                                                 },
+                                                                                    "metadata":  {
+                                                                                                     "operationMetadataId":  "fd38733d-d85c-40ca-a98c-01c7bfb66451"
+                                                                                                 }
+                                                                                }
+                 },
+    "inputSchema":  {
+                        "x-ms-conversation-id":  {
+                                                     "description":  "Provide exisiting conversation id to resume Agent execution.",
+                                                     "in":  "header",
+                                                     "type":  "string",
+                                                     "required":  false
+                                                 },
+                        "environmentId":  {
+                                              "description":  "Optional environment ID",
+                                              "in":  "query",
+                                              "type":  "string",
+                                              "required":  false
+                                          },
+                        "body":  {
+                                     "description":  null,
+                                     "in":  "body",
+                                     "type":  null,
+                                     "required":  true
+                                 },
+                        "Copilot":  {
+                                        "description":  "Agent",
+                                        "in":  "path",
+                                        "type":  "string",
+                                        "required":  true
+                                    },
+                        "connectionId":  {
+                                             "description":  null,
+                                             "in":  "path",
+                                             "type":  "string",
+                                             "required":  true
+                                         }
+                    },
+    "outputSchema":  {
+                         "properties":  {
+                                            "ConversationId":  {
+                                                                   "type":  "string",
+                                                                   "description":  "The conversation ID associated with the response"
+                                                               }
+                                        }
+                     },
+    "dynamicValuesRef":  {
+                             "Copilot":  {
+                                             "operationId":  "ListCopilots",
+                                             "titlePath":  "name",
+                                             "parameters":  {
+
+                                                            },
+                                             "valueCollection":  "copilotsList",
+                                             "valuePath":  "schemaname"
+                                         }
+                         },
+    "swaggerLearned":  true,
+    "graphConvertible":  true,
+    "graphNodeType":  "connector"
+}

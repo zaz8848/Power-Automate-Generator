@@ -1,0 +1,330 @@
+{
+    "id": "shared_office365_GetAttachment_V2",
+    "connector": "shared_office365",
+    "connectorBase": "shared_office365",
+    "operationId": "GetAttachment_V2",
+    "apiId": "/providers/Microsoft.PowerApps/apis/shared_office365",
+    "type": "OpenApiConnection",
+    "learnedFrom": [
+        "0db98c9e-fd89-ee11-8179-000d3a551f03"
+    ],
+    "learnedFromName": [
+        "Automatic Flow - Monitoring incoming Email and save to Dataverse"
+    ],
+    "learnedAt": "2026-05-26",
+    "verified": true,
+    "environment": [
+        "org1cd97ca4.crm.dynamics.com"
+    ],
+    "template": {
+        "Get_Attachment_(V2)": {
+            "runAfter": {},
+            "metadata": {
+                "operationMetadataId": "ca320519-5faa-4dec-abf5-56b042df80ce"
+            },
+            "type": "OpenApiConnection",
+            "inputs": {
+                "host": {
+                    "connectionName": "shared_office365",
+                    "operationId": "GetAttachment_V2",
+                    "apiId": "/providers/Microsoft.PowerApps/apis/shared_office365"
+                },
+                "parameters": {
+                    "messageId": "@triggerOutputs()?['body/id']",
+                    "attachmentId": "@item()?['id']"
+                },
+                "authentication": "@parameters('$authentication')"
+            }
+        }
+    },
+    "inputSchema": {
+        "connectionId": {
+            "description": null,
+            "in": "path",
+            "type": "string",
+            "required": true
+        },
+        "mailboxAddress": {
+            "description": "Address of the shared mailbox to retrieve attachment from.",
+            "in": "query",
+            "type": "string",
+            "required": false
+        },
+        "extractSensitivityLabel": {
+            "description": "Select if you want to extract Sensitivity label ( false, true).",
+            "in": "query",
+            "type": "boolean",
+            "required": false
+        },
+        "attachmentId": {
+            "description": "Id of the attachment to download.",
+            "in": "path",
+            "type": "string",
+            "required": true
+        },
+        "messageId": {
+            "description": "Id of the email.",
+            "in": "path",
+            "type": "string",
+            "required": true
+        },
+        "fetchSensitivityLabelMetadata": {
+            "description": "A boolean whether to fetch sensitivity label Metadata for associated LabelId.",
+            "in": "query",
+            "type": "boolean",
+            "required": false
+        }
+    },
+    "outputSchema": {
+        "properties": {
+            "lastModifiedDateTime": {
+                "type": "string",
+                "description": "The date and time when the attachment was last modified."
+            },
+            "id": {
+                "type": "string",
+                "description": "Id of the attachment."
+            },
+            "size": {
+                "type": "integer",
+                "description": "Size of attachment."
+            },
+            "sensitivityLabelInfo": {
+                "type": "array",
+                "description": null
+            },
+            "isInline": {
+                "type": "boolean",
+                "description": "Set to true if this is an inline attachment."
+            },
+            "name": {
+                "type": "string",
+                "description": "Name of attachment."
+            },
+            "contentId": {
+                "type": "string",
+                "description": "Content Id"
+            },
+            "contentBytes": {
+                "type": "string",
+                "description": "Content of attachment."
+            },
+            "contentType": {
+                "type": "string",
+                "description": "Content type of attachment."
+            }
+        }
+    },
+    "dynamicValuesRef": {
+        "mailboxAddress": {
+            "operationId": null,
+            "parameters": {},
+            "valuePath": "mail"
+        }
+    },
+    "swaggerLearned": true,
+    "graphConvertible": true,
+    "graphNodeType": "connector",
+    "graphTemplate": {
+        "type": "connector",
+        "config": {
+            "apiName": "shared_office365",
+            "displayName": "Office 365 Outlook",
+            "iconUri": "https://static.powerapps.com/resource/ppcr/releases/v1.0.1812/1.0.1812.4763/office365/icon.png",
+            "brandColor": "#0078D4",
+            "operationName": "GetAttachment_V2",
+            "operationType": "OpenApiConnection",
+            "parametersSchema": {
+                "type": "object",
+                "properties": {
+                    "messageId": {
+                        "type": "string",
+                        "title": "消息 ID",
+                        "description": "电子邮件 ID。",
+                        "minLength": 1,
+                        "x-ms-property-name-alias": "messageId"
+                    },
+                    "attachmentId": {
+                        "type": "string",
+                        "title": "附件 ID",
+                        "description": "要下载的附件的 ID。",
+                        "minLength": 1,
+                        "x-ms-property-name-alias": "attachmentId"
+                    },
+                    "mailboxAddress": {
+                        "type": "string",
+                        "title": "原始邮箱地址",
+                        "x-ms-dynamic-list": {
+                            "builtInOperation": "AadGraph.GetUsers",
+                            "parameters": {},
+                            "itemValuePath": "mail"
+                        },
+                        "description": "要从中检索附件的共享邮箱的地址。",
+                        "x-ms-property-name-alias": "mailboxAddress"
+                    },
+                    "extractSensitivityLabel": {
+                        "type": "boolean",
+                        "title": "提取敏感度标签",
+                        "description": "选择是否要提取敏感度标签(false、true)。",
+                        "x-ms-property-name-alias": "extractSensitivityLabel"
+                    },
+                    "fetchSensitivityLabelMetadata": {
+                        "type": "boolean",
+                        "title": "敏感度标签元数据",
+                        "description": "一个布尔值，用于确定是否提取关联 LabelId 的敏感度标签元数据。",
+                        "x-ms-property-name-alias": "fetchSensitivityLabelMetadata"
+                    }
+                },
+                "required": [
+                    "attachmentId",
+                    "messageId"
+                ]
+            },
+            "connectionName": "shared_office365",
+            "parameters": {
+                "messageId": "@{triggerOutputs()?['body/id']}",
+                "attachmentId": "@{items('Apply_to_each')?['id']}"
+            }
+        },
+        "outcomes": [
+            {
+                "id": "default",
+                "label": "Default",
+                "outcomeSchema": {
+                    "type": "object",
+                    "properties": {
+                        "body": {
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                    "type": "string",
+                                    "title": "ID",
+                                    "description": "附件的 ID。",
+                                    "x-ms-property-name-alias": "body/id"
+                                },
+                                "name": {
+                                    "type": "string",
+                                    "title": "名称",
+                                    "description": "附件的名称。",
+                                    "x-ms-property-name-alias": "body/name"
+                                },
+                                "contentType": {
+                                    "type": "string",
+                                    "title": "内容类型",
+                                    "description": "附件的内容类型。",
+                                    "x-ms-property-name-alias": "body/contentType"
+                                },
+                                "size": {
+                                    "type": "integer",
+                                    "title": "大小",
+                                    "format": "int32",
+                                    "description": "附件的大小。",
+                                    "x-ms-property-name-alias": "body/size"
+                                },
+                                "contentBytes": {
+                                    "type": "string",
+                                    "title": "内容字节",
+                                    "format": "byte",
+                                    "description": "附件的内容。",
+                                    "x-ms-property-name-alias": "body/contentBytes"
+                                },
+                                "isInline": {
+                                    "type": "boolean",
+                                    "title": "是内联的",
+                                    "description": "如果这是内联附件，则设置为 true。",
+                                    "x-ms-property-name-alias": "body/isInline"
+                                },
+                                "lastModifiedDateTime": {
+                                    "type": "string",
+                                    "title": "上次修改日期/时间",
+                                    "format": "date-time",
+                                    "description": "上次修改附件的日期和时间。",
+                                    "x-ms-property-name-alias": "body/lastModifiedDateTime"
+                                },
+                                "contentId": {
+                                    "type": "string",
+                                    "title": "内容 ID",
+                                    "description": "内容 ID",
+                                    "x-ms-property-name-alias": "body/contentId"
+                                },
+                                "sensitivityLabelInfo": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "sensitivityLabelId": {
+                                                "type": "string",
+                                                "title": "sensitivityLabelId",
+                                                "description": "SensitivityLabel ID。",
+                                                "x-ms-property-name-alias": "sensitivityLabelId"
+                                            },
+                                            "name": {
+                                                "type": "string",
+                                                "title": "名称",
+                                                "description": "SensitivityLabel 名称。",
+                                                "x-ms-property-name-alias": "name"
+                                            },
+                                            "displayName": {
+                                                "type": "string",
+                                                "title": "displayName",
+                                                "description": "SensitivityLabel displayName 信息",
+                                                "x-ms-property-name-alias": "displayName"
+                                            },
+                                            "tooltip": {
+                                                "type": "string",
+                                                "title": "工具提示",
+                                                "description": "工具提示上的 SensitivityLabel 详细信息。",
+                                                "x-ms-property-name-alias": "tooltip"
+                                            },
+                                            "priority": {
+                                                "type": "integer",
+                                                "title": "优先级",
+                                                "format": "int32",
+                                                "description": "SensitivityLabel 优先级。",
+                                                "x-ms-property-name-alias": "priority"
+                                            },
+                                            "color": {
+                                                "type": "string",
+                                                "title": "颜色",
+                                                "description": "SensitivityLabel 颜色。",
+                                                "x-ms-property-name-alias": "color"
+                                            },
+                                            "isEncrypted": {
+                                                "type": "boolean",
+                                                "title": "isEncrypted",
+                                                "description": "SensitivityLabel 是否已加密。",
+                                                "x-ms-property-name-alias": "isEncrypted"
+                                            },
+                                            "isEnabled": {
+                                                "type": "boolean",
+                                                "title": "isEnabled",
+                                                "description": "是否已启用 SensitivityLabel。",
+                                                "x-ms-property-name-alias": "isEnabled"
+                                            },
+                                            "isParent": {
+                                                "type": "boolean",
+                                                "title": "isParent",
+                                                "description": "SensitivityLabel 是否为父级。",
+                                                "x-ms-property-name-alias": "isParent"
+                                            },
+                                            "parentSensitivityLabelId": {
+                                                "type": "string",
+                                                "title": "parentSensitivityLabelId",
+                                                "description": "父级 SensitivityLabel ID。",
+                                                "x-ms-property-name-alias": "parentSensitivityLabelId"
+                                            }
+                                        },
+                                        "required": []
+                                    },
+                                    "x-ms-property-name-alias": "body/sensitivityLabelInfo"
+                                }
+                            },
+                            "required": [],
+                            "x-ms-property-name-alias": "body"
+                        }
+                    }
+                }
+            }
+        ]
+    }
+}

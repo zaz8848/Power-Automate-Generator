@@ -1,0 +1,38 @@
+﻿{
+    "id":  "shared_aisteps",
+    "displayName":  "AI actions",
+    "connectorId":  "/providers/Microsoft.PowerApps/apis/shared_aisteps",
+    "learnedFrom":  [
+                        "2901c842-91f9-f011-8406-00224859581e"
+                    ],
+    "learnedAt":  "2026-05-26",
+    "operations":  [
+                       {
+                           "operationId":  "RunAIFlow",
+                           "description":  "杩愯 AI Flow锛堣皟鐢ㄩ閰嶇疆鐨?AI 瀛愭祦绋嬶級",
+                           "parameters":  {
+                                              "flowId":  {
+                                                             "type":  "string",
+                                                             "required":  true,
+                                                             "description":  "鐩爣 AI flow 鐨?GUID"
+                                                         }
+                                          },
+                           "notes":  "鐢ㄤ簬閾惧紡璋冪敤鍏朵粬 AI flow锛屽父瑙佷簬 Copilot Studio agent 鍦烘櫙"
+                       }
+                   ],
+    "connectionReference":  {
+                                "example":  {
+                                                "api":  {
+                                                            "name":  "shared_aisteps"
+                                                        },
+                                                "connection":  {
+                                                                   "connectionReferenceLogicalName":  "new_sharedaisteps_168c7"
+                                                               },
+                                                "runtimeSource":  "embedded",
+                                                "impersonation":  {
+
+                                                                  }
+                                            }
+                            },
+    "swaggerUrl":  "https://api.powerapps.com/providers/Microsoft.PowerApps/apis/shared_aisteps?api-version=2020-06-01\u0026$filter=environment eq \u0027{envId}\u0027\u0026$select=properties.swagger"
+}

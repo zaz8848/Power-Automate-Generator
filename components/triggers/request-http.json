@@ -1,0 +1,34 @@
+﻿{
+    "id":  "Request_Http",
+    "type":  "Request",
+    "kind":  "Http",
+    "learnedFrom":  [
+                        "d6b0f275-a18b-f011-b4cc-000d3aa3d219",
+                        "83c631fc-3476-4a4a-c15c-0f00dc1e6ed7",
+                        "7cf68b01-8141-8cb2-2227-5dd7ef1d036d",
+                        "e6dac266-bb06-7965-202f-5e23a624e1b8",
+                        "b351d853-121b-213c-56cf-9c584ef3980e"
+                    ],
+    "learnedFromName":  [
+                            "Http -\u003e Compose",
+                            "Untitled flow",
+                            "Http-Test2",
+                            "Untitled flow",
+                            "Untitled flow"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "template":  {
+                     "manual":  {
+                                    "metadata":  {
+                                                     "operationMetadataId":  "a1138071-45b8-4f09-a98a-477e11d1b543"
+                                                 },
+                                    "type":  "Request",
+                                    "kind":  "Http",
+                                    "inputs":  {
+                                                   "method":  "GET",
+                                                   "triggerAuthenticationType":  "All"
+                                               }
+                                }
+                 }
+}

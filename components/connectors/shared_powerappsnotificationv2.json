@@ -1,0 +1,34 @@
+﻿{
+    "connector":  "shared_onedriveforbusiness",
+    "learnedAt":  "2026-05-26",
+    "operations":  [
+                       {
+                           "operationId":  "GetFileThumbnail",
+                           "type":  "OpenApiConnection",
+                           "componentFile":  "actions/openapi/shared_onedriveforbusiness_GetFileThumbnail.json",
+                           "flowCount":  1
+                       },
+                       {
+                           "operationId":  "CreateFile",
+                           "type":  "OpenApiConnection",
+                           "componentFile":  "actions/openapi/shared_onedriveforbusiness_CreateFile.json",
+                           "flowCount":  1
+                       },
+                       {
+                           "operationId":  "ConvertFile",
+                           "type":  "OpenApiConnection",
+                           "componentFile":  "actions/openapi/shared_onedriveforbusiness_ConvertFile.json",
+                           "flowCount":  1
+                       },
+                       {
+                           "operationId":  "DeleteFile",
+                           "type":  "OpenApiConnection",
+                           "componentFile":  "actions/openapi/shared_onedriveforbusiness_DeleteFile.json",
+                           "flowCount":  1
+                       }
+                   ],
+    "triggers":  [
+
+                 ],
+    "swaggerUrl":  "https://api.powerapps.com/providers/Microsoft.PowerApps/apis/shared_onedriveforbusiness?api-version=2020-06-01\u0026$filter=environment eq \u0027{envId}\u0027\u0026$select=properties.swagger"
+}

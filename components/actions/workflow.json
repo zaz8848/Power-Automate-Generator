@@ -1,0 +1,79 @@
+﻿{
+    "id":  "Wait",
+    "type":  "Wait",
+    "learnedFrom":  [
+                        "819831c9-e258-f111-a825-6045bd5777da",
+                        "829d9bbc-0fb7-ea11-a812-000d3a1ab88b",
+                        "861bdd5e-bc09-ef11-9f8a-000d3a5cb958",
+                        "fa40c544-9a0b-ef11-9f8a-000d3a5cb958",
+                        "e3f17f06-9373-f011-b4cc-00224802c180",
+                        "fe662b82-0dff-ef11-bae2-00224802c180",
+                        "b65e4a38-3adc-217b-220a-7ae1505da6f2"
+                    ],
+    "learnedFromName":  [
+                            "SLAInstanceMonitoringWarningAndExpiryFlow",
+                            "IoT - Flow - Schedule Device Data Pulls",
+                            "Test Automation | Enrich with Azure Application Insights",
+                            "Test Automation | Enrich with Dataverse Conversation Transcripts",
+                            "Test Automation | AI Builder Credit Consumption",
+                            "Test Automation | Run Multiturn Tests (Child)",
+                            "3.Bot Get Reponse"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "templates":  [
+                      {
+                          "template":  {
+                                           "runAfter":  {
+
+                                                        },
+                                           "metadata":  {
+                                                            "operationMetadataId":  "78e60b68-d68a-46ac-b424-150803a226aa"
+                                                        },
+                                           "type":  "Wait",
+                                           "inputs":  {
+                                                          "until":  {
+                                                                        "timestamp":  "@triggerOutputs()?[\u0027body/warningtime\u0027]"
+                                                                    }
+                                                      }
+                                       },
+                          "name":  "Delay_until_Warning_Time"
+                      },
+                      {
+                          "template":  {
+                                           "runAfter":  {
+
+                                                        },
+                                           "metadata":  {
+                                                            "operationMetadataId":  "29e286d2-0124-4783-9ac6-ad10436deb87"
+                                                        },
+                                           "type":  "Wait",
+                                           "inputs":  {
+                                                          "until":  {
+                                                                        "timestamp":  "@outputs(\u0027Update_status_to_Nearing_Noncompliance\u0027)?[\u0027body/failuretime\u0027]"
+                                                                    }
+                                                      }
+                                       },
+                          "name":  "Delay_until_failure_time_after_reaching_Nearing_Noncompliance"
+                      },
+                      {
+                          "template":  {
+                                           "runAfter":  {
+
+                                                        },
+                                           "metadata":  {
+                                                            "operationMetadataId":  "85d60a98-1ff4-4978-8a4f-2af32767fa37"
+                                                        },
+                                           "type":  "Wait",
+                                           "inputs":  {
+                                                          "until":  {
+                                                                        "timestamp":  "@triggerOutputs()?[\u0027body/failuretime\u0027]"
+                                                                    }
+                                                      }
+                                       },
+                          "name":  "Delay_until_Failure_Time"
+                      }
+                  ],
+    "graphConvertible":  true,
+    "graphNodeType":  "builtinFunction"
+}

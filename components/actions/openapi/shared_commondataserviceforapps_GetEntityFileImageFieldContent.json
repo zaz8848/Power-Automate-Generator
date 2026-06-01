@@ -1,0 +1,157 @@
+﻿{
+    "id":  "shared_commondataserviceforapps_GetEntityFileImageFieldContent",
+    "connector":  "shared_commondataserviceforapps",
+    "connectorBase":  "shared_commondataserviceforapps",
+    "operationId":  "GetEntityFileImageFieldContent",
+    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+    "type":  "OpenApiConnection",
+    "learnedFrom":  [
+                        "a0921697-c07c-f011-b4cc-000d3a099cdf",
+                        "bf53b222-1c95-f011-b4cc-00224856c036",
+                        "b351d853-121b-213c-56cf-9c584ef3980e",
+                        "32542a90-9cf7-f011-8406-0022480a3b0e",
+                        "702c1ebc-fdf8-f011-8406-0022480a3b0e",
+                        "91fbfdcc-d863-f011-bec3-6045bd00625f"
+                    ],
+    "learnedFromName":  [
+                            "Child Flow - Extract Content From Document",
+                            "AgentFlow-Approval",
+                            "Untitled flow",
+                            "Automatic Flow - Detect Process Setting",
+                            "Utility Flow - Convert Document to PDF through OneDrive",
+                            "Automatic Flow - Send Translated Document When Translation Log Status Changes to Success"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "environment":  [
+                        "orgdf331f66.crm5.dynamics.com",
+                        "org1cd97ca4.crm.dynamics.com"
+                    ],
+    "template":  {
+                     "Download_a_file_or_an_image":  {
+                                                         "runAfter":  {
+
+                                                                      },
+                                                         "metadata":  {
+                                                                          "operationMetadataId":  "1dec220f-b25c-4cb7-9bde-e39b1791b292"
+                                                                      },
+                                                         "type":  "OpenApiConnection",
+                                                         "inputs":  {
+                                                                        "host":  {
+                                                                                     "connectionName":  "shared_commondataserviceforapps",
+                                                                                     "operationId":  "GetEntityFileImageFieldContent",
+                                                                                     "apiId":  "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                                                                                 },
+                                                                        "parameters":  {
+                                                                                           "entityName":  "crff8_rfpdocuments",
+                                                                                           "recordId":  "@triggerBody()[\u0027text\u0027]",
+                                                                                           "fileImageFieldName":  "crff8_file"
+                                                                                       },
+                                                                        "authentication":  {
+                                                                                               "type":  "Raw",
+                                                                                               "value":  "@json(decodeBase64(triggerOutputs().headers[\u0027X-MS-APIM-Tokens\u0027]))[\u0027$ConnectionKey\u0027]"
+                                                                                           }
+                                                                    }
+                                                     }
+                 },
+    "inputSchema":  [
+                        {
+                            "name":  "connectionId",
+                            "in":  "path",
+                            "required":  true,
+                            "x-ms-visibility":  "internal",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "Range",
+                            "in":  "header",
+                            "description":  "The header parameter required to make Microsoft Dataverse support chunked downloads",
+                            "required":  true,
+                            "x-ms-summary":  "Range",
+                            "x-ms-visibility":  "internal",
+                            "type":  "string",
+                            "default":  "bytes=0-4194303"
+                        },
+                        {
+                            "name":  "entityName",
+                            "in":  "path",
+                            "description":  "Choose a table",
+                            "required":  true,
+                            "x-ms-url-encoding":  "double",
+                            "x-ms-dynamic-values":  {
+                                                        "operationId":  "GetEntities",
+                                                        "parameters":  {
+
+                                                                       },
+                                                        "value-collection":  "value",
+                                                        "value-path":  "EntitySetName",
+                                                        "value-title":  "DisplayCollectionName/UserLocalizedLabel/Label"
+                                                    },
+                            "x-ms-summary":  "Table name",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "recordId",
+                            "in":  "path",
+                            "description":  "Enter the row\u0027s globally unique identifier (GUID)",
+                            "required":  true,
+                            "x-ms-url-encoding":  "double",
+                            "x-ms-summary":  "Row ID",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "fileImageFieldName",
+                            "in":  "path",
+                            "description":  "Choose a column",
+                            "required":  true,
+                            "x-ms-url-encoding":  "double",
+                            "x-ms-dynamic-list":  {
+                                                      "operationId":  "GetAttributeFilters",
+                                                      "parameters":  {
+                                                                         "entityName":  {
+                                                                                            "parameterReference":  "entityName"
+                                                                                        },
+                                                                         "attributeTypeNames":  {
+                                                                                                    "value":  [
+                                                                                                                  "ImageType",
+                                                                                                                  "FileType"
+                                                                                                              ]
+                                                                                                }
+                                                                     },
+                                                      "itemsPath":  "value",
+                                                      "itemValuePath":  "LogicalName",
+                                                      "itemTitlePath":  "DisplayName/UserLocalizedLabel/Label"
+                                                  },
+                            "x-ms-summary":  "Column name",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "size",
+                            "in":  "query",
+                            "description":  "Enter \u0027full\u0027 for entire image if enabled (default = thumbnail)",
+                            "x-ms-summary":  "Image size",
+                            "x-ms-visibility":  "advanced",
+                            "type":  "string"
+                        }
+                    ],
+    "dynamicValuesRef":  {
+                             "entityName":  {
+                                                "operationId":  "GetEntities",
+                                                "titlePath":  "DisplayCollectionName/UserLocalizedLabel/Label",
+                                                "parameters":  {
+
+                                                               },
+                                                "valueCollection":  "value",
+                                                "valuePath":  "EntitySetName"
+                                            }
+                         },
+    "swaggerLearned":  true,
+    "outputSchema":  {
+                         "format":  "binary",
+                         "description":  "The content of the file or image",
+                         "type":  "string",
+                         "x-ms-summary":  "File or image content"
+                     },
+    "graphConvertible":  true,
+    "graphNodeType":  "connector"
+}

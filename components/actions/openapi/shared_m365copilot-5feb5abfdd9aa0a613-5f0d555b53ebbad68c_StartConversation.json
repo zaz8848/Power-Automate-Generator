@@ -1,0 +1,76 @@
+﻿{
+    "id":  "shared_m365copilot-5feb5abfdd9aa0a613-5f0d555b53ebbad68c_StartConversation",
+    "connector":  "shared_m365copilot-5feb5abfdd9aa0a613-5f0d555b53ebbad68c",
+    "connectorBase":  "shared_m365copilot-5feb5abfdd9aa0a613-5f0d555b53ebbad68c",
+    "operationId":  "StartConversation",
+    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_m365copilot-5feb5abfdd9aa0a613-5f0d555b53ebbad68c",
+    "type":  "OpenApiConnection",
+    "learnedFrom":  [
+                        "3f2be75e-a103-6cb5-e222-4610920bbf93"
+                    ],
+    "learnedFromName":  [
+                            "M365 Agent API-Conversation"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "environment":  [
+                        "orgdf331f66.crm5.dynamics.com"
+                    ],
+    "template":  {
+                     "StartConversation":  {
+                                               "runAfter":  {
+                                                                "Compose":  [
+                                                                                "Succeeded"
+                                                                            ]
+                                                            },
+                                               "metadata":  {
+                                                                "operationMetadataId":  "fb818e46-7fff-424a-99e3-727de838b14a"
+                                                            },
+                                               "type":  "OpenApiConnection",
+                                               "inputs":  {
+                                                              "host":  {
+                                                                           "connectionName":  "shared_m365copilot-5feb5abfdd9aa0a613-5f0d555b53ebbad68c",
+                                                                           "operationId":  "StartConversation",
+                                                                           "apiId":  "/providers/Microsoft.PowerApps/apis/shared_m365copilot-5feb5abfdd9aa0a613-5f0d555b53ebbad68c"
+                                                                       },
+                                                              "parameters":  {
+                                                                                 "conversationId":  "8b5ca333-89f4-43d9-9048-341b70160586",
+                                                                                 "body":  {
+                                                                                              "message":  {
+                                                                                                              "text":  "@{outputs(\u0027Compose\u0027)}"
+                                                                                                          },
+                                                                                              "locationHint":  {
+                                                                                                                   "timeZone":  "America/New_York"
+                                                                                                               },
+                                                                                              "contextualResources":  {
+                                                                                                                          "files":  [
+                                                                                                                                        {
+                                                                                                                                            "uri":  "https://contoso-my.sharepoint.com/:b:/g/personal/user_contoso_onmicrosoft_com/IQAL7228z6dCQaBQ7AToARfEATv6BRFaKB6n1YsGJlifzkU?e=EXAMPLE"
+                                                                                                                                        }
+                                                                                                                                    ]
+                                                                                                                      }
+                                                                                          }
+                                                                             },
+                                                              "authentication":  {
+                                                                                     "type":  "Raw",
+                                                                                     "value":  "@json(decodeBase64(triggerOutputs().headers[\u0027X-MS-APIM-Tokens\u0027]))[\u0027$ConnectionKey\u0027]"
+                                                                                 }
+                                                          }
+                                           }
+                 },
+    "swaggerLearned":  false,
+    "inputSchema":  [
+                        {
+                            "name":  "connectionId",
+                            "in":  "path",
+                            "type":  "string",
+                            "required":  true
+                        }
+                    ],
+    "outputSchema":  {
+                         "type":  "object",
+                         "description":  "Custom connector - Swagger unavailable"
+                     },
+    "graphConvertible":  true,
+    "graphNodeType":  "connector"
+}

@@ -1,0 +1,208 @@
+﻿{
+    "id":  "shared_excelonlinebusiness_PatchItem",
+    "connector":  "shared_excelonlinebusiness",
+    "connectorBase":  "shared_excelonlinebusiness",
+    "operationId":  "PatchItem",
+    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_excelonlinebusiness",
+    "type":  "OpenApiConnection",
+    "learnedFrom":  [
+                        "60c177a9-082a-8438-8a3d-a4c4e6e814e3",
+                        "2db9fcad-71bb-76a7-4b48-d0a01836f4f9"
+                    ],
+    "learnedFromName":  [
+                            "Manually -  Run case list",
+                            "Untitled flow"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "environment":  [
+                        "orgdf331f66.crm5.dynamics.com"
+                    ],
+    "template":  {
+                     "Update_a_row":  {
+                                          "runAfter":  {
+                                                           "Run_a_prompt":  [
+                                                                                "Succeeded"
+                                                                            ]
+                                                       },
+                                          "metadata":  {
+                                                           "01S3C4UYRXLZMEM7VZ55F2VVMKBNDAV6DJ":  "/HaierTestFolder/HaierTestQA.xlsx",
+                                                           "tableId":  "{147C9B37-D3A8-4C7F-84CB-E833459C49BD}",
+                                                           "operationMetadataId":  "94cc00f7-a74e-4328-984f-35d34fd72619"
+                                                       },
+                                          "type":  "OpenApiConnection",
+                                          "inputs":  {
+                                                         "host":  {
+                                                                      "connectionName":  "shared_excelonlinebusiness",
+                                                                      "operationId":  "PatchItem",
+                                                                      "apiId":  "/providers/Microsoft.PowerApps/apis/shared_excelonlinebusiness"
+                                                                  },
+                                                         "parameters":  {
+                                                                            "source":  "me",
+                                                                            "drive":  "b!W5TMYBpW30KlzcNcb-8BfVCtZnaHlQNNmgnShIj4o8MKm36ivRLHQZOufUHGJ2-M",
+                                                                            "file":  "01S3C4UYRXLZMEM7VZ55F2VVMKBNDAV6DJ",
+                                                                            "table":  "{147C9B37-D3A8-4C7F-84CB-E833459C49BD}",
+                                                                            "idColumn":  "Guid",
+                                                                            "id":  "@items(\u0027For_each\u0027)?[\u0027Guid\u0027]",
+                                                                            "item/TranlatedContent":  "@outputs(\u0027Run_a_prompt\u0027)?[\u0027body/responsev2/predictionOutput/structuredOutput/ChineseTranslation\u0027]",
+                                                                            "item/IsUseful":  "@outputs(\u0027Run_a_prompt\u0027)?[\u0027body/responsev2/predictionOutput/structuredOutput/IsRelevant\u0027]"
+                                                                        },
+                                                         "authentication":  {
+                                                                                "type":  "Raw",
+                                                                                "value":  "@json(decodeBase64(triggerOutputs().headers[\u0027X-MS-APIM-Tokens\u0027]))[\u0027$ConnectionKey\u0027]"
+                                                                            }
+                                                     }
+                                      }
+                 },
+    "inputSchema":  {
+                        "source":  {
+                                       "description":  "Select from the drop-down or specify one of the following:\r\n            - \"me\"\r\n            - \"SharePoint Site URL\"\r\n            - \"users/someone\u0027s UPN\"\r\n            - \"groups/group Id\"\r\n            - \"sites/SharePoint Site URL:/teams/team name:\" (the colons are required)",
+                                       "in":  "query",
+                                       "type":  "string",
+                                       "required":  true
+                                   },
+                        "id":  {
+                                   "description":  "Enter the key value.",
+                                   "in":  "path",
+                                   "type":  "string",
+                                   "required":  true
+                               },
+                        "connectionId":  {
+                                             "description":  null,
+                                             "in":  "path",
+                                             "type":  "string",
+                                             "required":  true
+                                         },
+                        "dateTimeFormat":  {
+                                               "description":  "DateTime Format.",
+                                               "in":  "query",
+                                               "type":  "string",
+                                               "required":  false
+                                           },
+                        "mode":  {
+                                     "description":  "Mode of the operation.",
+                                     "in":  "query",
+                                     "type":  "string",
+                                     "required":  false
+                                 },
+                        "table":  {
+                                      "description":  "Select a table from the drop-down.",
+                                      "in":  "path",
+                                      "type":  "string",
+                                      "required":  true
+                                  },
+                        "idColumn":  {
+                                         "description":  "Select a column from the drop-down.",
+                                         "in":  "query",
+                                         "type":  "string",
+                                         "required":  true
+                                     },
+                        "drive":  {
+                                      "description":  "Select a document library from the drop-down.",
+                                      "in":  "path",
+                                      "type":  "string",
+                                      "required":  true
+                                  },
+                        "item":  {
+                                     "description":  "Provide the item properties.",
+                                     "in":  "body",
+                                     "type":  null,
+                                     "required":  true
+                                 },
+                        "file":  {
+                                     "description":  "Select an Excel file through File Browse.",
+                                     "in":  "path",
+                                     "type":  "string",
+                                     "required":  true
+                                 }
+                    },
+    "outputSchema":  {
+                         "$ref":  "Item",
+                         "properties":  {
+                                            "dynamicProperties":  {
+                                                                      "type":  "object",
+                                                                      "description":  null
+                                                                  }
+                                        }
+                     },
+    "dynamicValuesRef":  {
+                             "drive":  {
+                                           "operationId":  "GetDrives",
+                                           "titlePath":  "name",
+                                           "parameters":  {
+                                                              "$select":  "id,name",
+                                                              "source":  {
+                                                                             "parameter":  "source"
+                                                                         }
+                                                          },
+                                           "valueCollection":  "value",
+                                           "valuePath":  "id"
+                                       },
+                             "table":  {
+                                           "operationId":  "GetTables",
+                                           "titlePath":  "name",
+                                           "parameters":  {
+                                                              "drive":  {
+                                                                            "parameter":  "drive"
+                                                                        },
+                                                              "source":  {
+                                                                             "parameter":  "source"
+                                                                         },
+                                                              "$select":  "id,name",
+                                                              "file":  {
+                                                                           "parameter":  "file"
+                                                                       }
+                                                          },
+                                           "valueCollection":  "value",
+                                           "valuePath":  "id"
+                                       },
+                             "idColumn":  {
+                                              "operationId":  "GetColumns",
+                                              "titlePath":  "displayName",
+                                              "parameters":  {
+                                                                 "drive":  {
+                                                                               "parameter":  "drive"
+                                                                           },
+                                                                 "table":  {
+                                                                               "parameter":  "table"
+                                                                           },
+                                                                 "source":  {
+                                                                                "parameter":  "source"
+                                                                            },
+                                                                 "file":  {
+                                                                              "parameter":  "file"
+                                                                          }
+                                                             },
+                                              "valueCollection":  "value",
+                                              "valuePath":  "name"
+                                          },
+                             "source":  {
+                                            "operationId":  "GetSources",
+                                            "titlePath":  "displayName",
+                                            "parameters":  {
+                                                               "$select":  "id,displayName",
+                                                               "$top":  "999"
+                                                           },
+                                            "valueCollection":  "value",
+                                            "valuePath":  "id"
+                                        },
+                             "file":  {
+                                          "operationId":  null,
+                                          "parameters":  {
+                                                             "drive":  {
+                                                                           "parameter":  "drive"
+                                                                       },
+                                                             "isFolder":  false,
+                                                             "dataset":  null,
+                                                             "fileFilter":  [
+                                                                                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                                                                                "application/vnd.ms-excel.sheet.binary.macroEnabled.12"
+                                                                            ]
+                                                         },
+                                          "valuePath":  "Id"
+                                      }
+                         },
+    "swaggerLearned":  true,
+    "graphConvertible":  true,
+    "graphNodeType":  "connector"
+}

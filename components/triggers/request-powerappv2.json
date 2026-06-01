@@ -1,0 +1,63 @@
+﻿{
+    "id":  "Request_PowerAppV2",
+    "type":  "Request",
+    "kind":  "PowerAppV2",
+    "learnedFrom":  [
+                        "15a680d4-1e05-f111-8407-6045bd5777da",
+                        "e74b3f15-5310-f011-9988-000d3a329ac2",
+                        "3ddf75ff-1597-f011-b41c-000d3ac6a644",
+                        "e55931c1-601f-f011-998a-00224802c180",
+                        "d8a8c388-8a25-f011-8c4e-00224808dbf5",
+                        "98466431-8d25-f011-8c4e-00224808dbf5",
+                        "9e65ce8d-8f25-f011-8c4e-00224808dbf5",
+                        "0e2464d1-b350-f011-877a-002248095f4f",
+                        "7eb68ff6-e2a0-ef11-8a69-00224829a66f",
+                        "af2bf60d-0bb0-f011-bbd3-6045bd08568b",
+                        "c5eeb2b4-1974-f011-b4cc-6045bd203130",
+                        "e43ae9eb-84dc-f011-8544-6045bd205ea8",
+                        "f63da1ff-257b-ef11-a671-7c1e520158f7"
+                    ],
+    "learnedFromName":  [
+                            "PowerApps-Validate Invoices",
+                            "Global | Get Current Dataverse Url",
+                            "PowerApps-Generate RFP Proposal ",
+                            "Conversation Analyzer | Analyze Conversation Based On Prompt",
+                            "Setup Wizard | Get Solution Environment Variable Definitions Details",
+                            "Setup Wizard | Get Solution Connection References Details",
+                            "Setup Wizard | Get Solution Flows Details",
+                            "Sharepoint Synchronization | Validate Connection On Demand",
+                            "Conversation KPI | Get Conversation Transcripts Count",
+                            "Agent Inventory | Agents Data Load OnDemand",
+                            "Canvas App - Warranty Status Check",
+                            "PowerAppsFlow-Test1",
+                            "Conversation KPI | On Demand"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "template":  {
+                     "manual":  {
+                                    "metadata":  {
+                                                     "operationMetadataId":  "dc3eba08-47b0-4b8f-8493-65a3ee055fad"
+                                                 },
+                                    "type":  "Request",
+                                    "kind":  "PowerAppV2",
+                                    "inputs":  {
+                                                   "schema":  {
+                                                                  "type":  "object",
+                                                                  "properties":  {
+                                                                                     "number":  {
+                                                                                                    "description":  "Please enter a number",
+                                                                                                    "title":  "RequestId",
+                                                                                                    "type":  "number",
+                                                                                                    "x-ms-content-hint":  "NUMBER",
+                                                                                                    "x-ms-dynamically-added":  true
+                                                                                                }
+                                                                                 },
+                                                                  "required":  [
+                                                                                   "number"
+                                                                               ]
+                                                              }
+                                               }
+                                }
+                 }
+}

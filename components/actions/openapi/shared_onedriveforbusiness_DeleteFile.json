@@ -1,0 +1,119 @@
+﻿{
+    "id":  "shared_onedriveforbusiness_DeleteFile",
+    "connector":  "shared_onedriveforbusiness",
+    "connectorBase":  "shared_onedriveforbusiness",
+    "operationId":  "DeleteFile",
+    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_onedriveforbusiness",
+    "type":  "OpenApiConnection",
+    "learnedFrom":  [
+                        "ee87fd77-09fa-f011-8407-000d3a316017",
+                        "702c1ebc-fdf8-f011-8406-0022480a3b0e"
+                    ],
+    "learnedFromName":  [
+                            "Sharepoint-PO Uploaded-Extract Po Item",
+                            "Utility Flow - Convert Document to PDF through OneDrive"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "environment":  [
+                        "{dataverseOrg}",
+                        "org1cd97ca4.crm.dynamics.com"
+                    ],
+    "template":  {
+                     "Delete_file":  {
+                                         "type":  "OpenApiConnection",
+                                         "inputs":  {
+                                                        "parameters":  {
+                                                                           "id":  "@outputs(\u0027Create_file\u0027)?[\u0027body/Id\u0027]"
+                                                                       },
+                                                        "host":  {
+                                                                     "apiId":  "/providers/Microsoft.PowerApps/apis/shared_onedriveforbusiness",
+                                                                     "operationId":  "DeleteFile",
+                                                                     "connectionName":  "shared_onedriveforbusiness"
+                                                                 }
+                                                    },
+                                         "runAfter":  {
+                                                          "Create_file_1":  [
+                                                                                "Succeeded"
+                                                                            ]
+                                                      },
+                                         "metadata":  {
+                                                          "operationMetadataId":  "6298b871-ab6b-4ae7-a08d-f3fcbcea4b95"
+                                                      }
+                                     }
+                 },
+    "inputSchema":  [
+                        {
+                            "name":  "connectionId",
+                            "in":  "path",
+                            "required":  true,
+                            "x-ms-visibility":  "internal",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "id",
+                            "in":  "path",
+                            "description":  "The unique identifier of the file.",
+                            "required":  true,
+                            "type":  "string",
+                            "x-ms-summary":  "File",
+                            "x-ms-url-encoding":  "double",
+                            "x-ms-dynamic-values":  {
+                                                        "capability":  "file-picker",
+                                                        "parameters":  {
+                                                                           "isFolder":  false,
+                                                                           "fileFilter":  [
+
+                                                                                          ],
+                                                                           "dataset":  null
+                                                                       },
+                                                        "value-path":  "Id"
+                                                    },
+                            "x-ms-dynamic-tree":  {
+                                                      "settings":  {
+                                                                       "canSelectParentNodes":  false,
+                                                                       "canSelectLeafNodes":  true
+                                                                   },
+                                                      "open":  {
+                                                                   "operationId":  "ListAllRootFolders",
+                                                                   "itemValuePath":  "Id",
+                                                                   "itemTitlePath":  "DisplayName",
+                                                                   "itemFullTitlePath":  "Path",
+                                                                   "itemIsParent":  "(IsFolder eq true)"
+                                                               },
+                                                      "browse":  {
+                                                                     "operationId":  "ListFolder",
+                                                                     "parameters":  {
+                                                                                        "id":  {
+                                                                                                   "selectedItemValuePath":  "Id"
+                                                                                               }
+                                                                                    },
+                                                                     "itemValuePath":  "Id",
+                                                                     "itemTitlePath":  "DisplayName",
+                                                                     "itemFullTitlePath":  "Path",
+                                                                     "itemIsParent":  "(IsFolder eq true)"
+                                                                 }
+                                                  }
+                        }
+                    ],
+    "dynamicValuesRef":  {
+                             "id":  {
+                                        "operationId":  null,
+                                        "parameters":  {
+                                                           "isFolder":  false,
+                                                           "dataset":  null,
+                                                           "fileFilter":  [
+
+                                                                          ]
+                                                       },
+                                        "valuePath":  "Id"
+                                    }
+                         },
+    "swaggerLearned":  true,
+    "outputSchema":  {
+                         "type":  "object",
+                         "description":  "No response schema in Swagger"
+                     },
+    "graphConvertible":  true,
+    "graphNodeType":  "connector"
+}

@@ -1,0 +1,158 @@
+﻿{
+    "id":  "shared_commondataserviceforapps_2_UpdateRecord",
+    "connector":  "shared_commondataserviceforapps_2",
+    "connectorBase":  "shared_commondataserviceforapps",
+    "operationId":  "UpdateRecord",
+    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+    "type":  "OpenApiConnection",
+    "learnedFrom":  [
+                        "117db4e1-7dbf-ef11-a72e-0022481efed6"
+                    ],
+    "learnedFromName":  [
+                            "Conversation KPI | Generate Conversation KPIs Scheduler"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "environment":  [
+                        "orgdf331f66.crm5.dynamics.com"
+                    ],
+    "template":  {
+                     "Update_a_row:_Logs":  {
+                                                "type":  "OpenApiConnection",
+                                                "inputs":  {
+                                                               "parameters":  {
+                                                                                  "entityName":  "cat_copilotstudiokitlogses",
+                                                                                  "recordId":  "@outputs(\u0027Add_a_new_row:_Logs\u0027)?[\u0027body/cat_copilotstudiokitlogsid\u0027]",
+                                                                                  "item/cat_executionstatuscode":  "@if(not(empty(variables(\u0027ErrorMessage\u0027))), 4, 3)",
+                                                                                  "item/cat_errormessage":  "@if(not(empty(variables(\u0027ErrorMessage\u0027))), variables(\u0027ErrorMessage\u0027), null)"
+                                                                              },
+                                                               "host":  {
+                                                                            "apiId":  "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                                                                            "operationId":  "UpdateRecord",
+                                                                            "connectionName":  "shared_commondataserviceforapps_2"
+                                                                        }
+                                                           },
+                                                "metadata":  {
+                                                                 "operationMetadataId":  "9f447776-551f-41e3-a432-ecfb376e623f"
+                                                             }
+                                            }
+                 },
+    "inputSchema":  [
+                        {
+                            "name":  "connectionId",
+                            "in":  "path",
+                            "required":  true,
+                            "x-ms-visibility":  "internal",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "prefer",
+                            "in":  "header",
+                            "description":  "The header parameter required to make Microsoft Dataverse return the created resource",
+                            "required":  true,
+                            "x-ms-summary":  "Prefer",
+                            "x-ms-visibility":  "internal",
+                            "type":  "string",
+                            "default":  "return=representation,odata.include-annotations=*"
+                        },
+                        {
+                            "name":  "accept",
+                            "in":  "header",
+                            "description":  "The header parameter required to make Microsoft Dataverse return the odata id",
+                            "required":  true,
+                            "x-ms-summary":  "Accept",
+                            "x-ms-visibility":  "internal",
+                            "type":  "string",
+                            "default":  "application/json;odata.metadata=full"
+                        },
+                        {
+                            "name":  "x-ms-odata-metadata-full",
+                            "in":  "header",
+                            "description":  "The header parameter to customer to opt-in returning full odata metadata in response.",
+                            "required":  false,
+                            "x-ms-summary":  "Return Full Metadata",
+                            "x-ms-visibility":  "advanced",
+                            "type":  "boolean",
+                            "x-ms-description-for-model":  "Optional. If true, returns full OData metadata in the response. Defaults to false. Usually omit this parameter.",
+                            "x-ms-name-for-model":  "upsert_row_x-ms-odata-metadata-full"
+                        },
+                        {
+                            "name":  "entityName",
+                            "in":  "path",
+                            "description":  "Choose a table",
+                            "required":  true,
+                            "x-ms-url-encoding":  "double",
+                            "x-ms-dynamic-values":  {
+                                                        "operationId":  "GetEntities",
+                                                        "parameters":  {
+
+                                                                       },
+                                                        "value-collection":  "value",
+                                                        "value-path":  "EntitySetName",
+                                                        "value-title":  "DisplayCollectionName/UserLocalizedLabel/Label"
+                                                    },
+                            "x-ms-summary":  "Table name",
+                            "type":  "string",
+                            "x-ms-description-for-model":  "Name of the target Dataverse table (e.g., \u0027contacts\u0027). Use get_tables to discover valid names.",
+                            "x-ms-name-for-model":  "upsert_row_entityName"
+                        },
+                        {
+                            "name":  "recordId",
+                            "in":  "path",
+                            "description":  "Enter the row\u0027s globally unique identifier (GUID)",
+                            "required":  true,
+                            "x-ms-url-encoding":  "double",
+                            "x-ms-summary":  "Row ID",
+                            "type":  "string",
+                            "x-ms-description-for-model":  "Primary key (GUID) of the row. If a row with this ID exists, it is updated; otherwise a new row is created.",
+                            "x-ms-name-for-model":  "upsert_row_recordId"
+                        },
+                        {
+                            "name":  "item",
+                            "in":  "body",
+                            "description":  "Row to update",
+                            "required":  true,
+                            "schema":  {
+                                           "type":  "object",
+                                           "x-ms-dynamic-properties":  {
+                                                                           "operationId":  "GetMetadataForPatchEntity",
+                                                                           "parameters":  {
+                                                                                              "entityName":  {
+                                                                                                                 "parameterReference":  "entityName"
+                                                                                                             }
+                                                                                          },
+                                                                           "itemValuePath":  "schema"
+                                                                       }
+                                       },
+                            "x-ms-summary":  "Row Item",
+                            "x-ms-description-for-model":  "REQUIRED. A JSON object containing the field values to set. All field values MUST be inside this object -- do not pass them as top-level parameters. Keys must match column names exactly.",
+                            "x-ms-name-for-model":  "upsert_row_item"
+                        }
+                    ],
+    "dynamicValuesRef":  {
+                             "entityName":  {
+                                                "operationId":  "GetEntities",
+                                                "titlePath":  "DisplayCollectionName/UserLocalizedLabel/Label",
+                                                "parameters":  {
+
+                                                               },
+                                                "valueCollection":  "value",
+                                                "valuePath":  "EntitySetName"
+                                            }
+                         },
+    "swaggerLearned":  true,
+    "outputSchema":  {
+                         "type":  "object",
+                         "x-ms-dynamic-properties":  {
+                                                         "operationId":  "GetMetadataForGetEntity",
+                                                         "parameters":  {
+                                                                            "entityName":  {
+                                                                                               "parameterReference":  "entityName"
+                                                                                           }
+                                                                        },
+                                                         "itemValuePath":  "schema"
+                                                     }
+                     },
+    "graphConvertible":  true,
+    "graphNodeType":  "connector"
+}

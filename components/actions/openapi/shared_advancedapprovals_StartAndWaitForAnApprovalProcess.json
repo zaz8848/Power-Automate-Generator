@@ -1,0 +1,79 @@
+﻿{
+    "id":  "shared_advancedapprovals_StartAndWaitForAnApprovalProcess",
+    "connector":  "shared_advancedapprovals",
+    "connectorBase":  "shared_advancedapprovals",
+    "operationId":  "StartAndWaitForAnApprovalProcess",
+    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_advancedapprovals",
+    "type":  "OpenApiConnectionWebhook",
+    "learnedFrom":  [
+                        "bf53b222-1c95-f011-b4cc-00224856c036"
+                    ],
+    "learnedFromName":  [
+                            "AgentFlow-Approval"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "environment":  [
+                        "orgdf331f66.crm5.dynamics.com"
+                    ],
+    "template":  {
+                     "Run_a_multistage_approval_(preview)":  {
+                                                                 "type":  "OpenApiConnectionWebhook",
+                                                                 "inputs":  {
+                                                                                "parameters":  {
+                                                                                                   "approvalProcessId":  "d85b5315-63a6-f011-bbd3-6045bd205ea8",
+                                                                                                   "WebhookApprovalProcessCreationInput/multistageinput_Summary":  "@outputs(\u0027Run_a_prompt\u0027)?[\u0027body/responsev2/predictionOutput/text\u0027]",
+                                                                                                   "WebhookApprovalProcessCreationInput/multistageinput_Summary of RFP":  "@outputs(\u0027Run_a_prompt\u0027)?[\u0027body/responsev2/predictionOutput/text\u0027]"
+                                                                                               },
+                                                                                "host":  {
+                                                                                             "apiId":  "/providers/Microsoft.PowerApps/apis/shared_advancedapprovals",
+                                                                                             "operationId":  "StartAndWaitForAnApprovalProcess",
+                                                                                             "connectionName":  "shared_advancedapprovals"
+                                                                                         }
+                                                                            },
+                                                                 "runAfter":  {
+                                                                                  "Run_a_prompt":  [
+                                                                                                       "Succeeded"
+                                                                                                   ]
+                                                                              }
+                                                             }
+                 },
+    "inputSchema":  [
+                        {
+                            "name":  "connectionId",
+                            "in":  "path",
+                            "required":  true,
+                            "x-ms-visibility":  "internal",
+                            "type":  "string"
+                        },
+                        {
+                            "$ref":  "#/parameters/ApprovalProcessId"
+                        },
+                        {
+                            "name":  "WebhookApprovalProcessCreationInput",
+                            "description":  "Fetch the input fields dynamically from Flow-RP. They include inputs like Title as well as the input fields the user defined in their approval process.",
+                            "in":  "body",
+                            "required":  true,
+                            "schema":  {
+                                           "type":  "object",
+                                           "x-ms-dynamic-schema":  {
+                                                                       "operationId":  "GetApprovalProcessMetadata",
+                                                                       "parameters":  {
+                                                                                          "metadataType":  "approvalProcessWebhookInputs",
+                                                                                          "approvalProcessId":  {
+                                                                                                                    "parameter":  "approvalProcessId"
+                                                                                                                }
+                                                                                      },
+                                                                       "value-path":  "schema"
+                                                                   }
+                                       }
+                        }
+                    ],
+    "swaggerLearned":  true,
+    "outputSchema":  {
+                         "type":  "object",
+                         "description":  "No response schema in Swagger"
+                     },
+    "graphConvertible":  true,
+    "graphNodeType":  "connector"
+}

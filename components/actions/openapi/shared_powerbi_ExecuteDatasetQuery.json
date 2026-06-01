@@ -1,0 +1,66 @@
+﻿{
+    "id":  "shared_powerbi_ExecuteDatasetQuery",
+    "connector":  "shared_powerbi",
+    "connectorBase":  "shared_powerbi",
+    "operationId":  "ExecuteDatasetQuery",
+    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_powerbi",
+    "type":  "OpenApiConnection",
+    "learnedFrom":  [
+                        "68e9ef49-d682-d68a-d78e-d1baa790f05b"
+                    ],
+    "learnedFromName":  [
+                            "Powerbi"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "environment":  [
+                        "orgdf331f66.crm5.dynamics.com"
+                    ],
+    "template":  {
+                     "Run_a_query_against_a_dataset":  {
+                                                           "type":  "OpenApiConnection",
+                                                           "inputs":  {
+                                                                          "parameters":  {
+                                                                                             "groupid":  "2434f0df-14e3-4b77-8359-786b0cb93e86",
+                                                                                             "datasetid":  "b89514f0-ba8d-489b-93ba-2eca7e8bdccd",
+                                                                                             "specification/query":  "EVALUATE  \n\u0027Query1\u0027  ",
+                                                                                             "specification/serializerSettings/includeNulls":  false
+                                                                                         },
+                                                                          "host":  {
+                                                                                       "apiId":  "/providers/Microsoft.PowerApps/apis/shared_powerbi",
+                                                                                       "operationId":  "ExecuteDatasetQuery",
+                                                                                       "connectionName":  "shared_powerbi"
+                                                                                   }
+                                                                      },
+                                                           "runAfter":  {
+
+                                                                        }
+                                                       }
+                 },
+    "inputSchema":  {
+                        "connectionId":  {
+                                             "description":  null,
+                                             "in":  "path",
+                                             "type":  "string",
+                                             "required":  true
+                                         },
+                        "specification":  {
+                                              "description":  null,
+                                              "in":  "body",
+                                              "type":  null,
+                                              "required":  true
+                                          }
+                    },
+    "outputSchema":  {
+                         "$ref":  "QueryExecutionResults",
+                         "properties":  {
+                                            "firstTableRows":  {
+                                                                   "type":  "array",
+                                                                   "description":  "Query results as an array of rows."
+                                                               }
+                                        }
+                     },
+    "swaggerLearned":  true,
+    "graphConvertible":  true,
+    "graphNodeType":  "connector"
+}

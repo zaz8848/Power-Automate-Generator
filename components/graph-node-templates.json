@@ -1,0 +1,877 @@
+{
+  "start": {
+    "type": "start",
+    "config": {
+      "triggerType": "connector",
+      "connector": {
+        "apiName": "shared_office365",
+        "operationName": "OnNewEmailV3",
+        "connectionName": "shared_office365",
+        "inputs": {
+          "folderPath": "Id::AQMkAGU4MjQ5ZjNjLWZhYjgtNDlhMi1hYjVhLTU4Yzc4OTQ0AGJmNGIALgAAA-S7oUeXUKhBkcKk0dkp-5oBAIJdJvjUb99Au0OgSIvewxYAAAIBDAAAAA==",
+          "importance": "Any",
+          "includeAttachments": false
+        },
+        "displayName": "新电子邮件到达时",
+        "iconUri": "https://static.powerapps.com/resource/ppcr/releases/v1.0.1812/1.0.1812.4763/office365/icon.png",
+        "brandColor": "#0078D4",
+        "operationType": "OpenApiConnectionNotification",
+        "parametersSchema": {
+          "type": "object",
+          "properties": {
+            "to": {
+              "type": "string",
+              "title": "至",
+              "x-ms-dynamic-list": {
+                "builtInOperation": "AadGraph.GetUsers",
+                "parameters": {},
+                "itemValuePath": "mail"
+              },
+              "format": "email",
+              "description": "以分号分隔的收件人电子邮件地址(如果有匹配项，触发器将运行)。",
+              "x-ms-visibility": "advanced",
+              "x-ms-property-name-alias": "to"
+            },
+            "cc": {
+              "type": "string",
+              "title": "抄送",
+              "x-ms-dynamic-list": {
+                "builtInOperation": "AadGraph.GetUsers",
+                "parameters": {},
+                "itemValuePath": "mail"
+              },
+              "format": "email",
+              "description": "以分号分隔的抄送收件人电子邮件地址(如果有匹配项，触发器将运行)。",
+              "x-ms-visibility": "advanced",
+              "x-ms-property-name-alias": "cc"
+            },
+            "toOrCc": {
+              "type": "string",
+              "title": "收件人或抄送",
+              "x-ms-dynamic-list": {
+                "builtInOperation": "AadGraph.GetUsers",
+                "parameters": {},
+                "itemValuePath": "mail"
+              },
+              "format": "email",
+              "description": "以分号分隔的目标或抄送收件人电子邮件地址(如果有匹配项，触发器将运行)。",
+              "x-ms-visibility": "advanced",
+              "x-ms-property-name-alias": "toOrCc"
+            },
+            "from": {
+              "type": "string",
+              "title": "发件人",
+              "x-ms-dynamic-list": {
+                "builtInOperation": "AadGraph.GetUsers",
+                "parameters": {},
+                "itemValuePath": "mail"
+              },
+              "format": "email",
+              "description": "由分号分隔的发件人电子邮件地址(如果有匹配项，触发器将运行)。",
+              "x-ms-visibility": "advanced",
+              "x-ms-property-name-alias": "from"
+            },
+            "includeAttachments": {
+              "type": "boolean",
+              "title": "加入附件",
+              "description": "触发器响应是否包含附件内容。",
+              "default": false,
+              "x-ms-visibility": "advanced",
+              "x-ms-property-name-alias": "includeAttachments"
+            },
+            "subjectFilter": {
+              "type": "string",
+              "title": "主题筛选器",
+              "description": "要在主题行中查找的字符串。",
+              "x-ms-visibility": "advanced",
+              "x-ms-property-name-alias": "subjectFilter"
+            },
+            "folderPath": {
+              "type": "string",
+              "title": "文件夹",
+              "x-ms-dynamic-tree": {
+                "settings": {
+                  "canSelectParentNodes": true,
+                  "canSelectLeafNodes": false
+                },
+                "open": {
+                  "operationId": "OnFilePickerOpen",
+                  "parameters": {
+                    "operation": {
+                      "value": "MailFolders"
+                    }
+                  },
+                  "itemsPath": "value",
+                  "itemValuePath": "Id",
+                  "itemTitlePath": "DisplayName",
+                  "itemFullTitlePath": "Path",
+                  "itemIsParent": "(IsFolder eq true)"
+                },
+                "browse": {
+                  "operationId": "OnFilePickerBrowse",
+                  "parameters": {
+                    "id": {
+                      "selectedItemValuePath": "Id"
+                    },
+                    "operation": {
+                      "value": "MailFolders"
+                    }
+                  },
+                  "itemsPath": "value",
+                  "itemValuePath": "Id",
+                  "itemTitlePath": "DisplayName",
+                  "itemFullTitlePath": "Path",
+                  "itemIsParent": "(IsFolder eq true)"
+                }
+              },
+              "description": "用于检查是否有新电子邮件的邮件文件夹。",
+              "default": "Inbox",
+              "x-ms-property-name-alias": "folderPath"
+            },
+            "importance": {
+              "type": "string",
+              "title": "重要性",
+              "description": "电子邮件的重要性(任意、高、普通、低)。",
+              "default": "Any",
+              "enum": [
+                "Any",
+                "Low",
+                "Normal",
+                "High"
+              ],
+              "x-ms-visibility": "advanced",
+              "x-ms-enum-values": [
+                {
+                  "displayName": "任意",
+                  "value": "Any"
+                },
+                {
+                  "displayName": "低",
+                  "value": "Low"
+                },
+                {
+                  "displayName": "中",
+                  "value": "Normal"
+                },
+                {
+                  "displayName": "高",
+                  "value": "High"
+                }
+              ],
+              "x-ms-property-name-alias": "importance"
+            },
+            "fetchOnlyWithAttachment": {
+              "type": "boolean",
+              "title": "只检索带附件的电子邮件",
+              "description": "如果设置为 true，将只检索带附件的电子邮件，并跳过不带任何附件的电子邮件。如果设置为 false，将检索所有电子邮件。",
+              "default": false,
+              "x-ms-visibility": "advanced",
+              "x-ms-property-name-alias": "fetchOnlyWithAttachment"
+            }
+          },
+          "required": []
+        },
+        "triggerBatchMode": "Batch",
+        "outputSchema": {
+          "200": {
+            "type": "object",
+            "properties": {
+              "body": {
+                "type": "object",
+                "properties": {
+                  "value": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "from": {
+                          "type": "string",
+                          "title": "从",
+                          "format": "email",
+                          "description": "邮件的邮箱所有者和发件人",
+                          "x-ms-visibility": "important",
+                          "x-ms-property-name-alias": "from"
+                        },
+                        "toRecipients": {
+                          "type": "string",
+                          "title": "到",
+                          "format": "email",
+                          "description": "邮件的收件人",
+                          "x-ms-visibility": "important",
+                          "x-ms-property-name-alias": "toRecipients"
+                        },
+                        "ccRecipients": {
+                          "type": "string",
+                          "title": "抄送",
+                          "format": "email",
+                          "description": "邮件的抄送收件人",
+                          "x-ms-visibility": "advanced",
+                          "x-ms-property-name-alias": "ccRecipients"
+                        },
+                        "bccRecipients": {
+                          "type": "string",
+                          "title": "密件抄送",
+                          "format": "email",
+                          "description": "邮件的密件抄送收件人",
+                          "x-ms-visibility": "advanced",
+                          "x-ms-property-name-alias": "bccRecipients"
+                        },
+                        "replyTo": {
+                          "type": "string",
+                          "title": "回复对象",
+                          "format": "email",
+                          "description": "回复时要使用的电子邮件地址",
+                          "x-ms-visibility": "advanced",
+                          "x-ms-property-name-alias": "replyTo"
+                        },
+                        "subject": {
+                          "type": "string",
+                          "title": "主题",
+                          "description": "邮件主题",
+                          "x-ms-visibility": "important",
+                          "x-ms-property-name-alias": "subject"
+                        },
+                        "body": {
+                          "type": "string",
+                          "title": "正文",
+                          "description": "邮件正文",
+                          "x-ms-visibility": "important",
+                          "x-ms-property-name-alias": "body"
+                        },
+                        "importance": {
+                          "type": "string",
+                          "title": "重要性",
+                          "description": "消息的重要性(低、普通、高)",
+                          "enum": [
+                            "low",
+                            "normal",
+                            "high"
+                          ],
+                          "x-ms-property-name-alias": "importance"
+                        },
+                        "bodyPreview": {
+                          "type": "string",
+                          "title": "正文预览",
+                          "description": "消息预览",
+                          "x-ms-visibility": "advanced",
+                          "x-ms-property-name-alias": "bodyPreview"
+                        },
+                        "hasAttachments": {
+                          "type": "boolean",
+                          "title": "包含附件",
+                          "description": "指示邮件是否包含附件",
+                          "x-ms-property-name-alias": "hasAttachments"
+                        },
+                        "id": {
+                          "type": "string",
+                          "title": "消息 ID",
+                          "description": "邮件的唯一标识符",
+                          "x-ms-visibility": "advanced",
+                          "x-ms-property-name-alias": "id"
+                        },
+                        "internetMessageId": {
+                          "type": "string",
+                          "title": "Internet 邮件 ID",
+                          "description": "采用 RFC2822 指定的格式的消息 ID",
+                          "x-ms-visibility": "advanced",
+                          "x-ms-property-name-alias": "internetMessageId"
+                        },
+                        "conversationId": {
+                          "type": "string",
+                          "title": "对话 ID",
+                          "description": "电子邮件所属的会话 ID",
+                          "x-ms-visibility": "advanced",
+                          "x-ms-property-name-alias": "conversationId"
+                        },
+                        "receivedDateTime": {
+                          "type": "string",
+                          "title": "接收时间",
+                          "format": "date-time",
+                          "description": "邮件的接收日期和时间",
+                          "x-ms-visibility": "advanced",
+                          "x-ms-property-name-alias": "receivedDateTime"
+                        },
+                        "isRead": {
+                          "type": "boolean",
+                          "title": "已读",
+                          "description": "指示邮件是否已读",
+                          "x-ms-visibility": "advanced",
+                          "x-ms-property-name-alias": "isRead"
+                        },
+                        "attachments": {
+                          "type": "array",
+                          "title": "附件",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string",
+                                "title": "附件 ID",
+                                "description": "附件 ID",
+                                "x-ms-property-name-alias": "id"
+                              },
+                              "name": {
+                                "type": "string",
+                                "title": "名称",
+                                "description": "附件名",
+                                "x-ms-property-name-alias": "name"
+                              },
+                              "contentBytes": {
+                                "type": "string",
+                                "title": "内容",
+                                "format": "byte",
+                                "description": "附件内容",
+                                "x-ms-property-name-alias": "contentBytes"
+                              },
+                              "contentType": {
+                                "type": "string",
+                                "title": "内容类型",
+                                "description": "附件内容类型",
+                                "x-ms-property-name-alias": "contentType"
+                              },
+                              "size": {
+                                "type": "integer",
+                                "title": "大小",
+                                "format": "int64",
+                                "description": "附件大小(以字节为单位)",
+                                "x-ms-property-name-alias": "size"
+                              },
+                              "isInline": {
+                                "type": "boolean",
+                                "title": "是内联的",
+                                "description": "如果这是内联附件，则设置为 true",
+                                "x-ms-property-name-alias": "isInline"
+                              },
+                              "lastModifiedDateTime": {
+                                "type": "string",
+                                "title": "上次修改日期/时间",
+                                "format": "date-time",
+                                "description": "上次修改附件的日期和时间",
+                                "x-ms-property-name-alias": "lastModifiedDateTime"
+                              },
+                              "contentId": {
+                                "type": "string",
+                                "title": "内容 ID",
+                                "description": "内容 ID",
+                                "x-ms-property-name-alias": "contentId"
+                              }
+                            },
+                            "required": [],
+                            "description": "文件附件"
+                          },
+                          "description": "邮件的文件附件",
+                          "x-ms-visibility": "advanced",
+                          "x-ms-property-name-alias": "attachments"
+                        },
+                        "isHtml": {
+                          "type": "boolean",
+                          "title": "为 HTML",
+                          "description": "为 HTML?",
+                          "x-ms-visibility": "advanced",
+                          "x-ms-property-name-alias": "isHtml"
+                        },
+                        "sensitivityLabelInfo": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "sensitivityLabelId": {
+                                "type": "string",
+                                "title": "sensitivityLabelId",
+                                "description": "SensitivityLabel ID。",
+                                "x-ms-property-name-alias": "sensitivityLabelId"
+                              },
+                              "name": {
+                                "type": "string",
+                                "title": "名称",
+                                "description": "SensitivityLabel 名称。",
+                                "x-ms-property-name-alias": "name"
+                              },
+                              "displayName": {
+                                "type": "string",
+                                "title": "displayName",
+                                "description": "SensitivityLabel displayName 信息",
+                                "x-ms-property-name-alias": "displayName"
+                              },
+                              "tooltip": {
+                                "type": "string",
+                                "title": "工具提示",
+                                "description": "工具提示上的 SensitivityLabel 详细信息。",
+                                "x-ms-property-name-alias": "tooltip"
+                              },
+                              "priority": {
+                                "type": "integer",
+                                "title": "优先级",
+                                "format": "int32",
+                                "description": "SensitivityLabel 优先级。",
+                                "x-ms-property-name-alias": "priority"
+                              },
+                              "color": {
+                                "type": "string",
+                                "title": "颜色",
+                                "description": "SensitivityLabel 颜色。",
+                                "x-ms-property-name-alias": "color"
+                              },
+                              "isEncrypted": {
+                                "type": "boolean",
+                                "title": "isEncrypted",
+                                "description": "SensitivityLabel 是否已加密。",
+                                "x-ms-property-name-alias": "isEncrypted"
+                              },
+                              "isEnabled": {
+                                "type": "boolean",
+                                "title": "isEnabled",
+                                "description": "是否已启用 SensitivityLabel。",
+                                "x-ms-property-name-alias": "isEnabled"
+                              },
+                              "isParent": {
+                                "type": "boolean",
+                                "title": "isParent",
+                                "description": "SensitivityLabel 是否为父级。",
+                                "x-ms-property-name-alias": "isParent"
+                              },
+                              "parentSensitivityLabelId": {
+                                "type": "string",
+                                "title": "parentSensitivityLabelId",
+                                "description": "父级 SensitivityLabel ID。",
+                                "x-ms-property-name-alias": "parentSensitivityLabelId"
+                              }
+                            },
+                            "required": []
+                          },
+                          "x-ms-property-name-alias": "sensitivityLabelInfo"
+                        }
+                      },
+                      "required": [],
+                      "description": "图形客户端接收电子邮件"
+                    },
+                    "description": "响应对象的列表",
+                    "x-ms-property-name-alias": "body/value"
+                  }
+                },
+                "required": [],
+                "description": "表示批触发响应的包装对象",
+                "x-ms-property-name-alias": "body"
+              }
+            }
+          }
+        }
+      }
+    },
+    "outcomes": [
+      {
+        "id": "default",
+        "label": "Default",
+        "outcomeSchema": {
+          "type": "object",
+          "properties": {
+            "from": {
+              "type": "string",
+              "title": "从",
+              "format": "email",
+              "description": "邮件的邮箱所有者和发件人",
+              "x-ms-visibility": "important",
+              "x-ms-property-name-alias": "body/from"
+            },
+            "toRecipients": {
+              "type": "string",
+              "title": "到",
+              "format": "email",
+              "description": "邮件的收件人",
+              "x-ms-visibility": "important",
+              "x-ms-property-name-alias": "body/toRecipients"
+            },
+            "ccRecipients": {
+              "type": "string",
+              "title": "抄送",
+              "format": "email",
+              "description": "邮件的抄送收件人",
+              "x-ms-visibility": "advanced",
+              "x-ms-property-name-alias": "body/ccRecipients"
+            },
+            "bccRecipients": {
+              "type": "string",
+              "title": "密件抄送",
+              "format": "email",
+              "description": "邮件的密件抄送收件人",
+              "x-ms-visibility": "advanced",
+              "x-ms-property-name-alias": "body/bccRecipients"
+            },
+            "replyTo": {
+              "type": "string",
+              "title": "回复对象",
+              "format": "email",
+              "description": "回复时要使用的电子邮件地址",
+              "x-ms-visibility": "advanced",
+              "x-ms-property-name-alias": "body/replyTo"
+            },
+            "subject": {
+              "type": "string",
+              "title": "主题",
+              "description": "邮件主题",
+              "x-ms-visibility": "important",
+              "x-ms-property-name-alias": "body/subject"
+            },
+            "body": {
+              "type": "string",
+              "title": "正文",
+              "description": "邮件正文",
+              "x-ms-visibility": "important",
+              "x-ms-property-name-alias": "body/body"
+            },
+            "importance": {
+              "type": "string",
+              "title": "重要性",
+              "description": "消息的重要性(低、普通、高)",
+              "enum": [
+                "low",
+                "normal",
+                "high"
+              ],
+              "x-ms-property-name-alias": "body/importance"
+            },
+            "bodyPreview": {
+              "type": "string",
+              "title": "正文预览",
+              "description": "消息预览",
+              "x-ms-visibility": "advanced",
+              "x-ms-property-name-alias": "body/bodyPreview"
+            },
+            "hasAttachments": {
+              "type": "boolean",
+              "title": "包含附件",
+              "description": "指示邮件是否包含附件",
+              "x-ms-property-name-alias": "body/hasAttachments"
+            },
+            "id": {
+              "type": "string",
+              "title": "消息 ID",
+              "description": "邮件的唯一标识符",
+              "x-ms-visibility": "advanced",
+              "x-ms-property-name-alias": "body/id"
+            },
+            "internetMessageId": {
+              "type": "string",
+              "title": "Internet 邮件 ID",
+              "description": "采用 RFC2822 指定的格式的消息 ID",
+              "x-ms-visibility": "advanced",
+              "x-ms-property-name-alias": "body/internetMessageId"
+            },
+            "conversationId": {
+              "type": "string",
+              "title": "对话 ID",
+              "description": "电子邮件所属的会话 ID",
+              "x-ms-visibility": "advanced",
+              "x-ms-property-name-alias": "body/conversationId"
+            },
+            "receivedDateTime": {
+              "type": "string",
+              "title": "接收时间",
+              "format": "date-time",
+              "description": "邮件的接收日期和时间",
+              "x-ms-visibility": "advanced",
+              "x-ms-property-name-alias": "body/receivedDateTime"
+            },
+            "isRead": {
+              "type": "boolean",
+              "title": "已读",
+              "description": "指示邮件是否已读",
+              "x-ms-visibility": "advanced",
+              "x-ms-property-name-alias": "body/isRead"
+            },
+            "attachments": {
+              "type": "array",
+              "title": "附件",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "title": "附件 ID",
+                    "description": "附件 ID",
+                    "x-ms-property-name-alias": "id"
+                  },
+                  "name": {
+                    "type": "string",
+                    "title": "名称",
+                    "description": "附件名",
+                    "x-ms-property-name-alias": "name"
+                  },
+                  "contentBytes": {
+                    "type": "string",
+                    "title": "内容",
+                    "format": "byte",
+                    "description": "附件内容",
+                    "x-ms-property-name-alias": "contentBytes"
+                  },
+                  "contentType": {
+                    "type": "string",
+                    "title": "内容类型",
+                    "description": "附件内容类型",
+                    "x-ms-property-name-alias": "contentType"
+                  },
+                  "size": {
+                    "type": "integer",
+                    "title": "大小",
+                    "format": "int64",
+                    "description": "附件大小(以字节为单位)",
+                    "x-ms-property-name-alias": "size"
+                  },
+                  "isInline": {
+                    "type": "boolean",
+                    "title": "是内联的",
+                    "description": "如果这是内联附件，则设置为 true",
+                    "x-ms-property-name-alias": "isInline"
+                  },
+                  "lastModifiedDateTime": {
+                    "type": "string",
+                    "title": "上次修改日期/时间",
+                    "format": "date-time",
+                    "description": "上次修改附件的日期和时间",
+                    "x-ms-property-name-alias": "lastModifiedDateTime"
+                  },
+                  "contentId": {
+                    "type": "string",
+                    "title": "内容 ID",
+                    "description": "内容 ID",
+                    "x-ms-property-name-alias": "contentId"
+                  }
+                },
+                "required": [],
+                "description": "文件附件"
+              },
+              "description": "邮件的文件附件",
+              "x-ms-visibility": "advanced",
+              "x-ms-property-name-alias": "body/attachments"
+            },
+            "isHtml": {
+              "type": "boolean",
+              "title": "为 HTML",
+              "description": "为 HTML?",
+              "x-ms-visibility": "advanced",
+              "x-ms-property-name-alias": "body/isHtml"
+            },
+            "sensitivityLabelInfo": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "sensitivityLabelId": {
+                    "type": "string",
+                    "title": "sensitivityLabelId",
+                    "description": "SensitivityLabel ID。",
+                    "x-ms-property-name-alias": "sensitivityLabelId"
+                  },
+                  "name": {
+                    "type": "string",
+                    "title": "名称",
+                    "description": "SensitivityLabel 名称。",
+                    "x-ms-property-name-alias": "name"
+                  },
+                  "displayName": {
+                    "type": "string",
+                    "title": "displayName",
+                    "description": "SensitivityLabel displayName 信息",
+                    "x-ms-property-name-alias": "displayName"
+                  },
+                  "tooltip": {
+                    "type": "string",
+                    "title": "工具提示",
+                    "description": "工具提示上的 SensitivityLabel 详细信息。",
+                    "x-ms-property-name-alias": "tooltip"
+                  },
+                  "priority": {
+                    "type": "integer",
+                    "title": "优先级",
+                    "format": "int32",
+                    "description": "SensitivityLabel 优先级。",
+                    "x-ms-property-name-alias": "priority"
+                  },
+                  "color": {
+                    "type": "string",
+                    "title": "颜色",
+                    "description": "SensitivityLabel 颜色。",
+                    "x-ms-property-name-alias": "color"
+                  },
+                  "isEncrypted": {
+                    "type": "boolean",
+                    "title": "isEncrypted",
+                    "description": "SensitivityLabel 是否已加密。",
+                    "x-ms-property-name-alias": "isEncrypted"
+                  },
+                  "isEnabled": {
+                    "type": "boolean",
+                    "title": "isEnabled",
+                    "description": "是否已启用 SensitivityLabel。",
+                    "x-ms-property-name-alias": "isEnabled"
+                  },
+                  "isParent": {
+                    "type": "boolean",
+                    "title": "isParent",
+                    "description": "SensitivityLabel 是否为父级。",
+                    "x-ms-property-name-alias": "isParent"
+                  },
+                  "parentSensitivityLabelId": {
+                    "type": "string",
+                    "title": "parentSensitivityLabelId",
+                    "description": "父级 SensitivityLabel ID。",
+                    "x-ms-property-name-alias": "parentSensitivityLabelId"
+                  }
+                },
+                "required": []
+              },
+              "x-ms-property-name-alias": "body/sensitivityLabelInfo"
+            }
+          },
+          "required": [],
+          "description": "图形客户端接收电子邮件"
+        }
+      }
+    ]
+  },
+  "classify": {
+    "type": "classify",
+    "config": {
+      "input": "正文",
+      "categories": [
+        {
+          "id": "975e87dd-d677-4098-bd64-d666ff4693ef",
+          "name": "销售相关",
+          "description": "关于销售或售前的查询和支持，包括产品和服务查询、报价、RFP等"
+        },
+        {
+          "id": "9a5f2dd7-5974-425c-b2ec-d919a33eda6f",
+          "name": "售后支持",
+          "description": "关于售后维修服务、产品异常处理或诊断"
+        },
+        {
+          "id": "99ba0ae4-cd7c-49c2-a5ab-88a05b4bc8e4",
+          "name": "单据识别",
+          "description": "关于发票、订单等的单据识别"
+        }
+      ],
+      "examples": [
+        {
+          "id": "83c271bb-75c4-4c3a-994e-3fda507b011f",
+          "input": "我们需要你们的售前支持，我们目前正在评估如何借助 AI 能力提升教学支持、学生服务以及内部流程协同效率。近期我们希望规划一个面向教育场景的智能体方案，并了解微软在相关产品与落地路径上的建议。\n目前我们重点关注的方向包括：\n面向教师的教学支持场景，例如课程资料整理、常见问答、通知内容生成等；\n面向学生的服务场景，例如学习问答、办事指引、个性化支持等；\n面向教务或管理人员的流程协同场景，例如审批流、政策查询、异常处理与人机协同审核等；\n多智能体协作场景，例如由不同智能体分别负责教学支持、政策解答和流程执行，并在统一入口下完成编排。\n我们了解到微软在这一方向上提供了包括 Copilot Studio、Power Platform 以及与 AI Business Solutions 相关的能力，因此希望进一步请教：\n对于教育行业的智能体场景，推荐优先从哪些产品或架构开始；\n是否可以同时支持对话式交互与 workflow 自动化执行；\n多智能体协作、人工审核、人机协同这类模式，当前有哪些较合适的实现方式；\n是否有教育行业或相近行业的参考案例、最佳实践或 Demo 可供交流。\n感谢支持，期待回复！",
+          "label": "销售相关"
+        },
+        {
+          "id": "c715808a-22ae-45ca-b0e1-a3da3a5db458",
+          "input": "我们在使用 Microsoft Copilot Studio 构建企业智能体（Agent）过程中遇到了一些问题，希望获得售后技术支持的协助。\n具体情况如下：\n产品名称：Microsoft Copilot Studio（结合 Power Platform / Teams 使用）\n使用场景：构建多智能体协作（RFP agent + policy agent），并集成至 Teams Copilot 侧边栏与 workflow 调用\n问题描述：\n自定义 Agent 在 Teams/M365 Copilot 中的调用方式存在限制，无法像内置 Agent 一样通过 @ 方式直接触发\n通过 MCP app 打包后的 Agent，在 Copilot 左侧栏显示正常，但与其他 Agent 的触发链路（如 workflow 或 multi-agent orchestration）存在不一致\n在 multi-agent 场景中，子 Agent 的调用和上下文传递存在不稳定情况\n出现时间：近期在 Demo 场景搭建过程中持续出现\n期望支持：\nClarify Copilot Studio Agent 在 M365 Copilot 中的触发机制与限制\n提供 multi-agent orchestration + Teams 集成的最佳实践或参考架构\n协助定位当前集成方式的问题原因，并给出优化建议\n期望贵方能够尽快协助排查并提供解决方案。如需进一步的环境信息或日志，我们可以随时配合提供。",
+          "label": "售后支持"
+        }
+      ],
+      "model": "gpt-41-mini",
+      "connectionName": "shared_commondataserviceforapps",
+      "inputRich": {
+        "segments": [
+          {
+            "type": "token",
+            "value": "正文",
+            "tokenRef": {
+              "type": "step",
+              "stepId": "start-a4a107c3-9e3b-43db-b74f-7c0affe04b4d",
+              "stepName": "新电子邮件到达时",
+              "outputName": "body/body",
+              "outputDisplayName": "正文",
+              "outputType": "string",
+              "outputAlias": "body/body"
+            }
+          }
+        ]
+      }
+    },
+    "outcomes": [
+      {
+        "id": "category:975e87dd-d677-4098-bd64-d666ff4693ef",
+        "label": "销售相关"
+      },
+      {
+        "id": "category:9a5f2dd7-5974-425c-b2ec-d919a33eda6f",
+        "label": "售后支持"
+      },
+      {
+        "id": "category:99ba0ae4-cd7c-49c2-a5ab-88a05b4bc8e4",
+        "label": "单据识别"
+      },
+      {
+        "id": "default-category",
+        "label": "Other"
+      }
+    ]
+  },
+  "canvasNote": {
+    "type": "canvasNote",
+    "config": {
+      "markdown": "Sales Agentic Workflow",
+      "color": "green"
+    },
+    "outcomes": []
+  },
+  "agent": {
+    "type": "agent",
+    "config": {
+      "mode": "inline",
+      "instructions": "sfd",
+      "botSchemaName": "",
+      "isHitlEscalationEnabled": false,
+      "inlineInstructions": "【Goal】\n请从以下邮件内容中提取关键信息，并生成一封简洁、专业的回复邮件，用于告知对方“邮件已收到”。\n \n【Context】\n我是企业员工，邮件回复主要用于工作沟通场景。\n回复邮件不需要立即给出结论或解决方案，只需确认已收到信息，并说明后续会跟进。\n \n【Source】\n以下是需要处理的原始邮件内容：\n<<<{triggerOutputs()?['body/body']} >>>\n \n【Instructions】\n1. 提取并理解邮件中的关键信息，包括（如有）：\n- 发件人意图 / 请求事项 \n- 涉及的主题或事项 \n- 是否包含时间点、截止日期或下一步期望 \n2. 基于以上信息，生成一封回复邮件，满足：\n- 明确表达“我已收到你的邮件”\n- 语言礼貌、专业、简洁\n- 不编造未在原邮件中出现的事实\n- 如合适，可包含“我会进一步查看 / 稍后回复”的表述\n \n【Output Expectations】\n- 输出为一封完整的回复邮件正文\n- 使用商务邮件常用语气\n- 默认使用中文；如原邮件为英文，则使用英文回复\n- 不需要邮件标题（除非原邮件标题对理解有帮助）\n- 在每行开头加几个空格\n",
+      "outputMode": "text",
+      "connectionName": "shared_agentnode-1",
+      "inlineModel": "Sonnet46",
+      "instructionsRich": {
+        "segments": [
+          {
+            "type": "static",
+            "value": "sfd"
+          }
+        ]
+      },
+      "inlineTools": []
+    },
+    "outcomes": [
+      {
+        "id": "default",
+        "label": "Default",
+        "outcomeSchema": {
+          "type": "object",
+          "properties": {
+            "message": {
+              "type": "string",
+              "title": "Agent Response",
+              "description": "The agent response text"
+            },
+            "activities": {
+              "type": "array",
+              "description": "Bot response activities (typing, message, and event types)"
+            }
+          },
+          "required": [
+            "activities"
+          ]
+        }
+      }
+    ]
+  },
+  "end": {
+    "type": "end",
+    "config": {
+      "runStatus": "Succeeded"
+    },
+    "outcomes": []
+  },
+  "loop": {
+    "type": "loop",
+    "config": {
+      "loopType": "foreach",
+      "foreach": "@triggerOutputs()?['body/attachments']"
+    },
+    "outcomes": [
+      {
+        "id": "default",
+        "label": "Default"
+      }
+    ]
+  }
+}

@@ -1,0 +1,11 @@
+{
+    "_name": "PROFILE_NAME",
+    "_comment": "描述这个环境的用途",
+    "tenantId": "YOUR_TENANT_ID",
+    "clientId": "YOUR_APP_CLIENT_ID",
+    "clientSecret": "YOUR_APP_CLIENT_SECRET",
+    "environmentId": "YOUR_ENVIRONMENT_ID",
+    "dataverseOrg": "org12345.crm.dynamics.com",
+    "redirectUri": "https://localhost/callback",
+    "refreshToken": ""
+}

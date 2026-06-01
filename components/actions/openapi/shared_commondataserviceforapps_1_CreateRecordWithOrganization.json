@@ -1,0 +1,244 @@
+﻿{
+    "id":  "shared_commondataserviceforapps_1_CreateRecordWithOrganization",
+    "connector":  "shared_commondataserviceforapps_1",
+    "connectorBase":  "shared_commondataserviceforapps",
+    "operationId":  "CreateRecordWithOrganization",
+    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+    "type":  "OpenApiConnection",
+    "learnedFrom":  [
+                        "e3742ca3-e086-ef11-ac21-7c1e520158f7"
+                    ],
+    "learnedFromName":  [
+                            "Sharepoint Synchronization | Synchronize files to Agent (Child)"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "environment":  [
+                        "orgdf331f66.crm5.dynamics.com"
+                    ],
+    "template":  {
+                     "Create_File_Copilot_Component":  {
+                                                           "runAfter":  {
+                                                                            "Get_file_content":  [
+                                                                                                     "Succeeded"
+                                                                                                 ]
+                                                                        },
+                                                           "metadata":  {
+                                                                            "operationMetadataId":  "bdcdaf05-3202-482b-86f5-03fff616b1fe"
+                                                                        },
+                                                           "type":  "OpenApiConnection",
+                                                           "inputs":  {
+                                                                          "host":  {
+                                                                                       "connectionName":  "shared_commondataserviceforapps_1",
+                                                                                       "operationId":  "CreateRecordWithOrganization",
+                                                                                       "apiId":  "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                                                                                   },
+                                                                          "parameters":  {
+                                                                                             "organization":  "@items(\u0027Apply_to_each_File_Indexer_Configurations\u0027)?[\u0027parent.cat_dataverseurl\u0027]",
+                                                                                             "entityName":  "botcomponents",
+                                                                                             "item":  {
+                                                                                                          "componenttype":  14,
+                                                                                                          "schemaname":  "@{body(\u0027Get_Agent\u0027)?[\u0027schemaname\u0027]}.component.dvindexer_@{replace(guid(), \u0027-\u0027, \u0027\u0027)}",
+                                                                                                          "description":  "This knowledge source searches information contained in @{items(\u0027Apply_to_each_file\u0027)?[\u0027{FilenameWithExtension}\u0027]}",
+                                                                                                          "name":  "@{items(\u0027Apply_to_each_file\u0027)?[\u0027{FilenameWithExtension}\u0027]}",
+                                                                                                          "parentbotid@odata.bind":  "bots(@{outputs(\u0027Get_Agent\u0027)?[\u0027body/botid\u0027]})"
+                                                                                                      }
+                                                                                         },
+                                                                          "authentication":  {
+                                                                                                 "type":  "Raw",
+                                                                                                 "value":  "@json(decodeBase64(triggerOutputs().headers[\u0027X-MS-APIM-Tokens\u0027]))[\u0027$ConnectionKey\u0027]"
+                                                                                             }
+                                                                      }
+                                                       }
+                 },
+    "inputSchema":  [
+                        {
+                            "name":  "connectionId",
+                            "in":  "path",
+                            "required":  true,
+                            "x-ms-visibility":  "internal",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "prefer",
+                            "in":  "header",
+                            "description":  "The header parameter required to make Microsoft Dataverse return the created resource",
+                            "required":  true,
+                            "x-ms-summary":  "Prefer",
+                            "x-ms-visibility":  "internal",
+                            "type":  "string",
+                            "default":  "return=representation,odata.include-annotations=*"
+                        },
+                        {
+                            "name":  "accept",
+                            "in":  "header",
+                            "description":  "The header parameter required to make Microsoft Dataverse return the odata id",
+                            "required":  true,
+                            "x-ms-summary":  "Accept",
+                            "x-ms-visibility":  "internal",
+                            "type":  "string",
+                            "default":  "application/json;odata.metadata=full"
+                        },
+                        {
+                            "name":  "x-ms-odata-metadata-full",
+                            "in":  "header",
+                            "description":  "The header parameter to customer to opt-in returning full odata metadata in response.",
+                            "required":  false,
+                            "x-ms-summary":  "Return Full Metadata",
+                            "x-ms-visibility":  "advanced",
+                            "x-ms-name-for-model":  "create_record_with_organization_x_ms_odata_metadata_full",
+                            "x-ms-description-for-model":  "Set to true to include full OData metadata in response. False otherwise. If not specified default to false.",
+                            "type":  "boolean"
+                        },
+                        {
+                            "name":  "organization",
+                            "in":  "header",
+                            "description":  "Choose an environment",
+                            "required":  true,
+                            "x-ms-dynamic-values":  {
+                                                        "operationId":  "GetOrganizations",
+                                                        "parameters":  {
+
+                                                                       },
+                                                        "value-collection":  "value",
+                                                        "value-path":  "Url",
+                                                        "value-title":  "FriendlyName"
+                                                    },
+                            "x-ms-dynamic-list":  {
+                                                      "operationId":  "GetOrganizations",
+                                                      "parameters":  {
+
+                                                                     },
+                                                      "itemsPath":  "value",
+                                                      "itemValuePath":  "Url",
+                                                      "itemTitlePath":  "FriendlyName"
+                                                  },
+                            "x-ms-summary":  "Environment",
+                            "x-ms-visibility":  "important",
+                            "x-ms-name-for-model":  "create_record_with_organization_organization",
+                            "x-ms-description-for-model":  "Set this to the environment base URL containing the target Dataverse table. You MUST use a URL and NOT environment name. If name is provided, map to correct URL. If you cannot infer the base URL, default to URL of (Current). Examples: https://org12345.crm.dynamics.com/, https://exampleenv.crm.dynamics.com/",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "entityName",
+                            "in":  "path",
+                            "description":  "Choose a table",
+                            "required":  true,
+                            "x-ms-url-encoding":  "double",
+                            "x-ms-dynamic-values":  {
+                                                        "operationId":  "GetEntitiesWithOrganization",
+                                                        "parameters":  {
+                                                                           "organization":  {
+                                                                                                "parameter":  "organization"
+                                                                                            }
+                                                                       },
+                                                        "value-collection":  "value",
+                                                        "value-path":  "EntitySetName",
+                                                        "value-title":  "DisplayCollectionName/UserLocalizedLabel/Label"
+                                                    },
+                            "x-ms-dynamic-list":  {
+                                                      "operationId":  "GetEntitiesWithOrganization",
+                                                      "parameters":  {
+                                                                         "organization":  {
+                                                                                              "parameterReference":  "organization"
+                                                                                          }
+                                                                     },
+                                                      "itemsPath":  "value",
+                                                      "itemValuePath":  "EntitySetName",
+                                                      "itemTitlePath":  "DisplayCollectionName/UserLocalizedLabel/Label"
+                                                  },
+                            "x-ms-summary":  "Table name",
+                            "x-ms-name-for-model":  "create_record_with_organization_entity_name",
+                            "x-ms-description-for-model":  "Set this to the entity set name for the Dataverse table in which you are adding the row. Examples: accounts, contacts, incidents, cr3a_customtables.",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "item",
+                            "in":  "body",
+                            "description":  "Row to create",
+                            "required":  true,
+                            "schema":  {
+                                           "type":  "object",
+                                           "x-ms-dynamic-schema":  {
+                                                                       "operationId":  "GetMetadataForPostEntityWithOrganization",
+                                                                       "parameters":  {
+                                                                                          "organization":  {
+                                                                                                               "parameter":  "organization"
+                                                                                                           },
+                                                                                          "entityName":  {
+                                                                                                             "parameter":  "entityName"
+                                                                                                         }
+                                                                                      },
+                                                                       "value-path":  "schema"
+                                                                   },
+                                           "x-ms-dynamic-properties":  {
+                                                                           "operationId":  "GetMetadataForPostEntityWithOrganization",
+                                                                           "parameters":  {
+                                                                                              "organization":  {
+                                                                                                                   "parameterReference":  "organization"
+                                                                                                               },
+                                                                                              "entityName":  {
+                                                                                                                 "parameterReference":  "entityName"
+                                                                                                             }
+                                                                                          },
+                                                                           "itemValuePath":  "schema"
+                                                                       }
+                                       },
+                            "x-ms-summary":  "Row Item",
+                            "x-ms-name-for-model":  "create_record_with_organization_item",
+                            "x-ms-description-for-model":  "Set this to an object defining the new row. Keys must be column logical names (not display labels). For lookups, use @odata.bind format (e.g.,\"PrimaryContactId@odata.bind\": \"/contacts(GUID)\"). Example: {\"name\": \"Contoso Ltd\", \"telephone1\": \"+1 425 555 0100\"}."
+                        }
+                    ],
+    "dynamicValuesRef":  {
+                             "entityName":  {
+                                                "operationId":  "GetEntitiesWithOrganization",
+                                                "titlePath":  "DisplayCollectionName/UserLocalizedLabel/Label",
+                                                "parameters":  {
+                                                                   "organization":  {
+                                                                                        "parameter":  "organization"
+                                                                                    }
+                                                               },
+                                                "valueCollection":  "value",
+                                                "valuePath":  "EntitySetName"
+                                            },
+                             "organization":  {
+                                                  "operationId":  "GetOrganizations",
+                                                  "titlePath":  "FriendlyName",
+                                                  "parameters":  {
+
+                                                                 },
+                                                  "valueCollection":  "value",
+                                                  "valuePath":  "Url"
+                                              }
+                         },
+    "swaggerLearned":  true,
+    "outputSchema":  {
+                         "type":  "object",
+                         "x-ms-dynamic-schema":  {
+                                                     "operationId":  "GetMetadataForGetEntityWithOrganization",
+                                                     "parameters":  {
+                                                                        "organization":  {
+                                                                                             "parameter":  "organization"
+                                                                                         },
+                                                                        "entityName":  {
+                                                                                           "parameter":  "entityName"
+                                                                                       }
+                                                                    },
+                                                     "value-path":  "schema"
+                                                 },
+                         "x-ms-dynamic-properties":  {
+                                                         "operationId":  "GetMetadataForGetEntityWithOrganization",
+                                                         "parameters":  {
+                                                                            "organization":  {
+                                                                                                 "parameterReference":  "organization"
+                                                                                             },
+                                                                            "entityName":  {
+                                                                                               "parameterReference":  "entityName"
+                                                                                           }
+                                                                        },
+                                                         "itemValuePath":  "schema"
+                                                     }
+                     },
+    "graphConvertible":  true,
+    "graphNodeType":  "connector"
+}

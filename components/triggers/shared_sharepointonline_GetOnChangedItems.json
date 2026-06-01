@@ -1,0 +1,45 @@
+﻿{
+    "id":  "shared_sharepointonline_GetOnChangedItems",
+    "connector":  "shared_sharepointonline",
+    "operationId":  "GetOnChangedItems",
+    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+    "type":  "OpenApiConnection",
+    "kind":  null,
+    "learnedFrom":  [
+                        "f7d564de-0705-f111-8407-000d3a316017",
+                        "33afba72-d005-f111-8407-6045bd5777da"
+                    ],
+    "learnedFromName":  [
+                            "Sharepoint-Modify-Post Data To Server",
+                            "Sharepoint-Modified-ExpenseRequest-ExtractInvoice"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "environment":  [
+                        "{dataverseOrg}"
+                    ],
+    "template":  {
+                     "When_an_item_or_a_file_is_modified":  {
+                                                                "type":  "OpenApiConnection",
+                                                                "inputs":  {
+                                                                               "parameters":  {
+                                                                                                  "dataset":  "@parameters(\u0027SharepointSite (crdd1_SharepointSite)\u0027)",
+                                                                                                  "table":  "@parameters(\u0027List-[Purchase Orders] (crdd1_ListPurchaseOrders)\u0027)"
+                                                                                              },
+                                                                               "host":  {
+                                                                                            "apiId":  "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+                                                                                            "operationId":  "GetOnChangedItems",
+                                                                                            "connectionName":  "shared_sharepointonline"
+                                                                                        }
+                                                                           },
+                                                                "recurrence":  {
+                                                                                   "interval":  1,
+                                                                                   "frequency":  "Minute"
+                                                                               },
+                                                                "splitOn":  "@triggerOutputs()?[\u0027body/value\u0027]",
+                                                                "metadata":  {
+                                                                                 "operationMetadataId":  "c4f9b32c-daa3-4dcb-806f-0946c643fd99"
+                                                                             }
+                                                            }
+                 }
+}

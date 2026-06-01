@@ -1,0 +1,170 @@
+﻿{
+    "id":  "shared_azureblob-1_CreateFile_V2",
+    "connector":  "shared_azureblob-1",
+    "connectorBase":  "shared_azureblob",
+    "operationId":  "CreateFile_V2",
+    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_azureblob",
+    "type":  "OpenApiConnection",
+    "learnedFrom":  [
+                        "b99118ab-dd62-f011-bec3-6045bd00625f"
+                    ],
+    "learnedFromName":  [
+                            "Automatic Flow - Start Document Translation When Translation Log Status Changes to Waiting for Proc"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "environment":  [
+                        "org1cd97ca4.crm.dynamics.com"
+                    ],
+    "template":  {
+                     "Upload_document_to_Blob_storage":  {
+                                                             "type":  "OpenApiConnection",
+                                                             "inputs":  {
+                                                                            "parameters":  {
+                                                                                               "dataset":  "wellsdocumentstorage",
+                                                                                               "folderPath":  "/translation",
+                                                                                               "name":  "@body(\u0027Get_the_translation_log\u0027)?[\u0027biz_sourcedocument_name\u0027]",
+                                                                                               "body":  "@body(\u0027Download_the_source_document\u0027)"
+                                                                                           },
+                                                                            "host":  {
+                                                                                         "apiId":  "/providers/Microsoft.PowerApps/apis/shared_azureblob",
+                                                                                         "operationId":  "CreateFile_V2",
+                                                                                         "connectionName":  "shared_azureblob-1"
+                                                                                     },
+                                                                            "retryPolicy":  {
+                                                                                                "type":  "none"
+                                                                                            }
+                                                                        },
+                                                             "runtimeConfiguration":  {
+                                                                                          "contentTransfer":  {
+                                                                                                                  "transferMode":  "Chunked"
+                                                                                                              }
+                                                                                      },
+                                                             "metadata":  {
+                                                                              "operationMetadataId":  "00790f32-7830-4d41-8129-5ea0fda6e204"
+                                                                          }
+                                                         }
+                 },
+    "inputSchema":  {
+                        "dataset":  {
+                                        "description":  "Azure Storage account name or blob endpoint.",
+                                        "in":  "path",
+                                        "type":  "string",
+                                        "required":  true
+                                    },
+                        "connectionId":  {
+                                             "description":  null,
+                                             "in":  "path",
+                                             "type":  "string",
+                                             "required":  true
+                                         },
+                        "ReadFileMetadataFromServer":  {
+                                                           "description":  "Get all file metadata from the server after file creation is complete. If this is false, some metadata properties may not be returned such as last modified time, etc.",
+                                                           "in":  "header",
+                                                           "type":  "boolean",
+                                                           "required":  false
+                                                       },
+                        "queryParametersSingleEncoded":  {
+                                                             "description":  null,
+                                                             "in":  "query",
+                                                             "type":  "boolean",
+                                                             "required":  false
+                                                         },
+                        "Content-Type":  {
+                                             "description":  "Specify content-type of the blob to upload.",
+                                             "in":  "header",
+                                             "type":  "string",
+                                             "required":  false
+                                         },
+                        "name":  {
+                                     "description":  "Specify name of the blob to create.",
+                                     "in":  "query",
+                                     "type":  "string",
+                                     "required":  true
+                                 },
+                        "body":  {
+                                     "description":  "Specify the content of the blob to upload.",
+                                     "in":  "body",
+                                     "type":  null,
+                                     "required":  true
+                                 },
+                        "folderPath":  {
+                                           "description":  "Specify folder path to upload.",
+                                           "in":  "query",
+                                           "type":  "string",
+                                           "required":  true
+                                       }
+                    },
+    "outputSchema":  {
+                         "$ref":  "BlobMetadata",
+                         "properties":  {
+                                            "FileLocator":  {
+                                                                "type":  "string",
+                                                                "description":  "The filelocator of the file or folder."
+                                                            },
+                                            "Id":  {
+                                                       "type":  "string",
+                                                       "description":  "The unique id of the file or folder."
+                                                   },
+                                            "Size":  {
+                                                         "type":  "integer",
+                                                         "description":  "The size of the file or folder."
+                                                     },
+                                            "LastModified":  {
+                                                                 "type":  "string",
+                                                                 "description":  "The date and time the file or folder was last modified."
+                                                             },
+                                            "MediaType":  {
+                                                              "type":  "string",
+                                                              "description":  "The media type of the file or folder."
+                                                          },
+                                            "ETag":  {
+                                                         "type":  "string",
+                                                         "description":  "The etag of the file or folder."
+                                                     },
+                                            "Name":  {
+                                                         "type":  "string",
+                                                         "description":  "The name of the file or folder."
+                                                     },
+                                            "IsFolder":  {
+                                                             "type":  "boolean",
+                                                             "description":  "A boolean value (true, false) to indicate whether or not the blob is a folder."
+                                                         },
+                                            "Path":  {
+                                                         "type":  "string",
+                                                         "description":  "The path of the file or folder."
+                                                     },
+                                            "DisplayName":  {
+                                                                "type":  "string",
+                                                                "description":  "The display name of the file or folder."
+                                                            }
+                                        }
+                     },
+    "dynamicValuesRef":  {
+                             "folderPath":  {
+                                                "operationId":  null,
+                                                "parameters":  {
+                                                                   "isFolder":  true,
+                                                                   "dataset":  {
+                                                                                   "parameter":  "dataset"
+                                                                               },
+                                                                   "fileFilter":  [
+
+                                                                                  ]
+                                                               },
+                                                "valuePath":  "Path"
+                                            },
+                             "dataset":  {
+                                             "operationId":  "GetDataSets",
+                                             "titlePath":  "DisplayName",
+                                             "parameters":  {
+
+                                                            },
+                                             "valueCollection":  "value",
+                                             "valuePath":  "Name"
+                                         }
+                         },
+    "swaggerLearned":  true,
+    "graphConvertible":  true,
+    "graphNodeType":  "connector"
+}

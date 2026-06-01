@@ -1,0 +1,133 @@
+﻿{
+    "id":  "shared_onedriveforbusiness_GetFileContent",
+    "connector":  "shared_onedriveforbusiness",
+    "connectorBase":  "shared_onedriveforbusiness",
+    "operationId":  "GetFileContent",
+    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_onedriveforbusiness",
+    "type":  "OpenApiConnection",
+    "learnedFrom":  [
+                        "0a035c01-c979-0229-e10f-059dbb7a383f",
+                        "38aa543f-f20d-1475-ebb9-44311524b24a",
+                        "0abb697b-78e1-9b86-9b50-8d8ee1b4908a"
+                    ],
+    "learnedFromName":  [
+                            "AgentFlow-Auto Procesing Excel File To Analysis",
+                            "Schedule-1 week-PPT Generator",
+                            "AgentFlow - Assign Sales Task To Store"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "environment":  [
+                        "org1cd97ca4.crm.dynamics.com"
+                    ],
+    "template":  {
+                     "Get_file_content":  {
+                                              "type":  "OpenApiConnection",
+                                              "inputs":  {
+                                                             "parameters":  {
+                                                                                "id":  "@outputs(\u0027Get_file_metadata\u0027)?[\u0027body/Id\u0027]",
+                                                                                "inferContentType":  true
+                                                                            },
+                                                             "host":  {
+                                                                          "apiId":  "/providers/Microsoft.PowerApps/apis/shared_onedriveforbusiness",
+                                                                          "operationId":  "GetFileContent",
+                                                                          "connectionName":  "shared_onedriveforbusiness"
+                                                                      }
+                                                         },
+                                              "runAfter":  {
+                                                               "Get_file_metadata":  [
+                                                                                         "Succeeded"
+                                                                                     ]
+                                                           },
+                                              "metadata":  {
+                                                               "b!W5TMYBpW30KlzcNcb-8BfVCtZnaHlQNNmgnShIj4o8MKm36ivRLHQZOufUHGJ2-M.01S3C4UYWSRDT3FTWYUJC27E7VUSRNCRF3":  "/AEON Demo Data/生鲜销量Demo.xlsx"
+                                                           }
+                                          }
+                 },
+    "inputSchema":  [
+                        {
+                            "name":  "connectionId",
+                            "in":  "path",
+                            "required":  true,
+                            "x-ms-visibility":  "internal",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "id",
+                            "in":  "path",
+                            "description":  "The unique identifier of the file.",
+                            "required":  true,
+                            "type":  "string",
+                            "x-ms-summary":  "File",
+                            "x-ms-url-encoding":  "double",
+                            "x-ms-dynamic-values":  {
+                                                        "capability":  "file-picker",
+                                                        "parameters":  {
+                                                                           "isFolder":  false,
+                                                                           "fileFilter":  [
+
+                                                                                          ],
+                                                                           "dataset":  null
+                                                                       },
+                                                        "value-path":  "Id"
+                                                    },
+                            "x-ms-dynamic-tree":  {
+                                                      "settings":  {
+                                                                       "canSelectParentNodes":  false,
+                                                                       "canSelectLeafNodes":  true
+                                                                   },
+                                                      "open":  {
+                                                                   "operationId":  "ListAllRootFolders",
+                                                                   "itemValuePath":  "Id",
+                                                                   "itemTitlePath":  "DisplayName",
+                                                                   "itemFullTitlePath":  "Path",
+                                                                   "itemIsParent":  "(IsFolder eq true)"
+                                                               },
+                                                      "browse":  {
+                                                                     "operationId":  "ListFolder",
+                                                                     "parameters":  {
+                                                                                        "id":  {
+                                                                                                   "selectedItemValuePath":  "Id"
+                                                                                               }
+                                                                                    },
+                                                                     "itemValuePath":  "Id",
+                                                                     "itemTitlePath":  "DisplayName",
+                                                                     "itemFullTitlePath":  "Path",
+                                                                     "itemIsParent":  "(IsFolder eq true)"
+                                                                 }
+                                                  }
+                        },
+                        {
+                            "name":  "inferContentType",
+                            "in":  "query",
+                            "description":  "A boolean value (true, false) to infer content-type based on extension.",
+                            "required":  false,
+                            "type":  "boolean",
+                            "default":  true,
+                            "x-ms-summary":  "Infer Content Type",
+                            "x-ms-visibility":  "advanced"
+                        }
+                    ],
+    "dynamicValuesRef":  {
+                             "id":  {
+                                        "operationId":  null,
+                                        "parameters":  {
+                                                           "isFolder":  false,
+                                                           "dataset":  null,
+                                                           "fileFilter":  [
+
+                                                                          ]
+                                                       },
+                                        "valuePath":  "Id"
+                                    }
+                         },
+    "swaggerLearned":  true,
+    "outputSchema":  {
+                         "format":  "binary",
+                         "description":  "The content of the file.",
+                         "type":  "string",
+                         "x-ms-summary":  "File content"
+                     },
+    "graphConvertible":  true,
+    "graphNodeType":  "connector"
+}

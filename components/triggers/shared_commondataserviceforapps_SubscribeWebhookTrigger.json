@@ -1,0 +1,77 @@
+﻿{
+    "id":  "shared_commondataserviceforapps_SubscribeWebhookTrigger",
+    "connector":  "shared_commondataserviceforapps",
+    "operationId":  "SubscribeWebhookTrigger",
+    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+    "type":  "OpenApiConnectionWebhook",
+    "kind":  null,
+    "learnedFrom":  [
+                        "2c22183a-d831-9de1-32d2-20c463f0a35d",
+                        "c86f37cf-0558-f111-a825-6045bd5777da",
+                        "819831c9-e258-f111-a825-6045bd5777da",
+                        "c6080ca7-f274-8901-960a-c23f63a84ab1",
+                        "b1c1d185-c57c-f011-b4cc-000d3a080cec",
+                        "01614ff6-17b7-ea11-a812-000d3a1ab78a",
+                        "829d9bbc-0fb7-ea11-a812-000d3a1ab88b",
+                        "3de5ba35-7d03-ea11-a811-000d3a382874",
+                        "05e57ac4-dac5-f011-bbd3-000d3ac79569",
+                        "8719e711-6e50-e911-a974-000d3af292f2",
+                        "bf53b222-1c95-f011-b4cc-00224856c036",
+                        "facc4beb-c9b5-48f7-b709-0b41f6518b22",
+                        "cde64862-0804-453b-b9f4-0ec8ff12d30f",
+                        "6d738f84-1d55-2746-ebe8-46766fe4b983",
+                        "34ab6b30-cd65-f171-ff77-5475d9e6cc47",
+                        "5439e6c3-3e4d-f011-877b-6045bd0937a6",
+                        "2f19d1aa-7c32-ef11-8409-7c1e520ac4c6",
+                        "445c9bd8-f21a-49c4-ab13-8f2076a72ad1",
+                        "99b0bd7d-2d4e-4bfa-9120-b9a2cd81a35d",
+                        "333b0082-b97e-4b10-89b2-bdececd4ac34",
+                        "a9373689-25bf-4677-b557-ff4736df8e21"
+                    ],
+    "learnedFromName":  [
+                            "Untitled flow",
+                            "EmailRouting-WebhookDispatch",
+                            "SLAInstanceMonitoringWarningAndExpiryFlow",
+                            "Untitled flow",
+                            "Automatic - Modify - AI Processing Log",
+                            "IoT - Flow - Parent IoT Alerts",
+                            "IoT - Flow - Schedule Device Data Pulls",
+                            "Field Service - Flow - Mark Agreement As Expired",
+                            "ARC: Intake Service Email (do not delete or rename)",
+                            "Field Service - Flow - Generate Agreement Booking Dates",
+                            "AgentFlow-Approval",
+                            "Field Service - Flow - Generate Order Invoicing Setup Dates",
+                            "Field Service - Flow - Generate Agreement Invoice Dates",
+                            "Automatic - Create - AI Processing Log",
+                            "Automatic-RFP Response-Create",
+                            "QEA On Demand Evaluation Case",
+                            "Test Automation | Assign Copilot Studio Kit Tester Role to Team",
+                            "Field Service - Flow - Generate Invoice For Order Invoicing Date",
+                            "Field Service - Flow - Generate Invoice for Agreement Invoice Date",
+                            "Field Service - Flow - Generate Order Invoicing Dates",
+                            "Field Service - Flow - Generate Work Order for Agreement Booking Date"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "environment":  [
+                        "{dataverseOrg}",
+                        "orgdf331f66.crm5.dynamics.com"
+                    ],
+    "template":  {
+                     "When_a_row_is_added,_modified_or_deleted":  {
+                                                                      "type":  "OpenApiConnectionWebhook",
+                                                                      "inputs":  {
+                                                                                     "parameters":  {
+                                                                                                        "subscriptionRequest/message":  4,
+                                                                                                        "subscriptionRequest/entityname":  "cre47_atestdocument",
+                                                                                                        "subscriptionRequest/scope":  4
+                                                                                                    },
+                                                                                     "host":  {
+                                                                                                  "apiId":  "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                                                                                                  "operationId":  "SubscribeWebhookTrigger",
+                                                                                                  "connectionName":  "shared_commondataserviceforapps"
+                                                                                              }
+                                                                                 }
+                                                                  }
+                 }
+}

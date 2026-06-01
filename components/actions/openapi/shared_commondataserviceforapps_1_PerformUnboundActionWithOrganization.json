@@ -1,0 +1,207 @@
+﻿{
+    "id":  "shared_commondataserviceforapps_1_PerformUnboundActionWithOrganization",
+    "connector":  "shared_commondataserviceforapps_1",
+    "connectorBase":  "shared_commondataserviceforapps",
+    "operationId":  "PerformUnboundActionWithOrganization",
+    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+    "type":  "OpenApiConnection",
+    "learnedFrom":  [
+                        "e3742ca3-e086-ef11-ac21-7c1e520158f7"
+                    ],
+    "learnedFromName":  [
+                            "Sharepoint Synchronization | Synchronize files to Agent (Child)"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "environment":  [
+                        "orgdf331f66.crm5.dynamics.com"
+                    ],
+    "template":  {
+                     "Perform_an_unbound_action_in_selected_environment":  {
+                                                                               "runAfter":  {
+
+                                                                                            },
+                                                                               "metadata":  {
+                                                                                                "operationMetadataId":  "fd6256b4-06fb-4f3d-819a-3f8b336bbbd9"
+                                                                                            },
+                                                                               "type":  "OpenApiConnection",
+                                                                               "inputs":  {
+                                                                                              "host":  {
+                                                                                                           "connectionName":  "shared_commondataserviceforapps_1",
+                                                                                                           "operationId":  "PerformUnboundActionWithOrganization",
+                                                                                                           "apiId":  "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                                                                                                       },
+                                                                                              "parameters":  {
+                                                                                                                 "organization":  "@items(\u0027Apply_to_each_File_Indexer_Configurations\u0027)?[\u0027parent.cat_dataverseurl\u0027]",
+                                                                                                                 "actionName":  "DeleteFile",
+                                                                                                                 "item":  {
+                                                                                                                              "FileId":  "@{items(\u0027For_each_component\u0027)?[\u0027filedata\u0027]}"
+                                                                                                                          }
+                                                                                                             },
+                                                                                              "authentication":  {
+                                                                                                                     "type":  "Raw",
+                                                                                                                     "value":  "@json(decodeBase64(triggerOutputs().headers[\u0027X-MS-APIM-Tokens\u0027]))[\u0027$ConnectionKey\u0027]"
+                                                                                                                 }
+                                                                                          }
+                                                                           }
+                 },
+    "inputSchema":  [
+                        {
+                            "name":  "connectionId",
+                            "in":  "path",
+                            "required":  true,
+                            "x-ms-visibility":  "internal",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "organization",
+                            "in":  "header",
+                            "description":  "Choose an environment",
+                            "required":  true,
+                            "x-ms-dynamic-values":  {
+                                                        "operationId":  "GetOrganizations",
+                                                        "parameters":  {
+
+                                                                       },
+                                                        "value-collection":  "value",
+                                                        "value-path":  "Url",
+                                                        "value-title":  "FriendlyName"
+                                                    },
+                            "x-ms-dynamic-list":  {
+                                                      "operationId":  "GetOrganizations",
+                                                      "parameters":  {
+
+                                                                     },
+                                                      "itemsPath":  "value",
+                                                      "itemValuePath":  "Url",
+                                                      "itemTitlePath":  "FriendlyName"
+                                                  },
+                            "x-ms-summary":  "Environment",
+                            "x-ms-visibility":  "important",
+                            "x-ms-name-for-model":  "perform_unbound_action_with_organization_organization",
+                            "x-ms-description-for-model":  "Set to the URL of the target Power Platform environment where the action will run. Get this value from configuration or a prior tool call. Example: \u0027https://org1a2b3c.crm.dynamics.com\u0027.",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "actionName",
+                            "in":  "path",
+                            "description":  "Choose an action",
+                            "required":  true,
+                            "x-ms-url-encoding":  "double",
+                            "x-ms-dynamic-values":  {
+                                                        "operationId":  "GetUnboundActionsWithOrganization",
+                                                        "parameters":  {
+                                                                           "organization":  {
+                                                                                                "parameter":  "organization"
+                                                                                            }
+                                                                       },
+                                                        "value-collection":  "value",
+                                                        "value-path":  "operationId",
+                                                        "value-title":  "operationDisplayName"
+                                                    },
+                            "x-ms-dynamic-list":  {
+                                                      "operationId":  "GetUnboundActionsWithOrganization",
+                                                      "parameters":  {
+                                                                         "organization":  {
+                                                                                              "parameterReference":  "organization"
+                                                                                          }
+                                                                     },
+                                                      "itemsPath":  "value",
+                                                      "itemValuePath":  "operationId",
+                                                      "itemTitlePath":  "operationDisplayName"
+                                                  },
+                            "x-ms-summary":  "Action Name",
+                            "x-ms-name-for-model":  "perform_unbound_action_with_organization_action_name",
+                            "x-ms-description-for-model":  "Set to the name of the unbound Dataverse action to execute. Examples: \u0027WhoAmI\u0027, \u0027ExportSolution\u0027.",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "item",
+                            "in":  "body",
+                            "description":  "Action parameters",
+                            "required":  false,
+                            "schema":  {
+                                           "type":  "object",
+                                           "x-ms-dynamic-schema":  {
+                                                                       "operationId":  "GetMetadataForUnboundActionInputWithOrganization",
+                                                                       "parameters":  {
+                                                                                          "organization":  {
+                                                                                                               "parameter":  "organization"
+                                                                                                           },
+                                                                                          "actionName":  {
+                                                                                                             "parameter":  "actionName"
+                                                                                                         }
+                                                                                      },
+                                                                       "value-path":  "schema"
+                                                                   },
+                                           "x-ms-dynamic-properties":  {
+                                                                           "operationId":  "GetMetadataForUnboundActionInputWithOrganization",
+                                                                           "parameters":  {
+                                                                                              "organization":  {
+                                                                                                                   "parameterReference":  "organization"
+                                                                                                               },
+                                                                                              "actionName":  {
+                                                                                                                 "parameterReference":  "actionName"
+                                                                                                             }
+                                                                                          },
+                                                                           "itemValuePath":  "schema"
+                                                                       }
+                                       },
+                            "x-ms-summary":  "Action parameters",
+                            "x-ms-name-for-model":  "perform_unbound_action_with_organization_item",
+                            "x-ms-description-for-model":  "Set to a JSON object containing the input parameters required by the selected action. Include only the parameters defined for that action. Example { \u0027SolutionName\u0027: \u0027MySolution\u0027, \u0027Managed\u0027: true }."
+                        }
+                    ],
+    "dynamicValuesRef":  {
+                             "actionName":  {
+                                                "operationId":  "GetUnboundActionsWithOrganization",
+                                                "titlePath":  "operationDisplayName",
+                                                "parameters":  {
+                                                                   "organization":  {
+                                                                                        "parameter":  "organization"
+                                                                                    }
+                                                               },
+                                                "valueCollection":  "value",
+                                                "valuePath":  "operationId"
+                                            },
+                             "organization":  {
+                                                  "operationId":  "GetOrganizations",
+                                                  "titlePath":  "FriendlyName",
+                                                  "parameters":  {
+
+                                                                 },
+                                                  "valueCollection":  "value",
+                                                  "valuePath":  "Url"
+                                              }
+                         },
+    "swaggerLearned":  true,
+    "outputSchema":  {
+                         "type":  "object",
+                         "x-ms-dynamic-schema":  {
+                                                     "operationId":  "GetMetadataForUnboundActionResponseWithOrganization",
+                                                     "parameters":  {
+                                                                        "organization":  {
+                                                                                             "parameter":  "organization"
+                                                                                         },
+                                                                        "actionName":  {
+                                                                                           "parameter":  "actionName"
+                                                                                       }
+                                                                    },
+                                                     "value-path":  "schema"
+                                                 },
+                         "x-ms-dynamic-properties":  {
+                                                         "operationId":  "GetMetadataForUnboundActionResponseWithOrganization",
+                                                         "parameters":  {
+                                                                            "organization":  {
+                                                                                                 "parameterReference":  "organization"
+                                                                                             },
+                                                                            "actionName":  {
+                                                                                               "parameterReference":  "actionName"
+                                                                                           }
+                                                                        },
+                                                         "itemValuePath":  "schema"
+                                                     }
+                     },
+    "graphConvertible":  true,
+    "graphNodeType":  "connector"
+}

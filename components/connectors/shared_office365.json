@@ -1,0 +1,28 @@
+﻿{
+    "connector":  "shared_office365",
+    "learnedAt":  "2026-05-26",
+    "operations":  [
+                       {
+                           "operationId":  "SendEmailV2",
+                           "type":  "OpenApiConnection",
+                           "componentFile":  "actions/openapi/shared_office365_SendEmailV2.json",
+                           "flowCount":  4
+                       },
+                       {
+                           "operationId":  "GetEmailsV3",
+                           "type":  "OpenApiConnection",
+                           "componentFile":  "actions/openapi/shared_office365_GetEmailsV3.json",
+                           "flowCount":  1
+                       }
+                   ],
+    "triggers":  [
+                     {
+                         "operationId":  "OnNewEmailV3",
+                         "type":  "OpenApiConnectionNotification",
+                         "isTrigger":  true,
+                         "componentFile":  "triggers/shared_office365_OnNewEmailV3.json",
+                         "flowCount":  3
+                     }
+                 ],
+    "swaggerUrl":  "https://api.powerapps.com/providers/Microsoft.PowerApps/apis/shared_office365?api-version=2020-06-01\u0026$filter=environment eq \u0027{envId}\u0027\u0026$select=properties.swagger"
+}

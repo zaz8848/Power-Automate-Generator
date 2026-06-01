@@ -1,0 +1,49 @@
+{
+    "id": "action_openapi_template",
+    "type": "OpenApiConnection",
+    "description": "通用 OpenApiConnection action 模板 — 调用连接器操作的标准格式",
+    "learnedFrom": [
+        "55ecf82a-b5e3-f011-8406-7ced8db59fd8",
+        "2901c842-91f9-f011-8406-00224859581e",
+        "667cb8b3-1bdd-e38d-8411-7f868f09c427"
+    ],
+    "learnedAt": "2026-05-26",
+    "verified": true,
+    "template": {
+        "<ActionName>": {
+            "type": "OpenApiConnection",
+            "inputs": {
+                "parameters": {},
+                "host": {
+                    "apiId": "/providers/Microsoft.PowerApps/apis/<connector_name>",
+                    "operationId": "<operation_id>",
+                    "connectionName": "<connectionReferences中的别名>"
+                }
+            },
+            "runAfter": {},
+            "metadata": {
+                "operationMetadataId": "<GUID>"
+            }
+        }
+    },
+    "keyRules": {
+        "host.apiId": "固定前缀 /providers/Microsoft.PowerApps/apis/ + 连接器名",
+        "host.connectionName": "必须匹配 clientdata 顶层 connectionReferences 中的 key",
+        "metadata.operationMetadataId": "GUID，可自行生成，不影响运行",
+        "runAfter": "空对象 {} 表示无依赖（第一个 action）；{ 'ActionName': ['Succeeded'] } 表示依赖"
+    },
+    "specialVariants": {
+        "aibuilder": {
+            "host.apiId": "providers/Microsoft.ProcessSimple/operationGroups/aibuilder",
+            "notes": "AI Builder predict 操作使用不同的 apiId 前缀"
+        },
+        "withPagination": {
+            "runtimeConfiguration": {
+                "paginationPolicy": {
+                    "minimumItemCount": 5000
+                }
+            },
+            "notes": "列表操作可启用分页"
+        }
+    }
+}

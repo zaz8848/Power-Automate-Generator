@@ -1,0 +1,136 @@
+﻿{
+    "id":  "shared_commondataserviceforapps_AssociateEntities",
+    "connector":  "shared_commondataserviceforapps",
+    "connectorBase":  "shared_commondataserviceforapps",
+    "operationId":  "AssociateEntities",
+    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+    "type":  "OpenApiConnection",
+    "learnedFrom":  [
+                        "2f19d1aa-7c32-ef11-8409-7c1e520ac4c6"
+                    ],
+    "learnedFromName":  [
+                            "Test Automation | Assign Copilot Studio Kit Tester Role to Team"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "environment":  [
+                        "orgdf331f66.crm5.dynamics.com"
+                    ],
+    "template":  {
+                     "Assign_Copilot_Studio_Accelerator_Tester_security_role_to_Team":  {
+                                                                                            "runAfter":  {
+                                                                                                             "Get_Created_By_OData_Id":  [
+                                                                                                                                             "Succeeded"
+                                                                                                                                         ]
+                                                                                                         },
+                                                                                            "metadata":  {
+                                                                                                             "operationMetadataId":  "55013582-ef35-4486-98d2-27a1f1def922"
+                                                                                                         },
+                                                                                            "type":  "OpenApiConnection",
+                                                                                            "inputs":  {
+                                                                                                           "host":  {
+                                                                                                                        "connectionName":  "shared_commondataserviceforapps",
+                                                                                                                        "operationId":  "AssociateEntities",
+                                                                                                                        "apiId":  "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                                                                                                                    },
+                                                                                                           "parameters":  {
+                                                                                                                              "entityName":  "teams",
+                                                                                                                              "recordId":  "@triggerOutputs()?[\u0027body/teamid\u0027]",
+                                                                                                                              "associationEntityRelationship":  "teamroles_association",
+                                                                                                                              "item/@odata.id":  "@outputs(\u0027Get_Copilot_Studio_Accelerator_Tester_security_role_OData_Id\u0027)?[\u0027body/@odata.id\u0027]"
+                                                                                                                          },
+                                                                                                           "authentication":  "@parameters(\u0027$authentication\u0027)"
+                                                                                                       }
+                                                                                        }
+                 },
+    "inputSchema":  [
+                        {
+                            "name":  "connectionId",
+                            "in":  "path",
+                            "required":  true,
+                            "x-ms-visibility":  "internal",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "entityName",
+                            "in":  "path",
+                            "description":  "Choose a table",
+                            "required":  true,
+                            "x-ms-url-encoding":  "double",
+                            "x-ms-dynamic-values":  {
+                                                        "operationId":  "GetEntities",
+                                                        "parameters":  {
+
+                                                                       },
+                                                        "value-collection":  "value",
+                                                        "value-path":  "EntitySetName",
+                                                        "value-title":  "DisplayCollectionName/UserLocalizedLabel/Label"
+                                                    },
+                            "x-ms-summary":  "Table name",
+                            "type":  "string",
+                            "x-ms-description-for-model":  "Name of the table containing the primary row (e.g., \u0027contacts\u0027). Use get_tables to discover valid names.",
+                            "x-ms-name-for-model":  "relate_rows_entityName"
+                        },
+                        {
+                            "name":  "recordId",
+                            "in":  "path",
+                            "description":  "Enter the row\u0027s globally unique identifier (GUID)",
+                            "required":  true,
+                            "x-ms-url-encoding":  "double",
+                            "x-ms-summary":  "Row ID",
+                            "type":  "string",
+                            "x-ms-description-for-model":  "GUID (primary key) of the primary row to create the relationship from. Must be a valid ID from the entityName table.",
+                            "x-ms-name-for-model":  "relate_rows_recordId"
+                        },
+                        {
+                            "name":  "associationEntityRelationship",
+                            "in":  "path",
+                            "description":  "Choose relationship type",
+                            "required":  true,
+                            "x-ms-url-encoding":  "double",
+                            "x-ms-dynamic-list":  {
+                                                      "operationId":  "GetEntityRelationships",
+                                                      "parameters":  {
+                                                                         "entityName":  {
+                                                                                            "parameterReference":  "entityName"
+                                                                                        }
+                                                                     },
+                                                      "itemsPath":  "value",
+                                                      "itemValuePath":  "LogicalName",
+                                                      "itemTitlePath":  "DisplayName/UserLocalizedLabel/Label"
+                                                  },
+                            "x-ms-summary":  "Relationship",
+                            "type":  "string",
+                            "x-ms-description-for-model":  "Name of the Dataverse relationship to use (e.g., \u0027contact_customer_accounts\u0027). Must be a valid relationship defined in the schema.",
+                            "x-ms-name-for-model":  "relate_rows_associationEntityRelationship"
+                        },
+                        {
+                            "name":  "item",
+                            "in":  "body",
+                            "description":  "Relate request",
+                            "required":  true,
+                            "schema":  {
+                                           "$ref":  "#/definitions/AssociateEntityRequest"
+                                       },
+                            "x-ms-summary":  "Relate Request"
+                        }
+                    ],
+    "dynamicValuesRef":  {
+                             "entityName":  {
+                                                "operationId":  "GetEntities",
+                                                "titlePath":  "DisplayCollectionName/UserLocalizedLabel/Label",
+                                                "parameters":  {
+
+                                                               },
+                                                "valueCollection":  "value",
+                                                "valuePath":  "EntitySetName"
+                                            }
+                         },
+    "swaggerLearned":  true,
+    "outputSchema":  {
+                         "type":  "object",
+                         "description":  "No response schema in Swagger"
+                     },
+    "graphConvertible":  true,
+    "graphNodeType":  "connector"
+}

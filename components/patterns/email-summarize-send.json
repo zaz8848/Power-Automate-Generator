@@ -1,0 +1,39 @@
+{
+    "id": "pattern_email_summarize_send",
+    "name": "邮件获取 → AI 摘要 → 发送通知",
+    "description": "定时获取近期邮件，用 AI 生成摘要，然后发送到 Teams/邮件",
+    "learnedFrom": [
+        "2901c842-91f9-f011-8406-00224859581e"
+    ],
+    "learnedAt": "2026-05-26",
+    "verified": true,
+    "trigger": "recurrence",
+    "steps": [
+        {
+            "order": 1,
+            "component": "shared_aisteps/RunAIFlow",
+            "purpose": "获取近期邮件数据"
+        },
+        {
+            "order": 2,
+            "component": "shared_commondataserviceforapps/aibuilderpredict_customprompt",
+            "purpose": "用 AI Builder prompt 对邮件进行摘要",
+            "dependsOn": [
+                1
+            ]
+        },
+        {
+            "order": 3,
+            "component": "shared_aisteps/RunAIFlow",
+            "purpose": "将摘要发送到 Teams",
+            "dependsOn": [
+                2
+            ]
+        }
+    ],
+    "connectors": [
+        "shared_aisteps",
+        "shared_commondataserviceforapps"
+    ],
+    "notes": "此模式使用 AI actions 连接器链式调用多个 AI flow，中间用 AI Builder custom prompt 做文本处理。"
+}

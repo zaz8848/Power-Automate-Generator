@@ -1,0 +1,314 @@
+﻿{
+    "id":  "Variables",
+    "types":  [
+                  "InitializeVariable",
+                  "SetVariable",
+                  "AppendToArrayVariable",
+                  "AppendToStringVariable",
+                  "IncrementVariable"
+              ],
+    "learnedFrom":  [
+                        "3e048272-81f2-01da-5796-5bddbd0332ff",
+                        "33afba72-d005-f111-8407-6045bd5777da",
+                        "d1b9f638-6896-4cc0-4be7-b18c0623feaa",
+                        "79876439-5578-f011-b4cc-000d3a080cec",
+                        "ced4fe0e-a135-f011-8c4e-000d3a3755b8",
+                        "66b343c7-63ce-ef11-8eea-000d3a5c1e68",
+                        "d441ccaa-33d2-ef11-8eea-000d3a5c1e68",
+                        "b2199f54-3dd2-ef11-8eea-000d3a5c1e68",
+                        "be974926-47d2-ef11-8eea-000d3a5c1e68",
+                        "5130712d-59d2-ef11-8eea-000d3a5c1e68",
+                        "861bdd5e-bc09-ef11-9f8a-000d3a5cb958",
+                        "fa40c544-9a0b-ef11-9f8a-000d3a5cb958",
+                        "ed6a53e3-6012-ef11-9f8a-000d3a5cb958",
+                        "0f468fd0-1dcf-ef11-8ee9-000d3a5ccf2d",
+                        "e3e46b57-f936-f011-8c4d-000d3aa1971f",
+                        "6c089c39-f681-f011-b4cc-000d3aa3d219",
+                        "f1faed1c-a4c5-f011-bbd3-000d3ac79569",
+                        "05e57ac4-dac5-f011-bbd3-000d3ac79569",
+                        "8719e711-6e50-e911-a974-000d3af292f2",
+                        "e55931c1-601f-f011-998a-00224802c180",
+                        "fe662b82-0dff-ef11-bae2-00224802c180",
+                        "6c595a51-ad0c-f011-9988-0022480427dd",
+                        "ae08d194-1903-f011-bae2-0022480427dd",
+                        "c7db6d55-e004-f011-bae2-0022480427dd",
+                        "98466431-8d25-f011-8c4e-00224808dbf5",
+                        "9e65ce8d-8f25-f011-8c4e-00224808dbf5",
+                        "0e2464d1-b350-f011-877a-002248095f4f",
+                        "42853375-172c-f011-8c4e-002248095f4f",
+                        "b6182655-6eac-f011-bbd3-00224809eacc",
+                        "117db4e1-7dbf-ef11-a72e-0022481efed6",
+                        "290d043b-9fbf-ef11-a72e-0022481efed6",
+                        "09a76655-9fbf-ef11-a72e-0022481efed6",
+                        "facc4beb-c9b5-48f7-b709-0b41f6518b22",
+                        "cde64862-0804-453b-b9f4-0ec8ff12d30f",
+                        "485c39e3-44fd-59c3-3638-4777211cbc5e",
+                        "08a22b21-d7d3-ef11-a730-6045bd00cb12",
+                        "7cebd225-e3d3-ef11-a730-6045bd00cb12",
+                        "61dc8bec-f1d3-ef11-a730-6045bd00cb12",
+                        "d06e9f82-b2d7-ef11-a730-6045bd00cb12",
+                        "1a0cb2d6-fc3d-f011-877a-6045bd05e54b",
+                        "5d27b158-cb45-f011-877a-6045bd06efb1",
+                        "34fad402-8609-f011-bae2-6045bd07d12b",
+                        "5439e6c3-3e4d-f011-877b-6045bd0937a6",
+                        "c5eeb2b4-1974-f011-b4cc-6045bd203130",
+                        "7a5c6671-5bc5-f011-bbd3-6045bd205ea8",
+                        "e3742ca3-e086-ef11-ac21-7c1e520158f7",
+                        "af6b06fb-4553-f011-877b-7c1e524ac215",
+                        "445c9bd8-f21a-49c4-ab13-8f2076a72ad1",
+                        "99b0bd7d-2d4e-4bfa-9120-b9a2cd81a35d",
+                        "333b0082-b97e-4b10-89b2-bdececd4ac34",
+                        "a9373689-25bf-4677-b557-ff4736df8e21"
+                    ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "templates":  [
+                      {
+                          "type":  "InitializeVariable",
+                          "name":  "Initialize_variable",
+                          "template":  {
+                                           "type":  "InitializeVariable",
+                                           "inputs":  {
+                                                          "variables":  [
+                                                                            {
+                                                                                "name":  "Invoice",
+                                                                                "type":  "array"
+                                                                            }
+                                                                        ]
+                                                      },
+                                           "runAfter":  {
+                                                            "Get_items":  [
+                                                                              "Succeeded"
+                                                                          ]
+                                                        }
+                                       }
+                      },
+                      {
+                          "type":  "InitializeVariable",
+                          "name":  "Initialize_variable",
+                          "template":  {
+                                           "runAfter":  {
+
+                                                        },
+                                           "metadata":  {
+                                                            "operationMetadataId":  "5dc7ff3a-9631-4747-b5cb-5f3b95e64b48"
+                                                        },
+                                           "type":  "InitializeVariable",
+                                           "inputs":  {
+                                                          "variables":  [
+                                                                            {
+                                                                                "name":  "Invoice",
+                                                                                "type":  "array"
+                                                                            }
+                                                                        ]
+                                                      }
+                                       }
+                      },
+                      {
+                          "type":  "InitializeVariable",
+                          "name":  "Initialize_variable",
+                          "template":  {
+                                           "type":  "InitializeVariable",
+                                           "inputs":  {
+                                                          "variables":  [
+                                                                            {
+                                                                                "name":  "AA",
+                                                                                "type":  "array"
+                                                                            }
+                                                                        ]
+                                                      },
+                                           "runAfter":  {
+                                                            "Compose_2":  [
+                                                                              "SUCCEEDED"
+                                                                          ]
+                                                        }
+                                       }
+                      },
+                      {
+                          "type":  "SetVariable",
+                          "name":  "Set_variable",
+                          "template":  {
+                                           "type":  "SetVariable",
+                                           "inputs":  {
+                                                          "name":  "AA",
+                                                          "value":  "@json(\u0027[]\u0027)"
+                                                      },
+                                           "runAfter":  {
+                                                            "Compose":  [
+                                                                            "Succeeded"
+                                                                        ]
+                                                        }
+                                       }
+                      },
+                      {
+                          "type":  "SetVariable",
+                          "name":  "Set_ErrorMessage_from_MCS_error",
+                          "template":  {
+                                           "type":  "SetVariable",
+                                           "inputs":  {
+                                                          "name":  "ErrorMessage",
+                                                          "value":  "@actions(\u0027Execute_Copilot_And_Wait\u0027)?[\u0027error\u0027]?[\u0027message\u0027]"
+                                                      }
+                                       }
+                      },
+                      {
+                          "type":  "SetVariable",
+                          "name":  "Set_ErrorMessage_from_lastResponse",
+                          "template":  {
+                                           "type":  "SetVariable",
+                                           "inputs":  {
+                                                          "name":  "ErrorMessage",
+                                                          "value":  "@outputs(\u0027Execute_Copilot_And_Wait\u0027)?[\u0027body/lastResponse\u0027]"
+                                                      }
+                                       }
+                      },
+                      {
+                          "type":  "AppendToArrayVariable",
+                          "name":  "Append_to_array_variable",
+                          "template":  {
+                                           "type":  "AppendToArrayVariable",
+                                           "inputs":  {
+                                                          "name":  "Invoice",
+                                                          "value":  "@addProperty(outputs(\u0027Compose\u0027),\u0027FileName\u0027,items(\u0027For_each\u0027)?[\u0027DisplayName\u0027])"
+                                                      },
+                                           "runAfter":  {
+                                                            "Compose":  [
+                                                                            "Succeeded"
+                                                                        ]
+                                                        }
+                                       }
+                      },
+                      {
+                          "type":  "AppendToArrayVariable",
+                          "name":  "Append_to_array_variable",
+                          "template":  {
+                                           "runAfter":  {
+                                                            "Compose":  [
+                                                                            "Succeeded"
+                                                                        ]
+                                                        },
+                                           "metadata":  {
+                                                            "operationMetadataId":  "5f76014e-07b2-440b-a63f-6953e4e2c09f"
+                                                        },
+                                           "type":  "AppendToArrayVariable",
+                                           "inputs":  {
+                                                          "name":  "Invoice",
+                                                          "value":  "@addProperty(addProperty(outputs(\u0027Compose\u0027),\u0027FileName\u0027,items(\u0027For_each\u0027)?[\u0027DisplayName\u0027]),\u0027SystemReimbusementId\u0027,items(\u0027For_each_1\u0027)?[\u0027ID\u0027])"
+                                                      }
+                                       }
+                      },
+                      {
+                          "type":  "AppendToArrayVariable",
+                          "name":  "Append_to_array_variable",
+                          "template":  {
+                                           "type":  "AppendToArrayVariable",
+                                           "inputs":  {
+                                                          "name":  "AA",
+                                                          "value":  "a"
+                                                      },
+                                           "runAfter":  {
+                                                            "Initialize_variable":  [
+                                                                                        "Succeeded"
+                                                                                    ]
+                                                        }
+                                       }
+                      },
+                      {
+                          "type":  "AppendToStringVariable",
+                          "name":  "Append_to_string_variable:_Add_error_message",
+                          "template":  {
+                                           "type":  "AppendToStringVariable",
+                                           "inputs":  {
+                                                          "name":  "ErrorMessage",
+                                                          "value":  "@{first(body(\u0027Filter_array:_Error_Actions\u0027))?[\u0027error\u0027]?[\u0027message\u0027]} url: @{outputs(\u0027Compose:_Flow_URL\u0027)}"
+                                                      },
+                                           "runAfter":  {
+                                                            "Compose:_Flow_URL":  [
+                                                                                      "Succeeded"
+                                                                                  ]
+                                                        },
+                                           "metadata":  {
+                                                            "operationMetadataId":  "d3919e17-82d2-4f85-acde-84b34f4b99c3"
+                                                        }
+                                       }
+                      },
+                      {
+                          "type":  "AppendToStringVariable",
+                          "name":  "Append_to_string_variable:_Add_Error_Message1",
+                          "template":  {
+                                           "runAfter":  {
+                                                            "Filter_array:_Error_Actions":  [
+                                                                                                "Succeeded"
+                                                                                            ]
+                                                        },
+                                           "metadata":  {
+                                                            "operationMetadataId":  "b8c6feab-2b15-45f4-b10e-c1bebc865a6c"
+                                                        },
+                                           "type":  "AppendToStringVariable",
+                                           "inputs":  {
+                                                          "name":  "ErrorMessage",
+                                                          "value":  "@first(body(\u0027Filter_array:_Error_Actions\u0027))?[\u0027error\u0027]?[\u0027message\u0027]"
+                                                      }
+                                       }
+                      },
+                      {
+                          "type":  "AppendToStringVariable",
+                          "name":  "Append_to_string_variable:_Add_Error_Message2",
+                          "template":  {
+                                           "runAfter":  {
+                                                            "Get_a_row_by_ID:_Logs":  [
+                                                                                          "Succeeded"
+                                                                                      ]
+                                                        },
+                                           "metadata":  {
+                                                            "operationMetadataId":  "76f2d86b-50ad-4fc7-ad5a-7c299b1ce7b1"
+                                                        },
+                                           "type":  "AppendToStringVariable",
+                                           "inputs":  {
+                                                          "name":  "ErrorMessage",
+                                                          "value":  "@outputs(\u0027Get_a_row_by_ID:_Logs\u0027)?[\u0027body/cat_errormessage\u0027]"
+                                                      }
+                                       }
+                      },
+                      {
+                          "type":  "IncrementVariable",
+                          "name":  "Increment_variable:_PageNumber",
+                          "template":  {
+                                           "type":  "IncrementVariable",
+                                           "inputs":  {
+                                                          "name":  "PageNumber",
+                                                          "value":  1
+                                                      },
+                                           "runAfter":  {
+                                                            "Set_variable:_MoreRecords":  [
+                                                                                              "Succeeded"
+                                                                                          ]
+                                                        },
+                                           "metadata":  {
+                                                            "operationMetadataId":  "0b984473-6a37-4104-bd4a-7ac3a137c37c"
+                                                        }
+                                       }
+                      },
+                      {
+                          "type":  "IncrementVariable",
+                          "name":  "IncrementPageNumberVariable",
+                          "template":  {
+                                           "runAfter":  {
+                                                            "ExpireEvaluationsByChangingStatus":  [
+                                                                                                      "Succeeded"
+                                                                                                  ]
+                                                        },
+                                           "metadata":  {
+                                                            "operationMetadataId":  "a433c292-d3e2-4d32-91c1-8c79b61a565c"
+                                                        },
+                                           "type":  "IncrementVariable",
+                                           "inputs":  {
+                                                          "name":  "PageNumber",
+                                                          "value":  1
+                                                      }
+                                       }
+                      }
+                  ],
+    "graphConvertible":  true,
+    "graphNodeType":  "builtinFunction"
+}

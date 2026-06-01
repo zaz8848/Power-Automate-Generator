@@ -1,0 +1,181 @@
+﻿{
+    "id":  "shared_sharepointonline_GetFileContent",
+    "connector":  "shared_sharepointonline",
+    "connectorBase":  "shared_sharepointonline",
+    "operationId":  "GetFileContent",
+    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+    "type":  "OpenApiConnection",
+    "learnedFrom":  [
+                        "ee87fd77-09fa-f011-8407-000d3a316017",
+                        "e3742ca3-e086-ef11-ac21-7c1e520158f7",
+                        "725f12eb-4053-f111-a825-7ced8d3c72c7"
+                    ],
+    "learnedFromName":  [
+                            "Sharepoint-PO Uploaded-Extract Po Item",
+                            "Sharepoint Synchronization | Synchronize files to Agent (Child)",
+                            "When a file is created (properties only)"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "environment":  [
+                        "{dataverseOrg}",
+                        "orgdf331f66.crm5.dynamics.com",
+                        "org1cd97ca4.crm.dynamics.com"
+                    ],
+    "template":  {
+                     "Get_file_content":  {
+                                              "type":  "OpenApiConnection",
+                                              "inputs":  {
+                                                             "parameters":  {
+                                                                                "dataset":  "@parameters(\u0027SharepointSite (crdd1_SharepointSite)\u0027)",
+                                                                                "id":  "@triggerBody()?[\u0027{Identifier}\u0027]",
+                                                                                "inferContentType":  true
+                                                                            },
+                                                             "host":  {
+                                                                          "apiId":  "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+                                                                          "operationId":  "GetFileContent",
+                                                                          "connectionName":  "shared_sharepointonline"
+                                                                      }
+                                                         },
+                                              "runAfter":  {
+                                                               "Create_item-PO":  [
+                                                                                      "Succeeded"
+                                                                                  ]
+                                                           },
+                                              "metadata":  {
+                                                               "operationMetadataId":  "a4d84888-d425-495e-995d-50711d805bcf"
+                                                           }
+                                          }
+                 },
+    "inputSchema":  [
+                        {
+                            "name":  "connectionId",
+                            "in":  "path",
+                            "required":  true,
+                            "x-ms-visibility":  "internal",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "dataset",
+                            "in":  "path",
+                            "description":  "Example: https://contoso.sharepoint.com/sites/sitename.",
+                            "required":  true,
+                            "x-ms-summary":  "Site Address",
+                            "x-ms-dynamic-values":  {
+                                                        "operationId":  "GetDataSets",
+                                                        "parameters":  {
+
+                                                                       },
+                                                        "value-collection":  "value",
+                                                        "value-path":  "Name",
+                                                        "value-title":  "DisplayName"
+                                                    },
+                            "x-ms-url-encoding":  "double",
+                            "x-ms-ai-sensitivity":  "high",
+                            "x-ms-name-for-model":  "get_file_content_dataset",
+                            "x-ms-description-for-model":  "Set to the full HTTPS URL of the SharePoint site that contains the target list, not the list URL. Example: https://contoso.sharepoint.com/sites/PMO.",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "id",
+                            "in":  "path",
+                            "description":  "Select a file.",
+                            "required":  true,
+                            "x-ms-summary":  "File Identifier",
+                            "x-ms-dynamic-values":  {
+                                                        "capability":  "file-picker",
+                                                        "parameters":  {
+                                                                           "isFolder":  false,
+                                                                           "fileFilter":  [
+
+                                                                                          ],
+                                                                           "dataset":  {
+                                                                                           "parameter":  "dataset"
+                                                                                       }
+                                                                       },
+                                                        "value-path":  "Id"
+                                                    },
+                            "x-ms-dynamic-tree":  {
+                                                      "settings":  {
+                                                                       "canSelectParentNodes":  false,
+                                                                       "canSelectLeafNodes":  true
+                                                                   },
+                                                      "open":  {
+                                                                   "operationId":  "ListAllRootFolders",
+                                                                   "itemValuePath":  "Id",
+                                                                   "itemTitlePath":  "DisplayName",
+                                                                   "itemIsParent":  "(IsFolder eq true)",
+                                                                   "itemFullTitlePath":  "Path",
+                                                                   "parameters":  {
+                                                                                      "dataset":  {
+                                                                                                      "parameterReference":  "dataset"
+                                                                                                  }
+                                                                                  }
+                                                               },
+                                                      "browse":  {
+                                                                     "operationId":  "ListFolder",
+                                                                     "itemValuePath":  "Id",
+                                                                     "itemTitlePath":  "DisplayName",
+                                                                     "itemIsParent":  "(IsFolder eq true)",
+                                                                     "itemFullTitlePath":  "Path",
+                                                                     "parameters":  {
+                                                                                        "dataset":  {
+                                                                                                        "parameterReference":  "dataset"
+                                                                                                    },
+                                                                                        "id":  {
+                                                                                                   "selectedItemValuePath":  "Id"
+                                                                                               }
+                                                                                    }
+                                                                 }
+                                                  },
+                            "x-ms-name-for-model":  "get_file_content_id",
+                            "x-ms-description-for-model":  "Set to the SharePoint File Identifier for the target file (NOT the SharePoint list item ID / SPListItem ID). DO NOT use a file path or file name. If needed, source this from a previous SharePoint tool as follows: from Get file properties and Get files (properties only), use the output named \"Identifier\". From Get file metadata and List folder, use the output named \"Id\".",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "inferContentType",
+                            "in":  "query",
+                            "description":  "Infer content-type based on extension.",
+                            "required":  false,
+                            "x-ms-summary":  "Infer Content Type",
+                            "x-ms-visibility":  "advanced",
+                            "x-ms-name-for-model":  "get_file_content_infer_content_type",
+                            "x-ms-description-for-model":  "Set this based on how the file will be used. Set to true (or leave unset) to treat the file as its real type (e.g., PDF or Word). Set to false ONLY if the user requests something like \"raw bytes\" or \"generic binary data.\"",
+                            "type":  "boolean",
+                            "default":  true
+                        }
+                    ],
+    "dynamicValuesRef":  {
+                             "id":  {
+                                        "operationId":  null,
+                                        "parameters":  {
+                                                           "isFolder":  false,
+                                                           "dataset":  {
+                                                                           "parameter":  "dataset"
+                                                                       },
+                                                           "fileFilter":  [
+
+                                                                          ]
+                                                       },
+                                        "valuePath":  "Id"
+                                    },
+                             "dataset":  {
+                                             "operationId":  "GetDataSets",
+                                             "titlePath":  "DisplayName",
+                                             "parameters":  {
+
+                                                            },
+                                             "valueCollection":  "value",
+                                             "valuePath":  "Name"
+                                         }
+                         },
+    "swaggerLearned":  true,
+    "outputSchema":  {
+                         "format":  "binary",
+                         "description":  "The content of the file.",
+                         "type":  "string",
+                         "x-ms-summary":  "File Content"
+                     },
+    "graphConvertible":  true,
+    "graphNodeType":  "connector"
+}

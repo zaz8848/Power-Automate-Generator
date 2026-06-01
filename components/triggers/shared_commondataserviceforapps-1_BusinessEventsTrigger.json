@@ -1,0 +1,41 @@
+﻿{
+    "id":  "shared_commondataserviceforapps-1_BusinessEventsTrigger",
+    "connector":  "shared_commondataserviceforapps-1",
+    "operationId":  "BusinessEventsTrigger",
+    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+    "type":  "OpenApiConnectionWebhook",
+    "kind":  null,
+    "learnedFrom":  [
+                        "eeadb10f-458c-ef11-ac21-6045bdd46f57"
+                    ],
+    "learnedFromName":  [
+                            "Sharepoint Synchronization | On Demand"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "environment":  [
+                        "orgdf331f66.crm5.dynamics.com"
+                    ],
+    "template":  {
+                     "When_an_action_is_performed":  {
+                                                         "metadata":  {
+                                                                          "operationMetadataId":  "cca0b404-9a7f-45c4-b14d-85ad652ebb66"
+                                                                      },
+                                                         "type":  "OpenApiConnectionWebhook",
+                                                         "inputs":  {
+                                                                        "host":  {
+                                                                                     "connectionName":  "shared_commondataserviceforapps-1",
+                                                                                     "operationId":  "BusinessEventsTrigger",
+                                                                                     "apiId":  "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                                                                                 },
+                                                                        "parameters":  {
+                                                                                           "catalog":  "allcatalog",
+                                                                                           "category":  "allcategory",
+                                                                                           "subscriptionRequest/entityname":  "none",
+                                                                                           "subscriptionRequest/sdkmessagename":  "cat_RunSyncFiles"
+                                                                                       },
+                                                                        "authentication":  "@parameters(\u0027$authentication\u0027)"
+                                                                    }
+                                                     }
+                 }
+}

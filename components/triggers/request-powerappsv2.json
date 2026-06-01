@@ -1,0 +1,35 @@
+{
+    "id": "trigger_request_powerappsv2",
+    "type": "Request",
+    "kind": "PowerAppV2",
+    "description": "Power Apps V2 触发器 — 从 Power Apps 按钮调用 flow，接收 Power Apps 传入的参数",
+    "learnedFrom": [
+        "3a94fc5f-d772-ee11-9ae7-000d3a551f03"
+    ],
+    "learnedAt": "2026-05-26",
+    "verified": true,
+    "template": {
+        "manual": {
+            "type": "Request",
+            "kind": "PowerAppV2",
+            "inputs": {
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "text": {
+                            "title": "参数名",
+                            "type": "string",
+                            "x-ms-dynamically-added": true,
+                            "description": "参数描述",
+                            "x-ms-content-hint": "TEXT"
+                        }
+                    },
+                    "required": [
+                        "text"
+                    ]
+                }
+            }
+        }
+    },
+    "notes": "与 Button 类似但专用于 Power Apps 调用。常配合 Response kind=PowerApp 返回结果给 Power App。metadata 中可包含 flowSystemMetadata.flowKind: Stateful。"
+}

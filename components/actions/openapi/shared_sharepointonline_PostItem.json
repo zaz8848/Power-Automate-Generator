@@ -1,0 +1,216 @@
+﻿{
+    "id":  "shared_sharepointonline_PostItem",
+    "connector":  "shared_sharepointonline",
+    "connectorBase":  "shared_sharepointonline",
+    "operationId":  "PostItem",
+    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+    "type":  "OpenApiConnection",
+    "learnedFrom":  [
+                        "ee87fd77-09fa-f011-8407-000d3a316017",
+                        "3e048272-81f2-01da-5796-5bddbd0332ff",
+                        "33afba72-d005-f111-8407-6045bd5777da"
+                    ],
+    "learnedFromName":  [
+                            "Sharepoint-PO Uploaded-Extract Po Item",
+                            "Untitled flow",
+                            "Sharepoint-Modified-ExpenseRequest-ExtractInvoice"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "environment":  [
+                        "{dataverseOrg}"
+                    ],
+    "template":  {
+                     "Create_item-PO_Line_Items_Failed_2":  {
+                                                                "type":  "OpenApiConnection",
+                                                                "inputs":  {
+                                                                               "parameters":  {
+                                                                                                  "dataset":  "@parameters(\u0027SharepointSite (crdd1_SharepointSite)\u0027)",
+                                                                                                  "table":  "@parameters(\u0027List-[Po Line Items] (crdd1_ListPoLineItems)\u0027)",
+                                                                                                  "item/Title":  "@items(\u0027Foreach-ItemsNo\u0027)?[\u0027Order number/Item\u0027]",
+                                                                                                  "item/PO/Id":  "@outputs(\u0027Create_item-PO\u0027)?[\u0027body/ID\u0027]",
+                                                                                                  "item/PoNumber":  "@items(\u0027Foreach-ItemsNo\u0027)?[\u0027PO\u0027]",
+                                                                                                  "item/Pos":  "@items(\u0027Foreach-ItemsNo\u0027)?[\u0027Pos.\u0027]",
+                                                                                                  "item/PartNumber":  "@items(\u0027Foreach-ItemsNo\u0027)?[\u0027Part Number\u0027]",
+                                                                                                  "item/Destination":  "@items(\u0027Foreach-ItemsNo\u0027)?[\u0027Destination\u0027]",
+                                                                                                  "item/Status/Value":  "Invalid",
+                                                                                                  "item/Remark":  "当前Pos.提取失败，辛苦自主进行填写",
+                                                                                                  "item/SystemPoId":  "@outputs(\u0027Create_item-PO\u0027)?[\u0027body/ID\u0027]"
+                                                                                              },
+                                                                               "host":  {
+                                                                                            "apiId":  "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+                                                                                            "operationId":  "PostItem",
+                                                                                            "connectionName":  "shared_sharepointonline"
+                                                                                        }
+                                                                           },
+                                                                "metadata":  {
+                                                                                 "operationMetadataId":  "6f91a3cc-82f5-41e9-b4aa-c944a3514ec2"
+                                                                             }
+                                                            }
+                 },
+    "inputSchema":  [
+                        {
+                            "name":  "connectionId",
+                            "in":  "path",
+                            "required":  true,
+                            "x-ms-visibility":  "internal",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "dataset",
+                            "in":  "path",
+                            "description":  "Example: https://contoso.sharepoint.com/sites/sitename",
+                            "required":  true,
+                            "x-ms-summary":  "Site Address",
+                            "x-ms-url-encoding":  "double",
+                            "x-ms-ai-sensitivity":  "high",
+                            "x-ms-dynamic-values":  {
+                                                        "operationId":  "GetDataSets",
+                                                        "parameters":  {
+
+                                                                       },
+                                                        "value-collection":  "value",
+                                                        "value-path":  "Name",
+                                                        "value-title":  "DisplayName"
+                                                    },
+                            "x-ms-name-for-model":  "post_item_dataset",
+                            "x-ms-description-for-model":  "Set to the full HTTPS site URL of the SharePoint site that contains the target list, not the list URL. Example: https://contoso.sharepoint.com/sites/PMO.",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "table",
+                            "in":  "path",
+                            "description":  "SharePoint list name",
+                            "required":  true,
+                            "x-ms-summary":  "List Name",
+                            "x-ms-url-encoding":  "double",
+                            "x-ms-dynamic-values":  {
+                                                        "operationId":  "GetTables",
+                                                        "parameters":  {
+                                                                           "dataset":  {
+                                                                                           "parameter":  "dataset"
+                                                                                       }
+                                                                       },
+                                                        "value-collection":  "value",
+                                                        "value-path":  "Name",
+                                                        "value-title":  "DisplayName"
+                                                    },
+                            "x-ms-name-for-model":  "post_item_table",
+                            "x-ms-description-for-model":  "Set to the name of the SharePoint list where the item should be created. Based on the user\u0027s request or existing context, select the relevant list from possible options. Example: Tasks, Expenses.",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "item",
+                            "in":  "body",
+                            "description":  "Item to create",
+                            "required":  true,
+                            "schema":  {
+                                           "type":  "object",
+                                           "additionalProperties":  {
+                                                                        "$ref":  "#/definitions/Item"
+                                                                    },
+                                           "x-ms-dynamic-schema":  {
+                                                                       "operationId":  "GetTable",
+                                                                       "parameters":  {
+                                                                                          "dataset":  {
+                                                                                                          "parameter":  "dataset"
+                                                                                                      },
+                                                                                          "table":  {
+                                                                                                        "parameter":  "table"
+                                                                                                    },
+                                                                                          "view":  {
+                                                                                                       "parameter":  "view"
+                                                                                                   }
+                                                                                      },
+                                                                       "value-path":  "Schema/Items"
+                                                                   }
+                                       },
+                            "x-ms-summary":  "Item",
+                            "x-ms-name-for-model":  "post_item_item",
+                            "x-ms-description-for-model":  "Set to a JSON object that maps column names from the list to values from the user or context. Use structured key value pairs, not plain text. You must include required fields and include non-required fields only if they can be inferred from user\u0027s request. Do not invent fields. Example: { Title: \u0027Call customer\u0027, DueDate: \u00272025-11-30\u0027, Status: \u0027Not Started\u0027 }."
+                        },
+                        {
+                            "name":  "view",
+                            "in":  "query",
+                            "description":  "Avoid column threshold issues by only using columns defined in a view",
+                            "required":  false,
+                            "x-ms-summary":  "Limit Columns by View",
+                            "x-ms-visibility":  "advanced",
+                            "x-ms-dynamic-values":  {
+                                                        "operationId":  "GetTableViews",
+                                                        "parameters":  {
+                                                                           "dataset":  {
+                                                                                           "parameter":  "dataset"
+                                                                                       },
+                                                                           "table":  {
+                                                                                         "parameter":  "table"
+                                                                                     }
+                                                                       },
+                                                        "value-path":  "Name",
+                                                        "value-title":  "DisplayName"
+                                                    },
+                            "x-ms-name-for-model":  "post_item_view",
+                            "x-ms-description-for-model":  "Usually leave this empty. Set to a view name or GUID when the user mentions a specific view or when column threshold limits are a concern, so only columns from that view are used. Do NOT include a view if user\u0027s request does not mention a specific view. Example: FinanceView.",
+                            "type":  "string"
+                        }
+                    ],
+    "dynamicValuesRef":  {
+                             "table":  {
+                                           "operationId":  "GetTables",
+                                           "titlePath":  "DisplayName",
+                                           "parameters":  {
+                                                              "dataset":  {
+                                                                              "parameter":  "dataset"
+                                                                          }
+                                                          },
+                                           "valueCollection":  "value",
+                                           "valuePath":  "Name"
+                                       },
+                             "view":  {
+                                          "operationId":  "GetTableViews",
+                                          "titlePath":  "DisplayName",
+                                          "parameters":  {
+                                                             "table":  {
+                                                                           "parameter":  "table"
+                                                                       },
+                                                             "dataset":  {
+                                                                             "parameter":  "dataset"
+                                                                         }
+                                                         },
+                                          "valuePath":  "Name"
+                                      },
+                             "dataset":  {
+                                             "operationId":  "GetDataSets",
+                                             "titlePath":  "DisplayName",
+                                             "parameters":  {
+
+                                                            },
+                                             "valueCollection":  "value",
+                                             "valuePath":  "Name"
+                                         }
+                         },
+    "swaggerLearned":  true,
+    "outputSchema":  {
+                         "type":  "object",
+                         "additionalProperties":  {
+                                                      "$ref":  "#/definitions/Item"
+                                                  },
+                         "x-ms-dynamic-schema":  {
+                                                     "operationId":  "GetTable",
+                                                     "parameters":  {
+                                                                        "dataset":  {
+                                                                                        "parameter":  "dataset"
+                                                                                    },
+                                                                        "table":  {
+                                                                                      "parameter":  "table"
+                                                                                  },
+                                                                        "view":  {
+                                                                                     "parameter":  "view"
+                                                                                 }
+                                                                    },
+                                                     "value-path":  "Schema/Items"
+                                                 }
+                     },
+    "graphConvertible":  true,
+    "graphNodeType":  "connector"
+}

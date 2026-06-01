@@ -1,0 +1,79 @@
+﻿{
+    "id":  "shared_microsofttranslatorv-1_GetTranslationStatus",
+    "connector":  "shared_microsofttranslatorv-1",
+    "connectorBase":  "shared_microsofttranslatorv",
+    "operationId":  "GetTranslationStatus",
+    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_microsofttranslatorv",
+    "type":  "OpenApiConnection",
+    "learnedFrom":  [
+                        "f5c05c98-d563-f011-bec3-6045bd00625f"
+                    ],
+    "learnedFromName":  [
+                            "Automatic Flow - Check Document Translation When Translation Log Status Changes to Processing"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "environment":  [
+                        "org1cd97ca4.crm.dynamics.com"
+                    ],
+    "template":  {
+                     "Get_translation_status":  {
+                                                    "type":  "OpenApiConnection",
+                                                    "inputs":  {
+                                                                   "parameters":  {
+                                                                                      "id":  "@outputs(\u0027Get_the_translation_log\u0027)?[\u0027body/biz_azuretransactionid\u0027]"
+                                                                                  },
+                                                                   "host":  {
+                                                                                "apiId":  "/providers/Microsoft.PowerApps/apis/shared_microsofttranslatorv",
+                                                                                "operationId":  "GetTranslationStatus",
+                                                                                "connectionName":  "shared_microsofttranslatorv-1"
+                                                                            }
+                                                               },
+                                                    "metadata":  {
+                                                                     "operationMetadataId":  "fd51e011-19e3-4603-971b-f2a2f076e6f7"
+                                                                 }
+                                                }
+                 },
+    "inputSchema":  {
+                        "connectionId":  {
+                                             "description":  null,
+                                             "in":  "path",
+                                             "type":  "string",
+                                             "required":  true
+                                         },
+                        "id":  {
+                                   "description":  "The operation ID.",
+                                   "in":  "path",
+                                   "type":  "string",
+                                   "required":  true
+                               }
+                    },
+    "outputSchema":  {
+                         "$ref":  "TranslationStatusResponse",
+                         "properties":  {
+                                            "lastActionDateTimeUtc":  {
+                                                                          "type":  "string",
+                                                                          "description":  "Date time in which the operation\u0027s status has been updated."
+                                                                      },
+                                            "status":  {
+                                                           "type":  "string",
+                                                           "description":  "List of possible statuses for job or document like Canceled, Cancelling, Failed, NotStarted, Running, Succeeded, ValidationFailed."
+                                                       },
+                                            "summary":  {
+                                                            "type":  "object",
+                                                            "description":  "Summary containing the details."
+                                                        },
+                                            "id":  {
+                                                       "type":  "string",
+                                                       "description":  "ID of the operation."
+                                                   },
+                                            "createdDateTimeUtc":  {
+                                                                       "type":  "string",
+                                                                       "description":  "Operation created date time."
+                                                                   }
+                                        }
+                     },
+    "swaggerLearned":  true,
+    "graphConvertible":  true,
+    "graphNodeType":  "connector"
+}

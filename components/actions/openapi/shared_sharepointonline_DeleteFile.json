@@ -1,0 +1,155 @@
+﻿{
+    "id":  "shared_sharepointonline_DeleteFile",
+    "connector":  "shared_sharepointonline",
+    "connectorBase":  "shared_sharepointonline",
+    "operationId":  "DeleteFile",
+    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+    "type":  "OpenApiConnection",
+    "learnedFrom":  [
+                        "b2538f39-9190-ef11-ac21-0022480c3fe9"
+                    ],
+    "learnedFromName":  [
+                            "Automatic Flow - Create Processing Log - SharePoint Lib"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "environment":  [
+                        "org1cd97ca4.crm.dynamics.com"
+                    ],
+    "template":  {
+                     "Delete_uploaded_file":  {
+                                                  "type":  "OpenApiConnection",
+                                                  "inputs":  {
+                                                                 "parameters":  {
+                                                                                    "dataset":  "https://contoso.sharepoint.com/sites/AIBusinessProcessPortal",
+                                                                                    "id":  "@triggerBody()?[\u0027{Identifier}\u0027]"
+                                                                                },
+                                                                 "host":  {
+                                                                              "apiId":  "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+                                                                              "operationId":  "DeleteFile",
+                                                                              "connectionName":  "shared_sharepointonline"
+                                                                          }
+                                                             },
+                                                  "runAfter":  {
+                                                                   "Update_processing_log_status_to_detect_setting":  [
+                                                                                                                          "SUCCEEDED"
+                                                                                                                      ]
+                                                               },
+                                                  "metadata":  {
+                                                                   "operationMetadataId":  "97153ac5-c9f2-4e9f-b104-f9c8dbabd2e7"
+                                                               }
+                                              }
+                 },
+    "inputSchema":  [
+                        {
+                            "name":  "connectionId",
+                            "in":  "path",
+                            "required":  true,
+                            "x-ms-visibility":  "internal",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "dataset",
+                            "in":  "path",
+                            "description":  "Example: https://contoso.sharepoint.com/sites/sitename.",
+                            "required":  true,
+                            "x-ms-summary":  "Site Address",
+                            "x-ms-dynamic-values":  {
+                                                        "operationId":  "GetDataSets",
+                                                        "parameters":  {
+
+                                                                       },
+                                                        "value-collection":  "value",
+                                                        "value-path":  "Name",
+                                                        "value-title":  "DisplayName"
+                                                    },
+                            "x-ms-url-encoding":  "double",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "id",
+                            "in":  "path",
+                            "description":  "Select a file.",
+                            "required":  true,
+                            "x-ms-summary":  "File Identifier",
+                            "x-ms-dynamic-values":  {
+                                                        "capability":  "file-picker",
+                                                        "parameters":  {
+                                                                           "isFolder":  false,
+                                                                           "fileFilter":  [
+
+                                                                                          ],
+                                                                           "dataset":  {
+                                                                                           "parameter":  "dataset"
+                                                                                       }
+                                                                       },
+                                                        "value-path":  "Id"
+                                                    },
+                            "x-ms-dynamic-tree":  {
+                                                      "settings":  {
+                                                                       "canSelectParentNodes":  false,
+                                                                       "canSelectLeafNodes":  true
+                                                                   },
+                                                      "open":  {
+                                                                   "operationId":  "ListAllRootFolders",
+                                                                   "itemValuePath":  "Id",
+                                                                   "itemTitlePath":  "DisplayName",
+                                                                   "itemIsParent":  "(IsFolder eq true)",
+                                                                   "itemFullTitlePath":  "Path",
+                                                                   "parameters":  {
+                                                                                      "dataset":  {
+                                                                                                      "parameterReference":  "dataset"
+                                                                                                  }
+                                                                                  }
+                                                               },
+                                                      "browse":  {
+                                                                     "operationId":  "ListFolder",
+                                                                     "itemValuePath":  "Id",
+                                                                     "itemTitlePath":  "DisplayName",
+                                                                     "itemIsParent":  "(IsFolder eq true)",
+                                                                     "itemFullTitlePath":  "Path",
+                                                                     "parameters":  {
+                                                                                        "dataset":  {
+                                                                                                        "parameterReference":  "dataset"
+                                                                                                    },
+                                                                                        "id":  {
+                                                                                                   "selectedItemValuePath":  "Id"
+                                                                                               }
+                                                                                    }
+                                                                 }
+                                                  },
+                            "type":  "string"
+                        }
+                    ],
+    "dynamicValuesRef":  {
+                             "id":  {
+                                        "operationId":  null,
+                                        "parameters":  {
+                                                           "isFolder":  false,
+                                                           "dataset":  {
+                                                                           "parameter":  "dataset"
+                                                                       },
+                                                           "fileFilter":  [
+
+                                                                          ]
+                                                       },
+                                        "valuePath":  "Id"
+                                    },
+                             "dataset":  {
+                                             "operationId":  "GetDataSets",
+                                             "titlePath":  "DisplayName",
+                                             "parameters":  {
+
+                                                            },
+                                             "valueCollection":  "value",
+                                             "valuePath":  "Name"
+                                         }
+                         },
+    "swaggerLearned":  true,
+    "outputSchema":  {
+                         "type":  "object",
+                         "description":  "No response schema in Swagger"
+                     },
+    "graphConvertible":  true,
+    "graphNodeType":  "connector"
+}

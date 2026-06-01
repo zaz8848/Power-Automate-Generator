@@ -1,0 +1,111 @@
+﻿{
+    "id":  "shared_commondataserviceforapps_2_PerformUnboundAction",
+    "connector":  "shared_commondataserviceforapps_2",
+    "connectorBase":  "shared_commondataserviceforapps",
+    "operationId":  "PerformUnboundAction",
+    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+    "type":  "OpenApiConnection",
+    "learnedFrom":  [
+                        "117db4e1-7dbf-ef11-a72e-0022481efed6"
+                    ],
+    "learnedFromName":  [
+                            "Conversation KPI | Generate Conversation KPIs Scheduler"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "environment":  [
+                        "orgdf331f66.crm5.dynamics.com"
+                    ],
+    "template":  {
+                     "Perform_an_unbound_action:_Generate_Conversation_KPIs":  {
+                                                                                   "type":  "OpenApiConnection",
+                                                                                   "inputs":  {
+                                                                                                  "parameters":  {
+                                                                                                                     "actionName":  "cat_GenerateConversationKpis",
+                                                                                                                     "item/cat_AgentTranscriptsIds":  "@item()"
+                                                                                                                 },
+                                                                                                  "host":  {
+                                                                                                               "apiId":  "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                                                                                                               "operationId":  "PerformUnboundAction",
+                                                                                                               "connectionName":  "shared_commondataserviceforapps_2"
+                                                                                                           }
+                                                                                              },
+                                                                                   "metadata":  {
+                                                                                                    "operationMetadataId":  "962a1215-aceb-4099-bbf1-bf5590c79b35"
+                                                                                                }
+                                                                               }
+                 },
+    "inputSchema":  [
+                        {
+                            "name":  "connectionId",
+                            "in":  "path",
+                            "required":  true,
+                            "x-ms-visibility":  "internal",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "actionName",
+                            "in":  "path",
+                            "description":  "Choose an action",
+                            "required":  true,
+                            "x-ms-url-encoding":  "double",
+                            "x-ms-dynamic-values":  {
+                                                        "operationId":  "GetUnboundActions",
+                                                        "parameters":  {
+
+                                                                       },
+                                                        "value-collection":  "value",
+                                                        "value-path":  "operationId",
+                                                        "value-title":  "operationDisplayName"
+                                                    },
+                            "x-ms-summary":  "Action Name",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "item",
+                            "in":  "body",
+                            "description":  "Action parameters",
+                            "required":  false,
+                            "schema":  {
+                                           "type":  "object",
+                                           "x-ms-dynamic-properties":  {
+                                                                           "operationId":  "GetMetadataForUnboundActionInput",
+                                                                           "parameters":  {
+                                                                                              "actionName":  {
+                                                                                                                 "parameterReference":  "actionName"
+                                                                                                             }
+                                                                                          },
+                                                                           "itemValuePath":  "schema"
+                                                                       }
+                                       },
+                            "x-ms-summary":  "Action parameters"
+                        }
+                    ],
+    "dynamicValuesRef":  {
+                             "actionName":  {
+                                                "operationId":  "GetUnboundActions",
+                                                "titlePath":  "operationDisplayName",
+                                                "parameters":  {
+
+                                                               },
+                                                "valueCollection":  "value",
+                                                "valuePath":  "operationId"
+                                            }
+                         },
+    "swaggerLearned":  true,
+    "outputSchema":  {
+                         "type":  "object",
+                         "x-ms-dynamic-properties":  {
+                                                         "operationId":  "GetMetadataForUnboundActionResponse",
+                                                         "parameters":  {
+                                                                            "actionName":  {
+                                                                                               "parameterReference":  "actionName"
+                                                                                           }
+                                                                        },
+                                                         "itemValuePath":  "schema"
+                                                     }
+                     },
+    "graphConvertible":  "partial",
+    "graphNodeType":  "connector",
+    "graphNotes":  "If used as Classify (QuickTest), needs AI to convert prompt to categories[]. Otherwise convertible."
+}

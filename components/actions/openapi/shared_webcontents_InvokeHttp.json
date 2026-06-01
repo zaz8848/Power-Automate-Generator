@@ -1,0 +1,78 @@
+﻿{
+    "id":  "shared_webcontents_InvokeHttp",
+    "connector":  "shared_webcontents",
+    "connectorBase":  "shared_webcontents",
+    "operationId":  "InvokeHttp",
+    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_webcontents",
+    "type":  "OpenApiConnection",
+    "learnedFrom":  [
+                        "aed4e501-b9b9-10e6-f430-161cb23447b8",
+                        "1a8648c4-c133-ef11-8409-000d3a31bd87",
+                        "ce41fa60-d233-ef11-8409-000d3a31bd87",
+                        "0d18967a-d333-ef11-8409-000d3a31bd87"
+                    ],
+    "learnedFromName":  [
+                            "Untitled flow",
+                            "Utility Flow - Dataverse Semantic Search",
+                            "Utility Flow - Get Dataverse Indexing Status",
+                            "Utility Flow - Get Dataverse Indexed Documents Count"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "environment":  [
+                        "orgdf331f66.crm5.dynamics.com",
+                        "org1cd97ca4.crm.dynamics.com"
+                    ],
+    "template":  {
+                     "Invoke_an_HTTP_request":  {
+                                                    "runAfter":  {
+
+                                                                 },
+                                                    "metadata":  {
+                                                                     "operationMetadataId":  "385fdd9e-8fc1-43c9-b5df-de84ba75c596"
+                                                                 },
+                                                    "type":  "OpenApiConnection",
+                                                    "inputs":  {
+                                                                   "host":  {
+                                                                                "connectionName":  "shared_webcontents",
+                                                                                "operationId":  "InvokeHttp",
+                                                                                "apiId":  "/providers/Microsoft.PowerApps/apis/shared_webcontents"
+                                                                            },
+                                                                   "parameters":  {
+                                                                                      "request/method":  "GET",
+                                                                                      "request/url":  "https://powervamg.as-il102.gateway.prod.island.powerapps.com/api/botauthoring/v1/environments/a72e299f-1672-e71c-83dd-bac0f2c17991/bots/11d5a4fb-9687-f011-b4cc-000d3a080cec/authorstate/0b2b5171-9cdf-4de5-a802-2eb1317f2dbb"
+                                                                                  },
+                                                                   "authentication":  {
+                                                                                          "type":  "Raw",
+                                                                                          "value":  "@json(decodeBase64(triggerOutputs().headers[\u0027X-MS-APIM-Tokens\u0027]))[\u0027$ConnectionKey\u0027]"
+                                                                                      }
+                                                               }
+                                                }
+                 },
+    "inputSchema":  [
+                        {
+                            "name":  "connectionId",
+                            "in":  "path",
+                            "required":  true,
+                            "x-ms-visibility":  "internal",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "request",
+                            "in":  "body",
+                            "description":  "Setting properties for the HTTP call.",
+                            "required":  true,
+                            "schema":  {
+                                           "$ref":  "#/definitions/HttpRequest"
+                                       },
+                            "x-ms-summary":  "Request to send"
+                        }
+                    ],
+    "swaggerLearned":  true,
+    "outputSchema":  {
+                         "description":  "The content of the response.",
+                         "x-ms-summary":  "Body"
+                     },
+    "graphConvertible":  true,
+    "graphNodeType":  "connector"
+}

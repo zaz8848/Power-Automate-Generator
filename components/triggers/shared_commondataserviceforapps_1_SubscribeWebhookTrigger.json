@@ -1,0 +1,40 @@
+﻿{
+    "id":  "shared_commondataserviceforapps_1_SubscribeWebhookTrigger",
+    "connector":  "shared_commondataserviceforapps_1",
+    "operationId":  "SubscribeWebhookTrigger",
+    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+    "type":  "OpenApiConnectionWebhook",
+    "kind":  null,
+    "learnedFrom":  [
+                        "59ab6a3a-ba4b-f011-877a-002248095f4f"
+                    ],
+    "learnedFromName":  [
+                            "Value Summary | New agent classification"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "environment":  [
+                        "orgdf331f66.crm5.dynamics.com"
+                    ],
+    "template":  {
+                     "When_a_row_is_added,_modified_or_deleted":  {
+                                                                      "type":  "OpenApiConnectionWebhook",
+                                                                      "inputs":  {
+                                                                                     "parameters":  {
+                                                                                                        "subscriptionRequest/message":  1,
+                                                                                                        "subscriptionRequest/entityname":  "cat_agentdetails",
+                                                                                                        "subscriptionRequest/scope":  4,
+                                                                                                        "subscriptionRequest/filterexpression":  "cat_description ne null and cat_instructions ne null"
+                                                                                                    },
+                                                                                     "host":  {
+                                                                                                  "apiId":  "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                                                                                                  "operationId":  "SubscribeWebhookTrigger",
+                                                                                                  "connectionName":  "shared_commondataserviceforapps_1"
+                                                                                              }
+                                                                                 },
+                                                                      "metadata":  {
+                                                                                       "operationMetadataId":  "12dce763-6c34-46a5-ac9a-82a5fe0ae570"
+                                                                                   }
+                                                                  }
+                 }
+}

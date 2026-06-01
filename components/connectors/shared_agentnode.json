@@ -1,0 +1,16 @@
+﻿{
+    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_agentnode",
+    "displayName":  "Agents (Agent Node)",
+    "id":  "shared_agentnode",
+    "operations":  [
+                       "InvokeDefinition"
+                   ],
+    "environment":  [
+                        "ZAF Prod"
+                    ],
+    "triggers":  [
+
+                 ],
+    "swaggerUrl":  "https://api.powerapps.com/providers/Microsoft.PowerApps/apis/shared_agentnode?$select=properties.swagger\u0026$filter=environment eq \u00279ffec6fe-9e60-eaf8-921d-be20e366a19b\u0027",
+    "learnedAt":  "2026-05-29"
+}

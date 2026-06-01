@@ -1,0 +1,80 @@
+{
+    "_comment": "Base template for Power Automate flow. Replace placeholders before deploying.",
+    "properties": {
+        "displayName": "[AutoGen] FLOW_NAME_HERE",
+        "definition": {
+            "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+            "contentVersion": "1.0.0.0",
+            "parameters": {
+                "$authentication": {
+                    "defaultValue": {},
+                    "type": "SecureObject"
+                },
+                "$connections": {
+                    "defaultValue": {},
+                    "type": "Object"
+                }
+            },
+            "triggers": {
+                "_example_manual_trigger": {
+                    "type": "Request",
+                    "kind": "Button",
+                    "inputs": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {},
+                            "required": []
+                        }
+                    },
+                    "_comment": "Manual trigger (button). Replace or remove."
+                },
+                "_example_recurrence_trigger": {
+                    "type": "Recurrence",
+                    "recurrence": {
+                        "frequency": "Day",
+                        "interval": 1
+                    },
+                    "_comment": "Scheduled trigger. Replace or remove."
+                }
+            },
+            "actions": {
+                "_example_compose": {
+                    "type": "Compose",
+                    "inputs": "Hello World",
+                    "runAfter": {},
+                    "_comment": "Simple Compose action. Replace or remove."
+                },
+                "_example_openapi_action": {
+                    "type": "OpenApiConnection",
+                    "inputs": {
+                        "parameters": {
+                            "_comment": "Fill from component template inputSchema"
+                        },
+                        "host": {
+                            "apiId": "/providers/Microsoft.PowerApps/apis/{connectorName}",
+                            "operationId": "{operationId}",
+                            "connectionName": "{connectionReferencesKeyName}"
+                        }
+                    },
+                    "runAfter": {
+                        "_example_compose": [
+                            "Succeeded"
+                        ]
+                    },
+                    "_comment": "OpenAPI connector action template. Replace or remove."
+                }
+            },
+            "outputs": {}
+        },
+        "connectionReferences": {
+            "_example_connector": {
+                "connectionName": "{connectionId}",
+                "source": "Embedded",
+                "id": "/providers/Microsoft.PowerApps/apis/{connectorName}",
+                "tier": "NotSpecified",
+                "_comment": "connectionName = connection ID (GUID), id = API path. Replace or remove."
+            }
+        }
+    },
+    "schemaVersion": "1.0.0.0"
+}

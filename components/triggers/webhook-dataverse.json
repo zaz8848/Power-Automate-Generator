@@ -1,0 +1,60 @@
+{
+    "id": "trigger_webhook",
+    "type": "OpenApiConnectionWebhook",
+    "description": "Webhook 触发器 — Dataverse 行创建/修改/删除时自动触发",
+    "learnedFrom": [
+        "b4ea0cc2-6f1d-f111-88b1-7ced8d3c7b0f",
+        "94b5a086-9472-c6b4-5555-ad8c140be559"
+    ],
+    "learnedAt": "2026-05-26",
+    "verified": true,
+    "template": {
+        "When_a_row_is_added,_modified_or_deleted": {
+            "type": "OpenApiConnectionWebhook",
+            "inputs": {
+                "parameters": {
+                    "subscriptionRequest/message": 1,
+                    "subscriptionRequest/entityname": "<entity_logical_name>",
+                    "subscriptionRequest/scope": 4,
+                    "subscriptionRequest/filterexpression": "<OData filter>"
+                },
+                "host": {
+                    "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                    "operationId": "SubscribeWebhookTrigger",
+                    "connectionName": "shared_commondataserviceforapps"
+                }
+            }
+        }
+    },
+    "parameters": {
+        "subscriptionRequest/message": {
+            "type": "integer",
+            "enum": [
+                1,
+                2,
+                3,
+                4
+            ],
+            "description": "1=Create, 2=Delete, 3=Update, 4=CreateOrUpdate"
+        },
+        "subscriptionRequest/entityname": {
+            "type": "string",
+            "description": "Dataverse 实体逻辑名"
+        },
+        "subscriptionRequest/scope": {
+            "type": "integer",
+            "enum": [
+                1,
+                2,
+                3,
+                4
+            ],
+            "description": "1=User, 2=BusinessUnit, 3=ParentChildBusinessUnit, 4=Organization"
+        },
+        "subscriptionRequest/filterexpression": {
+            "type": "string",
+            "description": "OData 过滤表达式"
+        }
+    },
+    "notes": "最常见的自动触发器。触发后通过 triggerOutputs()?['body/...'] 获取记录字段。支持 filterexpression 精确匹配条件。"
+}

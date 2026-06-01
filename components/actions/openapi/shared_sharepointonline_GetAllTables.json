@@ -1,0 +1,81 @@
+﻿{
+    "id":  "shared_sharepointonline_GetAllTables",
+    "connector":  "shared_sharepointonline",
+    "connectorBase":  "shared_sharepointonline",
+    "operationId":  "GetAllTables",
+    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+    "type":  "OpenApiConnection",
+    "learnedFrom":  [
+                        "e3742ca3-e086-ef11-ac21-7c1e520158f7"
+                    ],
+    "learnedFromName":  [
+                            "Sharepoint Synchronization | Synchronize files to Agent (Child)"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "environment":  [
+                        "orgdf331f66.crm5.dynamics.com"
+                    ],
+    "template":  {
+                     "Get_all_lists_and_libraries":  {
+                                                         "runAfter":  {
+
+                                                                      },
+                                                         "metadata":  {
+                                                                          "operationMetadataId":  "3cf3a7f1-f8f2-4dbb-b9f6-3cbcbde4e787"
+                                                                      },
+                                                         "type":  "OpenApiConnection",
+                                                         "inputs":  {
+                                                                        "host":  {
+                                                                                     "connectionName":  "shared_sharepointonline",
+                                                                                     "operationId":  "GetAllTables",
+                                                                                     "apiId":  "/providers/Microsoft.PowerApps/apis/shared_sharepointonline"
+                                                                                 },
+                                                                        "parameters":  {
+                                                                                           "dataset":  "@items(\u0027Apply_to_each_File_Indexer_Configurations\u0027)?[\u0027cat_siteaddress\u0027]"
+                                                                                       },
+                                                                        "authentication":  {
+                                                                                               "type":  "Raw",
+                                                                                               "value":  "@json(decodeBase64(triggerOutputs().headers[\u0027X-MS-APIM-Tokens\u0027]))[\u0027$ConnectionKey\u0027]"
+                                                                                           }
+                                                                    }
+                                                     }
+                 },
+    "inputSchema":  {
+                        "connectionId":  {
+                                             "description":  null,
+                                             "in":  "path",
+                                             "type":  "string",
+                                             "required":  true
+                                         },
+                        "dataset":  {
+                                        "description":  "Example: https://contoso.sharepoint.com/sites/sitename.",
+                                        "in":  "path",
+                                        "type":  "string",
+                                        "required":  true
+                                    }
+                    },
+    "outputSchema":  {
+                         "$ref":  "TablesList",
+                         "properties":  {
+                                            "value":  {
+                                                          "type":  "array",
+                                                          "description":  "List of Tables"
+                                                      }
+                                        }
+                     },
+    "dynamicValuesRef":  {
+                             "dataset":  {
+                                             "operationId":  "GetDataSets",
+                                             "titlePath":  "DisplayName",
+                                             "parameters":  {
+
+                                                            },
+                                             "valueCollection":  "value",
+                                             "valuePath":  "Name"
+                                         }
+                         },
+    "swaggerLearned":  true,
+    "graphConvertible":  true,
+    "graphNodeType":  "connector"
+}

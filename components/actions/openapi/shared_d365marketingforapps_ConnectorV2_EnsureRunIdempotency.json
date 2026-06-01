@@ -1,0 +1,124 @@
+﻿{
+    "id":  "shared_d365marketingforapps_ConnectorV2_EnsureRunIdempotency",
+    "connector":  "shared_d365marketingforapps",
+    "connectorBase":  "shared_d365marketingforapps",
+    "operationId":  "ConnectorV2_EnsureRunIdempotency",
+    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_d365marketingforapps",
+    "type":  "OpenApiConnection",
+    "learnedFrom":  [
+                        "cdd6ed42-6394-f011-b4cc-000d3a099cdf",
+                        "e8d6ed42-6394-f011-b4cc-000d3a099cdf",
+                        "f8d6ed42-6394-f011-b4cc-000d3a099cdf",
+                        "08d7ed42-6394-f011-b4cc-000d3a099cdf",
+                        "18d7ed42-6394-f011-b4cc-000d3a099cdf",
+                        "6e5ee200-6694-f011-b4cc-000d3a099cdf",
+                        "765ee200-6694-f011-b4cc-000d3a099cdf",
+                        "7d5ee200-6694-f011-b4cc-000d3a099cdf",
+                        "5ab5d806-6694-f011-b4cc-000d3a099cdf",
+                        "63b5d806-6694-f011-b4cc-000d3a099cdf",
+                        "5df39001-6494-f011-b4cc-000d3ac6a644",
+                        "64f39001-6494-f011-b4cc-000d3ac6a644",
+                        "6bf39001-6494-f011-b4cc-000d3ac6a644",
+                        "73f39001-6494-f011-b4cc-000d3ac6a644",
+                        "7bf39001-6494-f011-b4cc-000d3ac6a644",
+                        "2f54c3d3-6494-f011-b4cc-00224856c036",
+                        "3754c3d3-6494-f011-b4cc-00224856c036",
+                        "3e54c3d3-6494-f011-b4cc-00224856c036",
+                        "4654c3d3-6494-f011-b4cc-00224856c036",
+                        "4d54c3d3-6494-f011-b4cc-00224856c036"
+                    ],
+    "learnedFromName":  [
+                            "CXP_Outbound Call Journey_20250918074416",
+                            "CXP_Outbound Call Journey_20250918074416",
+                            "CXP_Outbound Call Journey_20250918074416",
+                            "CXP_Outbound Call Journey_20250918074416",
+                            "CXP_Outbound Call Journey_20250918074416",
+                            "CXP_Test Journey_20250918080356",
+                            "CXP_Test Journey_20250918080356",
+                            "CXP_Test Journey_20250918080356",
+                            "CXP_Test Journey_20250918080356",
+                            "CXP_Test Journey_20250918080356",
+                            "CXP_Contact Create Outbound Journey_20250918074937",
+                            "CXP_Contact Create Outbound Journey_20250918074937",
+                            "CXP_Contact Create Outbound Journey_20250918074937",
+                            "CXP_Contact Create Outbound Journey_20250918074937",
+                            "CXP_Contact Create Outbound Journey_20250918074937",
+                            "CXP_Outbound CC 01 Journey_20250918075525",
+                            "CXP_Outbound CC 01 Journey_20250918075525",
+                            "CXP_Outbound CC 01 Journey_20250918075525",
+                            "CXP_Outbound CC 01 Journey_20250918075525",
+                            "CXP_Outbound CC 01 Journey_20250918075525"
+                        ],
+    "learnedAt":  "2026-05-26",
+    "verified":  true,
+    "environment":  [
+                        "orgdf331f66.crm5.dynamics.com"
+                    ],
+    "template":  {
+                     "PerformRunIdempotency":  {
+                                                   "type":  "OpenApiConnection",
+                                                   "inputs":  {
+                                                                  "host":  {
+                                                                               "connectionName":  "shared_d365marketingforapps",
+                                                                               "operationId":  "ConnectorV2_EnsureRunIdempotency",
+                                                                               "apiId":  "/providers/Microsoft.PowerApps/apis/shared_d365marketingforapps"
+                                                                           },
+                                                                  "retryPolicy":  {
+                                                                                      "count":  50,
+                                                                                      "interval":  "PT1M",
+                                                                                      "maximumInterval":  "PT30M",
+                                                                                      "minimumInterval":  "PT1M",
+                                                                                      "type":  "Exponential"
+                                                                                  },
+                                                                  "parameters":  {
+                                                                                     "organizationId":  "f419f241-2a06-f011-b015-000d3a086781",
+                                                                                     "journeyId":  "f1c9fa39-6394-f011-b4cc-00224856c036",
+                                                                                     "journeyInstanceId":  "@{triggerBody()?[\u0027journeyInstanceId\u0027]}"
+                                                                                 }
+                                                              }
+                                               }
+                 },
+    "inputSchema":  [
+                        {
+                            "name":  "connectionId",
+                            "in":  "path",
+                            "required":  true,
+                            "x-ms-visibility":  "internal",
+                            "type":  "string"
+                        },
+                        {
+                            "name":  "organizationId",
+                            "in":  "path",
+                            "required":  true,
+                            "description":  "The organization ID",
+                            "type":  "string",
+                            "format":  "guid",
+                            "x-ms-summary":  "default x-ms-summary of organizationId"
+                        },
+                        {
+                            "name":  "journeyId",
+                            "in":  "path",
+                            "required":  true,
+                            "description":  "Journey ID",
+                            "type":  "string",
+                            "format":  "guid",
+                            "x-ms-summary":  "default x-ms-summary of journeyId"
+                        },
+                        {
+                            "name":  "journeyInstanceId",
+                            "in":  "path",
+                            "required":  true,
+                            "description":  "Journey instance ID",
+                            "type":  "string",
+                            "format":  "guid",
+                            "x-ms-summary":  "default x-ms-summary of journeyInstanceId"
+                        }
+                    ],
+    "swaggerLearned":  true,
+    "outputSchema":  {
+                         "type":  "object",
+                         "description":  "No response schema in Swagger"
+                     },
+    "graphConvertible":  true,
+    "graphNodeType":  "connector"
+}

@@ -1,0 +1,109 @@
+{
+    "_comment": "Example: Scheduled flow that lists SharePoint items and posts to Teams. Shows Recurrence trigger + multiple connectors. Replace connection IDs and SharePoint site/list with your own.",
+    "properties": {
+        "displayName": "[AutoGen] Daily SharePoint Report to Teams",
+        "definition": {
+            "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+            "contentVersion": "1.0.0.0",
+            "parameters": {
+                "$authentication": {
+                    "defaultValue": {},
+                    "type": "SecureObject"
+                },
+                "$connections": {
+                    "defaultValue": {},
+                    "type": "Object"
+                }
+            },
+            "triggers": {
+                "Recurrence": {
+                    "type": "Recurrence",
+                    "recurrence": {
+                        "frequency": "Day",
+                        "interval": 1,
+                        "schedule": {
+                            "hours": [
+                                "9"
+                            ],
+                            "minutes": [
+                                "0"
+                            ]
+                        },
+                        "timeZone": "China Standard Time"
+                    }
+                }
+            },
+            "actions": {
+                "Get_Items": {
+                    "type": "OpenApiConnection",
+                    "inputs": {
+                        "parameters": {
+                            "dataset": "{YOUR_SHAREPOINT_SITE_URL}",
+                            "table": "{YOUR_LIST_GUID}",
+                            "$top": 10,
+                            "$orderby": "Modified desc"
+                        },
+                        "host": {
+                            "apiId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+                            "operationId": "GetItems",
+                            "connectionName": "shared_sharepointonline"
+                        }
+                    },
+                    "runAfter": {}
+                },
+                "Select_Summary": {
+                    "type": "Select",
+                    "inputs": {
+                        "from": "@body('Get_Items')?['value']",
+                        "select": {
+                            "Title": "@item()?['Title']",
+                            "Modified": "@item()?['Modified']"
+                        }
+                    },
+                    "runAfter": {
+                        "Get_Items": [
+                            "Succeeded"
+                        ]
+                    }
+                },
+                "Post_to_Teams": {
+                    "type": "OpenApiConnection",
+                    "inputs": {
+                        "parameters": {
+                            "poster": "Flow bot",
+                            "location": "Channel",
+                            "body/recipient": "{YOUR_TEAM_ID};{YOUR_CHANNEL_ID}",
+                            "body/messageBody": "<p><strong>Daily SharePoint Report</strong></p><p>Top 10 recently modified items:</p><p>@{body('Select_Summary')}</p>"
+                        },
+                        "host": {
+                            "apiId": "/providers/Microsoft.PowerApps/apis/shared_teams",
+                            "operationId": "PostMessageToConversation",
+                            "connectionName": "shared_teams"
+                        }
+                    },
+                    "runAfter": {
+                        "Select_Summary": [
+                            "Succeeded"
+                        ]
+                    }
+                }
+            },
+            "outputs": {}
+        },
+        "connectionReferences": {
+            "shared_sharepointonline": {
+                "connectionName": "{YOUR_SP_CONNECTION_ID}",
+                "source": "Embedded",
+                "id": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+                "tier": "NotSpecified"
+            },
+            "shared_teams": {
+                "connectionName": "{YOUR_TEAMS_CONNECTION_ID}",
+                "source": "Embedded",
+                "id": "/providers/Microsoft.PowerApps/apis/shared_teams",
+                "tier": "NotSpecified"
+            }
+        }
+    },
+    "schemaVersion": "1.0.0.0"
+}

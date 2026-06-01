@@ -1,0 +1,68 @@
+{
+    "id": "trigger_request_apiconnection",
+    "type": "Request",
+    "kind": "ApiConnection",
+    "description": "API 连接触发器 — 通过连接器事件触发（如 OneDrive 选中文件）",
+    "learnedFrom": [
+        "55ecf82a-b5e3-f011-8406-7ced8db59fd8"
+    ],
+    "learnedAt": "2026-05-26",
+    "verified": true,
+    "template": {
+        "manual": {
+            "type": "Request",
+            "kind": "ApiConnection",
+            "inputs": {
+                "operationId": "ForASelectedFile",
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "rows": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "entity": {
+                                        "properties": {},
+                                        "type": "object",
+                                        "required": []
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "required": [
+                        "rows"
+                    ]
+                },
+                "host": {
+                    "connection": {
+                        "name": "@parameters('$connections')['shared_onedriveforbusiness']['connectionId']"
+                    }
+                },
+                "headersSchema": {}
+            },
+            "splitOn": "@triggerBody()['rows']"
+        }
+    },
+    "parameters": {
+        "operationId": {
+            "type": "string",
+            "required": true,
+            "description": "触发操作的 ID（如 ForASelectedFile, OnNewEmail 等）"
+        },
+        "schema": {
+            "type": "object",
+            "description": "输入数据的 JSON Schema"
+        },
+        "host.connection.name": {
+            "type": "string",
+            "description": "连接器的 connection 表达式"
+        },
+        "splitOn": {
+            "type": "string",
+            "description": "数组拆分表达式，让每个元素触发独立 run"
+        }
+    },
+    "notes": "trigger 名称通常为 'manual'。splitOn 自动拆分数组，类似 ForEach 但在触发级别。headersSchema 可包含 x-ms-user-name-encoded 等运行时 header。"
+}
