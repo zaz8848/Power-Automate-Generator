@@ -1,4 +1,4 @@
-﻿{
+{
     "id":  "Compose",
     "type":  "Compose",
     "learnedFrom":  [
@@ -151,5 +151,54 @@
                       }
                   ],
     "graphConvertible":  true,
-    "graphNodeType":  "builtinFunction"
+    "graphNodeType":  "builtinFunction",
+    "graphTemplate":  {
+                          "type":  "builtinFunction",
+                          "version":  1,
+                          "data":  {
+                                       "config":  {
+                                                      "operationId":  "composeNew",
+                                                      "operationName":  "composeNew",
+                                                      "displayName":  "Compose",
+                                                      "category":  "providers/Microsoft.ProcessSimple/operationGroups/DataOperation",
+                                                      "categoryDisplayName":  "Data Operations",
+                                                      "iconUri":  "https://logicappsv2resources.blob.core.windows.net/icons/compose.svg",
+                                                      "brandColor":  "#8c6cff",
+                                                      "description":  "Compose outputs from multiple actions into a single output.",
+                                                      "parameters":  {
+                                                                         "inputs":  "\u003cVALUE_TO_COMPOSE\u003e"
+                                                                     },
+                                                      "parametersSchema":  {
+                                                                               "type":  "object",
+                                                                               "required":  [
+                                                                                                "inputs"
+                                                                                            ],
+                                                                               "properties":  {
+                                                                                                  "inputs":  {
+                                                                                                                 "type":  "string",
+                                                                                                                 "title":  "Inputs",
+                                                                                                                 "description":  "Value to compose"
+                                                                                                             }
+                                                                                              }
+                                                                           }
+                                                  },
+                                       "outcomes":  [
+                                                        {
+                                                            "id":  "default",
+                                                            "label":  "Default",
+                                                            "outcomeSchema":  {
+                                                                                  "type":  "object",
+                                                                                  "description":  "Function output"
+                                                                              }
+                                                        }
+                                                    ]
+                                   },
+                          "measured":  {
+                                           "width":  240,
+                                           "height":  66
+                                       },
+                          "graphTemplateNotes":  "节点 id 规则: builtinFunction-{guid}; position.x 按入度从 566 起步 +316; nodeActionMapping 映射本 node id -\u003e definition.actions[\u0027Compose\u0027] 名"
+                      },
+    "graphTemplateVerified":  true,
+    "graphTemplateSource":  "flows/zaf-prod/_save_capture_2026-06-07.json (实测 Copilot Studio Preview 抓包)"
 }

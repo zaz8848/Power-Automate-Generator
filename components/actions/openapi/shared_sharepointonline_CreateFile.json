@@ -1,4 +1,4 @@
-﻿{
+{
     "id":  "shared_sharepointonline_CreateFile",
     "connector":  "shared_sharepointonline",
     "connectorBase":  "shared_sharepointonline",
@@ -14,14 +14,14 @@
     "learnedAt":  "2026-05-26",
     "verified":  true,
     "environment":  [
-                        "orgdf331f66.crm5.dynamics.com"
+                        "<YOUR_ORG>.crm.dynamics.com"
                     ],
     "template":  {
                      "Create_file_1":  {
                                            "type":  "OpenApiConnection",
                                            "inputs":  {
                                                           "parameters":  {
-                                                                             "dataset":  "https://contoso.sharepoint.com/sites/TestKnowledgeHubSite",
+                                                                             "dataset":  "https://<YOUR_TENANT>.sharepoint.com/sites/TestKnowledgeHubSite",
                                                                              "folderPath":  "/Shared Documents",
                                                                              "name":  "@{ticks(utcNow())}.docx",
                                                                              "body":  "@body(\u0027Populate_a_Microsoft_Word_template\u0027)"

@@ -1,4 +1,4 @@
-﻿{
+{
     "id":  "shared_microsofttranslatorv-1_GetTranslationStatus",
     "connector":  "shared_microsofttranslatorv-1",
     "connectorBase":  "shared_microsofttranslatorv",

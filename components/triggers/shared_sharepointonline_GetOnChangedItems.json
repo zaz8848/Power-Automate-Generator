@@ -1,4 +1,4 @@
-﻿{
+{
     "id":  "shared_sharepointonline_GetOnChangedItems",
     "connector":  "shared_sharepointonline",
     "operationId":  "GetOnChangedItems",
@@ -16,7 +16,7 @@
     "learnedAt":  "2026-05-26",
     "verified":  true,
     "environment":  [
-                        "{dataverseOrg}"
+                        "<YOUR_ORG>.crm.dynamics.com"
                     ],
     "template":  {
                      "When_an_item_or_a_file_is_modified":  {

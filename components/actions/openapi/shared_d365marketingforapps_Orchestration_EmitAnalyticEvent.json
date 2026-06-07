@@ -1,4 +1,4 @@
-﻿{
+{
     "id":  "shared_d365marketingforapps_Orchestration_EmitAnalyticEvent",
     "connector":  "shared_d365marketingforapps",
     "connectorBase":  "shared_d365marketingforapps",
@@ -52,7 +52,7 @@
     "learnedAt":  "2026-05-26",
     "verified":  true,
     "environment":  [
-                        "orgdf331f66.crm5.dynamics.com"
+                        "<YOUR_ORG>.crm.dynamics.com"
                     ],
     "template":  {
                      "13f46e3c-1482-487b-ac51-7afd70ad6426-Emit_DataDemandFail":  {

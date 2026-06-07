@@ -1,4 +1,4 @@
-﻿{
+{
     "id":  "shared_commondataserviceforapps-1_aibuilderpredict_customprompt",
     "connector":  "shared_commondataserviceforapps-1",
     "connectorBase":  "shared_commondataserviceforapps",

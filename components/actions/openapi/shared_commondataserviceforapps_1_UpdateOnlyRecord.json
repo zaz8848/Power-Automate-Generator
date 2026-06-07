@@ -1,4 +1,4 @@
-﻿{
+{
     "id":  "shared_commondataserviceforapps_1_UpdateOnlyRecord",
     "connector":  "shared_commondataserviceforapps_1",
     "connectorBase":  "shared_commondataserviceforapps",
@@ -22,7 +22,7 @@
     "learnedAt":  "2026-05-26",
     "verified":  true,
     "environment":  [
-                        "orgdf331f66.crm5.dynamics.com"
+                        "<YOUR_ORG>.crm.dynamics.com"
                     ],
     "template":  {
                      "Update_Copilot_Test_Result_for_child_test":  {

@@ -1,6 +1,6 @@
 param(
     [string]$Token,
-    [string]$EnvId = "9ffec6fe-9e60-eaf8-921d-be20e366a19b",
+    [string]$EnvId = "<YOUR_ENV_ID>",
     [string]$ComponentDir = "d:\A_Code\Automate Generator\components\actions\openapi"
 )
 

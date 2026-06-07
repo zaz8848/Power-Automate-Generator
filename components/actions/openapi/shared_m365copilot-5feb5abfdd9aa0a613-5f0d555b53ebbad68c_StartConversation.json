@@ -1,4 +1,4 @@
-﻿{
+{
     "id":  "shared_m365copilot-5feb5abfdd9aa0a613-5f0d555b53ebbad68c_StartConversation",
     "connector":  "shared_m365copilot-5feb5abfdd9aa0a613-5f0d555b53ebbad68c",
     "connectorBase":  "shared_m365copilot-5feb5abfdd9aa0a613-5f0d555b53ebbad68c",
@@ -14,7 +14,7 @@
     "learnedAt":  "2026-05-26",
     "verified":  true,
     "environment":  [
-                        "orgdf331f66.crm5.dynamics.com"
+                        "<YOUR_ORG>.crm.dynamics.com"
                     ],
     "template":  {
                      "StartConversation":  {
@@ -45,7 +45,7 @@
                                                                                               "contextualResources":  {
                                                                                                                           "files":  [
                                                                                                                                         {
-                                                                                                                                            "uri":  "https://contoso-my.sharepoint.com/:b:/g/personal/user_contoso_onmicrosoft_com/IQAL7228z6dCQaBQ7AToARfEATv6BRFaKB6n1YsGJlifzkU?e=EXAMPLE"
+                                                                                                                                            "uri":  "https://<YOUR_TENANT>-my.sharepoint.com/:b:/g/personal/<YOUR_USER>_<YOUR_TENANT>_onmicrosoft_com/IQAL7228z6dCQaBQ7AToARfEATv6BRFaKB6n1YsGJlifzkU?e=dtegA8"
                                                                                                                                         }
                                                                                                                                     ]
                                                                                                                       }

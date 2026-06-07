@@ -1,4 +1,4 @@
-﻿{
+{
     "id":  "shared_commondataserviceforapps_1_ListRecordsWithOrganization",
     "connector":  "shared_commondataserviceforapps_1",
     "connectorBase":  "shared_commondataserviceforapps",
@@ -26,7 +26,7 @@
     "learnedAt":  "2026-05-26",
     "verified":  true,
     "environment":  [
-                        "orgdf331f66.crm5.dynamics.com"
+                        "<YOUR_ORG>.crm.dynamics.com"
                     ],
     "template":  {
                      "List_rows_from_selected_environment:_Check_if_environment_has_agent":  {

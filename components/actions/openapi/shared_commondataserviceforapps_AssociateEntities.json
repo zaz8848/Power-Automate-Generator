@@ -1,4 +1,4 @@
-﻿{
+{
     "id":  "shared_commondataserviceforapps_AssociateEntities",
     "connector":  "shared_commondataserviceforapps",
     "connectorBase":  "shared_commondataserviceforapps",
@@ -14,7 +14,7 @@
     "learnedAt":  "2026-05-26",
     "verified":  true,
     "environment":  [
-                        "orgdf331f66.crm5.dynamics.com"
+                        "<YOUR_ORG>.crm.dynamics.com"
                     ],
     "template":  {
                      "Assign_Copilot_Studio_Accelerator_Tester_security_role_to_Team":  {

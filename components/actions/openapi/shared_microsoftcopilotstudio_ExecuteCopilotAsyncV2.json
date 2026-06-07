@@ -1,186 +1,306 @@
-﻿{
-    "id":  "shared_microsoftcopilotstudio_ExecuteCopilotAsyncV2",
-    "connector":  "shared_microsoftcopilotstudio",
-    "connectorBase":  "shared_microsoftcopilotstudio",
-    "operationId":  "ExecuteCopilotAsyncV2",
-    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_microsoftcopilotstudio",
-    "type":  "OpenApiConnectionWebhook",
-    "learnedFrom":  [
-                        "e9b4168c-f73b-d611-8b80-a76e16c3c130",
-                        "1a0cb2d6-fc3d-f011-877a-6045bd05e54b",
-                        "5d27b158-cb45-f011-877a-6045bd06efb1",
-                        "5439e6c3-3e4d-f011-877b-6045bd0937a6"
-                    ],
-    "learnedFromName":  [
-                            "Get file content and Execute Agent and wait",
-                            "AI Evaluation Flow for Conversation",
-                            "Call custom agent",
-                            "QEA On Demand Evaluation Case"
-                        ],
-    "learnedAt":  "2026-05-26",
-    "verified":  true,
-    "environment":  [
-                        "{dataverseOrg}",
-                        "orgdf331f66.crm5.dynamics.com"
-                    ],
-    "template":  {
-                     "Execute_Agent_and_wait":  {
-                                                    "type":  "OpenApiConnectionWebhook",
-                                                    "inputs":  {
-                                                                   "parameters":  {
-                                                                                      "body/message":  "我发了一个PDF给你，你把文档里面的内容总结一下发我\n",
-                                                                                      "body/attachments":  [
-                                                                                                               {
-                                                                                                                   "contentUrl":  "https://contoso-my.sharepoint.com/:b:/g/personal/user_contoso_onmicrosoft_com/IQB5j8oGXBhDTbOfNFwEGhf_AaSmDwHZxOE7lXnmpCWyYDk?e=EXAMPLE",
-                                                                                                                   "contentType":  "application/pdf",
-                                                                                                                   "name":  "639106046091078375.pdf"
-                                                                                                               }
-                                                                                                           ],
-                                                                                      "Copilot":  "cre47_agentIM_8vG",
-                                                                                      "body/locale":  "639106046091078375.pdf"
-                                                                                  },
-                                                                   "host":  {
-                                                                                "apiId":  "/providers/Microsoft.PowerApps/apis/shared_microsoftcopilotstudio",
-                                                                                "connectionName":  "shared_microsoftcopilotstudio",
-                                                                                "operationId":  "ExecuteCopilotAsyncV2"
-                                                                            }
-                                                               },
-                                                    "metadata":  {
-                                                                     "description":  "Execute Agent and wait",
-                                                                     "nodeId":  "connector-f2c5da59-3ae7-4f8c-88f2-8da0b1691eb2"
-                                                                 }
-                                                }
-                 },
-    "inputSchema":  [
-                        {
-                            "name":  "connectionId",
-                            "in":  "path",
-                            "required":  true,
-                            "x-ms-visibility":  "internal",
-                            "type":  "string"
-                        },
-                        {
-                            "name":  "Copilot",
-                            "in":  "path",
-                            "required":  true,
-                            "type":  "string",
-                            "x-ms-dynamic-list":  {
-                                                      "operationId":  "ListCopilots",
-                                                      "parameters":  {
-
-                                                                     },
-                                                      "itemsPath":  "copilotsList",
-                                                      "itemValuePath":  "schemaname",
-                                                      "itemTitlePath":  "name"
-                                                  },
-                            "x-ms-dynamic-values":  {
-                                                        "operationId":  "ListCopilots",
-                                                        "parameters":  {
-
-                                                                       },
-                                                        "value-collection":  "copilotsList",
-                                                        "value-path":  "schemaname",
-                                                        "value-title":  "name"
-                                                    },
-                            "x-ms-summary":  "Agent",
-                            "description":  "Agent"
-                        },
-                        {
-                            "name":  "body",
-                            "in":  "body",
-                            "required":  true,
-                            "x-ms-visibility":  "important",
-                            "schema":  {
-                                           "type":  "object",
-                                           "properties":  {
-                                                              "notificationUrl":  {
-                                                                                      "x-ms-visibility":  "internal",
-                                                                                      "type":  "string",
-                                                                                      "x-ms-notification-url":  true,
-                                                                                      "x-ms-summary":  "Notification URL",
-                                                                                      "description":  "Notification URL"
-                                                                                  },
-                                                              "message":  {
-                                                                              "type":  "string",
-                                                                              "description":  "Message",
-                                                                              "x-ms-summary":  "Message"
-                                                                          },
-                                                              "locale":  {
-                                                                             "type":  "string",
-                                                                             "description":  "A BCP-47 locale name for the contents of the text field.",
-                                                                             "x-ms-summary":  "A BCP-47 locale name for the contents of the text field.",
-                                                                             "x-ms-visibility":  "advanced"
-                                                                         },
-                                                              "attachments":  {
-                                                                                  "type":  "array",
-                                                                                  "description":  "A list of attachments https://learn.microsoft.com/en-us/dotnet/api/microsoft.bot.schema.activity.attachments?view=botbuilder-dotnet-stable",
-                                                                                  "x-ms-summary":  "A list of attachments https://learn.microsoft.com/en-us/dotnet/api/microsoft.bot.schema.activity.attachments?view=botbuilder-dotnet-stable",
-                                                                                  "x-ms-visibility":  "advanced",
-                                                                                  "items":  {
-                                                                                                "type":  "object",
-                                                                                                "properties":  {
-                                                                                                                   "contentType":  {
-                                                                                                                                       "type":  "string"
-                                                                                                                                   },
-                                                                                                                   "contentUrl":  {
-                                                                                                                                      "type":  "string"
-                                                                                                                                  },
-                                                                                                                   "content":  {
-                                                                                                                                   "type":  "object"
-                                                                                                                               },
-                                                                                                                   "name":  {
-                                                                                                                                "type":  "string"
-                                                                                                                            },
-                                                                                                                   "thumbnailUrl":  {
-                                                                                                                                        "type":  "string"
-                                                                                                                                    }
-                                                                                                               }
-                                                                                            }
-                                                                              }
-                                                          },
-                                           "required":  [
-                                                            "notificationUrl"
-                                                        ]
-                                       },
-                            "x-ms-summary":  "Execute Agent body",
-                            "description":  "Execute Agent body"
-                        },
-                        {
-                            "name":  "x-ms-conversation-id",
-                            "in":  "header",
-                            "description":  "Provide exisiting conversation id to resume Agent execution.",
-                            "required":  false,
-                            "x-ms-summary":  "Conversation ID",
-                            "x-ms-visibility":  "advanced",
-                            "type":  "string"
-                        },
-                        {
-                            "in":  "query",
-                            "name":  "environmentId",
-                            "required":  false,
-                            "description":  "Optional environment ID",
-                            "type":  "string",
-                            "x-ms-summary":  "Environment ID",
-                            "x-ms-visibility":  "advanced"
-                        }
-                    ],
-    "dynamicValuesRef":  {
-                             "Copilot":  {
-                                             "operationId":  "ListCopilots",
-                                             "titlePath":  "name",
-                                             "parameters":  {
-
-                                                            },
-                                             "valueCollection":  "copilotsList",
-                                             "valuePath":  "schemaname"
-                                         }
-                         },
-    "swaggerLearned":  true,
-    "outputSchema":  {
-                         "type":  "object",
-                         "description":  "Dynamic response - schema varies by request"
-                     },
-    "graphConvertible":  "partial",
-    "graphNodeType":  "agent",
-    "graphNotes":  "Agent node. instructionsRich tokenRef needs AI to parse expressions from body/message."
+{
+  "id": "shared_microsoftcopilotstudio_ExecuteCopilotAsyncV2",
+  "connector": "shared_microsoftcopilotstudio",
+  "connectorBase": "shared_microsoftcopilotstudio",
+  "operationId": "ExecuteCopilotAsyncV2",
+  "apiId": "/providers/Microsoft.PowerApps/apis/shared_microsoftcopilotstudio",
+  "type": "OpenApiConnectionWebhook",
+  "learnedFrom": [
+    "e9b4168c-f73b-d611-8b80-a76e16c3c130",
+    "1a0cb2d6-fc3d-f011-877a-6045bd05e54b",
+    "5d27b158-cb45-f011-877a-6045bd06efb1",
+    "5439e6c3-3e4d-f011-877b-6045bd0937a6"
+  ],
+  "learnedFromName": [
+    "Get file content and Execute Agent and wait",
+    "AI Evaluation Flow for Conversation",
+    "Call custom agent",
+    "QEA On Demand Evaluation Case"
+  ],
+  "learnedAt": "2026-05-26",
+  "verified": true,
+  "environment": [
+    "<YOUR_ORG>.crm.dynamics.com",
+    "<YOUR_ORG>.crm.dynamics.com"
+  ],
+  "template": {
+    "Execute_Agent_and_wait": {
+      "type": "OpenApiConnectionWebhook",
+      "inputs": {
+        "parameters": {
+          "body/message": "我发了一个PDF给你，你把文档里面的内容总结一下发我\n",
+          "body/attachments": [
+            {
+              "contentUrl": "https://<YOUR_TENANT>-my.sharepoint.com/:b:/g/personal/<YOUR_USER>_<YOUR_TENANT>_onmicrosoft_com/IQB5j8oGXBhDTbOfNFwEGhf_AaSmDwHZxOE7lXnmpCWyYDk?e=vTN6Ry",
+              "contentType": "application/pdf",
+              "name": "639106046091078375.pdf"
+            }
+          ],
+          "Copilot": "cre47_agentIM_8vG",
+          "body/locale": "639106046091078375.pdf"
+        },
+        "host": {
+          "apiId": "/providers/Microsoft.PowerApps/apis/shared_microsoftcopilotstudio",
+          "connectionName": "shared_microsoftcopilotstudio",
+          "operationId": "ExecuteCopilotAsyncV2"
+        }
+      },
+      "metadata": {
+        "description": "Execute Agent and wait",
+        "nodeId": "connector-f2c5da59-3ae7-4f8c-88f2-8da0b1691eb2"
+      }
+    }
+  },
+  "inputSchema": [
+    {
+      "name": "connectionId",
+      "in": "path",
+      "required": true,
+      "x-ms-visibility": "internal",
+      "type": "string"
+    },
+    {
+      "name": "Copilot",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-dynamic-list": {
+        "operationId": "ListCopilots",
+        "parameters": {},
+        "itemsPath": "copilotsList",
+        "itemValuePath": "schemaname",
+        "itemTitlePath": "name"
+      },
+      "x-ms-dynamic-values": {
+        "operationId": "ListCopilots",
+        "parameters": {},
+        "value-collection": "copilotsList",
+        "value-path": "schemaname",
+        "value-title": "name"
+      },
+      "x-ms-summary": "Agent",
+      "description": "Agent"
+    },
+    {
+      "name": "body",
+      "in": "body",
+      "required": true,
+      "x-ms-visibility": "important",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "notificationUrl": {
+            "x-ms-visibility": "internal",
+            "type": "string",
+            "x-ms-notification-url": true,
+            "x-ms-summary": "Notification URL",
+            "description": "Notification URL"
+          },
+          "message": {
+            "type": "string",
+            "description": "Message",
+            "x-ms-summary": "Message"
+          },
+          "locale": {
+            "type": "string",
+            "description": "A BCP-47 locale name for the contents of the text field.",
+            "x-ms-summary": "A BCP-47 locale name for the contents of the text field.",
+            "x-ms-visibility": "advanced"
+          },
+          "attachments": {
+            "type": "array",
+            "description": "A list of attachments https://learn.microsoft.com/en-us/dotnet/api/microsoft.bot.schema.activity.attachments?view=botbuilder-dotnet-stable",
+            "x-ms-summary": "A list of attachments https://learn.microsoft.com/en-us/dotnet/api/microsoft.bot.schema.activity.attachments?view=botbuilder-dotnet-stable",
+            "x-ms-visibility": "advanced",
+            "items": {
+              "type": "object",
+              "properties": {
+                "contentType": {
+                  "type": "string"
+                },
+                "contentUrl": {
+                  "type": "string"
+                },
+                "content": {
+                  "type": "object"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "thumbnailUrl": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "required": [
+          "notificationUrl"
+        ]
+      },
+      "x-ms-summary": "Execute Agent body",
+      "description": "Execute Agent body"
+    },
+    {
+      "name": "x-ms-conversation-id",
+      "in": "header",
+      "description": "Provide exisiting conversation id to resume Agent execution.",
+      "required": false,
+      "x-ms-summary": "Conversation ID",
+      "x-ms-visibility": "advanced",
+      "type": "string"
+    },
+    {
+      "in": "query",
+      "name": "environmentId",
+      "required": false,
+      "description": "Optional environment ID",
+      "type": "string",
+      "x-ms-summary": "Environment ID",
+      "x-ms-visibility": "advanced"
+    }
+  ],
+  "dynamicValuesRef": {
+    "Copilot": {
+      "operationId": "ListCopilots",
+      "titlePath": "name",
+      "parameters": {},
+      "valueCollection": "copilotsList",
+      "valuePath": "schemaname"
+    }
+  },
+  "swaggerLearned": true,
+  "outputSchema": {
+    "type": "object",
+    "description": "Dynamic response - schema varies by request"
+  },
+  "graphConvertible": "partial",
+  "graphNodeType": "agent",
+  "graphNotes": "Agent node. instructionsRich tokenRef needs AI to parse expressions from body/message.",
+  "graphTemplate": {
+    "type": "connector",
+    "version": 1,
+    "data": {
+      "config": {
+        "apiName": "shared_microsoftcopilotstudio",
+        "displayName": "Microsoft Copilot Studio",
+        "iconUri": "https://static.powerapps.com/resource/ppcr/releases/v1.0.1811/1.0.1811.4738/microsoftcopilotstudio/icon.png",
+        "brandColor": "",
+        "operationName": "ExecuteCopilotAsyncV2",
+        "operationType": "OpenApiConnectionWebhook",
+        "parametersSchema": {
+          "type": "object",
+          "properties": {
+            "Copilot": {
+              "type": "string",
+              "title": "Agent",
+              "x-ms-dynamic-list": {
+                "operationId": "ListCopilots",
+                "parameters": {},
+                "itemsPath": "copilotsList",
+                "itemValuePath": "schemaname",
+                "itemTitlePath": "name"
+              },
+              "description": "Agent",
+              "minLength": 1,
+              "x-ms-property-name-alias": "Copilot"
+            },
+            "body": {
+              "type": "object",
+              "title": "Execute Agent body",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "title": "Message",
+                  "description": "Message",
+                  "x-ms-property-name-alias": "body/message"
+                },
+                "locale": {
+                  "type": "string",
+                  "title": "A BCP-47 locale name for the contents of the text field.",
+                  "description": "A BCP-47 locale name for the contents of the text field.",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-property-name-alias": "body/locale"
+                },
+                "attachments": {
+                  "type": "array",
+                  "title": "A list of attachments https://learn.microsoft.com/en-us/dotnet/api/microsoft.bot.schema.activity.attachments?view=botbuilder-dotnet-stable",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "contentType": {
+                        "type": "string",
+                        "x-ms-property-name-alias": "contentType"
+                      },
+                      "contentUrl": {
+                        "type": "string",
+                        "x-ms-property-name-alias": "contentUrl"
+                      },
+                      "content": {
+                        "type": "object",
+                        "x-ms-property-name-alias": "content"
+                      },
+                      "name": {
+                        "type": "string",
+                        "x-ms-property-name-alias": "name"
+                      },
+                      "thumbnailUrl": {
+                        "type": "string",
+                        "x-ms-property-name-alias": "thumbnailUrl"
+                      }
+                    },
+                    "required": []
+                  },
+                  "description": "A list of attachments https://learn.microsoft.com/en-us/dotnet/api/microsoft.bot.schema.activity.attachments?view=botbuilder-dotnet-stable",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-property-name-alias": "body/attachments"
+                }
+              },
+              "required": [],
+              "description": "Execute Agent body",
+              "x-ms-property-name-alias": "body"
+            },
+            "x-ms-conversation-id": {
+              "type": "string",
+              "title": "Conversation ID",
+              "description": "Provide exisiting conversation id to resume Agent execution.",
+              "x-ms-visibility": "advanced",
+              "x-ms-property-name-alias": "x-ms-conversation-id"
+            },
+            "environmentId": {
+              "type": "string",
+              "title": "Environment ID",
+              "description": "Optional environment ID",
+              "x-ms-visibility": "advanced",
+              "x-ms-property-name-alias": "environmentId"
+            }
+          },
+          "required": [
+            "body",
+            "Copilot"
+          ]
+        },
+        "connectionName": "shared_microsoftcopilotstudio",
+        "parameters": {
+          "body/message": "我发了一个PDF给你，你把文档里面的内容总结一下发我\n",
+          "body/attachments": [
+            {
+              "contentUrl": "https://<YOUR_TENANT>-my.sharepoint.com/:b:/g/personal/<YOUR_USER>_<YOUR_TENANT>_onmicrosoft_com/IQB5j8oGXBhDTbOfNFwEGhf_AaSmDwHZxOE7lXnmpCWyYDk?e=vTN6Ry",
+              "contentType": "application/pdf",
+              "name": "639106046091078375.pdf"
+            }
+          ],
+          "Copilot": "cre47_agentIM_8vG",
+          "body/locale": "639106046091078375.pdf"
+        }
+      }
+    },
+    "measured": {
+      "width": 240,
+      "height": 66
+    },
+    "graphTemplateNotes": "Auto-merged from 1 flow(s); inspect before relying on it."
+  },
+  "graphTemplateVerified": false,
+  "graphTemplateSource": "extract_graph_templates.py (auto-merged from 1 flow(s) on Administrator)"
 }

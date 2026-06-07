@@ -20,17 +20,24 @@ Describe what you want in natural language → AI assembles the Flow JSON → de
 git clone https://github.com/your-username/automate-generator.git
 ```
 
-### 2. Point your project to the skills
+### 2. Point your project to the skills **and** instructions
 
 In your project's `.vscode/settings.json`:
 
 ```json
 {
   "chat.agentSkillsLocations": {
-    "/path/to/automate-generator/.github/skills": true
+    "/path/to/Power-Automate-Generator/.github/skills": true
+  },
+  "chat.instructionsFilesLocations": {
+    "/path/to/Power-Automate-Generator/.github/instructions": true
   }
 }
 ```
+
+> Use forward slashes `/` even on Windows. Replace `/path/to/` with where you cloned the repo.
+>
+> **Why both?** Skills (`.github/skills/`) are the slash-command entry points (`/create-flow`, etc.). Instructions (`.github/instructions/`) carry the deep SOP each skill calls into (token management, flow operations API endpoints, component-library rules, 30+ verified pitfalls). Without `chat.instructionsFilesLocations` the skills still load, but the agent loses the deep API knowledge and will hit avoidable bugs.
 
 ### 3. Configure your environment
 
@@ -55,9 +62,32 @@ You'll need:
 
 | Skill | Trigger Keywords | Description |
 |---|---|---|
-| `/create-flow` | create flow, deploy flow, 创建 flow, 生成 Power Automate | End-to-end: requirements → JSON → deploy |
-| `/configure-profile` | configure profile, add tenant, 配置环境 | Set up OAuth2 credentials for a new tenant |
-| `/scan-environment` | scan environment, list flows, 扫描环境, learn flow | Discover flows/connectors/connections, learn components |
+| `/create-flow` | create flow, deploy flow, 创建 flow, 生成 Power Automate | End-to-end: **prototype → describe → learn → deploy**. Refuses to skip the prototype confirmation step. |
+| `/describe-component` | describe component, 查组件 | Print inputSchema / outputSchema / known pitfalls / graphTemplate for a component. **Refuses to invent params from memory.** |
+| `/learn-component` | learn component, 学习组件 | Pull Swagger → write `components/actions/openapi/*.json` → update `_catalog.json`. Marks `verified=false` until a real deployment confirms. |
+| `/scan-environment` | scan environment, list flows, 扫环境, learn flow | Discover flows / connectors / connection references; optional `learn` mode batches `/learn-component`. |
+| `/configure-profile` | configure profile, add tenant, 配置环境 | Set up OAuth2 credentials for a new tenant (Device Code Flow). |
+| `/report-issue` | report issue, 反馈, this skill is wrong, 报个 bug | Append a feedback entry to **a single rolling file** in *your* workspace: `.copilot-feedback/power-automate-generator.md`. Auto-sanitizes tokens/URLs/emails. Share that file with the maintainer when convenient. |
+
+## Feedback Loop
+
+Found a pitfall? Component schema looks off? A skill's SOP is unclear? Run `/report-issue` in chat. The agent will:
+
+1. Collect context (which skill/component/error, expected vs actual, repro steps)
+2. Strip secrets (Bearer tokens, client_secret, org URLs, emails)
+3. Show you the draft, then **append** it to `.copilot-feedback/power-automate-generator.md` in your workspace
+
+Same file, every time — feedback accumulates as a single rolling log you fully control. When you're ready, share the file with the maintainer (paste, attach to a GitHub Issue at [zaz8848/Power-Automate-Generator](https://github.com/zaz8848/Power-Automate-Generator/issues), or email). Improvements are triaged in the private lab repo and synced back here, so a future `git pull` brings the fix.
+
+## Three-layer Design
+
+| Layer | Folder | Loaded by (VS Code setting) | Role |
+|---|---|---|---|
+| 1️⃣ Skills | `.github/skills/<name>/SKILL.md` | `chat.agentSkillsLocations` | Slash-command entry points; flow skeleton + mandatory steps |
+| 2️⃣ Instructions | `.github/instructions/*.instructions.md` | `chat.instructionsFilesLocations` | Always-loaded deep SOP — API endpoints, body shapes, pitfalls |
+| 3️⃣ Data | `components/` + `scripts/` + `profiles/` | Skills reference at runtime | Concrete schemas + executable PowerShell/Python helpers |
+
+Skills are intentionally short (the "what"). Instructions carry the heavy detail (the "how"). Both must be wired in `settings.json` for the agent to behave correctly.
 
 ## How It Works
 
@@ -71,10 +101,17 @@ You'll need:
 ┌─────────────────────────────────┐
 │  Automate Generator (this repo) │
 │                                 │
-│  .github/skills/                │ ← AI reads SKILL.md for instructions
-│    ├─ create-flow/SKILL.md      │
-│    ├─ configure-profile/SKILL.md│
-│    └─ scan-environment/SKILL.md │
+│  .github/skills/                │ ← 1️⃣ chat.agentSkillsLocations (slash commands)
+│    ├─ create-flow/SKILL.md      │    NL → prototype → describe → learn → deploy
+│    ├─ describe-component/SKILL.md  Component contract reader
+│    ├─ learn-component/SKILL.md     Swagger → component file writer
+│    ├─ scan-environment/SKILL.md    Environment / flow / connector scanner
+│    └─ configure-profile/SKILL.md   Tenant profile + Device Code Flow
+│                                 │
+│  .github/instructions/          │ ← 2️⃣ chat.instructionsFilesLocations (deep SOP)
+│    ├─ flow-operations.instructions.md       Flow CRUD / API endpoints / 30+ pitfalls
+│    ├─ token-management.instructions.md      4-scope OAuth2 refresh template
+│    └─ component-library.instructions.md     Component query / learning SOP
 │                                 │
 │  components/                    │ ← Pre-learned action/trigger templates
 │    ├─ _catalog.json             │

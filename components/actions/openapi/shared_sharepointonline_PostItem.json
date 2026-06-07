@@ -1,4 +1,4 @@
-﻿{
+{
     "id":  "shared_sharepointonline_PostItem",
     "connector":  "shared_sharepointonline",
     "connectorBase":  "shared_sharepointonline",
@@ -18,7 +18,7 @@
     "learnedAt":  "2026-05-26",
     "verified":  true,
     "environment":  [
-                        "{dataverseOrg}"
+                        "<YOUR_ORG>.crm.dynamics.com"
                     ],
     "template":  {
                      "Create_item-PO_Line_Items_Failed_2":  {

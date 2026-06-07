@@ -1,4 +1,4 @@
-﻿{
+{
     "id":  "shared_d365marketingforapps_Orchestration_RegisterWebhookTriggerV2",
     "connector":  "shared_d365marketingforapps",
     "operationId":  "Orchestration_RegisterWebhookTriggerV2",
@@ -52,7 +52,7 @@
     "learnedAt":  "2026-05-26",
     "verified":  true,
     "environment":  [
-                        "orgdf331f66.crm5.dynamics.com"
+                        "<YOUR_ORG>.crm.dynamics.com"
                     ],
     "template":  {
                      "Register_webhook_trigger":  {

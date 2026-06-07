@@ -1,4 +1,4 @@
-﻿{
+{
     "id":  "shared_wordonlinebusiness_CreateFileItem",
     "connector":  "shared_wordonlinebusiness",
     "connectorBase":  "shared_wordonlinebusiness",
@@ -14,7 +14,7 @@
     "learnedAt":  "2026-05-26",
     "verified":  true,
     "environment":  [
-                        "orgdf331f66.crm5.dynamics.com"
+                        "<YOUR_ORG>.crm.dynamics.com"
                     ],
     "template":  {
                      "Populate_a_Microsoft_Word_template":  {

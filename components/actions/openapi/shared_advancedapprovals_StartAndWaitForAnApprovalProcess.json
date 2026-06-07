@@ -1,4 +1,4 @@
-﻿{
+{
     "id":  "shared_advancedapprovals_StartAndWaitForAnApprovalProcess",
     "connector":  "shared_advancedapprovals",
     "connectorBase":  "shared_advancedapprovals",
@@ -14,7 +14,7 @@
     "learnedAt":  "2026-05-26",
     "verified":  true,
     "environment":  [
-                        "orgdf331f66.crm5.dynamics.com"
+                        "<YOUR_ORG>.crm.dynamics.com"
                     ],
     "template":  {
                      "Run_a_multistage_approval_(preview)":  {

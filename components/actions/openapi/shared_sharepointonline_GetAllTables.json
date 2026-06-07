@@ -1,4 +1,4 @@
-﻿{
+{
     "id":  "shared_sharepointonline_GetAllTables",
     "connector":  "shared_sharepointonline",
     "connectorBase":  "shared_sharepointonline",
@@ -14,7 +14,7 @@
     "learnedAt":  "2026-05-26",
     "verified":  true,
     "environment":  [
-                        "orgdf331f66.crm5.dynamics.com"
+                        "<YOUR_ORG>.crm.dynamics.com"
                     ],
     "template":  {
                      "Get_all_lists_and_libraries":  {

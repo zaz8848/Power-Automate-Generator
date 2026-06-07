@@ -1,233 +1,388 @@
-﻿{
-    "id":  "shared_m365copilotv2_StartChat",
-    "template":  {
-                     "M365_Copilot":  {
-                                          "runAfter":  {
-
-                                                       },
-                                          "limit":  {
-                                                        "timeout":  "PT3H"
-                                                    },
-                                          "metadata":  {
-                                                           "description":  "M365 Copilot",
-                                                           "nodeId":  "m365Copilot-74e3790a-00c5-48cb-b4ef-a7f1ebb349e9"
-                                                       },
-                                          "type":  "OpenApiConnection",
-                                          "inputs":  {
-                                                         "parameters":  {
-                                                                            "body/message":  "https://contoso.sharepoint.com/sites/test/Shared Documents/Agent Knowledge/2142A_Mindray I9_zh-CN_Compressed.pdf\n\n读取一下我这个文件里面的内容，把第401页内容总结发我看一下，然后并且告诉我那是第几章的内容",
-                                                                            "body/timezone":  "America/New_York",
-                                                                            "body/preferAsync":  false,
-                                                                            "body/isConversationVisible":  false
-                                                                        },
-                                                         "host":  {
-                                                                      "apiId":  "/providers/Microsoft.PowerApps/apis/shared_m365copilotv2",
-                                                                      "operationId":  "StartChat",
-                                                                      "connectionName":  "shared_m365copilotv2"
-                                                                  }
-                                                     }
-                                      }
-                 },
-    "learnedFrom":  [
-                        "a9457536-3c59-7be6-3841-f88789fa6e60"
-                    ],
-    "verified":  true,
-    "outputSchema":  {
-                         "type":  "object",
-                         "properties":  {
-                                            "conversationId":  {
-                                                                   "type":  "string",
-                                                                   "description":  "The unique identifier of the conversation",
-                                                                   "x-ms-summary":  "Conversation ID"
-                                                               },
-                                            "response":  {
-                                                             "type":  "string",
-                                                             "description":  "The response from the Copilot agent",
-                                                             "x-ms-summary":  "Response"
-                                                         },
-                                            "citations":  {
-                                                              "type":  "array",
-                                                              "description":  "Citations referenced in the response",
-                                                              "x-ms-summary":  "Citations",
-                                                              "items":  {
-                                                                            "type":  "object",
-                                                                            "properties":  {
-                                                                                               "seeMoreUrl":  {
-                                                                                                                  "type":  "string",
-                                                                                                                  "description":  "URL to see more information for this citation",
-                                                                                                                  "x-ms-summary":  "See More URL"
-                                                                                                              },
-                                                                                               "type":  {
-                                                                                                            "type":  "string",
-                                                                                                            "description":  "The type of citation (e.g. People, Event)",
-                                                                                                            "x-ms-summary":  "Type"
-                                                                                                        }
-                                                                                           }
-                                                                        }
-                                                          }
-                                        },
-                         "additionalProperties":  true
-                     },
-    "operationId":  "StartChat",
-    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_m365copilotv2",
-    "type":  "OpenApiConnection",
-    "connectorBase":  "shared_m365copilotv2",
-    "connector":  "shared_m365copilotv2",
-    "learnedFromName":  [
-                            "WorkFlow-M365 Copilot"
-                        ],
-    "learnedAt":  "2026-05-29",
-    "inputSchema":  {
-                        "type":  "object",
-                        "properties":  {
-                                           "message":  {
-                                                           "type":  "string",
-                                                           "description":  "What would you like M365 Copilot to do?",
-                                                           "x-ms-summary":  "Message"
-                                                       },
-                                           "timezone":  {
-                                                            "type":  "string",
-                                                            "description":  "The IANA time zone identifier for the user\u0027s location (e.g. America/New_York, Europe/London, Asia/Tokyo)",
-                                                            "x-ms-summary":  "Time Zone",
-                                                            "default":  "America/New_York",
-                                                            "enum":  [
-                                                                         "Etc/GMT+12",
-                                                                         "Etc/GMT+11",
-                                                                         "Pacific/Pago_Pago",
-                                                                         "Pacific/Honolulu",
-                                                                         "Pacific/Marquesas",
-                                                                         "America/Anchorage",
-                                                                         "America/Los_Angeles",
-                                                                         "America/Tijuana",
-                                                                         "America/Denver",
-                                                                         "America/Phoenix",
-                                                                         "America/Chicago",
-                                                                         "America/Mexico_City",
-                                                                         "America/Regina",
-                                                                         "America/New_York",
-                                                                         "America/Toronto",
-                                                                         "America/Bogota",
-                                                                         "America/Lima",
-                                                                         "America/Halifax",
-                                                                         "America/Caracas",
-                                                                         "America/St_Johns",
-                                                                         "America/Sao_Paulo",
-                                                                         "America/Argentina/Buenos_Aires",
-                                                                         "Atlantic/South_Georgia",
-                                                                         "Atlantic/Azores",
-                                                                         "Atlantic/Cape_Verde",
-                                                                         "UTC",
-                                                                         "Europe/London",
-                                                                         "Africa/Lagos",
-                                                                         "Europe/Berlin",
-                                                                         "Europe/Paris",
-                                                                         "Europe/Rome",
-                                                                         "Europe/Warsaw",
-                                                                         "Africa/Cairo",
-                                                                         "Europe/Athens",
-                                                                         "Europe/Bucharest",
-                                                                         "Europe/Helsinki",
-                                                                         "Europe/Istanbul",
-                                                                         "Africa/Johannesburg",
-                                                                         "Asia/Jerusalem",
-                                                                         "Europe/Moscow",
-                                                                         "Asia/Baghdad",
-                                                                         "Africa/Nairobi",
-                                                                         "Asia/Tehran",
-                                                                         "Asia/Dubai",
-                                                                         "Asia/Baku",
-                                                                         "Asia/Kabul",
-                                                                         "Asia/Karachi",
-                                                                         "Asia/Tashkent",
-                                                                         "Asia/Kolkata",
-                                                                         "Asia/Colombo",
-                                                                         "Asia/Kathmandu",
-                                                                         "Asia/Almaty",
-                                                                         "Asia/Dhaka",
-                                                                         "Asia/Yangon",
-                                                                         "Asia/Bangkok",
-                                                                         "Asia/Jakarta",
-                                                                         "Asia/Ho_Chi_Minh",
-                                                                         "Asia/Shanghai",
-                                                                         "Asia/Hong_Kong",
-                                                                         "Asia/Singapore",
-                                                                         "Asia/Taipei",
-                                                                         "Australia/Perth",
-                                                                         "Asia/Seoul",
-                                                                         "Asia/Tokyo",
-                                                                         "Australia/Darwin",
-                                                                         "Australia/Adelaide",
-                                                                         "Australia/Sydney",
-                                                                         "Australia/Brisbane",
-                                                                         "Pacific/Guam",
-                                                                         "Pacific/Noumea",
-                                                                         "Pacific/Auckland",
-                                                                         "Pacific/Fiji",
-                                                                         "Pacific/Tongatapu",
-                                                                         "Pacific/Apia",
-                                                                         "Pacific/Kiritimati"
-                                                                     ]
-                                                        },
-                                           "agentId":  {
-                                                           "type":  "string",
-                                                           "description":  "The unique identifier of the Copilot agent to chat with",
-                                                           "x-ms-summary":  "Agent",
-                                                           "x-ms-dynamic-values":  {
-                                                                                       "operationId":  "GetAgents",
-                                                                                       "value-collection":  "agents",
-                                                                                       "value-path":  "id",
-                                                                                       "value-title":  "name",
-                                                                                       "parameters":  {
-
-                                                                                                      }
-                                                                                   }
-                                                       },
-                                           "preferAsync":  {
-                                                               "type":  "boolean",
-                                                               "description":  "Whether to prefer asynchronous processing for the chat request",
-                                                               "x-ms-summary":  "Prefer Async",
-                                                               "default":  true
-                                                           },
-                                           "isConversationVisible":  {
-                                                                         "type":  "boolean",
-                                                                         "description":  "Whether the conversation appears in the user\u0027s Copilot conversation history. Defaults to false (hidden) when omitted.",
-                                                                         "x-ms-summary":  "Is Conversation Visible"
-                                                                     }
-                                       },
-                        "required":  [
-                                         "message"
-                                     ]
-                    },
-    "parameters":  {
-                       "body/message":  {
-                                            "description":  "What would you like M365 Copilot to do?",
-                                            "type":  "string",
-                                            "required":  true
-                                        },
-                       "body/isConversationVisible":  {
-                                                          "description":  "Show in conversation history",
-                                                          "default":  false,
-                                                          "type":  "boolean"
-                                                      },
-                       "body/preferAsync":  {
-                                                "description":  "Prefer async processing",
-                                                "default":  true,
-                                                "type":  "boolean"
-                                            },
-                       "body/timezone":  {
-                                             "description":  "IANA timezone",
-                                             "default":  "America/New_York",
-                                             "type":  "string"
-                                         },
-                       "body/agentId":  {
-                                            "type":  "string",
-                                            "description":  "Agent ID (optional)"
-                                        }
-                   },
-    "environment":  [
-                        "ZAF Prod"
-                    ],
-    "swaggerLearned":  true,
-    "graphConvertible":  true,
-    "graphNodeType":  "m365Copilot"
+{
+  "id": "shared_m365copilotv2_StartChat",
+  "template": {
+    "M365_Copilot": {
+      "runAfter": {},
+      "limit": {
+        "timeout": "PT3H"
+      },
+      "metadata": {
+        "description": "M365 Copilot",
+        "nodeId": "m365Copilot-74e3790a-00c5-48cb-b4ef-a7f1ebb349e9"
+      },
+      "type": "OpenApiConnection",
+      "inputs": {
+        "parameters": {
+          "body/message": "https://<YOUR_TENANT>.sharepoint.com/sites/test/Shared Documents/Agent Knowledge/2142A_Mindray I9_zh-CN_Compressed.pdf\n\n读取一下我这个文件里面的内容，把第401页内容总结发我看一下，然后并且告诉我那是第几章的内容",
+          "body/timezone": "America/New_York",
+          "body/preferAsync": false,
+          "body/isConversationVisible": false
+        },
+        "host": {
+          "apiId": "/providers/Microsoft.PowerApps/apis/shared_m365copilotv2",
+          "operationId": "StartChat",
+          "connectionName": "shared_m365copilotv2"
+        }
+      }
+    }
+  },
+  "learnedFrom": [
+    "a9457536-3c59-7be6-3841-f88789fa6e60"
+  ],
+  "verified": true,
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "conversationId": {
+        "type": "string",
+        "description": "The unique identifier of the conversation",
+        "x-ms-summary": "Conversation ID"
+      },
+      "response": {
+        "type": "string",
+        "description": "The response from the Copilot agent",
+        "x-ms-summary": "Response"
+      },
+      "citations": {
+        "type": "array",
+        "description": "Citations referenced in the response",
+        "x-ms-summary": "Citations",
+        "items": {
+          "type": "object",
+          "properties": {
+            "seeMoreUrl": {
+              "type": "string",
+              "description": "URL to see more information for this citation",
+              "x-ms-summary": "See More URL"
+            },
+            "type": {
+              "type": "string",
+              "description": "The type of citation (e.g. People, Event)",
+              "x-ms-summary": "Type"
+            }
+          }
+        }
+      }
+    },
+    "additionalProperties": true
+  },
+  "operationId": "StartChat",
+  "apiId": "/providers/Microsoft.PowerApps/apis/shared_m365copilotv2",
+  "type": "OpenApiConnection",
+  "connectorBase": "shared_m365copilotv2",
+  "connector": "shared_m365copilotv2",
+  "learnedFromName": [
+    "WorkFlow-M365 Copilot"
+  ],
+  "learnedAt": "2026-05-29",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "message": {
+        "type": "string",
+        "description": "What would you like M365 Copilot to do?",
+        "x-ms-summary": "Message"
+      },
+      "timezone": {
+        "type": "string",
+        "description": "The IANA time zone identifier for the user's location (e.g. America/New_York, Europe/London, Asia/Tokyo)",
+        "x-ms-summary": "Time Zone",
+        "default": "America/New_York",
+        "enum": [
+          "Etc/GMT+12",
+          "Etc/GMT+11",
+          "Pacific/Pago_Pago",
+          "Pacific/Honolulu",
+          "Pacific/Marquesas",
+          "America/Anchorage",
+          "America/Los_Angeles",
+          "America/Tijuana",
+          "America/Denver",
+          "America/Phoenix",
+          "America/Chicago",
+          "America/Mexico_City",
+          "America/Regina",
+          "America/New_York",
+          "America/Toronto",
+          "America/Bogota",
+          "America/Lima",
+          "America/Halifax",
+          "America/Caracas",
+          "America/St_Johns",
+          "America/Sao_Paulo",
+          "America/Argentina/Buenos_Aires",
+          "Atlantic/South_Georgia",
+          "Atlantic/Azores",
+          "Atlantic/Cape_Verde",
+          "UTC",
+          "Europe/London",
+          "Africa/Lagos",
+          "Europe/Berlin",
+          "Europe/Paris",
+          "Europe/Rome",
+          "Europe/Warsaw",
+          "Africa/Cairo",
+          "Europe/Athens",
+          "Europe/Bucharest",
+          "Europe/Helsinki",
+          "Europe/Istanbul",
+          "Africa/Johannesburg",
+          "Asia/Jerusalem",
+          "Europe/Moscow",
+          "Asia/Baghdad",
+          "Africa/Nairobi",
+          "Asia/Tehran",
+          "Asia/Dubai",
+          "Asia/Baku",
+          "Asia/Kabul",
+          "Asia/Karachi",
+          "Asia/Tashkent",
+          "Asia/Kolkata",
+          "Asia/Colombo",
+          "Asia/Kathmandu",
+          "Asia/Almaty",
+          "Asia/Dhaka",
+          "Asia/Yangon",
+          "Asia/Bangkok",
+          "Asia/Jakarta",
+          "Asia/Ho_Chi_Minh",
+          "Asia/Shanghai",
+          "Asia/Hong_Kong",
+          "Asia/Singapore",
+          "Asia/Taipei",
+          "Australia/Perth",
+          "Asia/Seoul",
+          "Asia/Tokyo",
+          "Australia/Darwin",
+          "Australia/Adelaide",
+          "Australia/Sydney",
+          "Australia/Brisbane",
+          "Pacific/Guam",
+          "Pacific/Noumea",
+          "Pacific/Auckland",
+          "Pacific/Fiji",
+          "Pacific/Tongatapu",
+          "Pacific/Apia",
+          "Pacific/Kiritimati"
+        ]
+      },
+      "agentId": {
+        "type": "string",
+        "description": "The unique identifier of the Copilot agent to chat with",
+        "x-ms-summary": "Agent",
+        "x-ms-dynamic-values": {
+          "operationId": "GetAgents",
+          "value-collection": "agents",
+          "value-path": "id",
+          "value-title": "name",
+          "parameters": {}
+        }
+      },
+      "preferAsync": {
+        "type": "boolean",
+        "description": "Whether to prefer asynchronous processing for the chat request",
+        "x-ms-summary": "Prefer Async",
+        "default": true
+      },
+      "isConversationVisible": {
+        "type": "boolean",
+        "description": "Whether the conversation appears in the user's Copilot conversation history. Defaults to false (hidden) when omitted.",
+        "x-ms-summary": "Is Conversation Visible"
+      }
+    },
+    "required": [
+      "message"
+    ]
+  },
+  "parameters": {
+    "body/message": {
+      "description": "What would you like M365 Copilot to do?",
+      "type": "string",
+      "required": true
+    },
+    "body/isConversationVisible": {
+      "description": "Show in conversation history",
+      "default": false,
+      "type": "boolean"
+    },
+    "body/preferAsync": {
+      "description": "Prefer async processing",
+      "default": true,
+      "type": "boolean"
+    },
+    "body/timezone": {
+      "description": "IANA timezone",
+      "default": "America/New_York",
+      "type": "string"
+    },
+    "body/agentId": {
+      "type": "string",
+      "description": "Agent ID (optional)"
+    }
+  },
+  "environment": [
+    "ZAF Prod"
+  ],
+  "swaggerLearned": true,
+  "graphConvertible": true,
+  "graphNodeType": "m365Copilot",
+  "graphTemplate": {
+    "type": "m365Copilot",
+    "version": 1,
+    "data": {
+      "config": {
+        "apiName": "shared_m365copilotv2",
+        "displayName": "M365 Copilot",
+        "operationName": "StartChat",
+        "parameters": {
+          "body/timezone": "America/New_York",
+          "body/preferAsync": false,
+          "body/message": "你在这里也没有写任何的message，去告诉M305如何去做呀。这是我手动写的"
+        },
+        "operationType": "OpenApiConnection",
+        "parametersSchema": {
+          "type": "object",
+          "properties": {
+            "body": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "title": "Message",
+                  "description": "What would you like M365 Copilot to do?",
+                  "x-ms-property-name-alias": "body/message"
+                },
+                "timezone": {
+                  "type": "string",
+                  "title": "Time Zone",
+                  "description": "The IANA time zone identifier for the user's location (e.g. America/New_York, Europe/London, Asia/Tokyo)",
+                  "default": "America/New_York",
+                  "enum": [
+                    "Etc/GMT+12",
+                    "Etc/GMT+11",
+                    "Pacific/Pago_Pago",
+                    "Pacific/Honolulu",
+                    "Pacific/Marquesas",
+                    "America/Anchorage",
+                    "America/Los_Angeles",
+                    "America/Tijuana",
+                    "America/Denver",
+                    "America/Phoenix",
+                    "America/Chicago",
+                    "America/Mexico_City",
+                    "America/Regina",
+                    "America/New_York",
+                    "America/Toronto",
+                    "America/Bogota",
+                    "America/Lima",
+                    "America/Halifax",
+                    "America/Caracas",
+                    "America/St_Johns",
+                    "America/Sao_Paulo",
+                    "America/Argentina/Buenos_Aires",
+                    "Atlantic/South_Georgia",
+                    "Atlantic/Azores",
+                    "Atlantic/Cape_Verde",
+                    "UTC",
+                    "Europe/London",
+                    "Africa/Lagos",
+                    "Europe/Berlin",
+                    "Europe/Paris",
+                    "Europe/Rome",
+                    "Europe/Warsaw",
+                    "Africa/Cairo",
+                    "Europe/Athens",
+                    "Europe/Bucharest",
+                    "Europe/Helsinki",
+                    "Europe/Istanbul",
+                    "Africa/Johannesburg",
+                    "Asia/Jerusalem",
+                    "Europe/Moscow",
+                    "Asia/Baghdad",
+                    "Africa/Nairobi",
+                    "Asia/Tehran",
+                    "Asia/Dubai",
+                    "Asia/Baku",
+                    "Asia/Kabul",
+                    "Asia/Karachi",
+                    "Asia/Tashkent",
+                    "Asia/Kolkata",
+                    "Asia/Colombo",
+                    "Asia/Kathmandu",
+                    "Asia/Almaty",
+                    "Asia/Dhaka",
+                    "Asia/Yangon",
+                    "Asia/Bangkok",
+                    "Asia/Jakarta",
+                    "Asia/Ho_Chi_Minh",
+                    "Asia/Shanghai",
+                    "Asia/Hong_Kong",
+                    "Asia/Singapore",
+                    "Asia/Taipei",
+                    "Australia/Perth",
+                    "Asia/Seoul",
+                    "Asia/Tokyo",
+                    "Australia/Darwin",
+                    "Australia/Adelaide",
+                    "Australia/Sydney",
+                    "Australia/Brisbane",
+                    "Pacific/Guam",
+                    "Pacific/Noumea",
+                    "Pacific/Auckland",
+                    "Pacific/Fiji",
+                    "Pacific/Tongatapu",
+                    "Pacific/Apia",
+                    "Pacific/Kiritimati"
+                  ],
+                  "x-ms-property-name-alias": "body/timezone"
+                },
+                "agentId": {
+                  "type": "string",
+                  "title": "Agent",
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetAgents",
+                    "parameters": {},
+                    "itemsPath": "agents",
+                    "itemValuePath": "id",
+                    "itemTitlePath": "name"
+                  },
+                  "description": "The unique identifier of the Copilot agent to chat with",
+                  "x-ms-property-name-alias": "body/agentId"
+                },
+                "preferAsync": {
+                  "type": "boolean",
+                  "title": "Prefer Async",
+                  "description": "Whether to prefer asynchronous processing for the chat request",
+                  "default": true,
+                  "x-ms-property-name-alias": "body/preferAsync"
+                },
+                "isConversationVisible": {
+                  "type": "boolean",
+                  "title": "Is Conversation Visible",
+                  "description": "Whether the conversation appears in the user's Copilot conversation history. Defaults to false (hidden) when omitted.",
+                  "x-ms-property-name-alias": "body/isConversationVisible"
+                }
+              },
+              "required": [
+                "message"
+              ],
+              "x-ms-property-name-alias": "body"
+            }
+          },
+          "required": [
+            "body"
+          ]
+        },
+        "iconUri": "https://static.powerapps.com/resource/ppcr/releases/v1.0.1811/1.0.1811.4721/m365copilotv2/icon.png",
+        "connectionName": "shared_m365copilotv2-1"
+      }
+    },
+    "measured": {
+      "width": 240,
+      "height": 66
+    },
+    "graphTemplateNotes": "Auto-merged from 3 flow(s); inspect before relying on it."
+  },
+  "graphTemplateVerified": false,
+  "graphTemplateSource": "extract_graph_templates.py (auto-merged from 3 flow(s) on Administrator)"
 }

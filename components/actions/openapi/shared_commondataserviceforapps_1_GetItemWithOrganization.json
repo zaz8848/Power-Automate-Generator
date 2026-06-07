@@ -1,4 +1,4 @@
-﻿{
+{
     "id":  "shared_commondataserviceforapps_1_GetItemWithOrganization",
     "connector":  "shared_commondataserviceforapps_1",
     "connectorBase":  "shared_commondataserviceforapps",
@@ -18,7 +18,7 @@
     "learnedAt":  "2026-05-26",
     "verified":  true,
     "environment":  [
-                        "orgdf331f66.crm5.dynamics.com"
+                        "<YOUR_ORG>.crm.dynamics.com"
                     ],
     "template":  {
                      "Get_a_row_by_ID_from_selected_environment:_Get_AiModel_of_prompts":  {

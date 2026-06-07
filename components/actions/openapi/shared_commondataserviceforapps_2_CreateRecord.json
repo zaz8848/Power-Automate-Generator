@@ -1,4 +1,4 @@
-﻿{
+{
     "id":  "shared_commondataserviceforapps_2_CreateRecord",
     "connector":  "shared_commondataserviceforapps_2",
     "connectorBase":  "shared_commondataserviceforapps",
@@ -14,7 +14,7 @@
     "learnedAt":  "2026-05-26",
     "verified":  true,
     "environment":  [
-                        "orgdf331f66.crm5.dynamics.com"
+                        "<YOUR_ORG>.crm.dynamics.com"
                     ],
     "template":  {
                      "Add_a_new_row:_Logs":  {

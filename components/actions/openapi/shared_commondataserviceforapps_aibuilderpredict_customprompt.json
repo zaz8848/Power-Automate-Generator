@@ -1,4 +1,4 @@
-﻿{
+{
     "id":  "shared_commondataserviceforapps_aibuilderpredict_customprompt",
     "connector":  "shared_commondataserviceforapps",
     "connectorBase":  "shared_commondataserviceforapps",
@@ -82,9 +82,9 @@
     "learnedAt":  "2026-05-26",
     "verified":  true,
     "environment":  [
-                        "{dataverseOrg}",
+                        "<YOUR_ORG>.crm.dynamics.com",
                         "orgc954877b.crm5.dynamics.com",
-                        "orgdf331f66.crm5.dynamics.com",
+                        "<YOUR_ORG>.crm.dynamics.com",
                         "org1cd97ca4.crm.dynamics.com"
                     ],
     "template":  {

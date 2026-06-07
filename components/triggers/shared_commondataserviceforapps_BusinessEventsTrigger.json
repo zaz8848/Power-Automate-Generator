@@ -1,4 +1,4 @@
-﻿{
+{
     "id":  "shared_commondataserviceforapps_BusinessEventsTrigger",
     "connector":  "shared_commondataserviceforapps",
     "operationId":  "BusinessEventsTrigger",
@@ -24,7 +24,7 @@
     "learnedAt":  "2026-05-26",
     "verified":  true,
     "environment":  [
-                        "orgdf331f66.crm5.dynamics.com"
+                        "<YOUR_ORG>.crm.dynamics.com"
                     ],
     "template":  {
                      "Invoke_case_processing_agent":  {

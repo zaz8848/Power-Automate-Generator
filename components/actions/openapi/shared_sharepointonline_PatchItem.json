@@ -1,4 +1,4 @@
-﻿{
+{
     "id":  "shared_sharepointonline_PatchItem",
     "connector":  "shared_sharepointonline",
     "connectorBase":  "shared_sharepointonline",
@@ -22,8 +22,8 @@
     "learnedAt":  "2026-05-26",
     "verified":  true,
     "environment":  [
-                        "{dataverseOrg}",
-                        "orgdf331f66.crm5.dynamics.com"
+                        "<YOUR_ORG>.crm.dynamics.com",
+                        "<YOUR_ORG>.crm.dynamics.com"
                     ],
     "template":  {
                      "Update_item-PO":  {

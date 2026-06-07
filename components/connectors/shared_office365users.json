@@ -1,4 +1,4 @@
-﻿{
+{
     "id":  "shared_office365groups",
     "displayName":  "Office 365 Groups",
     "connectorId":  "/providers/Microsoft.PowerApps/apis/shared_office365groups",

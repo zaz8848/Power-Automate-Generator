@@ -1,4 +1,4 @@
-﻿{
+{
     "id":  "shared_azureblob_GetFileContent_V2",
     "connector":  "shared_azureblob",
     "connectorBase":  "shared_azureblob",

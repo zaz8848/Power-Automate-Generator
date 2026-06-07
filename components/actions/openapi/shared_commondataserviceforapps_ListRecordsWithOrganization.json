@@ -1,4 +1,4 @@
-﻿{
+{
     "id":  "shared_commondataserviceforapps_ListRecordsWithOrganization",
     "connector":  "shared_commondataserviceforapps",
     "connectorBase":  "shared_commondataserviceforapps",
@@ -18,7 +18,7 @@
     "learnedAt":  "2026-05-26",
     "verified":  true,
     "environment":  [
-                        "orgdf331f66.crm5.dynamics.com"
+                        "<YOUR_ORG>.crm.dynamics.com"
                     ],
     "template":  {
                      "Get_Conversation_Transcripts":  {

@@ -1,1324 +1,1331 @@
-﻿{
-    "version":  "2.0.0",
-    "generatedAt":  "2026-05-29",
-    "summary":  "112 OpenAPI actions, 24 connectors, 21 triggers, 17 built-in. 6 Workflows learned.",
-    "connectors":  [
-                       {
-                           "connector":  "shared_advancedapprovals",
-                           "operations":  "StartAndWaitForAnApprovalProcess",
-                           "operationCount":  1
-                       },
-                       {
-                           "connector":  "shared_approvals",
-                           "operations":  "StartAndWaitForAnApproval",
-                           "operationCount":  1
-                       },
-                       {
-                           "connector":  "shared_azureblob",
-                           "operations":  [
-                                              "CreateFile_V2",
-                                              "DeleteFile_V2",
-                                              "GetFileContent_V2"
-                                          ],
-                           "operationCount":  3
-                       },
-                       {
-                           "connector":  "shared_commondataserviceforapps",
-                           "operations":  [
-                                              "aibuilderpredict_customprompt",
-                                              "aibuilderpredict_languagedetection",
-                                              "aibuilderpredict_textrecognition",
-                                              "AssociateEntities",
-                                              "CreateRecord",
-                                              "CreateRecordWithOrganization",
-                                              "DeleteRecord",
-                                              "DeleteRecordWithOrganization",
-                                              "GetEntityFileImageFieldContent",
-                                              "GetItem",
-                                              "GetItemWithOrganization",
-                                              "ListRecords",
-                                              "ListRecordsWithOrganization",
-                                              "PerformBoundAction",
-                                              "PerformBoundActionWithOrganization",
-                                              "PerformUnboundAction",
-                                              "PerformUnboundActionWithOrganization",
-                                              "UpdateEntityFileImageFieldContent",
-                                              "UpdateEntityFileImageFieldContentWithOrganization",
-                                              "UpdateOnlyRecord",
-                                              "UpdateRecord"
-                                          ],
-                           "operationCount":  21
-                       },
-                       {
-                           "connector":  "shared_conversionservice",
-                           "operations":  "HtmlToText",
-                           "operationCount":  1
-                       },
-                       {
-                           "connector":  "shared_d365marketingforapps",
-                           "operations":  [
-                                              "ConnectorV2_EnsureRunIdempotency",
-                                              "ContactCenter_StartVoiceEngagementWebhookRequest",
-                                              "DataverseDataSource_ResolveBindingsData",
-                                              "Orchestration_EmitAnalyticEvent",
-                                              "Orchestration_EmitJourneyAnalyticEvent",
-                                              "Orchestration_EmitJourneyCreateRecordActionAnalyticEvent",
-                                              "Orchestration_UpdateJourneyInstanceStateV2"
-                                          ],
-                           "operationCount":  7
-                       },
-                       {
-                           "connector":  "shared_excelonlinebusiness",
-                           "operations":  [
-                                              "AddRowV2",
-                                              "GetItems",
-                                              "PatchItem",
-                                              "RunScriptProd"
-                                          ],
-                           "operationCount":  4
-                       },
-                       {
-                           "connector":  "shared_flowmanagement",
-                           "operations":  "GetFlow",
-                           "operationCount":  1
-                       },
-                       {
-                           "connector":  "shared_m365copilot-5feb5abfdd9aa0a613-5f0d555b53ebbad68c",
-                           "operations":  [
-                                              "CreateConversation",
-                                              "StartConversation"
-                                          ],
-                           "operationCount":  2
-                       },
-                       {
-                           "connector":  "shared_microsoftcopilotstudio",
-                           "operations":  [
-                                              "ExecuteCopilot",
-                                              "ExecuteCopilotAsyncV2"
-                                          ],
-                           "operationCount":  2
-                       },
-                       {
-                           "connector":  "shared_microsofttranslatorv",
-                           "operations":  [
-                                              "GetTranslationStatus",
-                                              "StartDocumentTranslation"
-                                          ],
-                           "operationCount":  2
-                       },
-                       {
-                           "connector":  "shared_office365",
-                           "operations":  [
-                                              "GetAttachment_V2",
-                                              "GetEmailsV3",
-                                              "SendEmailV2"
-                                          ],
-                           "operationCount":  3
-                       },
-                       {
-                           "connector":  "shared_onedriveforbusiness",
-                           "operations":  [
-                                              "ConvertFile",
-                                              "CreateFile",
-                                              "CreateShareLinkV2",
-                                              "DeleteFile",
-                                              "GetFileContent",
-                                              "GetFileMetadata",
-                                              "GetFileThumbnail"
-                                          ],
-                           "operationCount":  7
-                       },
-                       {
-                           "connector":  "shared_powerappsforappmakers",
-                           "operations":  "Get-Environments",
-                           "operationCount":  1
-                       },
-                       {
-                           "connector":  "shared_powerappsnotificationv2",
-                           "operations":  "SendPushNotificationV2",
-                           "operationCount":  1
-                       },
-                       {
-                           "connector":  "shared_powerbi",
-                           "operations":  "ExecuteDatasetQuery",
-                           "operationCount":  1
-                       },
-                       {
-                           "connector":  "shared_powerplatformforadmins",
-                           "operations":  "Get-AdminEnvironment",
-                           "operationCount":  1
-                       },
-                       {
-                           "connector":  "shared_sharepointonline",
-                           "operations":  [
-                                              "CreateFile",
-                                              "DeleteFile",
-                                              "GetAllTables",
-                                              "GetAttachmentContent",
-                                              "GetFileContent",
-                                              "GetFileContentByPath",
-                                              "GetFileItem",
-                                              "GetFileItems",
-                                              "GetItem",
-                                              "GetItemAttachments",
-                                              "GetItemChanges",
-                                              "GetItems",
-                                              "HttpRequest",
-                                              "PatchItem",
-                                              "PostItem"
-                                          ],
-                           "operationCount":  15
-                       },
-                       {
-                           "connector":  "shared_teams",
-                           "operations":  "PostMessageToConversation",
-                           "operationCount":  1
-                       },
-                       {
-                           "connector":  "shared_testapi-5fdee4da8cd15b1326-5f0d555b53ebbad68c",
-                           "operations":  "Hello",
-                           "operationCount":  1
-                       },
-                       {
-                           "connector":  "shared_webcontents",
-                           "operations":  "InvokeHttp",
-                           "operationCount":  1
-                       },
-                       {
-                           "connector":  "shared_wordonlinebusiness",
-                           "operations":  [
-                                              "CreateFileItem",
-                                              "GetFilePDF"
-                                          ],
-                           "operationCount":  2
-                       },
-                       {
-                           "id":  "shared_m365copilotv2",
-                           "displayName":  "M365 Copilot V2",
-                           "actionCount":  1,
-                           "triggerCount":  0
-                       },
-                       {
-                           "id":  "shared_agentnode",
-                           "displayName":  "Agents",
-                           "actionCount":  1,
-                           "triggerCount":  0
-                       }
-                   ],
-    "triggers":  [
-                     {
-                         "id":  "shared_wordonlinebusiness_GetFilePDF",
-                         "type":  "OpenApiConnection",
-                         "file":  "triggers/notification.json",
-                         "connector":  "shared_wordonlinebusiness",
-                         "operationId":  "GetFilePDF"
-                     },
-                     {
-                         "id":  "Recurrence_",
-                         "type":  "Recurrence",
-                         "file":  "triggers/recurrence-none.json",
-                         "kind":  "none"
-                     },
-                     {
-                         "id":  "Recurrence_",
-                         "type":  "Recurrence",
-                         "file":  "triggers/recurrence.json",
-                         "kind":  "none"
-                     },
-                     {
-                         "id":  "Recurrence_",
-                         "type":  "Recurrence",
-                         "file":  "triggers/request-apiconnection.json",
-                         "kind":  "none"
-                     },
-                     {
-                         "id":  "Request_Button",
-                         "type":  "Request",
-                         "file":  "triggers/request-button.json",
-                         "kind":  "Button"
-                     },
-                     {
-                         "id":  "Request_Http",
-                         "type":  "Request",
-                         "file":  "triggers/request-http.json",
-                         "kind":  "Http"
-                     },
-                     {
-                         "id":  "Request_Http",
-                         "type":  "Request",
-                         "file":  "triggers/request-powerappsv2.json",
-                         "kind":  "Http"
-                     },
-                     {
-                         "id":  "Request_PowerAppV2",
-                         "type":  "Request",
-                         "file":  "triggers/request-powerappv2.json",
-                         "kind":  "PowerAppV2"
-                     },
-                     {
-                         "id":  "Request_Skills",
-                         "type":  "Request",
-                         "file":  "triggers/request-skills.json",
-                         "kind":  "Skills"
-                     },
-                     {
-                         "id":  "Request_Skills",
-                         "type":  "Request",
-                         "file":  "triggers/request-virtualagent.json",
-                         "kind":  "Skills"
-                     },
-                     {
-                         "id":  "shared_commondataserviceforapps-1_BusinessEventsTrigger",
-                         "type":  "OpenApiConnectionWebhook",
-                         "file":  "triggers/shared_commondataserviceforapps-1_BusinessEventsTrigger.json",
-                         "connector":  "shared_commondataserviceforapps-1",
-                         "operationId":  "BusinessEventsTrigger"
-                     },
-                     {
-                         "id":  "shared_commondataserviceforapps-1_SubscribeWebhookTrigger",
-                         "type":  "OpenApiConnectionWebhook",
-                         "file":  "triggers/shared_commondataserviceforapps-1_SubscribeWebhookTrigger.json",
-                         "connector":  "shared_commondataserviceforapps-1",
-                         "operationId":  "SubscribeWebhookTrigger"
-                     },
-                     {
-                         "id":  "shared_commondataserviceforapps_1_SubscribeWebhookTrigger",
-                         "type":  "OpenApiConnectionWebhook",
-                         "file":  "triggers/shared_commondataserviceforapps_1_SubscribeWebhookTrigger.json",
-                         "connector":  "shared_commondataserviceforapps_1",
-                         "operationId":  "SubscribeWebhookTrigger"
-                     },
-                     {
-                         "id":  "shared_commondataserviceforapps_BusinessEventsTrigger",
-                         "type":  "OpenApiConnectionWebhook",
-                         "file":  "triggers/shared_commondataserviceforapps_BusinessEventsTrigger.json",
-                         "connector":  "shared_commondataserviceforapps",
-                         "operationId":  "BusinessEventsTrigger"
-                     },
-                     {
-                         "id":  "shared_commondataserviceforapps_SubscribeWebhookTrigger",
-                         "type":  "OpenApiConnectionWebhook",
-                         "file":  "triggers/shared_commondataserviceforapps_SubscribeWebhookTrigger.json",
-                         "connector":  "shared_commondataserviceforapps",
-                         "operationId":  "SubscribeWebhookTrigger"
-                     },
-                     {
-                         "id":  "shared_d365marketingforapps_Orchestration_RegisterWebhookTriggerV2",
-                         "type":  "OpenApiConnectionWebhook",
-                         "file":  "triggers/shared_d365marketingforapps_Orchestration_RegisterWebhookTriggerV2.json",
-                         "connector":  "shared_d365marketingforapps",
-                         "operationId":  "Orchestration_RegisterWebhookTriggerV2"
-                     },
-                     {
-                         "id":  "shared_office365_OnNewEmailV3",
-                         "type":  "OpenApiConnectionNotification",
-                         "file":  "triggers/shared_office365_OnNewEmailV3.json",
-                         "connector":  "shared_office365",
-                         "operationId":  "OnNewEmailV3"
-                     },
-                     {
-                         "id":  "shared_sharepointonline_GetOnChangedItems",
-                         "type":  "OpenApiConnection",
-                         "file":  "triggers/shared_sharepointonline_GetOnChangedItems.json",
-                         "connector":  "shared_sharepointonline",
-                         "operationId":  "GetOnChangedItems"
-                     },
-                     {
-                         "id":  "shared_sharepointonline_GetOnNewFileItems",
-                         "type":  "OpenApiConnection",
-                         "file":  "triggers/shared_sharepointonline_GetOnNewFileItems.json",
-                         "connector":  "shared_sharepointonline",
-                         "operationId":  "GetOnNewFileItems"
-                     },
-                     {
-                         "id":  "shared_sharepointonline_GetOnNewItems",
-                         "type":  "OpenApiConnection",
-                         "file":  "triggers/shared_sharepointonline_GetOnNewItems.json",
-                         "connector":  "shared_sharepointonline",
-                         "operationId":  "GetOnNewItems"
-                     },
-                     {
-                         "id":  "shared_sharepointonline_GetOnNewItems",
-                         "type":  "OpenApiConnection",
-                         "file":  "triggers/webhook-dataverse.json",
-                         "connector":  "shared_sharepointonline",
-                         "operationId":  "GetOnNewItems"
-                     }
-                 ],
-    "builtinActions":  [
-                           {
-                               "id":  "Compose",
-                               "type":  "Compose",
-                               "file":  "actions/compose.json"
-                           },
-                           {
-                               "id":  "If",
-                               "type":  "If",
-                               "file":  "actions/condition.json"
-                           },
-                           {
-                               "id":  "Query",
-                               "type":  "Query",
-                               "file":  "actions/filter-array.json"
-                           },
-                           {
-                               "id":  "Foreach",
-                               "type":  "Foreach",
-                               "file":  "actions/foreach.json"
-                           },
-                           {
-                               "id":  "Http",
-                               "type":  "Http",
-                               "file":  "actions/http.json"
-                           },
-                           {
-                               "id":  "Join",
-                               "type":  "Join",
-                               "file":  "actions/join.json"
-                           },
-                           {
-                               "id":  "Join",
-                               "type":  "Join",
-                               "file":  "actions/openapi-connection-template.json"
-                           },
-                           {
-                               "id":  "ParseJson",
-                               "type":  "ParseJson",
-                               "file":  "actions/parse-json.json"
-                           },
-                           {
-                               "id":  "Response",
-                               "type":  "Response",
-                               "file":  "actions/response.json"
-                           },
-                           {
-                               "id":  "Scope",
-                               "type":  "Scope",
-                               "file":  "actions/scope.json"
-                           },
-                           {
-                               "id":  "Select",
-                               "type":  "Select",
-                               "file":  "actions/select.json"
-                           },
-                           {
-                               "id":  "Switch",
-                               "type":  "Switch",
-                               "file":  "actions/switch.json"
-                           },
-                           {
-                               "id":  "Terminate",
-                               "type":  "Terminate",
-                               "file":  "actions/terminate.json"
-                           },
-                           {
-                               "id":  "Until",
-                               "type":  "Until",
-                               "file":  "actions/until.json"
-                           },
-                           {
-                               "id":  "Variables",
-                               "type":  null,
-                               "file":  "actions/variables.json"
-                           },
-                           {
-                               "id":  "Wait",
-                               "type":  "Wait",
-                               "file":  "actions/wait.json"
-                           },
-                           {
-                               "id":  "Wait",
-                               "type":  "Wait",
-                               "file":  "actions/workflow.json"
-                           }
-                       ],
-    "openApiActions":  [
-                           {
-                               "id":  "shared_advancedapprovals_StartAndWaitForAnApprovalProcess",
-                               "connector":  "shared_advancedapprovals",
-                               "operationId":  "StartAndWaitForAnApprovalProcess",
-                               "type":  "OpenApiConnectionWebhook",
-                               "file":  "actions/openapi/shared_advancedapprovals_StartAndWaitForAnApprovalProcess.json",
-                               "flowCount":  1
-                           },
-                           {
-                               "id":  "shared_approvals_StartAndWaitForAnApproval",
-                               "connector":  "shared_approvals",
-                               "operationId":  "StartAndWaitForAnApproval",
-                               "type":  "OpenApiConnectionWebhook",
-                               "file":  "actions/openapi/shared_approvals_StartAndWaitForAnApproval.json",
-                               "flowCount":  1
-                           },
-                           {
-                               "id":  "shared_azureblob-1_CreateFile_V2",
-                               "connector":  "shared_azureblob-1",
-                               "operationId":  "CreateFile_V2",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_azureblob-1_CreateFile_V2.json",
-                               "flowCount":  1
-                           },
-                           {
-                               "id":  "shared_azureblob_DeleteFile_V2",
-                               "connector":  "shared_azureblob",
-                               "operationId":  "DeleteFile_V2",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_azureblob_DeleteFile_V2.json",
-                               "flowCount":  1
-                           },
-                           {
-                               "id":  "shared_azureblob_GetFileContent_V2",
-                               "connector":  "shared_azureblob",
-                               "operationId":  "GetFileContent_V2",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_azureblob_GetFileContent_V2.json",
-                               "flowCount":  1
-                           },
-                           {
-                               "id":  "shared_commondataserviceforapps-1_aibuilderpredict_customprompt",
-                               "connector":  "shared_commondataserviceforapps-1",
-                               "operationId":  "aibuilderpredict_customprompt",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_commondataserviceforapps-1_aibuilderpredict_customprompt.json",
-                               "flowCount":  7
-                           },
-                           {
-                               "id":  "shared_commondataserviceforapps-1_aibuilderpredict_textrecognition",
-                               "connector":  "shared_commondataserviceforapps-1",
-                               "operationId":  "aibuilderpredict_textrecognition",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_commondataserviceforapps-1_aibuilderpredict_textrecognition.json",
-                               "flowCount":  2
-                           },
-                           {
-                               "id":  "shared_commondataserviceforapps-1_CreateRecord",
-                               "connector":  "shared_commondataserviceforapps-1",
-                               "operationId":  "CreateRecord",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_commondataserviceforapps-1_CreateRecord.json",
-                               "flowCount":  6
-                           },
-                           {
-                               "id":  "shared_commondataserviceforapps-1_GetEntityFileImageFieldContent",
-                               "connector":  "shared_commondataserviceforapps-1",
-                               "operationId":  "GetEntityFileImageFieldContent",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_commondataserviceforapps-1_GetEntityFileImageFieldContent.json",
-                               "flowCount":  3
-                           },
-                           {
-                               "id":  "shared_commondataserviceforapps-1_GetItem",
-                               "connector":  "shared_commondataserviceforapps-1",
-                               "operationId":  "GetItem",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_commondataserviceforapps-1_GetItem.json",
-                               "flowCount":  4
-                           },
-                           {
-                               "id":  "shared_commondataserviceforapps-1_ListRecords",
-                               "connector":  "shared_commondataserviceforapps-1",
-                               "operationId":  "ListRecords",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_commondataserviceforapps-1_ListRecords.json",
-                               "flowCount":  2
-                           },
-                           {
-                               "id":  "shared_commondataserviceforapps-1_UpdateEntityFileImageFieldContent",
-                               "connector":  "shared_commondataserviceforapps-1",
-                               "operationId":  "UpdateEntityFileImageFieldContent",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_commondataserviceforapps-1_UpdateEntityFileImageFieldContent.json",
-                               "flowCount":  1
-                           },
-                           {
-                               "id":  "shared_commondataserviceforapps-1_UpdateOnlyRecord",
-                               "connector":  "shared_commondataserviceforapps-1",
-                               "operationId":  "UpdateOnlyRecord",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_commondataserviceforapps-1_UpdateOnlyRecord.json",
-                               "flowCount":  4
-                           },
-                           {
-                               "id":  "shared_commondataserviceforapps_1_aibuilderpredict_customprompt",
-                               "connector":  "shared_commondataserviceforapps_1",
-                               "operationId":  "aibuilderpredict_customprompt",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_commondataserviceforapps_1_aibuilderpredict_customprompt.json",
-                               "flowCount":  4
-                           },
-                           {
-                               "id":  "shared_commondataserviceforapps_1_aibuilderpredict_languagedetection",
-                               "connector":  "shared_commondataserviceforapps_1",
-                               "operationId":  "aibuilderpredict_languagedetection",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_commondataserviceforapps_1_aibuilderpredict_languagedetection.json",
-                               "flowCount":  1
-                           },
-                           {
-                               "id":  "shared_commondataserviceforapps_1_CreateRecord",
-                               "connector":  "shared_commondataserviceforapps_1",
-                               "operationId":  "CreateRecord",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_commondataserviceforapps_1_CreateRecord.json",
-                               "flowCount":  8
-                           },
-                           {
-                               "id":  "shared_commondataserviceforapps_1_CreateRecordWithOrganization",
-                               "connector":  "shared_commondataserviceforapps_1",
-                               "operationId":  "CreateRecordWithOrganization",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_commondataserviceforapps_1_CreateRecordWithOrganization.json",
-                               "flowCount":  1
-                           },
-                           {
-                               "id":  "shared_commondataserviceforapps_1_DeleteRecord",
-                               "connector":  "shared_commondataserviceforapps_1",
-                               "operationId":  "DeleteRecord",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_commondataserviceforapps_1_DeleteRecord.json",
-                               "flowCount":  3
-                           },
-                           {
-                               "id":  "shared_commondataserviceforapps_1_DeleteRecordWithOrganization",
-                               "connector":  "shared_commondataserviceforapps_1",
-                               "operationId":  "DeleteRecordWithOrganization",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_commondataserviceforapps_1_DeleteRecordWithOrganization.json",
-                               "flowCount":  1
-                           },
-                           {
-                               "id":  "shared_commondataserviceforapps_1_GetEntityFileImageFieldContent",
-                               "connector":  "shared_commondataserviceforapps_1",
-                               "operationId":  "GetEntityFileImageFieldContent",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_commondataserviceforapps_1_GetEntityFileImageFieldContent.json",
-                               "flowCount":  1
-                           },
-                           {
-                               "id":  "shared_commondataserviceforapps_1_GetItem",
-                               "connector":  "shared_commondataserviceforapps_1",
-                               "operationId":  "GetItem",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_commondataserviceforapps_1_GetItem.json",
-                               "flowCount":  4
-                           },
-                           {
-                               "id":  "shared_commondataserviceforapps_1_GetItemWithOrganization",
-                               "connector":  "shared_commondataserviceforapps_1",
-                               "operationId":  "GetItemWithOrganization",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_commondataserviceforapps_1_GetItemWithOrganization.json",
-                               "flowCount":  3
-                           },
-                           {
-                               "id":  "shared_commondataserviceforapps_1_ListRecords",
-                               "connector":  "shared_commondataserviceforapps_1",
-                               "operationId":  "ListRecords",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_commondataserviceforapps_1_ListRecords.json",
-                               "flowCount":  8
-                           },
-                           {
-                               "id":  "shared_commondataserviceforapps_1_ListRecordsWithOrganization",
-                               "connector":  "shared_commondataserviceforapps_1",
-                               "operationId":  "ListRecordsWithOrganization",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_commondataserviceforapps_1_ListRecordsWithOrganization.json",
-                               "flowCount":  7
-                           },
-                           {
-                               "id":  "shared_commondataserviceforapps_1_PerformBoundAction",
-                               "connector":  "shared_commondataserviceforapps_1",
-                               "operationId":  "PerformBoundAction",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_commondataserviceforapps_1_PerformBoundAction.json",
-                               "flowCount":  2
-                           },
-                           {
-                               "id":  "shared_commondataserviceforapps_1_PerformBoundActionWithOrganization",
-                               "connector":  "shared_commondataserviceforapps_1",
-                               "operationId":  "PerformBoundActionWithOrganization",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_commondataserviceforapps_1_PerformBoundActionWithOrganization.json",
-                               "flowCount":  1
-                           },
-                           {
-                               "id":  "shared_commondataserviceforapps_1_PerformUnboundAction",
-                               "connector":  "shared_commondataserviceforapps_1",
-                               "operationId":  "PerformUnboundAction",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_commondataserviceforapps_1_PerformUnboundAction.json",
-                               "flowCount":  3
-                           },
-                           {
-                               "id":  "shared_commondataserviceforapps_1_PerformUnboundActionWithOrganization",
-                               "connector":  "shared_commondataserviceforapps_1",
-                               "operationId":  "PerformUnboundActionWithOrganization",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_commondataserviceforapps_1_PerformUnboundActionWithOrganization.json",
-                               "flowCount":  1
-                           },
-                           {
-                               "id":  "shared_commondataserviceforapps_1_UpdateEntityFileImageFieldContentWithOrganization",
-                               "connector":  "shared_commondataserviceforapps_1",
-                               "operationId":  "UpdateEntityFileImageFieldContentWithOrganization",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_commondataserviceforapps_1_UpdateEntityFileImageFieldContentWithOrganization.json",
-                               "flowCount":  1
-                           },
-                           {
-                               "id":  "shared_commondataserviceforapps_1_UpdateOnlyRecord",
-                               "connector":  "shared_commondataserviceforapps_1",
-                               "operationId":  "UpdateOnlyRecord",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_commondataserviceforapps_1_UpdateOnlyRecord.json",
-                               "flowCount":  5
-                           },
-                           {
-                               "id":  "shared_commondataserviceforapps_1_UpdateRecord",
-                               "connector":  "shared_commondataserviceforapps_1",
-                               "operationId":  "UpdateRecord",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_commondataserviceforapps_1_UpdateRecord.json",
-                               "flowCount":  3
-                           },
-                           {
-                               "id":  "shared_commondataserviceforapps_2_CreateRecord",
-                               "connector":  "shared_commondataserviceforapps_2",
-                               "operationId":  "CreateRecord",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_commondataserviceforapps_2_CreateRecord.json",
-                               "flowCount":  1
-                           },
-                           {
-                               "id":  "shared_commondataserviceforapps_2_ListRecords",
-                               "connector":  "shared_commondataserviceforapps_2",
-                               "operationId":  "ListRecords",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_commondataserviceforapps_2_ListRecords.json",
-                               "flowCount":  1
-                           },
-                           {
-                               "id":  "shared_commondataserviceforapps_2_PerformUnboundAction",
-                               "connector":  "shared_commondataserviceforapps_2",
-                               "operationId":  "PerformUnboundAction",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_commondataserviceforapps_2_PerformUnboundAction.json",
-                               "flowCount":  1
-                           },
-                           {
-                               "id":  "shared_commondataserviceforapps_2_UpdateRecord",
-                               "connector":  "shared_commondataserviceforapps_2",
-                               "operationId":  "UpdateRecord",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_commondataserviceforapps_2_UpdateRecord.json",
-                               "flowCount":  1
-                           },
-                           {
-                               "id":  "shared_commondataserviceforapps_aibuilderpredict_customprompt",
-                               "connector":  "shared_commondataserviceforapps",
-                               "operationId":  "aibuilderpredict_customprompt",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_commondataserviceforapps_aibuilderpredict_customprompt.json",
-                               "flowCount":  35
-                           },
-                           {
-                               "id":  "shared_commondataserviceforapps_aibuilderpredict_textrecognition",
-                               "connector":  "shared_commondataserviceforapps",
-                               "operationId":  "aibuilderpredict_textrecognition",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_commondataserviceforapps_aibuilderpredict_textrecognition.json",
-                               "flowCount":  5
-                           },
-                           {
-                               "id":  "shared_commondataserviceforapps_AssociateEntities",
-                               "connector":  "shared_commondataserviceforapps",
-                               "operationId":  "AssociateEntities",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_commondataserviceforapps_AssociateEntities.json",
-                               "flowCount":  1
-                           },
-                           {
-                               "id":  "shared_commondataserviceforapps_CreateRecord",
-                               "connector":  "shared_commondataserviceforapps",
-                               "operationId":  "CreateRecord",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_commondataserviceforapps_CreateRecord.json",
-                               "flowCount":  26
-                           },
-                           {
-                               "id":  "shared_commondataserviceforapps_DeleteRecord",
-                               "connector":  "shared_commondataserviceforapps",
-                               "operationId":  "DeleteRecord",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_commondataserviceforapps_DeleteRecord.json",
-                               "flowCount":  1
-                           },
-                           {
-                               "id":  "shared_commondataserviceforapps_GetEntityFileImageFieldContent",
-                               "connector":  "shared_commondataserviceforapps",
-                               "operationId":  "GetEntityFileImageFieldContent",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_commondataserviceforapps_GetEntityFileImageFieldContent.json",
-                               "flowCount":  6
-                           },
-                           {
-                               "id":  "shared_commondataserviceforapps_GetItem",
-                               "connector":  "shared_commondataserviceforapps",
-                               "operationId":  "GetItem",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_commondataserviceforapps_GetItem.json",
-                               "flowCount":  24
-                           },
-                           {
-                               "id":  "shared_commondataserviceforapps_GetItemWithOrganization",
-                               "connector":  "shared_commondataserviceforapps",
-                               "operationId":  "GetItemWithOrganization",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_commondataserviceforapps_GetItemWithOrganization.json",
-                               "flowCount":  2
-                           },
-                           {
-                               "id":  "shared_commondataserviceforapps_ListRecords",
-                               "connector":  "shared_commondataserviceforapps",
-                               "operationId":  "ListRecords",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_commondataserviceforapps_ListRecords.json",
-                               "flowCount":  32
-                           },
-                           {
-                               "id":  "shared_commondataserviceforapps_ListRecordsWithOrganization",
-                               "connector":  "shared_commondataserviceforapps",
-                               "operationId":  "ListRecordsWithOrganization",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_commondataserviceforapps_ListRecordsWithOrganization.json",
-                               "flowCount":  3
-                           },
-                           {
-                               "id":  "shared_commondataserviceforapps_PerformBoundAction",
-                               "connector":  "shared_commondataserviceforapps",
-                               "operationId":  "PerformBoundAction",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_commondataserviceforapps_PerformBoundAction.json",
-                               "flowCount":  5
-                           },
-                           {
-                               "id":  "shared_commondataserviceforapps_PerformUnboundAction",
-                               "connector":  "shared_commondataserviceforapps",
-                               "operationId":  "PerformUnboundAction",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_commondataserviceforapps_PerformUnboundAction.json",
-                               "flowCount":  18
-                           },
-                           {
-                               "id":  "shared_commondataserviceforapps_PerformUnboundActionWithOrganization",
-                               "connector":  "shared_commondataserviceforapps",
-                               "operationId":  "PerformUnboundActionWithOrganization",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_commondataserviceforapps_PerformUnboundActionWithOrganization.json",
-                               "flowCount":  2
-                           },
-                           {
-                               "id":  "shared_commondataserviceforapps_UpdateEntityFileImageFieldContent",
-                               "connector":  "shared_commondataserviceforapps",
-                               "operationId":  "UpdateEntityFileImageFieldContent",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_commondataserviceforapps_UpdateEntityFileImageFieldContent.json",
-                               "flowCount":  10
-                           },
-                           {
-                               "id":  "shared_commondataserviceforapps_UpdateOnlyRecord",
-                               "connector":  "shared_commondataserviceforapps",
-                               "operationId":  "UpdateOnlyRecord",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_commondataserviceforapps_UpdateOnlyRecord.json",
-                               "flowCount":  18
-                           },
-                           {
-                               "id":  "shared_commondataserviceforapps_UpdateRecord",
-                               "connector":  "shared_commondataserviceforapps",
-                               "operationId":  "UpdateRecord",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_commondataserviceforapps_UpdateRecord.json",
-                               "flowCount":  22
-                           },
-                           {
-                               "id":  "shared_conversionservice_HtmlToText",
-                               "connector":  "shared_conversionservice",
-                               "operationId":  "HtmlToText",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_conversionservice_HtmlToText.json",
-                               "flowCount":  2
-                           },
-                           {
-                               "id":  "shared_d365marketingforapps_ConnectorV2_EnsureRunIdempotency",
-                               "connector":  "shared_d365marketingforapps",
-                               "operationId":  "ConnectorV2_EnsureRunIdempotency",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_d365marketingforapps_ConnectorV2_EnsureRunIdempotency.json",
-                               "flowCount":  20
-                           },
-                           {
-                               "id":  "shared_d365marketingforapps_ContactCenter_StartVoiceEngagementWebhookRequest",
-                               "connector":  "shared_d365marketingforapps",
-                               "operationId":  "ContactCenter_StartVoiceEngagementWebhookRequest",
-                               "type":  "OpenApiConnectionWebhook",
-                               "file":  "actions/openapi/shared_d365marketingforapps_ContactCenter_StartVoiceEngagementWebhookRequest.json",
-                               "flowCount":  15
-                           },
-                           {
-                               "id":  "shared_d365marketingforapps_DataverseDataSource_ResolveBindingsData",
-                               "connector":  "shared_d365marketingforapps",
-                               "operationId":  "DataverseDataSource_ResolveBindingsData",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_d365marketingforapps_DataverseDataSource_ResolveBindingsData.json",
-                               "flowCount":  20
-                           },
-                           {
-                               "id":  "shared_d365marketingforapps_Orchestration_EmitAnalyticEvent",
-                               "connector":  "shared_d365marketingforapps",
-                               "operationId":  "Orchestration_EmitAnalyticEvent",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_d365marketingforapps_Orchestration_EmitAnalyticEvent.json",
-                               "flowCount":  20
-                           },
-                           {
-                               "id":  "shared_d365marketingforapps_Orchestration_EmitJourneyAnalyticEvent",
-                               "connector":  "shared_d365marketingforapps",
-                               "operationId":  "Orchestration_EmitJourneyAnalyticEvent",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_d365marketingforapps_Orchestration_EmitJourneyAnalyticEvent.json",
-                               "flowCount":  20
-                           },
-                           {
-                               "id":  "shared_d365marketingforapps_Orchestration_EmitJourneyCreateRecordActionAnalyticEvent",
-                               "connector":  "shared_d365marketingforapps",
-                               "operationId":  "Orchestration_EmitJourneyCreateRecordActionAnalyticEvent",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_d365marketingforapps_Orchestration_EmitJourneyCreateRecordActionAnalyticEvent.json",
-                               "flowCount":  5
-                           },
-                           {
-                               "id":  "shared_d365marketingforapps_Orchestration_UpdateJourneyInstanceStateV2",
-                               "connector":  "shared_d365marketingforapps",
-                               "operationId":  "Orchestration_UpdateJourneyInstanceStateV2",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_d365marketingforapps_Orchestration_UpdateJourneyInstanceStateV2.json",
-                               "flowCount":  20
-                           },
-                           {
-                               "id":  "shared_excelonlinebusiness_AddRowV2",
-                               "connector":  "shared_excelonlinebusiness",
-                               "operationId":  "AddRowV2",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_excelonlinebusiness_AddRowV2.json",
-                               "flowCount":  1
-                           },
-                           {
-                               "id":  "shared_excelonlinebusiness_GetItems",
-                               "connector":  "shared_excelonlinebusiness",
-                               "operationId":  "GetItems",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_excelonlinebusiness_GetItems.json",
-                               "flowCount":  5
-                           },
-                           {
-                               "id":  "shared_excelonlinebusiness_PatchItem",
-                               "connector":  "shared_excelonlinebusiness",
-                               "operationId":  "PatchItem",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_excelonlinebusiness_PatchItem.json",
-                               "flowCount":  2
-                           },
-                           {
-                               "id":  "shared_excelonlinebusiness_RunScriptProd",
-                               "connector":  "shared_excelonlinebusiness",
-                               "operationId":  "RunScriptProd",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_excelonlinebusiness_RunScriptProd.json",
-                               "flowCount":  6
-                           },
-                           {
-                               "id":  "shared_flowmanagement_GetFlow",
-                               "connector":  "shared_flowmanagement",
-                               "operationId":  "GetFlow",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_flowmanagement_GetFlow.json",
-                               "flowCount":  1
-                           },
-                           {
-                               "id":  "shared_m365copilot-5feb5abfdd9aa0a613-5f0d555b53ebbad68c_CreateConversation",
-                               "connector":  "shared_m365copilot-5feb5abfdd9aa0a613-5f0d555b53ebbad68c",
-                               "operationId":  "CreateConversation",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_m365copilot-5feb5abfdd9aa0a613-5f0d555b53ebbad68c_CreateConversation.json",
-                               "flowCount":  1
-                           },
-                           {
-                               "id":  "shared_m365copilot-5feb5abfdd9aa0a613-5f0d555b53ebbad68c_StartConversation",
-                               "connector":  "shared_m365copilot-5feb5abfdd9aa0a613-5f0d555b53ebbad68c",
-                               "operationId":  "StartConversation",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_m365copilot-5feb5abfdd9aa0a613-5f0d555b53ebbad68c_StartConversation.json",
-                               "flowCount":  1
-                           },
-                           {
-                               "id":  "shared_microsoftcopilotstudio-1_ExecuteCopilotAsyncV2",
-                               "connector":  "shared_microsoftcopilotstudio-1",
-                               "operationId":  "ExecuteCopilotAsyncV2",
-                               "type":  "OpenApiConnectionWebhook",
-                               "file":  "actions/openapi/shared_microsoftcopilotstudio-1_ExecuteCopilotAsyncV2.json",
-                               "flowCount":  1
-                           },
-                           {
-                               "id":  "shared_microsoftcopilotstudio_ExecuteCopilot",
-                               "connector":  "shared_microsoftcopilotstudio",
-                               "operationId":  "ExecuteCopilot",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_microsoftcopilotstudio_ExecuteCopilot.json",
-                               "flowCount":  10
-                           },
-                           {
-                               "id":  "shared_microsoftcopilotstudio_ExecuteCopilotAsyncV2",
-                               "connector":  "shared_microsoftcopilotstudio",
-                               "operationId":  "ExecuteCopilotAsyncV2",
-                               "type":  "OpenApiConnectionWebhook",
-                               "file":  "actions/openapi/shared_microsoftcopilotstudio_ExecuteCopilotAsyncV2.json",
-                               "flowCount":  4
-                           },
-                           {
-                               "id":  "shared_microsofttranslatorv-1_GetTranslationStatus",
-                               "connector":  "shared_microsofttranslatorv-1",
-                               "operationId":  "GetTranslationStatus",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_microsofttranslatorv-1_GetTranslationStatus.json",
-                               "flowCount":  1
-                           },
-                           {
-                               "id":  "shared_microsofttranslatorv-1_StartDocumentTranslation",
-                               "connector":  "shared_microsofttranslatorv-1",
-                               "operationId":  "StartDocumentTranslation",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_microsofttranslatorv-1_StartDocumentTranslation.json",
-                               "flowCount":  1
-                           },
-                           {
-                               "id":  "shared_office365_GetAttachment_V2",
-                               "connector":  "shared_office365",
-                               "operationId":  "GetAttachment_V2",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_office365_GetAttachment_V2.json",
-                               "flowCount":  1
-                           },
-                           {
-                               "id":  "shared_office365_GetEmailsV3",
-                               "connector":  "shared_office365",
-                               "operationId":  "GetEmailsV3",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_office365_GetEmailsV3.json",
-                               "flowCount":  1
-                           },
-                           {
-                               "id":  "shared_office365_SendEmailV2",
-                               "connector":  "shared_office365",
-                               "operationId":  "SendEmailV2",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_office365_SendEmailV2.json",
-                               "flowCount":  5
-                           },
-                           {
-                               "id":  "shared_onedriveforbusiness_ConvertFile",
-                               "connector":  "shared_onedriveforbusiness",
-                               "operationId":  "ConvertFile",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_onedriveforbusiness_ConvertFile.json",
-                               "flowCount":  2
-                           },
-                           {
-                               "id":  "shared_onedriveforbusiness_CreateFile",
-                               "connector":  "shared_onedriveforbusiness",
-                               "operationId":  "CreateFile",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_onedriveforbusiness_CreateFile.json",
-                               "flowCount":  5
-                           },
-                           {
-                               "id":  "shared_onedriveforbusiness_CreateShareLinkV2",
-                               "connector":  "shared_onedriveforbusiness",
-                               "operationId":  "CreateShareLinkV2",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_onedriveforbusiness_CreateShareLinkV2.json",
-                               "flowCount":  3
-                           },
-                           {
-                               "id":  "shared_onedriveforbusiness_DeleteFile",
-                               "connector":  "shared_onedriveforbusiness",
-                               "operationId":  "DeleteFile",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_onedriveforbusiness_DeleteFile.json",
-                               "flowCount":  2
-                           },
-                           {
-                               "id":  "shared_onedriveforbusiness_GetFileContent",
-                               "connector":  "shared_onedriveforbusiness",
-                               "operationId":  "GetFileContent",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_onedriveforbusiness_GetFileContent.json",
-                               "flowCount":  3
-                           },
-                           {
-                               "id":  "shared_onedriveforbusiness_GetFileMetadata",
-                               "connector":  "shared_onedriveforbusiness",
-                               "operationId":  "GetFileMetadata",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_onedriveforbusiness_GetFileMetadata.json",
-                               "flowCount":  1
-                           },
-                           {
-                               "id":  "shared_onedriveforbusiness_GetFileThumbnail",
-                               "connector":  "shared_onedriveforbusiness",
-                               "operationId":  "GetFileThumbnail",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_onedriveforbusiness_GetFileThumbnail.json",
-                               "flowCount":  1
-                           },
-                           {
-                               "id":  "shared_powerappsforappmakers_Get-Environments",
-                               "connector":  "shared_powerappsforappmakers",
-                               "operationId":  "Get-Environments",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_powerappsforappmakers_Get-Environments.json",
-                               "flowCount":  1
-                           },
-                           {
-                               "id":  "shared_powerappsnotificationv2_SendPushNotificationV2",
-                               "connector":  "shared_powerappsnotificationv2",
-                               "operationId":  "SendPushNotificationV2",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_powerappsnotificationv2_SendPushNotificationV2.json",
-                               "flowCount":  1
-                           },
-                           {
-                               "id":  "shared_powerbi_ExecuteDatasetQuery",
-                               "connector":  "shared_powerbi",
-                               "operationId":  "ExecuteDatasetQuery",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_powerbi_ExecuteDatasetQuery.json",
-                               "flowCount":  1
-                           },
-                           {
-                               "id":  "shared_powerplatformforadmins_1_Get-AdminEnvironment",
-                               "connector":  "shared_powerplatformforadmins_1",
-                               "operationId":  "Get-AdminEnvironment",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_powerplatformforadmins_1_Get-AdminEnvironment.json",
-                               "flowCount":  1
-                           },
-                           {
-                               "id":  "shared_sharepointonline-1_GetAllTables",
-                               "connector":  "shared_sharepointonline-1",
-                               "operationId":  "GetAllTables",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_sharepointonline-1_GetAllTables.json",
-                               "flowCount":  1
-                           },
-                           {
-                               "id":  "shared_sharepointonline-1_GetFileItems",
-                               "connector":  "shared_sharepointonline-1",
-                               "operationId":  "GetFileItems",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_sharepointonline-1_GetFileItems.json",
-                               "flowCount":  1
-                           },
-                           {
-                               "id":  "shared_sharepointonline-1_HttpRequest",
-                               "connector":  "shared_sharepointonline-1",
-                               "operationId":  "HttpRequest",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_sharepointonline-1_HttpRequest.json",
-                               "flowCount":  1
-                           },
-                           {
-                               "id":  "shared_sharepointonline-1_PostItem",
-                               "connector":  "shared_sharepointonline-1",
-                               "operationId":  "PostItem",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_sharepointonline-1_PostItem.json",
-                               "flowCount":  1
-                           },
-                           {
-                               "id":  "shared_sharepointonline_CreateFile",
-                               "connector":  "shared_sharepointonline",
-                               "operationId":  "CreateFile",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_sharepointonline_CreateFile.json",
-                               "flowCount":  1
-                           },
-                           {
-                               "id":  "shared_sharepointonline_DeleteFile",
-                               "connector":  "shared_sharepointonline",
-                               "operationId":  "DeleteFile",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_sharepointonline_DeleteFile.json",
-                               "flowCount":  1
-                           },
-                           {
-                               "id":  "shared_sharepointonline_GetAllTables",
-                               "connector":  "shared_sharepointonline",
-                               "operationId":  "GetAllTables",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_sharepointonline_GetAllTables.json",
-                               "flowCount":  1
-                           },
-                           {
-                               "id":  "shared_sharepointonline_GetAttachmentContent",
-                               "connector":  "shared_sharepointonline",
-                               "operationId":  "GetAttachmentContent",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_sharepointonline_GetAttachmentContent.json",
-                               "flowCount":  2
-                           },
-                           {
-                               "id":  "shared_sharepointonline_GetFileContent",
-                               "connector":  "shared_sharepointonline",
-                               "operationId":  "GetFileContent",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_sharepointonline_GetFileContent.json",
-                               "flowCount":  3
-                           },
-                           {
-                               "id":  "shared_sharepointonline_GetFileContentByPath",
-                               "connector":  "shared_sharepointonline",
-                               "operationId":  "GetFileContentByPath",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_sharepointonline_GetFileContentByPath.json",
-                               "flowCount":  1
-                           },
-                           {
-                               "id":  "shared_sharepointonline_GetFileItem",
-                               "connector":  "shared_sharepointonline",
-                               "operationId":  "GetFileItem",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_sharepointonline_GetFileItem.json",
-                               "flowCount":  2
-                           },
-                           {
-                               "id":  "shared_sharepointonline_GetFileItems",
-                               "connector":  "shared_sharepointonline",
-                               "operationId":  "GetFileItems",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_sharepointonline_GetFileItems.json",
-                               "flowCount":  1
-                           },
-                           {
-                               "id":  "shared_sharepointonline_GetItem",
-                               "connector":  "shared_sharepointonline",
-                               "operationId":  "GetItem",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_sharepointonline_GetItem.json",
-                               "flowCount":  1
-                           },
-                           {
-                               "id":  "shared_sharepointonline_GetItemAttachments",
-                               "connector":  "shared_sharepointonline",
-                               "operationId":  "GetItemAttachments",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_sharepointonline_GetItemAttachments.json",
-                               "flowCount":  2
-                           },
-                           {
-                               "id":  "shared_sharepointonline_GetItemChanges",
-                               "connector":  "shared_sharepointonline",
-                               "operationId":  "GetItemChanges",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_sharepointonline_GetItemChanges.json",
-                               "flowCount":  2
-                           },
-                           {
-                               "id":  "shared_sharepointonline_GetItems",
-                               "connector":  "shared_sharepointonline",
-                               "operationId":  "GetItems",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_sharepointonline_GetItems.json",
-                               "flowCount":  4
-                           },
-                           {
-                               "id":  "shared_sharepointonline_HttpRequest",
-                               "connector":  "shared_sharepointonline",
-                               "operationId":  "HttpRequest",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_sharepointonline_HttpRequest.json",
-                               "flowCount":  1
-                           },
-                           {
-                               "id":  "shared_sharepointonline_PatchItem",
-                               "connector":  "shared_sharepointonline",
-                               "operationId":  "PatchItem",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_sharepointonline_PatchItem.json",
-                               "flowCount":  5
-                           },
-                           {
-                               "id":  "shared_sharepointonline_PostItem",
-                               "connector":  "shared_sharepointonline",
-                               "operationId":  "PostItem",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_sharepointonline_PostItem.json",
-                               "flowCount":  3
-                           },
-                           {
-                               "id":  "shared_teams_PostMessageToConversation",
-                               "connector":  "shared_teams",
-                               "operationId":  "PostMessageToConversation",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_teams_PostMessageToConversation.json",
-                               "flowCount":  1
-                           },
-                           {
-                               "id":  "shared_testapi-5fdee4da8cd15b1326-5f0d555b53ebbad68c_Hello",
-                               "connector":  "shared_testapi-5fdee4da8cd15b1326-5f0d555b53ebbad68c",
-                               "operationId":  "Hello",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_testapi-5fdee4da8cd15b1326-5f0d555b53ebbad68c_Hello.json",
-                               "flowCount":  2
-                           },
-                           {
-                               "id":  "shared_webcontents_InvokeHttp",
-                               "connector":  "shared_webcontents",
-                               "operationId":  "InvokeHttp",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_webcontents_InvokeHttp.json",
-                               "flowCount":  4
-                           },
-                           {
-                               "id":  "shared_wordonlinebusiness_CreateFileItem",
-                               "connector":  "shared_wordonlinebusiness",
-                               "operationId":  "CreateFileItem",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_wordonlinebusiness_CreateFileItem.json",
-                               "flowCount":  1
-                           },
-                           {
-                               "id":  "shared_wordonlinebusiness_GetFilePDF",
-                               "connector":  "shared_wordonlinebusiness",
-                               "operationId":  "GetFilePDF",
-                               "type":  "OpenApiConnection",
-                               "file":  "actions/openapi/shared_wordonlinebusiness_GetFilePDF.json",
-                               "flowCount":  1
-                           },
-                           {
-                               "id":  "shared_m365copilotv2_StartChat",
-                               "connector":  "shared_m365copilotv2",
-                               "operationId":  "StartChat"
-                           },
-                           {
-                               "id":  "shared_agentnode_InvokeDefinition",
-                               "connector":  "shared_agentnode",
-                               "operationId":  "InvokeDefinition"
-                           },
-                           {
-                               "id":  "shared_office365_ReplyToV3",
-                               "connector":  "shared_office365",
-                               "operationId":  "ReplyToV3"
-                           }
-                       ]
+{
+  "version": "2.0.0",
+  "generatedAt": "2026-05-29",
+  "summary": "112 OpenAPI actions, 24 connectors, 21 triggers, 17 built-in. 6 Workflows learned.",
+  "connectors": [
+    {
+      "connector": "shared_advancedapprovals",
+      "operations": "StartAndWaitForAnApprovalProcess",
+      "operationCount": 1
+    },
+    {
+      "connector": "shared_approvals",
+      "operations": "StartAndWaitForAnApproval",
+      "operationCount": 1
+    },
+    {
+      "connector": "shared_azureblob",
+      "operations": [
+        "CreateFile_V2",
+        "DeleteFile_V2",
+        "GetFileContent_V2"
+      ],
+      "operationCount": 3
+    },
+    {
+      "connector": "shared_commondataserviceforapps",
+      "operations": [
+        "aibuilderpredict_customprompt",
+        "aibuilderpredict_languagedetection",
+        "aibuilderpredict_textrecognition",
+        "AssociateEntities",
+        "CreateRecord",
+        "CreateRecordWithOrganization",
+        "DeleteRecord",
+        "DeleteRecordWithOrganization",
+        "GetEntityFileImageFieldContent",
+        "GetItem",
+        "GetItemWithOrganization",
+        "ListRecords",
+        "ListRecordsWithOrganization",
+        "PerformBoundAction",
+        "PerformBoundActionWithOrganization",
+        "PerformUnboundAction",
+        "PerformUnboundActionWithOrganization",
+        "UpdateEntityFileImageFieldContent",
+        "UpdateEntityFileImageFieldContentWithOrganization",
+        "UpdateOnlyRecord",
+        "UpdateRecord"
+      ],
+      "operationCount": 21
+    },
+    {
+      "connector": "shared_conversionservice",
+      "operations": "HtmlToText",
+      "operationCount": 1
+    },
+    {
+      "connector": "shared_d365marketingforapps",
+      "operations": [
+        "ConnectorV2_EnsureRunIdempotency",
+        "ContactCenter_StartVoiceEngagementWebhookRequest",
+        "DataverseDataSource_ResolveBindingsData",
+        "Orchestration_EmitAnalyticEvent",
+        "Orchestration_EmitJourneyAnalyticEvent",
+        "Orchestration_EmitJourneyCreateRecordActionAnalyticEvent",
+        "Orchestration_UpdateJourneyInstanceStateV2"
+      ],
+      "operationCount": 7
+    },
+    {
+      "connector": "shared_excelonlinebusiness",
+      "operations": [
+        "AddRowV2",
+        "GetItems",
+        "PatchItem",
+        "RunScriptProd"
+      ],
+      "operationCount": 4
+    },
+    {
+      "connector": "shared_flowmanagement",
+      "operations": "GetFlow",
+      "operationCount": 1
+    },
+    {
+      "connector": "shared_m365copilot-5feb5abfdd9aa0a613-5f0d555b53ebbad68c",
+      "operations": [
+        "CreateConversation",
+        "StartConversation"
+      ],
+      "operationCount": 2
+    },
+    {
+      "connector": "shared_microsoftcopilotstudio",
+      "operations": [
+        "ExecuteCopilot",
+        "ExecuteCopilotAsyncV2"
+      ],
+      "operationCount": 2
+    },
+    {
+      "connector": "shared_microsofttranslatorv",
+      "operations": [
+        "GetTranslationStatus",
+        "StartDocumentTranslation"
+      ],
+      "operationCount": 2
+    },
+    {
+      "connector": "shared_office365",
+      "operations": [
+        "GetAttachment_V2",
+        "GetEmailsV3",
+        "SendEmailV2"
+      ],
+      "operationCount": 3
+    },
+    {
+      "connector": "shared_onedriveforbusiness",
+      "operations": [
+        "ConvertFile",
+        "CreateFile",
+        "CreateShareLinkV2",
+        "DeleteFile",
+        "GetFileContent",
+        "GetFileMetadata",
+        "GetFileThumbnail"
+      ],
+      "operationCount": 7
+    },
+    {
+      "connector": "shared_powerappsforappmakers",
+      "operations": "Get-Environments",
+      "operationCount": 1
+    },
+    {
+      "connector": "shared_powerappsnotificationv2",
+      "operations": "SendPushNotificationV2",
+      "operationCount": 1
+    },
+    {
+      "connector": "shared_powerbi",
+      "operations": "ExecuteDatasetQuery",
+      "operationCount": 1
+    },
+    {
+      "connector": "shared_powerplatformforadmins",
+      "operations": "Get-AdminEnvironment",
+      "operationCount": 1
+    },
+    {
+      "connector": "shared_sharepointonline",
+      "operations": [
+        "CreateFile",
+        "DeleteFile",
+        "GetAllTables",
+        "GetAttachmentContent",
+        "GetFileContent",
+        "GetFileContentByPath",
+        "GetFileItem",
+        "GetFileItems",
+        "GetItem",
+        "GetItemAttachments",
+        "GetItemChanges",
+        "GetItems",
+        "HttpRequest",
+        "PatchItem",
+        "PostItem"
+      ],
+      "operationCount": 15
+    },
+    {
+      "connector": "shared_teams",
+      "operations": "PostMessageToConversation",
+      "operationCount": 1
+    },
+    {
+      "connector": "shared_testapi-5fdee4da8cd15b1326-5f0d555b53ebbad68c",
+      "operations": "Hello",
+      "operationCount": 1
+    },
+    {
+      "connector": "shared_webcontents",
+      "operations": "InvokeHttp",
+      "operationCount": 1
+    },
+    {
+      "connector": "shared_wordonlinebusiness",
+      "operations": [
+        "CreateFileItem",
+        "GetFilePDF"
+      ],
+      "operationCount": 2
+    },
+    {
+      "id": "shared_m365copilotv2",
+      "displayName": "M365 Copilot V2",
+      "actionCount": 1,
+      "triggerCount": 0
+    },
+    {
+      "id": "shared_agentnode",
+      "displayName": "Agents",
+      "actionCount": 1,
+      "triggerCount": 0
+    },
+    {
+      "id": "shared_powertools",
+      "displayName": "Microsoft Power Apps (MCP)",
+      "type": "MCP",
+      "file": "connectors/shared_powertools.json",
+      "learnedAt": "2026-06-04"
+    }
+  ],
+  "triggers": [
+    {
+      "id": "shared_wordonlinebusiness_GetFilePDF",
+      "type": "OpenApiConnection",
+      "file": "triggers/notification.json",
+      "connector": "shared_wordonlinebusiness",
+      "operationId": "GetFilePDF"
+    },
+    {
+      "id": "Recurrence_",
+      "type": "Recurrence",
+      "file": "triggers/recurrence-none.json",
+      "kind": "none"
+    },
+    {
+      "id": "Recurrence_",
+      "type": "Recurrence",
+      "file": "triggers/recurrence.json",
+      "kind": "none"
+    },
+    {
+      "id": "Recurrence_",
+      "type": "Recurrence",
+      "file": "triggers/request-apiconnection.json",
+      "kind": "none"
+    },
+    {
+      "id": "Request_Button",
+      "type": "Request",
+      "file": "triggers/request-button.json",
+      "kind": "Button"
+    },
+    {
+      "id": "Request_Http",
+      "type": "Request",
+      "file": "triggers/request-http.json",
+      "kind": "Http"
+    },
+    {
+      "id": "Request_Http",
+      "type": "Request",
+      "file": "triggers/request-powerappsv2.json",
+      "kind": "Http"
+    },
+    {
+      "id": "Request_PowerAppV2",
+      "type": "Request",
+      "file": "triggers/request-powerappv2.json",
+      "kind": "PowerAppV2"
+    },
+    {
+      "id": "Request_Skills",
+      "type": "Request",
+      "file": "triggers/request-skills.json",
+      "kind": "Skills"
+    },
+    {
+      "id": "Request_Skills",
+      "type": "Request",
+      "file": "triggers/request-virtualagent.json",
+      "kind": "Skills"
+    },
+    {
+      "id": "shared_commondataserviceforapps-1_BusinessEventsTrigger",
+      "type": "OpenApiConnectionWebhook",
+      "file": "triggers/shared_commondataserviceforapps-1_BusinessEventsTrigger.json",
+      "connector": "shared_commondataserviceforapps-1",
+      "operationId": "BusinessEventsTrigger"
+    },
+    {
+      "id": "shared_commondataserviceforapps-1_SubscribeWebhookTrigger",
+      "type": "OpenApiConnectionWebhook",
+      "file": "triggers/shared_commondataserviceforapps-1_SubscribeWebhookTrigger.json",
+      "connector": "shared_commondataserviceforapps-1",
+      "operationId": "SubscribeWebhookTrigger"
+    },
+    {
+      "id": "shared_commondataserviceforapps_1_SubscribeWebhookTrigger",
+      "type": "OpenApiConnectionWebhook",
+      "file": "triggers/shared_commondataserviceforapps_1_SubscribeWebhookTrigger.json",
+      "connector": "shared_commondataserviceforapps_1",
+      "operationId": "SubscribeWebhookTrigger"
+    },
+    {
+      "id": "shared_commondataserviceforapps_BusinessEventsTrigger",
+      "type": "OpenApiConnectionWebhook",
+      "file": "triggers/shared_commondataserviceforapps_BusinessEventsTrigger.json",
+      "connector": "shared_commondataserviceforapps",
+      "operationId": "BusinessEventsTrigger"
+    },
+    {
+      "id": "shared_commondataserviceforapps_SubscribeWebhookTrigger",
+      "type": "OpenApiConnectionWebhook",
+      "file": "triggers/shared_commondataserviceforapps_SubscribeWebhookTrigger.json",
+      "connector": "shared_commondataserviceforapps",
+      "operationId": "SubscribeWebhookTrigger"
+    },
+    {
+      "id": "shared_d365marketingforapps_Orchestration_RegisterWebhookTriggerV2",
+      "type": "OpenApiConnectionWebhook",
+      "file": "triggers/shared_d365marketingforapps_Orchestration_RegisterWebhookTriggerV2.json",
+      "connector": "shared_d365marketingforapps",
+      "operationId": "Orchestration_RegisterWebhookTriggerV2"
+    },
+    {
+      "id": "shared_office365_OnNewEmailV3",
+      "type": "OpenApiConnectionNotification",
+      "file": "triggers/shared_office365_OnNewEmailV3.json",
+      "connector": "shared_office365",
+      "operationId": "OnNewEmailV3"
+    },
+    {
+      "id": "shared_sharepointonline_GetOnChangedItems",
+      "type": "OpenApiConnection",
+      "file": "triggers/shared_sharepointonline_GetOnChangedItems.json",
+      "connector": "shared_sharepointonline",
+      "operationId": "GetOnChangedItems"
+    },
+    {
+      "id": "shared_sharepointonline_GetOnNewFileItems",
+      "type": "OpenApiConnection",
+      "file": "triggers/shared_sharepointonline_GetOnNewFileItems.json",
+      "connector": "shared_sharepointonline",
+      "operationId": "GetOnNewFileItems"
+    },
+    {
+      "id": "shared_sharepointonline_GetOnNewItems",
+      "type": "OpenApiConnection",
+      "file": "triggers/shared_sharepointonline_GetOnNewItems.json",
+      "connector": "shared_sharepointonline",
+      "operationId": "GetOnNewItems"
+    },
+    {
+      "id": "shared_sharepointonline_GetOnNewItems",
+      "type": "OpenApiConnection",
+      "file": "triggers/webhook-dataverse.json",
+      "connector": "shared_sharepointonline",
+      "operationId": "GetOnNewItems"
+    }
+  ],
+  "builtinActions": [
+    {
+      "id": "Compose",
+      "type": "Compose",
+      "file": "actions/compose.json"
+    },
+    {
+      "id": "If",
+      "type": "If",
+      "file": "actions/condition.json"
+    },
+    {
+      "id": "Query",
+      "type": "Query",
+      "file": "actions/filter-array.json"
+    },
+    {
+      "id": "Foreach",
+      "type": "Foreach",
+      "file": "actions/foreach.json"
+    },
+    {
+      "id": "Http",
+      "type": "Http",
+      "file": "actions/http.json"
+    },
+    {
+      "id": "Join",
+      "type": "Join",
+      "file": "actions/join.json"
+    },
+    {
+      "id": "Join",
+      "type": "Join",
+      "file": "actions/openapi-connection-template.json"
+    },
+    {
+      "id": "ParseJson",
+      "type": "ParseJson",
+      "file": "actions/parse-json.json"
+    },
+    {
+      "id": "Response",
+      "type": "Response",
+      "file": "actions/response.json"
+    },
+    {
+      "id": "Scope",
+      "type": "Scope",
+      "file": "actions/scope.json"
+    },
+    {
+      "id": "Select",
+      "type": "Select",
+      "file": "actions/select.json"
+    },
+    {
+      "id": "Switch",
+      "type": "Switch",
+      "file": "actions/switch.json"
+    },
+    {
+      "id": "Terminate",
+      "type": "Terminate",
+      "file": "actions/terminate.json"
+    },
+    {
+      "id": "Until",
+      "type": "Until",
+      "file": "actions/until.json"
+    },
+    {
+      "id": "Variables",
+      "type": null,
+      "file": "actions/variables.json"
+    },
+    {
+      "id": "Wait",
+      "type": "Wait",
+      "file": "actions/wait.json"
+    },
+    {
+      "id": "Wait",
+      "type": "Wait",
+      "file": "actions/workflow.json"
+    }
+  ],
+  "openApiActions": [
+    {
+      "id": "shared_advancedapprovals_StartAndWaitForAnApprovalProcess",
+      "connector": "shared_advancedapprovals",
+      "operationId": "StartAndWaitForAnApprovalProcess",
+      "type": "OpenApiConnectionWebhook",
+      "file": "actions/openapi/shared_advancedapprovals_StartAndWaitForAnApprovalProcess.json",
+      "flowCount": 1
+    },
+    {
+      "id": "shared_approvals_StartAndWaitForAnApproval",
+      "connector": "shared_approvals",
+      "operationId": "StartAndWaitForAnApproval",
+      "type": "OpenApiConnectionWebhook",
+      "file": "actions/openapi/shared_approvals_StartAndWaitForAnApproval.json",
+      "flowCount": 1
+    },
+    {
+      "id": "shared_azureblob-1_CreateFile_V2",
+      "connector": "shared_azureblob-1",
+      "operationId": "CreateFile_V2",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_azureblob-1_CreateFile_V2.json",
+      "flowCount": 1
+    },
+    {
+      "id": "shared_azureblob_DeleteFile_V2",
+      "connector": "shared_azureblob",
+      "operationId": "DeleteFile_V2",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_azureblob_DeleteFile_V2.json",
+      "flowCount": 1
+    },
+    {
+      "id": "shared_azureblob_GetFileContent_V2",
+      "connector": "shared_azureblob",
+      "operationId": "GetFileContent_V2",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_azureblob_GetFileContent_V2.json",
+      "flowCount": 1
+    },
+    {
+      "id": "shared_commondataserviceforapps-1_aibuilderpredict_customprompt",
+      "connector": "shared_commondataserviceforapps-1",
+      "operationId": "aibuilderpredict_customprompt",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_commondataserviceforapps-1_aibuilderpredict_customprompt.json",
+      "flowCount": 7
+    },
+    {
+      "id": "shared_commondataserviceforapps-1_aibuilderpredict_textrecognition",
+      "connector": "shared_commondataserviceforapps-1",
+      "operationId": "aibuilderpredict_textrecognition",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_commondataserviceforapps-1_aibuilderpredict_textrecognition.json",
+      "flowCount": 2
+    },
+    {
+      "id": "shared_commondataserviceforapps-1_CreateRecord",
+      "connector": "shared_commondataserviceforapps-1",
+      "operationId": "CreateRecord",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_commondataserviceforapps-1_CreateRecord.json",
+      "flowCount": 6
+    },
+    {
+      "id": "shared_commondataserviceforapps-1_GetEntityFileImageFieldContent",
+      "connector": "shared_commondataserviceforapps-1",
+      "operationId": "GetEntityFileImageFieldContent",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_commondataserviceforapps-1_GetEntityFileImageFieldContent.json",
+      "flowCount": 3
+    },
+    {
+      "id": "shared_commondataserviceforapps-1_GetItem",
+      "connector": "shared_commondataserviceforapps-1",
+      "operationId": "GetItem",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_commondataserviceforapps-1_GetItem.json",
+      "flowCount": 4
+    },
+    {
+      "id": "shared_commondataserviceforapps-1_ListRecords",
+      "connector": "shared_commondataserviceforapps-1",
+      "operationId": "ListRecords",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_commondataserviceforapps-1_ListRecords.json",
+      "flowCount": 2
+    },
+    {
+      "id": "shared_commondataserviceforapps-1_UpdateEntityFileImageFieldContent",
+      "connector": "shared_commondataserviceforapps-1",
+      "operationId": "UpdateEntityFileImageFieldContent",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_commondataserviceforapps-1_UpdateEntityFileImageFieldContent.json",
+      "flowCount": 1
+    },
+    {
+      "id": "shared_commondataserviceforapps-1_UpdateOnlyRecord",
+      "connector": "shared_commondataserviceforapps-1",
+      "operationId": "UpdateOnlyRecord",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_commondataserviceforapps-1_UpdateOnlyRecord.json",
+      "flowCount": 4
+    },
+    {
+      "id": "shared_commondataserviceforapps_1_aibuilderpredict_customprompt",
+      "connector": "shared_commondataserviceforapps_1",
+      "operationId": "aibuilderpredict_customprompt",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_commondataserviceforapps_1_aibuilderpredict_customprompt.json",
+      "flowCount": 4
+    },
+    {
+      "id": "shared_commondataserviceforapps_1_aibuilderpredict_languagedetection",
+      "connector": "shared_commondataserviceforapps_1",
+      "operationId": "aibuilderpredict_languagedetection",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_commondataserviceforapps_1_aibuilderpredict_languagedetection.json",
+      "flowCount": 1
+    },
+    {
+      "id": "shared_commondataserviceforapps_1_CreateRecord",
+      "connector": "shared_commondataserviceforapps_1",
+      "operationId": "CreateRecord",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_commondataserviceforapps_1_CreateRecord.json",
+      "flowCount": 8
+    },
+    {
+      "id": "shared_commondataserviceforapps_1_CreateRecordWithOrganization",
+      "connector": "shared_commondataserviceforapps_1",
+      "operationId": "CreateRecordWithOrganization",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_commondataserviceforapps_1_CreateRecordWithOrganization.json",
+      "flowCount": 1
+    },
+    {
+      "id": "shared_commondataserviceforapps_1_DeleteRecord",
+      "connector": "shared_commondataserviceforapps_1",
+      "operationId": "DeleteRecord",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_commondataserviceforapps_1_DeleteRecord.json",
+      "flowCount": 3
+    },
+    {
+      "id": "shared_commondataserviceforapps_1_DeleteRecordWithOrganization",
+      "connector": "shared_commondataserviceforapps_1",
+      "operationId": "DeleteRecordWithOrganization",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_commondataserviceforapps_1_DeleteRecordWithOrganization.json",
+      "flowCount": 1
+    },
+    {
+      "id": "shared_commondataserviceforapps_1_GetEntityFileImageFieldContent",
+      "connector": "shared_commondataserviceforapps_1",
+      "operationId": "GetEntityFileImageFieldContent",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_commondataserviceforapps_1_GetEntityFileImageFieldContent.json",
+      "flowCount": 1
+    },
+    {
+      "id": "shared_commondataserviceforapps_1_GetItem",
+      "connector": "shared_commondataserviceforapps_1",
+      "operationId": "GetItem",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_commondataserviceforapps_1_GetItem.json",
+      "flowCount": 4
+    },
+    {
+      "id": "shared_commondataserviceforapps_1_GetItemWithOrganization",
+      "connector": "shared_commondataserviceforapps_1",
+      "operationId": "GetItemWithOrganization",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_commondataserviceforapps_1_GetItemWithOrganization.json",
+      "flowCount": 3
+    },
+    {
+      "id": "shared_commondataserviceforapps_1_ListRecords",
+      "connector": "shared_commondataserviceforapps_1",
+      "operationId": "ListRecords",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_commondataserviceforapps_1_ListRecords.json",
+      "flowCount": 8
+    },
+    {
+      "id": "shared_commondataserviceforapps_1_ListRecordsWithOrganization",
+      "connector": "shared_commondataserviceforapps_1",
+      "operationId": "ListRecordsWithOrganization",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_commondataserviceforapps_1_ListRecordsWithOrganization.json",
+      "flowCount": 7
+    },
+    {
+      "id": "shared_commondataserviceforapps_1_PerformBoundAction",
+      "connector": "shared_commondataserviceforapps_1",
+      "operationId": "PerformBoundAction",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_commondataserviceforapps_1_PerformBoundAction.json",
+      "flowCount": 2
+    },
+    {
+      "id": "shared_commondataserviceforapps_1_PerformBoundActionWithOrganization",
+      "connector": "shared_commondataserviceforapps_1",
+      "operationId": "PerformBoundActionWithOrganization",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_commondataserviceforapps_1_PerformBoundActionWithOrganization.json",
+      "flowCount": 1
+    },
+    {
+      "id": "shared_commondataserviceforapps_1_PerformUnboundAction",
+      "connector": "shared_commondataserviceforapps_1",
+      "operationId": "PerformUnboundAction",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_commondataserviceforapps_1_PerformUnboundAction.json",
+      "flowCount": 3
+    },
+    {
+      "id": "shared_commondataserviceforapps_1_PerformUnboundActionWithOrganization",
+      "connector": "shared_commondataserviceforapps_1",
+      "operationId": "PerformUnboundActionWithOrganization",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_commondataserviceforapps_1_PerformUnboundActionWithOrganization.json",
+      "flowCount": 1
+    },
+    {
+      "id": "shared_commondataserviceforapps_1_UpdateEntityFileImageFieldContentWithOrganization",
+      "connector": "shared_commondataserviceforapps_1",
+      "operationId": "UpdateEntityFileImageFieldContentWithOrganization",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_commondataserviceforapps_1_UpdateEntityFileImageFieldContentWithOrganization.json",
+      "flowCount": 1
+    },
+    {
+      "id": "shared_commondataserviceforapps_1_UpdateOnlyRecord",
+      "connector": "shared_commondataserviceforapps_1",
+      "operationId": "UpdateOnlyRecord",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_commondataserviceforapps_1_UpdateOnlyRecord.json",
+      "flowCount": 5
+    },
+    {
+      "id": "shared_commondataserviceforapps_1_UpdateRecord",
+      "connector": "shared_commondataserviceforapps_1",
+      "operationId": "UpdateRecord",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_commondataserviceforapps_1_UpdateRecord.json",
+      "flowCount": 3
+    },
+    {
+      "id": "shared_commondataserviceforapps_2_CreateRecord",
+      "connector": "shared_commondataserviceforapps_2",
+      "operationId": "CreateRecord",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_commondataserviceforapps_2_CreateRecord.json",
+      "flowCount": 1
+    },
+    {
+      "id": "shared_commondataserviceforapps_2_ListRecords",
+      "connector": "shared_commondataserviceforapps_2",
+      "operationId": "ListRecords",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_commondataserviceforapps_2_ListRecords.json",
+      "flowCount": 1
+    },
+    {
+      "id": "shared_commondataserviceforapps_2_PerformUnboundAction",
+      "connector": "shared_commondataserviceforapps_2",
+      "operationId": "PerformUnboundAction",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_commondataserviceforapps_2_PerformUnboundAction.json",
+      "flowCount": 1
+    },
+    {
+      "id": "shared_commondataserviceforapps_2_UpdateRecord",
+      "connector": "shared_commondataserviceforapps_2",
+      "operationId": "UpdateRecord",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_commondataserviceforapps_2_UpdateRecord.json",
+      "flowCount": 1
+    },
+    {
+      "id": "shared_commondataserviceforapps_aibuilderpredict_customprompt",
+      "connector": "shared_commondataserviceforapps",
+      "operationId": "aibuilderpredict_customprompt",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_commondataserviceforapps_aibuilderpredict_customprompt.json",
+      "flowCount": 35
+    },
+    {
+      "id": "shared_commondataserviceforapps_aibuilderpredict_textrecognition",
+      "connector": "shared_commondataserviceforapps",
+      "operationId": "aibuilderpredict_textrecognition",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_commondataserviceforapps_aibuilderpredict_textrecognition.json",
+      "flowCount": 5
+    },
+    {
+      "id": "shared_commondataserviceforapps_AssociateEntities",
+      "connector": "shared_commondataserviceforapps",
+      "operationId": "AssociateEntities",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_commondataserviceforapps_AssociateEntities.json",
+      "flowCount": 1
+    },
+    {
+      "id": "shared_commondataserviceforapps_CreateRecord",
+      "connector": "shared_commondataserviceforapps",
+      "operationId": "CreateRecord",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_commondataserviceforapps_CreateRecord.json",
+      "flowCount": 26
+    },
+    {
+      "id": "shared_commondataserviceforapps_DeleteRecord",
+      "connector": "shared_commondataserviceforapps",
+      "operationId": "DeleteRecord",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_commondataserviceforapps_DeleteRecord.json",
+      "flowCount": 1
+    },
+    {
+      "id": "shared_commondataserviceforapps_GetEntityFileImageFieldContent",
+      "connector": "shared_commondataserviceforapps",
+      "operationId": "GetEntityFileImageFieldContent",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_commondataserviceforapps_GetEntityFileImageFieldContent.json",
+      "flowCount": 6
+    },
+    {
+      "id": "shared_commondataserviceforapps_GetItem",
+      "connector": "shared_commondataserviceforapps",
+      "operationId": "GetItem",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_commondataserviceforapps_GetItem.json",
+      "flowCount": 24
+    },
+    {
+      "id": "shared_commondataserviceforapps_GetItemWithOrganization",
+      "connector": "shared_commondataserviceforapps",
+      "operationId": "GetItemWithOrganization",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_commondataserviceforapps_GetItemWithOrganization.json",
+      "flowCount": 2
+    },
+    {
+      "id": "shared_commondataserviceforapps_ListRecords",
+      "connector": "shared_commondataserviceforapps",
+      "operationId": "ListRecords",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_commondataserviceforapps_ListRecords.json",
+      "flowCount": 32
+    },
+    {
+      "id": "shared_commondataserviceforapps_ListRecordsWithOrganization",
+      "connector": "shared_commondataserviceforapps",
+      "operationId": "ListRecordsWithOrganization",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_commondataserviceforapps_ListRecordsWithOrganization.json",
+      "flowCount": 3
+    },
+    {
+      "id": "shared_commondataserviceforapps_PerformBoundAction",
+      "connector": "shared_commondataserviceforapps",
+      "operationId": "PerformBoundAction",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_commondataserviceforapps_PerformBoundAction.json",
+      "flowCount": 5
+    },
+    {
+      "id": "shared_commondataserviceforapps_PerformUnboundAction",
+      "connector": "shared_commondataserviceforapps",
+      "operationId": "PerformUnboundAction",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_commondataserviceforapps_PerformUnboundAction.json",
+      "flowCount": 18
+    },
+    {
+      "id": "shared_commondataserviceforapps_PerformUnboundActionWithOrganization",
+      "connector": "shared_commondataserviceforapps",
+      "operationId": "PerformUnboundActionWithOrganization",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_commondataserviceforapps_PerformUnboundActionWithOrganization.json",
+      "flowCount": 2
+    },
+    {
+      "id": "shared_commondataserviceforapps_UpdateEntityFileImageFieldContent",
+      "connector": "shared_commondataserviceforapps",
+      "operationId": "UpdateEntityFileImageFieldContent",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_commondataserviceforapps_UpdateEntityFileImageFieldContent.json",
+      "flowCount": 10
+    },
+    {
+      "id": "shared_commondataserviceforapps_UpdateOnlyRecord",
+      "connector": "shared_commondataserviceforapps",
+      "operationId": "UpdateOnlyRecord",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_commondataserviceforapps_UpdateOnlyRecord.json",
+      "flowCount": 18
+    },
+    {
+      "id": "shared_commondataserviceforapps_UpdateRecord",
+      "connector": "shared_commondataserviceforapps",
+      "operationId": "UpdateRecord",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_commondataserviceforapps_UpdateRecord.json",
+      "flowCount": 22
+    },
+    {
+      "id": "shared_conversionservice_HtmlToText",
+      "connector": "shared_conversionservice",
+      "operationId": "HtmlToText",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_conversionservice_HtmlToText.json",
+      "flowCount": 2
+    },
+    {
+      "id": "shared_d365marketingforapps_ConnectorV2_EnsureRunIdempotency",
+      "connector": "shared_d365marketingforapps",
+      "operationId": "ConnectorV2_EnsureRunIdempotency",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_d365marketingforapps_ConnectorV2_EnsureRunIdempotency.json",
+      "flowCount": 20
+    },
+    {
+      "id": "shared_d365marketingforapps_ContactCenter_StartVoiceEngagementWebhookRequest",
+      "connector": "shared_d365marketingforapps",
+      "operationId": "ContactCenter_StartVoiceEngagementWebhookRequest",
+      "type": "OpenApiConnectionWebhook",
+      "file": "actions/openapi/shared_d365marketingforapps_ContactCenter_StartVoiceEngagementWebhookRequest.json",
+      "flowCount": 15
+    },
+    {
+      "id": "shared_d365marketingforapps_DataverseDataSource_ResolveBindingsData",
+      "connector": "shared_d365marketingforapps",
+      "operationId": "DataverseDataSource_ResolveBindingsData",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_d365marketingforapps_DataverseDataSource_ResolveBindingsData.json",
+      "flowCount": 20
+    },
+    {
+      "id": "shared_d365marketingforapps_Orchestration_EmitAnalyticEvent",
+      "connector": "shared_d365marketingforapps",
+      "operationId": "Orchestration_EmitAnalyticEvent",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_d365marketingforapps_Orchestration_EmitAnalyticEvent.json",
+      "flowCount": 20
+    },
+    {
+      "id": "shared_d365marketingforapps_Orchestration_EmitJourneyAnalyticEvent",
+      "connector": "shared_d365marketingforapps",
+      "operationId": "Orchestration_EmitJourneyAnalyticEvent",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_d365marketingforapps_Orchestration_EmitJourneyAnalyticEvent.json",
+      "flowCount": 20
+    },
+    {
+      "id": "shared_d365marketingforapps_Orchestration_EmitJourneyCreateRecordActionAnalyticEvent",
+      "connector": "shared_d365marketingforapps",
+      "operationId": "Orchestration_EmitJourneyCreateRecordActionAnalyticEvent",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_d365marketingforapps_Orchestration_EmitJourneyCreateRecordActionAnalyticEvent.json",
+      "flowCount": 5
+    },
+    {
+      "id": "shared_d365marketingforapps_Orchestration_UpdateJourneyInstanceStateV2",
+      "connector": "shared_d365marketingforapps",
+      "operationId": "Orchestration_UpdateJourneyInstanceStateV2",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_d365marketingforapps_Orchestration_UpdateJourneyInstanceStateV2.json",
+      "flowCount": 20
+    },
+    {
+      "id": "shared_excelonlinebusiness_AddRowV2",
+      "connector": "shared_excelonlinebusiness",
+      "operationId": "AddRowV2",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_excelonlinebusiness_AddRowV2.json",
+      "flowCount": 1
+    },
+    {
+      "id": "shared_excelonlinebusiness_GetItems",
+      "connector": "shared_excelonlinebusiness",
+      "operationId": "GetItems",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_excelonlinebusiness_GetItems.json",
+      "flowCount": 5
+    },
+    {
+      "id": "shared_excelonlinebusiness_PatchItem",
+      "connector": "shared_excelonlinebusiness",
+      "operationId": "PatchItem",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_excelonlinebusiness_PatchItem.json",
+      "flowCount": 2
+    },
+    {
+      "id": "shared_excelonlinebusiness_RunScriptProd",
+      "connector": "shared_excelonlinebusiness",
+      "operationId": "RunScriptProd",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_excelonlinebusiness_RunScriptProd.json",
+      "flowCount": 6
+    },
+    {
+      "id": "shared_flowmanagement_GetFlow",
+      "connector": "shared_flowmanagement",
+      "operationId": "GetFlow",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_flowmanagement_GetFlow.json",
+      "flowCount": 1
+    },
+    {
+      "id": "shared_m365copilot-5feb5abfdd9aa0a613-5f0d555b53ebbad68c_CreateConversation",
+      "connector": "shared_m365copilot-5feb5abfdd9aa0a613-5f0d555b53ebbad68c",
+      "operationId": "CreateConversation",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_m365copilot-5feb5abfdd9aa0a613-5f0d555b53ebbad68c_CreateConversation.json",
+      "flowCount": 1
+    },
+    {
+      "id": "shared_m365copilot-5feb5abfdd9aa0a613-5f0d555b53ebbad68c_StartConversation",
+      "connector": "shared_m365copilot-5feb5abfdd9aa0a613-5f0d555b53ebbad68c",
+      "operationId": "StartConversation",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_m365copilot-5feb5abfdd9aa0a613-5f0d555b53ebbad68c_StartConversation.json",
+      "flowCount": 1
+    },
+    {
+      "id": "shared_microsoftcopilotstudio-1_ExecuteCopilotAsyncV2",
+      "connector": "shared_microsoftcopilotstudio-1",
+      "operationId": "ExecuteCopilotAsyncV2",
+      "type": "OpenApiConnectionWebhook",
+      "file": "actions/openapi/shared_microsoftcopilotstudio-1_ExecuteCopilotAsyncV2.json",
+      "flowCount": 1
+    },
+    {
+      "id": "shared_microsoftcopilotstudio_ExecuteCopilot",
+      "connector": "shared_microsoftcopilotstudio",
+      "operationId": "ExecuteCopilot",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_microsoftcopilotstudio_ExecuteCopilot.json",
+      "flowCount": 10
+    },
+    {
+      "id": "shared_microsoftcopilotstudio_ExecuteCopilotAsyncV2",
+      "connector": "shared_microsoftcopilotstudio",
+      "operationId": "ExecuteCopilotAsyncV2",
+      "type": "OpenApiConnectionWebhook",
+      "file": "actions/openapi/shared_microsoftcopilotstudio_ExecuteCopilotAsyncV2.json",
+      "flowCount": 4
+    },
+    {
+      "id": "shared_microsofttranslatorv-1_GetTranslationStatus",
+      "connector": "shared_microsofttranslatorv-1",
+      "operationId": "GetTranslationStatus",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_microsofttranslatorv-1_GetTranslationStatus.json",
+      "flowCount": 1
+    },
+    {
+      "id": "shared_microsofttranslatorv-1_StartDocumentTranslation",
+      "connector": "shared_microsofttranslatorv-1",
+      "operationId": "StartDocumentTranslation",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_microsofttranslatorv-1_StartDocumentTranslation.json",
+      "flowCount": 1
+    },
+    {
+      "id": "shared_office365_GetAttachment_V2",
+      "connector": "shared_office365",
+      "operationId": "GetAttachment_V2",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_office365_GetAttachment_V2.json",
+      "flowCount": 1
+    },
+    {
+      "id": "shared_office365_GetEmailsV3",
+      "connector": "shared_office365",
+      "operationId": "GetEmailsV3",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_office365_GetEmailsV3.json",
+      "flowCount": 1
+    },
+    {
+      "id": "shared_office365_SendEmailV2",
+      "connector": "shared_office365",
+      "operationId": "SendEmailV2",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_office365_SendEmailV2.json",
+      "flowCount": 5
+    },
+    {
+      "id": "shared_onedriveforbusiness_ConvertFile",
+      "connector": "shared_onedriveforbusiness",
+      "operationId": "ConvertFile",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_onedriveforbusiness_ConvertFile.json",
+      "flowCount": 2
+    },
+    {
+      "id": "shared_onedriveforbusiness_CreateFile",
+      "connector": "shared_onedriveforbusiness",
+      "operationId": "CreateFile",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_onedriveforbusiness_CreateFile.json",
+      "flowCount": 5
+    },
+    {
+      "id": "shared_onedriveforbusiness_CreateShareLinkV2",
+      "connector": "shared_onedriveforbusiness",
+      "operationId": "CreateShareLinkV2",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_onedriveforbusiness_CreateShareLinkV2.json",
+      "flowCount": 3
+    },
+    {
+      "id": "shared_onedriveforbusiness_DeleteFile",
+      "connector": "shared_onedriveforbusiness",
+      "operationId": "DeleteFile",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_onedriveforbusiness_DeleteFile.json",
+      "flowCount": 2
+    },
+    {
+      "id": "shared_onedriveforbusiness_GetFileContent",
+      "connector": "shared_onedriveforbusiness",
+      "operationId": "GetFileContent",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_onedriveforbusiness_GetFileContent.json",
+      "flowCount": 3
+    },
+    {
+      "id": "shared_onedriveforbusiness_GetFileMetadata",
+      "connector": "shared_onedriveforbusiness",
+      "operationId": "GetFileMetadata",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_onedriveforbusiness_GetFileMetadata.json",
+      "flowCount": 1
+    },
+    {
+      "id": "shared_onedriveforbusiness_GetFileThumbnail",
+      "connector": "shared_onedriveforbusiness",
+      "operationId": "GetFileThumbnail",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_onedriveforbusiness_GetFileThumbnail.json",
+      "flowCount": 1
+    },
+    {
+      "id": "shared_powerappsforappmakers_Get-Environments",
+      "connector": "shared_powerappsforappmakers",
+      "operationId": "Get-Environments",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_powerappsforappmakers_Get-Environments.json",
+      "flowCount": 1
+    },
+    {
+      "id": "shared_powerappsnotificationv2_SendPushNotificationV2",
+      "connector": "shared_powerappsnotificationv2",
+      "operationId": "SendPushNotificationV2",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_powerappsnotificationv2_SendPushNotificationV2.json",
+      "flowCount": 1
+    },
+    {
+      "id": "shared_powerbi_ExecuteDatasetQuery",
+      "connector": "shared_powerbi",
+      "operationId": "ExecuteDatasetQuery",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_powerbi_ExecuteDatasetQuery.json",
+      "flowCount": 1
+    },
+    {
+      "id": "shared_powerplatformforadmins_1_Get-AdminEnvironment",
+      "connector": "shared_powerplatformforadmins_1",
+      "operationId": "Get-AdminEnvironment",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_powerplatformforadmins_1_Get-AdminEnvironment.json",
+      "flowCount": 1
+    },
+    {
+      "id": "shared_sharepointonline-1_GetAllTables",
+      "connector": "shared_sharepointonline-1",
+      "operationId": "GetAllTables",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_sharepointonline-1_GetAllTables.json",
+      "flowCount": 1
+    },
+    {
+      "id": "shared_sharepointonline-1_GetFileItems",
+      "connector": "shared_sharepointonline-1",
+      "operationId": "GetFileItems",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_sharepointonline-1_GetFileItems.json",
+      "flowCount": 1
+    },
+    {
+      "id": "shared_sharepointonline-1_HttpRequest",
+      "connector": "shared_sharepointonline-1",
+      "operationId": "HttpRequest",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_sharepointonline-1_HttpRequest.json",
+      "flowCount": 1
+    },
+    {
+      "id": "shared_sharepointonline-1_PostItem",
+      "connector": "shared_sharepointonline-1",
+      "operationId": "PostItem",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_sharepointonline-1_PostItem.json",
+      "flowCount": 1
+    },
+    {
+      "id": "shared_sharepointonline_CreateFile",
+      "connector": "shared_sharepointonline",
+      "operationId": "CreateFile",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_sharepointonline_CreateFile.json",
+      "flowCount": 1
+    },
+    {
+      "id": "shared_sharepointonline_DeleteFile",
+      "connector": "shared_sharepointonline",
+      "operationId": "DeleteFile",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_sharepointonline_DeleteFile.json",
+      "flowCount": 1
+    },
+    {
+      "id": "shared_sharepointonline_GetAllTables",
+      "connector": "shared_sharepointonline",
+      "operationId": "GetAllTables",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_sharepointonline_GetAllTables.json",
+      "flowCount": 1
+    },
+    {
+      "id": "shared_sharepointonline_GetAttachmentContent",
+      "connector": "shared_sharepointonline",
+      "operationId": "GetAttachmentContent",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_sharepointonline_GetAttachmentContent.json",
+      "flowCount": 2
+    },
+    {
+      "id": "shared_sharepointonline_GetFileContent",
+      "connector": "shared_sharepointonline",
+      "operationId": "GetFileContent",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_sharepointonline_GetFileContent.json",
+      "flowCount": 3
+    },
+    {
+      "id": "shared_sharepointonline_GetFileContentByPath",
+      "connector": "shared_sharepointonline",
+      "operationId": "GetFileContentByPath",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_sharepointonline_GetFileContentByPath.json",
+      "flowCount": 1
+    },
+    {
+      "id": "shared_sharepointonline_GetFileItem",
+      "connector": "shared_sharepointonline",
+      "operationId": "GetFileItem",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_sharepointonline_GetFileItem.json",
+      "flowCount": 2
+    },
+    {
+      "id": "shared_sharepointonline_GetFileItems",
+      "connector": "shared_sharepointonline",
+      "operationId": "GetFileItems",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_sharepointonline_GetFileItems.json",
+      "flowCount": 1
+    },
+    {
+      "id": "shared_sharepointonline_GetItem",
+      "connector": "shared_sharepointonline",
+      "operationId": "GetItem",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_sharepointonline_GetItem.json",
+      "flowCount": 1
+    },
+    {
+      "id": "shared_sharepointonline_GetItemAttachments",
+      "connector": "shared_sharepointonline",
+      "operationId": "GetItemAttachments",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_sharepointonline_GetItemAttachments.json",
+      "flowCount": 2
+    },
+    {
+      "id": "shared_sharepointonline_GetItemChanges",
+      "connector": "shared_sharepointonline",
+      "operationId": "GetItemChanges",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_sharepointonline_GetItemChanges.json",
+      "flowCount": 2
+    },
+    {
+      "id": "shared_sharepointonline_GetItems",
+      "connector": "shared_sharepointonline",
+      "operationId": "GetItems",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_sharepointonline_GetItems.json",
+      "flowCount": 4
+    },
+    {
+      "id": "shared_sharepointonline_HttpRequest",
+      "connector": "shared_sharepointonline",
+      "operationId": "HttpRequest",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_sharepointonline_HttpRequest.json",
+      "flowCount": 1
+    },
+    {
+      "id": "shared_sharepointonline_PatchItem",
+      "connector": "shared_sharepointonline",
+      "operationId": "PatchItem",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_sharepointonline_PatchItem.json",
+      "flowCount": 5
+    },
+    {
+      "id": "shared_sharepointonline_PostItem",
+      "connector": "shared_sharepointonline",
+      "operationId": "PostItem",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_sharepointonline_PostItem.json",
+      "flowCount": 3
+    },
+    {
+      "id": "shared_teams_PostMessageToConversation",
+      "connector": "shared_teams",
+      "operationId": "PostMessageToConversation",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_teams_PostMessageToConversation.json",
+      "flowCount": 1
+    },
+    {
+      "id": "shared_testapi-5fdee4da8cd15b1326-5f0d555b53ebbad68c_Hello",
+      "connector": "shared_testapi-5fdee4da8cd15b1326-5f0d555b53ebbad68c",
+      "operationId": "Hello",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_testapi-5fdee4da8cd15b1326-5f0d555b53ebbad68c_Hello.json",
+      "flowCount": 2
+    },
+    {
+      "id": "shared_webcontents_InvokeHttp",
+      "connector": "shared_webcontents",
+      "operationId": "InvokeHttp",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_webcontents_InvokeHttp.json",
+      "flowCount": 4
+    },
+    {
+      "id": "shared_wordonlinebusiness_CreateFileItem",
+      "connector": "shared_wordonlinebusiness",
+      "operationId": "CreateFileItem",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_wordonlinebusiness_CreateFileItem.json",
+      "flowCount": 1
+    },
+    {
+      "id": "shared_wordonlinebusiness_GetFilePDF",
+      "connector": "shared_wordonlinebusiness",
+      "operationId": "GetFilePDF",
+      "type": "OpenApiConnection",
+      "file": "actions/openapi/shared_wordonlinebusiness_GetFilePDF.json",
+      "flowCount": 1
+    },
+    {
+      "id": "shared_m365copilotv2_StartChat",
+      "connector": "shared_m365copilotv2",
+      "operationId": "StartChat"
+    },
+    {
+      "id": "shared_agentnode_InvokeDefinition",
+      "connector": "shared_agentnode",
+      "operationId": "InvokeDefinition"
+    },
+    {
+      "id": "shared_office365_ReplyToV3",
+      "connector": "shared_office365",
+      "operationId": "ReplyToV3"
+    }
+  ]
 }

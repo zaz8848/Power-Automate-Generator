@@ -1,4 +1,4 @@
-﻿{
+{
     "id":  "shared_commondataserviceforapps_SubscribeWebhookTrigger",
     "connector":  "shared_commondataserviceforapps",
     "operationId":  "SubscribeWebhookTrigger",
@@ -54,8 +54,8 @@
     "learnedAt":  "2026-05-26",
     "verified":  true,
     "environment":  [
-                        "{dataverseOrg}",
-                        "orgdf331f66.crm5.dynamics.com"
+                        "<YOUR_ORG>.crm.dynamics.com",
+                        "<YOUR_ORG>.crm.dynamics.com"
                     ],
     "template":  {
                      "When_a_row_is_added,_modified_or_deleted":  {

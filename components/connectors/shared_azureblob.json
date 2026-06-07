@@ -1,4 +1,4 @@
-﻿{
+{
     "id":  "shared_azureblob",
     "displayName":  "Azure Blob Storage",
     "connectorId":  "/providers/Microsoft.PowerApps/apis/shared_azureblob",

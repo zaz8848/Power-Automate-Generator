@@ -1,4 +1,4 @@
-﻿{
+{
     "id":  "shared_powerappsnotificationv2_SendPushNotificationV2",
     "connector":  "shared_powerappsnotificationv2",
     "connectorBase":  "shared_powerappsnotificationv2",

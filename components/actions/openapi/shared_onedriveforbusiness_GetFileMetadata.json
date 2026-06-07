@@ -1,4 +1,4 @@
-﻿{
+{
     "id":  "shared_onedriveforbusiness_GetFileMetadata",
     "connector":  "shared_onedriveforbusiness",
     "connectorBase":  "shared_onedriveforbusiness",

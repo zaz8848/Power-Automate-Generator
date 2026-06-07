@@ -1,4 +1,4 @@
-﻿{
+{
     "id":  "shared_wordonlinebusiness_GetFilePDF",
     "connector":  "shared_wordonlinebusiness",
     "connectorBase":  "shared_wordonlinebusiness",
@@ -14,14 +14,14 @@
     "learnedAt":  "2026-05-26",
     "verified":  true,
     "environment":  [
-                        "orgdf331f66.crm5.dynamics.com"
+                        "<YOUR_ORG>.crm.dynamics.com"
                     ],
     "template":  {
                      "Convert_Word_Document_to_PDF":  {
                                                           "type":  "OpenApiConnection",
                                                           "inputs":  {
                                                                          "parameters":  {
-                                                                                            "source":  "sites/contoso.sharepoint.com,{siteId},{webId}",
+                                                                                            "source":  "sites/<YOUR_TENANT>.sharepoint.com,6c6a86c5-1d91-474f-8826-70471bf731c7,d02e8e85-ca1f-4676-8b7d-0a528f164cbf",
                                                                                             "drive":  "b!xYZqbJEdT0eIJnBHG_cxx4WOLtAfynZGi30KUo8WTL_1mg9lvT3_R7nm-uq1fHMf",
                                                                                             "file":  "@outputs(\u0027Get_file_properties\u0027)?[\u0027body/{DriveItemId}\u0027]"
                                                                                         },

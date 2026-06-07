@@ -1,4 +1,4 @@
-﻿{
+{
     "id":  "shared_sharepointonline_DeleteFile",
     "connector":  "shared_sharepointonline",
     "connectorBase":  "shared_sharepointonline",
@@ -21,7 +21,7 @@
                                                   "type":  "OpenApiConnection",
                                                   "inputs":  {
                                                                  "parameters":  {
-                                                                                    "dataset":  "https://contoso.sharepoint.com/sites/AIBusinessProcessPortal",
+                                                                                    "dataset":  "https://<YOUR_TENANT>.sharepoint.com/sites/AIBusinessProcessPortal",
                                                                                     "id":  "@triggerBody()?[\u0027{Identifier}\u0027]"
                                                                                 },
                                                                  "host":  {

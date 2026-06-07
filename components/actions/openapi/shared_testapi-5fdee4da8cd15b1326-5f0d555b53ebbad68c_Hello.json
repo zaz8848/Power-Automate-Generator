@@ -1,4 +1,4 @@
-﻿{
+{
     "id":  "shared_testapi-5fdee4da8cd15b1326-5f0d555b53ebbad68c_Hello",
     "connector":  "shared_testapi-5fdee4da8cd15b1326-5f0d555b53ebbad68c",
     "connectorBase":  "shared_testapi-5fdee4da8cd15b1326-5f0d555b53ebbad68c",
@@ -16,7 +16,7 @@
     "learnedAt":  "2026-05-26",
     "verified":  true,
     "environment":  [
-                        "{dataverseOrg}"
+                        "<YOUR_ORG>.crm.dynamics.com"
                     ],
     "template":  {
                      "Hello":  {

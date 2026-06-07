@@ -1,4 +1,4 @@
-﻿{
+{
     "id":  "shared_sharepointonline_GetOnNewFileItems",
     "connector":  "shared_sharepointonline",
     "operationId":  "GetOnNewFileItems",
@@ -14,7 +14,7 @@
     "learnedAt":  "2026-05-26",
     "verified":  true,
     "environment":  [
-                        "{dataverseOrg}"
+                        "<YOUR_ORG>.crm.dynamics.com"
                     ],
     "template":  {
                      "When_a_file_is_created_(properties_only)":  {

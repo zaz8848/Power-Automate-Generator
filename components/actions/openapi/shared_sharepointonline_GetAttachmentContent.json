@@ -1,4 +1,4 @@
-﻿{
+{
     "id":  "shared_sharepointonline_GetAttachmentContent",
     "connector":  "shared_sharepointonline",
     "connectorBase":  "shared_sharepointonline",
@@ -16,14 +16,14 @@
     "learnedAt":  "2026-05-26",
     "verified":  true,
     "environment":  [
-                        "{dataverseOrg}"
+                        "<YOUR_ORG>.crm.dynamics.com"
                     ],
     "template":  {
                      "Get_attachment_content":  {
                                                     "type":  "OpenApiConnection",
                                                     "inputs":  {
                                                                    "parameters":  {
-                                                                                      "dataset":  "https://contoso.sharepoint.com/sites/test",
+                                                                                      "dataset":  "https://<YOUR_TENANT>.sharepoint.com/sites/test",
                                                                                       "table":  "d62bfda9-eadf-4a77-9b55-3964d5566fc4",
                                                                                       "itemId":  "@items(\u0027For_each_1\u0027)?[\u0027ID\u0027]",
                                                                                       "attachmentId":  "@items(\u0027For_each\u0027)?[\u0027Id\u0027]"

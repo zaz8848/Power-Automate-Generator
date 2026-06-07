@@ -1,4 +1,4 @@
-﻿{
+{
     "id":  "shared_aisteps",
     "displayName":  "AI actions",
     "connectorId":  "/providers/Microsoft.PowerApps/apis/shared_aisteps",

@@ -1,4 +1,4 @@
-﻿{
+{
     "id":  "shared_commondataserviceforapps_1_CreateRecord",
     "connector":  "shared_commondataserviceforapps_1",
     "connectorBase":  "shared_commondataserviceforapps",
@@ -28,7 +28,7 @@
     "learnedAt":  "2026-05-26",
     "verified":  true,
     "environment":  [
-                        "orgdf331f66.crm5.dynamics.com",
+                        "<YOUR_ORG>.crm.dynamics.com",
                         "org1cd97ca4.crm.dynamics.com"
                     ],
     "template":  {

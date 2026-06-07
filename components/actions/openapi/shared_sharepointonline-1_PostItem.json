@@ -1,4 +1,4 @@
-﻿{
+{
     "id":  "shared_sharepointonline-1_PostItem",
     "connector":  "shared_sharepointonline-1",
     "connectorBase":  "shared_sharepointonline",
@@ -14,14 +14,14 @@
     "learnedAt":  "2026-05-26",
     "verified":  true,
     "environment":  [
-                        "{dataverseOrg}"
+                        "<YOUR_ORG>.crm.dynamics.com"
                     ],
     "template":  {
                      "Create_item":  {
                                          "type":  "OpenApiConnection",
                                          "inputs":  {
                                                         "parameters":  {
-                                                                           "dataset":  "https://contoso.sharepoint.com/sites/test",
+                                                                           "dataset":  "https://<YOUR_TENANT>.sharepoint.com/sites/test",
                                                                            "table":  "2d2c71a6-7c18-40a6-b106-e08d63fc1d45",
                                                                            "item/Title":  "@triggerBody()?[\u0027text\u0027]",
                                                                            "item/Description":  "@triggerBody()?[\u0027text_1\u0027]",

@@ -1,4 +1,4 @@
-﻿{
+{
     "id":  "shared_commondataserviceforapps-1_SubscribeWebhookTrigger",
     "connector":  "shared_commondataserviceforapps-1",
     "operationId":  "SubscribeWebhookTrigger",

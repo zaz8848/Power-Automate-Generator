@@ -6,23 +6,36 @@ applyTo: "**"
 
 # Flow 操作 SOP
 
+## 2026-06-07 重大更新（Copilot Studio Preview 拓包验证）
+
+据据：`flows/zaf-prod/_save_capture_2026-06-07.json`（浏览器 fetch/XHR hook 抓捖 18 条 UI Save 的请求）。
+
+**变更要点**：
+
+1. **“Dataverse 直写 workflow 不可用” 说法废弃** —— Copilot Studio Preview UI 现在就是直接 `POST {orgUrl}/api/data/v9.2/workflows`，返回 `201 Created`。创建时 body 要同时带齐 `name` / `category=5` / `type=1` / `modernflowtype=1` / `primaryentity="none"` / `clientdata`（6 个顶层字段）。代替 Flow Management API。
+2. **`modernflowtype` 不需二次 PATCH** —— 创建时一次性带入即可，Workflow / 普通 Flow 都是这么走。下面 Phase 6 原“创建后 PATCH `modernflowtype=1`”的步骤 ❌ 过时。
+3. **`checkFlowAlerts` 是独立后端** —— 不是前端校验，是 Copilot Studio 保存后调的 lint API，详见下面《校验 API》章节。
+4. **graph node 的 `data.config` 有完整字段集** —— 原本我们只存了 `operationId`，现实测还要 `operationName` / `displayName` / `category` / `categoryDisplayName` / `iconUri` / `brandColor` / `description` / `parametersSchema` / `outcomes[].outcomeSchema`。组件库要补 `graphTemplate` 字段装这些，详见 `component-library.instructions.md`。
+
 ## API 端点参考
 
 | 操作 | 方法 | 端点 | Token scope |
 |---|---|---|---|
-| **创建 flow** | POST | `https://api.flow.microsoft.com/providers/Microsoft.ProcessSimple/environments/{envId}/flows?api-version=2016-11-01` | `service.flow.microsoft.com` |
-| **修改 flow** | PATCH | 同上 `/{flowId}` | 同上 |
-| **查询 flow 列表** | GET | 同上 `/flows?api-version=2016-11-01` | 同上 |
+| **创建 flow / workflow (首选)** | POST | `https://<YOUR_ORG>.crm.dynamics.com/api/data/v9.2/workflows` | `{orgUrl}/user_impersonation` |
+| **创建 flow (旧路径)** | POST | `https://api.flow.microsoft.com/providers/Microsoft.ProcessSimple/environments/{envId}/flows?api-version=2016-11-01` | `service.flow.microsoft.com` |
+| **保存后 lint 校验** | POST | `https://{envIdNoDash}.{region}.environment.api.powerplatform.com/powerautomate/flows/{flowId}/checkFlowAlerts?api-version=1` | `service.flow.microsoft.com` |
+| **修改 flow** | PATCH | `https://api.flow.microsoft.com/providers/Microsoft.ProcessSimple/environments/{envId}/flows/{flowId}?api-version=2016-11-01` | `service.flow.microsoft.com` |
+| **查询 flow 列表** | GET | `https://api.flow.microsoft.com/providers/Microsoft.ProcessSimple/environments/{envId}/flows?api-version=2016-11-01` | 同上 |
 | **查看 flow 详情** | GET | 同上 `/{flowId}?api-version=2016-11-01` | 同上 |
 | **查看 run history** | GET | 同上 `/{flowId}/runs?api-version=2016-11-01` | 同上 |
 | **查看 run action** | GET | 同上 `/{flowId}/runs/{runId}/actions?api-version=2016-11-01` | 同上 |
 | **Resubmit run** | POST | 同上 `/{flowId}/triggers/{triggerName}/histories/{runId}/resubmit?api-version=2016-11-01` | 同上 |
-| **读 Dataverse workflow** | GET | `https://{dataverseOrg}/api/data/v9.2/workflows({workflowid})` | `{dataverseOrg}` |
-| **查 connectionReference** | GET | `https://{dataverseOrg}/api/data/v9.2/connectionreferences` | 同上 |
+| **读 Dataverse workflow** | GET | `https://<YOUR_ORG>.crm.dynamics.com/api/data/v9.2/workflows({workflowid})` | `<YOUR_ORG>.crm.dynamics.com` |
+| **查 connectionReference** | GET | `https://<YOUR_ORG>.crm.dynamics.com/api/data/v9.2/connectionreferences` | 同上 |
 
 ## 环境 ID
 
-环境 ID 存储在各租户的 profile JSON 中（`profiles/{profileName}.json` 的 `environmentId` 字段）。
+- ZAF Prod: `<YOUR_ENV_ID>`
 
 ## 创建 Flow
 
@@ -74,17 +87,27 @@ applyTo: "**"
 17. **graph connectionReferences** — 用 Copilot Studio 格式：`api.name` + `connection.connectionReferenceLogicalName` + `runtimeSource`
 18. **注入 graph** → 放入 trigger 的 `metadata.associatedData`（graph + nodeActionMapping）
 
-#### Phase 6：部署
+#### Phase 6：部署（2026-06-07 重写 - Dataverse 直写路径）
 
-19. **获取 token** — `scope: https://service.flow.microsoft.com/.default offline_access`（从 `.token-cache.json` 刷新）
-20. **POST 部署** — `POST .../environments/{envId}/flows?api-version=2016-11-01`
-    - 读文件用 `[System.IO.File]::ReadAllBytes()` 避免编码损坏
-    - Header: `Content-Type: application/json; charset=utf-8`
-21. **部署防护** — POST 返回 400/404 时**不要盲目重试**，先查 `GET .../flows?$orderby=properties/createdTime desc&$top=3` 检查是否已创建
-22. **Copilot Studio Plan 切换**（仅 Workflow）：
-    - 从 flow 详情获取 `workflowEntityId`
-    - 获取 Dataverse token（scope: `https://{dataverseOrg}/user_impersonation offline_access`）
-    - `PATCH .../api/data/v9.2/workflows({entityId})` body: `{"modernflowtype": 1}`
+19. **获取 token** — `scope: https://<YOUR_ORG>.crm.dynamics.com/user_impersonation offline_access`（从 `.token-cache.json` 刷新）
+20. **POST 创建** — `POST https://<YOUR_ORG>.crm.dynamics.com/api/data/v9.2/workflows`。body 6 个顶层字段：
+    ```jsonc
+    {
+      "name": "[AutoGen] My Workflow",
+      "category": 5,             // Cloud Flow
+      "type": 1,                 // Definition
+      "modernflowtype": 1,       // 创建时一次性带入，不需二次 PATCH
+      "primaryentity": "none",
+      "clientdata": "{...stringified JSON...}"   // 含 graph (Workflow) 或不含 graph (普通 Flow)
+    }
+    ```
+    返回 `201 Created`，响应体含新 `workflowid`。
+21. **调 checkFlowAlerts (可选 / 保存后 lint)** — `POST {envApi}/powerautomate/flows/{flowId}/checkFlowAlerts?api-version=1`，body 是**不含 graph 的简化 definition**，返回 `{errors:[], warnings:[]}`。错误需在下一次 PATCH 修正。
+22. **部署防护** — POST 返回错误时**不要盲目重试**，先查 `GET .../workflows?$orderby=createdon desc&$top=3` 检查是否已创建。
+
+#### Phase 6-Legacy：走 Flow Management API（旧路径，仅在 Dataverse 路径报错时 fallback）
+
+23a. POST `https://api.flow.microsoft.com/.../environments/{envId}/flows?api-version=2016-11-01`，body 是 Flow API 格式（`properties.definition` + `properties.connectionReferences`）。成功后另需 `PATCH .../workflows({entityId})` 设 `modernflowtype=1`（旧路径才需要二次 PATCH）。
 
 #### Phase 7：PATCH graph（如果 Phase 5 的 graph 没在 Phase 4 一起 POST）
 
@@ -160,7 +183,7 @@ Workflow 必须切换到 **Copilot Studio plan** 才是真正的 Workflow。通�
 ```powershell
 # 1. 部署 flow 后，获取 workflowEntityId（从 Flow API 返回的 properties.workflowEntityId）
 # 2. PATCH Dataverse workflows 表的 modernflowtype 字段
-PATCH https://{dataverseOrg}/api/data/v9.2/workflows({workflowEntityId})
+PATCH https://<YOUR_ORG>.crm.dynamics.com/api/data/v9.2/workflows({workflowEntityId})
 Body: {"modernflowtype": 1}
 ```
 
@@ -308,7 +331,12 @@ Body: {}
 
 ## 已部署 Flow 状态
 
-此表由各项目自己的 `flow-dictionary.json` 维护，不在公共仓库中记录。
+| Flow | ID | 状态 |
+|---|---|---|
+| Test-List Top5 to Teams | `282debe2-636f-771c-9fe6-7532ba610292` | Started ✅ |
+| Test-List Grouped Email Report | `8aab0abd-052d-b5f8-8b33-92c346e8055a` | Started ✅ |
+| Smart Invoice v3.1 (AsyncV2 Fixed) | `8722e7ed-c011-3ecd-0c02-86da70be7fa9` | Started（Agent PDF 问题） |
+| Smart Invoice v2 (Multimodal) | `cb1cfb73-1f28-11fc-c728-1f59852defd0` | Started |
 
 ## Host 节点格式规则（从 connector-prerequisites 合并）
 
@@ -350,3 +378,94 @@ ExecuteCopilotAsyncV2 connector 的 `body/attachments[].contentUrl` 参数：
 
 在 flow 中引用 action 的输出字段之前，**必须先查 Swagger 或通过 repetitions API 查看实际输出**，验证字段名和值。
 不要凭猜测使用 `body/{Link}` 等动态属性名——很可能返回 null。
+
+### shared_agentnode/InvokeDefinition 输出双形态（2026-06-04 确认）
+
+**同一个 connector + 同一个 operationId，同一个 flow 里两个 Agent 节点输出 shape 不一致**：
+- 同步返回（一般场景）：`body = { conversationId, status, result }` ← `result` 是 JSON 字符串，几 KB
+- 流式返回（触发条件未明，可能与 model/prompt 长度有关）：`body = { message, activities }` ← `message` 才是最终 JSON，`activities` 含 100+ streaming chunks，可达 100+ KB
+
+**修法**：Parse 节点 content 用 coalesce 兜底：
+```
+@{coalesce(body('Agent_Node')?['result'], body('Agent_Node')?['message'])}
+```
+
+**踩坑案例**：V5 Service Email Workflow 的 `Return_Agent_Query` 走流式、`Tech_Assistance_Agent` 走同步，同样表达式 `?['result']` 在 Return 分支永远 null，Parse 报 `content expects value but got null`。
+
+### ParseJson schema=string 时数值比较必须 int() 转换（2026-06-04）
+
+ParseJson 节点 schema 里把数值字段写成 string 示例（如 `"orderAmount":"123"`），Parse 出来的就是 string 类型。If/Switch 节点用 `lessOrEquals` / `less` 等数值比较时**必须显式转换**：
+```
+@less(int(body('Parse_Agent_Response')?['orderAmount']), 200)
+```
+不转直接比较 → 字符串字典序比较（`"1299" < "200"` 为 true），逻辑全错。
+
+### Dataverse salesorder/invoice 的 totalamount 写入坑（2026-06-04）
+
+`salesorders` / `invoices` / `quotes` 表的 `totalamount` 是 rollup-like 字段：
+- POST 创建时即使 body 带 `totalamount: 129.99`，记录建出来仍是 0
+- **必须 PATCH 二次写入**才能持久化
+- 同理 `totaltax` / `totalamountlessfreight` / `totallineitemamount` 都有这个行为
+
+### Dataverse overriddencreatedon 在新建时生效（2026-06-04 确认）
+
+跟一般认知相反：**新建 record 时 body 里带 `overriddencreatedon: "2026-06-01T..."` 是会生效的**，会把 `createdon` 字段反向设置成这个时间。用来造历史测试数据非常有用（如造"3 天前"的订单）。
+- 字段格式：ISO 8601
+- 限制：只能往**过去**回溯，不能设未来
+
+### Flow Management API $top 上限 50（2026-06-04）
+
+`GET .../flows?api-version=2016-11-01&$top=200` → 400 `InvalidTopInQueryString`。
+Flow Mgmt API 的 `$top` 上限是 **50**，不是常见的 100/200。要更多记录用 `$skiptoken` 翻页。
+
+### Dataverse EntityDefinitions 不支持 startswith 过滤（2026-06-04）
+
+`GET /EntityDefinitions?$filter=startswith(LogicalName,'msdyn_approv')` → 400 `The "startswith" function isn't supported for Metadata Entities`。
+**解法**：GET 全表 `?$select=LogicalName,EntitySetName` 再客户端 `Where-Object` / `filter` 过滤。
+
+### Approvals API 必带 assignedTo/id filter（2026-06-04）
+
+```
+GET /providers/Microsoft.ProcessSimple/environments/{envId}/approvalRequests?api-version=2016-11-01
+```
+不带 `$filter` → 400 `A $filter query specifying properties/assignedTo/id is required`。
+正确：
+```
+?$filter=properties/assignedTo/id eq '{userObjectId}' and properties/status eq 'Active'
+```
+`userObjectId` 从 Graph `GET /me` 拿。
+
+### Advanced Approvals 不发 Outlook 邮件（2026-06-04 ⚠️ 重要）
+
+`shared_advancedapprovals` connector 的 `RequestForInformation` 操作 ≠ 标准 `shared_approvals`。Advanced Approvals **不通过 Outlook 邮件**送审批 Adaptive Card：
+- ❌ Outlook inbox 没有 "Tech Reply Review" 邮件
+- ❌ Outlook Junk / Other tab 没有
+- ❌ Power Automate Approvals 页面（`make.powerautomate.com/.../approvals/received`）也看不到（那里只显示标准 Approvals）
+- ❌ Dataverse `msdyn_flow_approvalrequest*` 表不存这个（那是标准 Approvals 的表）
+- ✅ **审批通过 Teams Approvals app 或 Adaptive Card webhook 推送**
+
+**生成 flow 时的影响**：
+- 如果要 AI/API 端到端测试 → **不要用 Advanced Approvals**，用标准 `shared_approvals/StartAndWaitForAnApproval` 才能在 Outlook 收审批 + 可通过 API 自动响应
+- 如果客户场景必须用 Advanced Approvals → 测试时必须人工去 Teams 点
+
+**已知未解**：Advanced Approvals 的 RFI 请求存在哪个表 / 怎么通过 API 响应 — 暂未找到。
+
+### 测试发邮件触发 Flow：禁止同账号自发自收（2026-06-04）
+
+Office 365 Outlook trigger `OnNewEmailV3` 监听目标 inbox 新邮件：
+- ❌ 用目标账号自己给自己发邮件 → trigger 不一定触发（同账号同 mailbox 的内部 message 可能不计为 "new email"）
+- ✅ 用**同租户的另一个账号**或**外部邮箱**发，trigger 稳定触发
+
+### Power Automate Approvals 页面 URL 必须带 envId（2026-06-04）
+
+`https://make.powerautomate.com/approvals/received` 默认进 tenant default 环境（Contoso default），看不到其他环境的 approvals。
+**正确**：
+```
+https://make.powerautomate.com/environments/{envId}/approvals/received
+```
+
+### 测试 Agent 时邮件正文禁止硬编码 Agent 应自查的数据（2026-06-04 用户偏好）
+
+发测试邮件时，**不要在正文里写金额、日期、订单号等 Agent 应该从 Dataverse 自查的数据**。否则无法验证 Agent 是真的通过 MCP 查数据，还是从邮件正文直接抄。
+
+正确写法：邮件只描述"我要退某个产品"或"我有什么问题"，让 Agent 自己从发件人邮箱 → account → salesorder/incident 全链路查。

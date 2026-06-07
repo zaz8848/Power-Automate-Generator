@@ -1,4 +1,4 @@
-﻿{
+{
     "id":  "shared_m365copilot-5feb5abfdd9aa0a613-5f0d555b53ebbad68c_CreateConversation",
     "connector":  "shared_m365copilot-5feb5abfdd9aa0a613-5f0d555b53ebbad68c",
     "connectorBase":  "shared_m365copilot-5feb5abfdd9aa0a613-5f0d555b53ebbad68c",
@@ -14,7 +14,7 @@
     "learnedAt":  "2026-05-26",
     "verified":  true,
     "environment":  [
-                        "orgdf331f66.crm5.dynamics.com"
+                        "<YOUR_ORG>.crm.dynamics.com"
                     ],
     "template":  {
                      "Create_conversation":  {

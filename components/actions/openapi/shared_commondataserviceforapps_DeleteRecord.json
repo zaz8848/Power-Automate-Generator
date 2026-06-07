@@ -1,4 +1,4 @@
-﻿{
+{
     "id":  "shared_commondataserviceforapps_DeleteRecord",
     "connector":  "shared_commondataserviceforapps",
     "connectorBase":  "shared_commondataserviceforapps",
@@ -14,7 +14,7 @@
     "learnedAt":  "2026-05-26",
     "verified":  true,
     "environment":  [
-                        "orgdf331f66.crm5.dynamics.com"
+                        "<YOUR_ORG>.crm.dynamics.com"
                     ],
     "template":  {
                      "Delete_a_row:_Delete_existing_Conversation_Analyzer_records":  {

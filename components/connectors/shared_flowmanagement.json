@@ -1,4 +1,4 @@
-﻿{
+{
     "id":  "shared_flowmanagement",
     "displayName":  "Power Automate Management",
     "connectorId":  "/providers/Microsoft.PowerApps/apis/shared_flowmanagement",

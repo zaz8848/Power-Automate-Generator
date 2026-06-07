@@ -1,78 +1,250 @@
-﻿{
-    "id":  "shared_office365_SendEmailV2",
-    "connector":  "shared_office365",
-    "connectorBase":  "shared_office365",
-    "operationId":  "SendEmailV2",
-    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_office365",
-    "type":  "OpenApiConnection",
-    "learnedFrom":  [
-                        "c6080ca7-f274-8901-960a-c23f63a84ab1",
-                        "09985c04-ada5-f011-bbd2-000d3ac79569",
-                        "978f64a3-261a-cb58-edd6-0e2cf4179460",
-                        "23f83b71-ede8-f1e8-f573-5938648561e9",
-                        "91fbfdcc-d863-f011-bec3-6045bd00625f"
+{
+  "id": "shared_office365_SendEmailV2",
+  "connector": "shared_office365",
+  "connectorBase": "shared_office365",
+  "operationId": "SendEmailV2",
+  "apiId": "/providers/Microsoft.PowerApps/apis/shared_office365",
+  "type": "OpenApiConnection",
+  "learnedFrom": [
+    "c6080ca7-f274-8901-960a-c23f63a84ab1",
+    "09985c04-ada5-f011-bbd2-000d3ac79569",
+    "978f64a3-261a-cb58-edd6-0e2cf4179460",
+    "23f83b71-ede8-f1e8-f573-5938648561e9",
+    "91fbfdcc-d863-f011-bec3-6045bd00625f"
+  ],
+  "learnedFromName": [
+    "Untitled flow",
+    "BeOne-SendInformationToEmail",
+    "SendInfoEmail（Multilingual）",
+    "Untitled flow",
+    "Automatic Flow - Send Translated Document When Translation Log Status Changes to Success"
+  ],
+  "learnedAt": "2026-05-26",
+  "verified": true,
+  "environment": [
+    "<YOUR_ORG>.crm.dynamics.com",
+    "<YOUR_ORG>.crm.dynamics.com",
+    "org1cd97ca4.crm.dynamics.com"
+  ],
+  "template": {
+    "Send_an_email_(V2)": {
+      "type": "OpenApiConnection",
+      "inputs": {
+        "parameters": {
+          "emailMessage/To": "@outputs('Get_a_row_by_ID-Dog')?['body/internalemailaddress']",
+          "emailMessage/Subject": "工单已分配，请及时处理",
+          "emailMessage/Body": "<p class=\"editor-paragraph\">工单已分配，请及时处理</p><br><p class=\"editor-paragraph\">@{triggerOutputs()?['body/cre47_workordername']}</p>",
+          "emailMessage/Importance": "Normal"
+        },
+        "host": {
+          "apiId": "/providers/Microsoft.PowerApps/apis/shared_office365",
+          "operationId": "SendEmailV2",
+          "connectionName": "shared_office365"
+        }
+      },
+      "runAfter": {
+        "Get_a_row_by_ID-Dog": [
+          "SUCCEEDED"
+        ]
+      }
+    }
+  },
+  "inputSchema": [
+    {
+      "name": "connectionId",
+      "in": "path",
+      "required": true,
+      "x-ms-visibility": "internal",
+      "type": "string"
+    },
+    {
+      "name": "emailMessage",
+      "in": "body",
+      "description": "Email.",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/ClientSendHtmlMessage"
+      },
+      "x-ms-summary": "Email"
+    }
+  ],
+  "swaggerLearned": true,
+  "outputSchema": {
+    "type": "object",
+    "description": "No response schema in Swagger"
+  },
+  "graphConvertible": true,
+  "graphNodeType": "connector",
+  "graphTemplate": {
+    "type": "connector",
+    "version": 1,
+    "data": {
+      "config": {
+        "apiName": "shared_office365",
+        "displayName": "Office 365 Outlook",
+        "iconUri": "https://static.powerapps.com/resource/ppcr/releases/v1.0.1812/1.0.1812.4763/office365/icon.png",
+        "brandColor": "#0078D4",
+        "operationName": "SendEmailV2",
+        "operationType": "OpenApiConnection",
+        "parametersSchema": {
+          "type": "object",
+          "properties": {
+            "emailMessage": {
+              "type": "object",
+              "title": "Email",
+              "properties": {
+                "To": {
+                  "type": "string",
+                  "title": "To",
+                  "x-ms-dynamic-list": {
+                    "builtInOperation": "AadGraph.GetUsers",
+                    "parameters": {},
+                    "itemValuePath": "mail"
+                  },
+                  "format": "email",
+                  "description": "Specify email addresses separated by semicolons like someone@contoso.com",
+                  "x-ms-property-name-alias": "emailMessage/To"
+                },
+                "Subject": {
+                  "type": "string",
+                  "title": "Subject",
+                  "description": "Specify the subject of the mail",
+                  "x-ms-property-name-alias": "emailMessage/Subject"
+                },
+                "Body": {
+                  "type": "string",
+                  "title": "Body",
+                  "format": "html",
+                  "description": "Specify the body of the mail",
+                  "x-ms-property-name-alias": "emailMessage/Body"
+                },
+                "From": {
+                  "type": "string",
+                  "title": "From (Send as)",
+                  "format": "email",
+                  "description": "Email address to send mail from (requires \"Send as\" or \"Send on behalf of\" permission for that mailbox). For more info on granting permissions please refer https://docs.microsoft.com/office365/admin/manage/send-email-as-distribution-list",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-property-name-alias": "emailMessage/From"
+                },
+                "Cc": {
+                  "type": "string",
+                  "title": "CC",
+                  "x-ms-dynamic-list": {
+                    "builtInOperation": "AadGraph.GetUsers",
+                    "parameters": {},
+                    "itemValuePath": "mail"
+                  },
+                  "format": "email",
+                  "description": "Specify email addresses separated by semicolons like someone@contoso.com",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-property-name-alias": "emailMessage/Cc"
+                },
+                "Bcc": {
+                  "type": "string",
+                  "title": "BCC",
+                  "x-ms-dynamic-list": {
+                    "builtInOperation": "AadGraph.GetUsers",
+                    "parameters": {},
+                    "itemValuePath": "mail"
+                  },
+                  "format": "email",
+                  "description": "Specify email addresses separated by semicolons like someone@contoso.com",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-property-name-alias": "emailMessage/Bcc"
+                },
+                "Attachments": {
+                  "type": "array",
+                  "title": "Attachments",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "Name": {
+                        "type": "string",
+                        "title": "Name",
+                        "description": "Attachment name",
+                        "x-ms-property-name-alias": "Name"
+                      },
+                      "ContentBytes": {
+                        "type": "string",
+                        "title": "Content",
+                        "format": "byte",
+                        "description": "Attachment content",
+                        "x-ms-property-name-alias": "ContentBytes"
+                      }
+                    },
+                    "required": [
+                      "ContentBytes",
+                      "Name"
                     ],
-    "learnedFromName":  [
-                            "Untitled flow",
-                            "BeOne-SendInformationToEmail",
-                            "SendInfoEmail（Multilingual）",
-                            "Untitled flow",
-                            "Automatic Flow - Send Translated Document When Translation Log Status Changes to Success"
-                        ],
-    "learnedAt":  "2026-05-26",
-    "verified":  true,
-    "environment":  [
-                        "{dataverseOrg}",
-                        "orgdf331f66.crm5.dynamics.com",
-                        "org1cd97ca4.crm.dynamics.com"
-                    ],
-    "template":  {
-                     "Send_an_email_(V2)":  {
-                                                "type":  "OpenApiConnection",
-                                                "inputs":  {
-                                                               "parameters":  {
-                                                                                  "emailMessage/To":  "@outputs(\u0027Get_a_row_by_ID-Dog\u0027)?[\u0027body/internalemailaddress\u0027]",
-                                                                                  "emailMessage/Subject":  "工单已分配，请及时处理",
-                                                                                  "emailMessage/Body":  "\u003cp class=\"editor-paragraph\"\u003e工单已分配，请及时处理\u003c/p\u003e\u003cbr\u003e\u003cp class=\"editor-paragraph\"\u003e@{triggerOutputs()?[\u0027body/cre47_workordername\u0027]}\u003c/p\u003e",
-                                                                                  "emailMessage/Importance":  "Normal"
-                                                                              },
-                                                               "host":  {
-                                                                            "apiId":  "/providers/Microsoft.PowerApps/apis/shared_office365",
-                                                                            "operationId":  "SendEmailV2",
-                                                                            "connectionName":  "shared_office365"
-                                                                        }
-                                                           },
-                                                "runAfter":  {
-                                                                 "Get_a_row_by_ID-Dog":  [
-                                                                                             "SUCCEEDED"
-                                                                                         ]
-                                                             }
-                                            }
-                 },
-    "inputSchema":  [
-                        {
-                            "name":  "connectionId",
-                            "in":  "path",
-                            "required":  true,
-                            "x-ms-visibility":  "internal",
-                            "type":  "string"
-                        },
-                        {
-                            "name":  "emailMessage",
-                            "in":  "body",
-                            "description":  "Email.",
-                            "required":  true,
-                            "schema":  {
-                                           "$ref":  "#/definitions/ClientSendHtmlMessage"
-                                       },
-                            "x-ms-summary":  "Email"
-                        }
-                    ],
-    "swaggerLearned":  true,
-    "outputSchema":  {
-                         "type":  "object",
-                         "description":  "No response schema in Swagger"
-                     },
-    "graphConvertible":  true,
-    "graphNodeType":  "connector"
+                    "description": "Attachment"
+                  },
+                  "description": "Attachments",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-property-name-alias": "emailMessage/Attachments"
+                },
+                "Sensitivity": {
+                  "type": "string",
+                  "title": "Sensitivity",
+                  "x-ms-dynamic-list": {
+                    "operationId": "GetSensitivityLabels",
+                    "parameters": {},
+                    "itemValuePath": "Id",
+                    "itemTitlePath": "DisplayName"
+                  },
+                  "description": "Sensitivity",
+                  "x-ms-visibility": "important",
+                  "x-ms-property-name-alias": "emailMessage/Sensitivity"
+                },
+                "ReplyTo": {
+                  "type": "string",
+                  "title": "Reply To",
+                  "format": "email",
+                  "description": "The email addresses to use when replying",
+                  "x-ms-visibility": "advanced",
+                  "x-ms-property-name-alias": "emailMessage/ReplyTo"
+                },
+                "Importance": {
+                  "type": "string",
+                  "title": "Importance",
+                  "description": "Importance",
+                  "default": "Normal",
+                  "enum": [
+                    "Low",
+                    "Normal",
+                    "High"
+                  ],
+                  "x-ms-visibility": "advanced",
+                  "x-ms-property-name-alias": "emailMessage/Importance"
+                }
+              },
+              "required": [
+                "Body",
+                "Subject",
+                "To"
+              ],
+              "description": "Email.",
+              "x-ms-property-name-alias": "emailMessage"
+            }
+          },
+          "required": [
+            "emailMessage"
+          ]
+        },
+        "parameters": {
+          "emailMessage/Importance": "Normal",
+          "emailMessage/To": "alexb@<YOUR_TENANT>.OnMicrosoft.com",
+          "emailMessage/Subject": "@{outputs('prompt-11c056cb-9a5a-4694-9343-ee931b824e75')?['body']?['responsev2']?['predictionOutput']?['structuredOutput']?['subject']}  ",
+          "emailMessage/Body": "<div>@{outputs('prompt-11c056cb-9a5a-4694-9343-ee931b824e75')?['body']?['responsev2']?['predictionOutput']?['structuredOutput']?['body']}</div><div><br></div><div><b><br></b></div>"
+        },
+        "connectionName": "shared_office365"
+      }
+    },
+    "measured": {
+      "width": 240,
+      "height": 66
+    },
+    "graphTemplateNotes": "Auto-merged from 4 flow(s); inspect before relying on it."
+  },
+  "graphTemplateVerified": false,
+  "graphTemplateSource": "extract_graph_templates.py (auto-merged from 4 flow(s) on Administrator)"
 }

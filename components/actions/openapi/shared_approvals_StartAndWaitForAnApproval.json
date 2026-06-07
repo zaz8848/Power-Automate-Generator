@@ -1,4 +1,4 @@
-﻿{
+{
     "id":  "shared_approvals_StartAndWaitForAnApproval",
     "connector":  "shared_approvals",
     "connectorBase":  "shared_approvals",
@@ -14,7 +14,7 @@
     "learnedAt":  "2026-05-26",
     "verified":  true,
     "environment":  [
-                        "orgdf331f66.crm5.dynamics.com"
+                        "<YOUR_ORG>.crm.dynamics.com"
                     ],
     "template":  {
                      "Start_and_wait_for_an_approval-HR":  {
@@ -23,7 +23,7 @@
                                                                               "parameters":  {
                                                                                                  "approvalType":  "Basic",
                                                                                                  "WebhookApprovalCreationInput/title":  "【@{triggerBody()?[\u0027Title\u0027]}】-测试审批1112",
-                                                                                                 "WebhookApprovalCreationInput/assignedTo":  "user@contoso.onmicrosoft.com",
+                                                                                                 "WebhookApprovalCreationInput/assignedTo":  "<YOUR_USER_EMAIL>",
                                                                                                  "WebhookApprovalCreationInput/details":  "下面是一个简洁又美观的 **Markdown 请假申请模板**，你可以直接复制使用或根据需要调整：\n\n***\n\n## 📝 请假申请\n\n**申请人**：`@{triggerBody()?[\u0027Author/DisplayName\u0027]}`  \n**部门**：`@{triggerBody()?[\u0027Author/Department\u0027]}`  \n**职位**：`[填写职位]`  \n**申请日期**：`@{triggerBody()?[\u0027Created\u0027]}`\n\n***\n\n### 📅 请假详情\n\n*   **请假类型**：`事假 / 病假 / 年假 / 其他`\n*   **开始时间**：`[YYYY-MM-DD HH:mm]`\n*   **结束时间**：`[YYYY-MM-DD HH:mm]`\n*   **请假天数**：`[X 天 / X 小时]`\n\n***\n\n### 🧾 请假原因\n\n@{triggerBody()?[\u0027OData__x4f11__x5047__x539f__x56e0_\u0027]}\n\n***\n\n### ✅ 审批流程\n\n*   **直属主管**：`[姓名]`\n*   **审批状态**：`待审批 / 已批准 / 已拒绝`\n\n***\n\n### 📌 备注\n\n    [可选：补充说明或附件信息]\n\n***\n\n\n",
                                                                                                  "WebhookApprovalCreationInput/itemLink":  "@triggerBody()?[\u0027{Link}\u0027]",
                                                                                                  "WebhookApprovalCreationInput/itemLinkDescription":  "@triggerBody()?[\u0027Title\u0027]",

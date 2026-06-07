@@ -1,4 +1,4 @@
-﻿{
+{
     "id":  "shared_powerbi_ExecuteDatasetQuery",
     "connector":  "shared_powerbi",
     "connectorBase":  "shared_powerbi",
@@ -14,7 +14,7 @@
     "learnedAt":  "2026-05-26",
     "verified":  true,
     "environment":  [
-                        "orgdf331f66.crm5.dynamics.com"
+                        "<YOUR_ORG>.crm.dynamics.com"
                     ],
     "template":  {
                      "Run_a_query_against_a_dataset":  {

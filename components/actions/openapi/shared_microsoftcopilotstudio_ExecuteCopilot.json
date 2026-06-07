@@ -1,4 +1,4 @@
-﻿{
+{
     "id":  "shared_microsoftcopilotstudio_ExecuteCopilot",
     "connector":  "shared_microsoftcopilotstudio",
     "connectorBase":  "shared_microsoftcopilotstudio",
@@ -32,8 +32,8 @@
     "learnedAt":  "2026-05-26",
     "verified":  true,
     "environment":  [
-                        "{dataverseOrg}",
-                        "orgdf331f66.crm5.dynamics.com",
+                        "<YOUR_ORG>.crm.dynamics.com",
+                        "<YOUR_ORG>.crm.dynamics.com",
                         "org1cd97ca4.crm.dynamics.com"
                     ],
     "template":  {
@@ -42,7 +42,7 @@
                                                                                     "inputs":  {
                                                                                                    "parameters":  {
                                                                                                                       "Copilot":  "cre47_agentR_VtwP",
-                                                                                                                      "body/message":  "你是邮件路由触发流程。收到新邮件后，请严格按以下规则处理这封邮件：\n1. 使用 Dataverse MCP 先查询 Active 的 Routing Rule，再根据规则和默认分类判断 Category 与 Assigned Team。\n2. 提取 Subject、Sender、Received Time、Detected Language、Summary、Category、Assigned Team、Priority、Confidence、Reason、Needs Human Review、Review Reason、Status。\n3. 如果可以明确分配，Status=Routed；如果涉及金额、合同、合规、权限、客户承诺、多个类别或置信度低于 0.75，Status=Needs Review 且 Needs Human Review=true。\n4. 处理完成后，允许使用 Dataverse MCP 创建 Email Routing Log 记录，也可以按需更新该记录；不要删除任何 Dataverse 数据。\n5. 如果 Teams 工具可用，请向负责团队或人工审核团队发送通知，内容包含主题、类别、优先级、状态、负责人/团队、摘要和审核原因。\n6. 默认用中文输出结构化处理结果；如果邮件语言是英文或日文，也要记录 Detected Language 并保留关键原文。\n\n【已经包含了MessageId（@{outputs(\u0027Compose\u0027)?[\u0027id\u0027]}），你需要创建记录的时候自动填写上去 】\n所有邮件信息如下\nMailBox:\nuser@contoso.onmicrosoft.com\n\n@{outputs(\u0027Compose\u0027)}\n\nFrom:@{outputs(\u0027Compose\u0027)?[\u0027from\u0027]}\n主题：@{outputs(\u0027Compose\u0027)?[\u0027subject\u0027]}\n接收时间：@{outputs(\u0027Compose\u0027)?[\u0027receivedDateTime\u0027]}\n\n\n邮件正文如下：\nUse content from @{body(\u0027Html_to_text\u0027)}"
+                                                                                                                      "body/message":  "你是邮件路由触发流程。收到新邮件后，请严格按以下规则处理这封邮件：\n1. 使用 Dataverse MCP 先查询 Active 的 Routing Rule，再根据规则和默认分类判断 Category 与 Assigned Team。\n2. 提取 Subject、Sender、Received Time、Detected Language、Summary、Category、Assigned Team、Priority、Confidence、Reason、Needs Human Review、Review Reason、Status。\n3. 如果可以明确分配，Status=Routed；如果涉及金额、合同、合规、权限、客户承诺、多个类别或置信度低于 0.75，Status=Needs Review 且 Needs Human Review=true。\n4. 处理完成后，允许使用 Dataverse MCP 创建 Email Routing Log 记录，也可以按需更新该记录；不要删除任何 Dataverse 数据。\n5. 如果 Teams 工具可用，请向负责团队或人工审核团队发送通知，内容包含主题、类别、优先级、状态、负责人/团队、摘要和审核原因。\n6. 默认用中文输出结构化处理结果；如果邮件语言是英文或日文，也要记录 Detected Language 并保留关键原文。\n\n【已经包含了MessageId（@{outputs(\u0027Compose\u0027)?[\u0027id\u0027]}），你需要创建记录的时候自动填写上去 】\n所有邮件信息如下\nMailBox:\n<YOUR_USER_EMAIL>\n\n@{outputs(\u0027Compose\u0027)}\n\nFrom:@{outputs(\u0027Compose\u0027)?[\u0027from\u0027]}\n主题：@{outputs(\u0027Compose\u0027)?[\u0027subject\u0027]}\n接收时间：@{outputs(\u0027Compose\u0027)?[\u0027receivedDateTime\u0027]}\n\n\n邮件正文如下：\nUse content from @{body(\u0027Html_to_text\u0027)}"
                                                                                                                   },
                                                                                                    "host":  {
                                                                                                                 "apiId":  "/providers/Microsoft.PowerApps/apis/shared_microsoftcopilotstudio",

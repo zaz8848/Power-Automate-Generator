@@ -1,4 +1,4 @@
-﻿{
+{
     "id":  "shared_teams_PostMessageToConversation",
     "connector":  "shared_teams",
     "connectorBase":  "shared_teams",
@@ -14,7 +14,7 @@
     "learnedAt":  "2026-05-26",
     "verified":  true,
     "environment":  [
-                        "orgdf331f66.crm5.dynamics.com"
+                        "<YOUR_ORG>.crm.dynamics.com"
                     ],
     "template":  {
                      "Post_message_in_a_chat_or_channel":  {
@@ -36,7 +36,7 @@
                                                                               "parameters":  {
                                                                                                  "poster":  "Flow bot",
                                                                                                  "location":  "Chat with Flow bot",
-                                                                                                 "body/recipient":  "user@contoso.onmicrosoft.com;",
+                                                                                                 "body/recipient":  "<YOUR_USER_EMAIL>;",
                                                                                                  "body/messageBody":  "\u003cp\u003e恭喜你！打卡成功了！\u003cbr\u003e\n你的数据传输为@{outputs(\u0027Compose\u0027)}\u003c/p\u003e"
                                                                                              },
                                                                               "authentication":  "@parameters(\u0027$authentication\u0027)"

@@ -1,4 +1,4 @@
-﻿{
+{
     "id":  "shared_commondataserviceforapps_GetItem",
     "connector":  "shared_commondataserviceforapps",
     "connectorBase":  "shared_commondataserviceforapps",
@@ -60,8 +60,8 @@
     "learnedAt":  "2026-05-26",
     "verified":  true,
     "environment":  [
-                        "{dataverseOrg}",
-                        "orgdf331f66.crm5.dynamics.com",
+                        "<YOUR_ORG>.crm.dynamics.com",
+                        "<YOUR_ORG>.crm.dynamics.com",
                         "org1cd97ca4.crm.dynamics.com"
                     ],
     "template":  {

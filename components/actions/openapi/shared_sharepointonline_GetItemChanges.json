@@ -1,4 +1,4 @@
-﻿{
+{
     "id":  "shared_sharepointonline_GetItemChanges",
     "connector":  "shared_sharepointonline",
     "connectorBase":  "shared_sharepointonline",
@@ -16,7 +16,7 @@
     "learnedAt":  "2026-05-26",
     "verified":  true,
     "environment":  [
-                        "{dataverseOrg}"
+                        "<YOUR_ORG>.crm.dynamics.com"
                     ],
     "template":  {
                      "Get_changes_for_an_item_or_a_file_(properties_only)":  {

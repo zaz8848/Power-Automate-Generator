@@ -1,4 +1,4 @@
-﻿{
+{
     "id":  "shared_excelonlinebusiness_GetItems",
     "connector":  "shared_excelonlinebusiness",
     "connectorBase":  "shared_excelonlinebusiness",
@@ -22,7 +22,7 @@
     "learnedAt":  "2026-05-26",
     "verified":  true,
     "environment":  [
-                        "orgdf331f66.crm5.dynamics.com",
+                        "<YOUR_ORG>.crm.dynamics.com",
                         "org1cd97ca4.crm.dynamics.com"
                     ],
     "template":  {
@@ -43,7 +43,7 @@
                                                                                       "apiId":  "/providers/Microsoft.PowerApps/apis/shared_excelonlinebusiness"
                                                                                   },
                                                                          "parameters":  {
-                                                                                            "source":  "sites/contoso.sharepoint.com,{siteId},{webId}",
+                                                                                            "source":  "sites/<YOUR_TENANT>.sharepoint.com,057b9b5e-0ee9-4bb5-aefb-72a2e0d80b1f,2656a4ef-ec54-4a49-b502-fd7560325a4b",
                                                                                             "drive":  "b!Xpt7BekOtUuu-3Ki4NgLH--kViZU7ElKtQL9dWAyWkuMyWS3dYDiQ5ds2SaAOyF_",
                                                                                             "file":  "01UIIDQTSLX3R75BCGSJFLPRQTBMQAWCAX",
                                                                                             "table":  "{1A5E3F72-9698-45EF-A464-6A0E97F447C8}"

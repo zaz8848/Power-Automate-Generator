@@ -1,0 +1,60 @@
+{
+    "id": "shared_powertools",
+    "displayName": "Microsoft Power Apps",
+    "type": "MCP",
+    "learnedFrom": [
+        "<TEST_WORKFLOW_ENTITY_ID>"
+    ],
+    "learnedFromName": [
+        "[AutoGen] Service Email Workflow v5"
+    ],
+    "learnedAt": "2026-06-04",
+    "verified": true,
+    "connectionId": "6e855099a3c644ddac9cee35a5162587",
+    "operations": [
+        {
+            "operationId": "InvokeMCP",
+            "summary": "Power Apps MCP Server",
+            "description": "Provides MCP server access to Power Apps capabilities including request_assistance for Agent Feed tasks"
+        }
+    ],
+    "mcpTools": [
+        {
+            "name": "request_assistance",
+            "description": "Create an Agent Feed task that requires human review/confirmation",
+            "usage": "Use request_assistance to create a task in the Agent Feed. The task will appear in the user's Power Apps Agent Feed for review.",
+            "parameters": {
+                "title": "Task title - should identify the source workflow (e.g. 'FlowWeekly', 'ReturnReview')",
+                "description": "What the human reviewer needs to check/confirm",
+                "entityName": "Dataverse table logical name to bind the task to (e.g. 'crf5c_orderrecord', 'incident')",
+                "recordId": "The Dataverse record ID to associate with the task",
+                "statusOptions": "Describe what status changes the user can make (e.g. 'Assign Tasks' to accept, 'Cancel' to reject)"
+            },
+            "samplePrompt": "Use Power Apps MCP Server request_assistance to create a task:\n- title: 'ReturnReview'\n- Ask the reviewer to check the return request details and confirm\n- If accepted, change status to 'Approved'; if rejected, change to 'Cancelled'\n- Bind to entity 'incident' with the created case record ID"
+        }
+    ],
+    "toolConfigForDefinition": {
+        "type": "mcp",
+        "connectorId": "/providers/Microsoft.PowerApps/apis/shared_powertools",
+        "connectionId": "6e855099a3c644ddac9cee35a5162587",
+        "operationId": "InvokeMCP",
+        "connectionMode": "Maker",
+        "displayName": "Microsoft Power Apps — Power Apps MCP Server",
+        "description": "Power Apps MCP Server"
+    },
+    "toolConfigForGraph": {
+        "id": "GENERATE_UUID",
+        "connectorId": "shared_powertools",
+        "operationId": "InvokeMCP",
+        "displayName": "Microsoft Power Apps — Power Apps MCP Server",
+        "description": "Power Apps MCP Server",
+        "connectionReferenceName": "6e855099a3c644ddac9cee35a5162587",
+        "connectionId": "6e855099a3c644ddac9cee35a5162587",
+        "isMcp": true,
+        "iconUri": "https://content.powerapps.com/resource/makerx/static/pauto/images/designeroperations/powertools.png",
+        "brandColor": "#742774",
+        "mcpToolMode": "all",
+        "mcpEnabledTools": []
+    },
+    "notes": "Power Apps MCP connector name is 'shared_powertools' (not 'shared_powerapps'). The request_assistance tool creates Agent Feed tasks for human-in-the-loop scenarios."
+}

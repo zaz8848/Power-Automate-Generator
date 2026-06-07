@@ -1,4 +1,4 @@
-﻿{
+{
     "id":  "shared_microsoftcopilotstudio-1_ExecuteCopilotAsyncV2",
     "connector":  "shared_microsoftcopilotstudio-1",
     "connectorBase":  "shared_microsoftcopilotstudio",
@@ -14,7 +14,7 @@
     "learnedAt":  "2026-05-26",
     "verified":  true,
     "environment":  [
-                        "orgdf331f66.crm5.dynamics.com"
+                        "<YOUR_ORG>.crm.dynamics.com"
                     ],
     "template":  {
                      "Execute_Copilot_And_Wait":  {

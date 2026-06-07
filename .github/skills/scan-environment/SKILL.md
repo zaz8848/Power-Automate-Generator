@@ -1,214 +1,121 @@
 ---
 name: scan-environment
-description: >
-  Scan a Power Platform environment to discover existing flows, connectors, connections, and connection references.
-  Also supports learning flow components into the component library.
-  USE WHEN: 扫描环境、查看有哪些 flow、list flows、scan environment、discover connectors、
-  查 connectionReference、look up connections、学习 flow.
-argument-hint: Specify profile name and what to scan (flows, connectors, connections, or learn a specific flow)
+description: |
+  扫描某个 Power Platform 环境，列出 flow / connector / connectionReference，
+  可选 "学习" 模式批量调用 /learn-component。
+  用户说"扫环境"/"scan environment"/"list flows"/"看看这个 env 有什么"时使用。
+applyTo: '**'
 ---
 
-# Scan Environment
-
-Discovers resources in a Power Platform environment and optionally learns flow components.
-
-## Path Resolution
-
-Resolve the project root from this SKILL.md's path — it is 4 levels up (`.github/skills/scan-environment/SKILL.md` → project root).
-
-```powershell
-$SKILL_ROOT = "D:\A_Code\Automate Generator-public"  # ← AI: replace with actual resolved path
-```
+# /scan-environment — 环境扫描 SOP
 
 ---
 
-## Step 1: Load Profile
+## 触发条件
+
+- 用户说 "扫环境 / scan environment / list flows"
+- 用户说 "看看 <envName> 有什么 flow"
+- 用户说 "学习这个环境所有 flow"（→ 进入"学习模式"）
+
+---
+
+## 输入
+
+- `<envName>` 或 `<envId>`（不给则用当前默认环境）
+- 模式：`list`（默认） / `learn`（批量学组件）
+
+---
+
+## 执行步骤
+
+### Step 1 — 解析环境
 
 ```powershell
-$profilePath = "$SKILL_ROOT\profiles\{profileName}.json"
-$profile = Get-Content $profilePath -Raw | ConvertFrom-Json
+$envs = Get-Content "environments.json" -Raw | ConvertFrom-Json
+$env = $envs | Where-Object { $_.displayName -eq $envName -or $_.id -eq $envId }
 ```
 
-## Step 2: Choose What to Scan
+如果 `environments.json` 不存在或没匹配 → 报告并提示 `/configure-profile`。
 
-Ask the user what they want to discover:
-
-| Target | Description |
-|---|---|
-| **Flows** | List all flows in the environment (name, ID, state, type) |
-| **Connectors** | List available connectors and their operations |
-| **Connections** | List active connections (connector + connection ID) |
-| **Connection References** | List Dataverse connection references (for Workflow generation) |
-| **Dataverse Workflows** | List category=5 workflows (cloud flows stored in Dataverse) |
-| **Learn a flow** | Extract components from a specific flow into the component library |
-
-## Step 3: Get Token & Query
-
-### Scan Flows (Flow Management API)
+### Step 2 — 拉 token
 
 ```powershell
-$flowToken = & "$SKILL_ROOT\.github\skills\create-flow\get-token.ps1" `
-  -ProfilePath $profilePath `
-  -Scope "https://service.flow.microsoft.com/.default offline_access"
-
-# List all flows
-$flows = Invoke-RestMethod `
-  -Uri "https://api.flow.microsoft.com/providers/Microsoft.ProcessSimple/environments/$($profile.environmentId)/flows?api-version=2016-11-01" `
-  -Headers @{Authorization="Bearer $flowToken"}
-
-# Display summary
-$flows.value | ForEach-Object {
-    [PSCustomObject]@{
-        Name   = $_.properties.displayName
-        ID     = $_.name
-        State  = $_.properties.state
-        Type   = if ($_.properties.definitionSummary.triggers[0].swaggerOperationId -like "*virtualagent*") { "Workflow" } else { "Regular" }
-        Modified = $_.properties.lastModifiedTime
-    }
-} | Format-Table -AutoSize
+.\scripts\_get_tokens.ps1
+# 产出 $dvToken / $flowToken / $graphToken / $powerappsToken
 ```
 
-### Scan Connectors (PowerApps API)
+### Step 3 — 列 flows
 
 ```powershell
-$paToken = & "$SKILL_ROOT\.github\skills\create-flow\get-token.ps1" `
-  -ProfilePath $profilePath `
-  -Scope "https://service.powerapps.com/.default offline_access"
-
-$connectors = Invoke-RestMethod `
-  -Uri "https://api.powerapps.com/providers/Microsoft.PowerApps/apis?`$filter=environment eq '$($profile.environmentId)'&api-version=2016-11-01" `
-  -Headers @{Authorization="Bearer $paToken"}
-
-$connectors.value | ForEach-Object {
-    [PSCustomObject]@{
-        Name    = $_.properties.displayName
-        ApiName = $_.name
-        Tier    = $_.properties.tier
-    }
-} | Format-Table -AutoSize
+# Flow Management API
+$flows = Invoke-RestMethod -Uri "https://api.flow.microsoft.com/providers/Microsoft.ProcessSimple/environments/$($env.id)/flows?api-version=2016-11-01&`$top=50" -Headers @{Authorization="Bearer $flowToken"}
 ```
 
-### Scan Connections
+**⚠️ 已知坑**：`$top` 上限 50，多于此数要分页。
+
+### Step 4 — 列 connectionReferences（Dataverse）
 
 ```powershell
-# Uses same PowerApps token as connectors
-$connections = Invoke-RestMethod `
-  -Uri "https://api.powerapps.com/providers/Microsoft.PowerApps/connections?`$filter=environment eq '$($profile.environmentId)'&api-version=2016-11-01" `
-  -Headers @{Authorization="Bearer $paToken"}
-
-$connections.value | ForEach-Object {
-    [PSCustomObject]@{
-        Connector    = $_.properties.apiId.Split('/')[-1]
-        ConnectionId = $_.name
-        Status       = $_.properties.statuses[0].status
-        CreatedBy    = $_.properties.createdBy.displayName
-    }
-} | Format-Table -AutoSize
+$crefs = Invoke-RestMethod -Uri "$($env.dataverseUrl)/api/data/v9.2/connectionreferences?`$select=connectionreferencelogicalname,connectorid,connectionreferencedisplayname" -Headers @{Authorization="Bearer $dvToken"}
 ```
 
-### Scan Connection References (Dataverse)
+### Step 5 — 输出报告
 
-```powershell
-$dvToken = & "$SKILL_ROOT\.github\skills\create-flow\get-token.ps1" `
-  -ProfilePath $profilePath `
-  -Scope "https://$($profile.dataverseOrg)/user_impersonation offline_access"
+```markdown
+**环境**: <envName> (id: ..., dataverse: ...)
 
-$connRefs = Invoke-RestMethod `
-  -Uri "https://$($profile.dataverseOrg)/api/data/v9.2/connectionreferences?`$select=connectionreferencelogicalname,connectorid,connectionid,connectionreferencedisplayname" `
-  -Headers @{Authorization="Bearer $dvToken"}
+**Flows** (N 条):
+| # | DisplayName | Type | State | FlowId |
+|---|---|---|---|---|
 
-$connRefs.value | ForEach-Object {
-    [PSCustomObject]@{
-        DisplayName    = $_.connectionreferencedisplayname
-        LogicalName    = $_.connectionreferencelogicalname
-        Connector      = ($_.connectorid -split '/')[-1]
-        ConnectionId   = $_.connectionid
-    }
-} | Format-Table -AutoSize
-```
-
-### Scan Dataverse Workflows
-
-```powershell
-# Uses same Dataverse token
-$workflows = Invoke-RestMethod `
-  -Uri "https://$($profile.dataverseOrg)/api/data/v9.2/workflows?`$filter=category eq 5&`$select=name,workflowid,statecode,modifiedon,clientdata&`$orderby=modifiedon desc" `
-  -Headers @{Authorization="Bearer $dvToken"}
-
-$workflows.value | ForEach-Object {
-    [PSCustomObject]@{
-        Name       = $_.name
-        WorkflowId = $_.workflowid
-        State      = if ($_.statecode -eq 1) { "Active" } else { "Draft" }
-        Modified   = $_.modifiedon
-    }
-} | Format-Table -AutoSize
-```
-
-## Step 4: Learn Flow Components (Optional)
-
-When the user says "learn flow X", extract its components into the component library:
-
-### 4a: Get Flow Definition
-
-```powershell
-# Via Flow Management API (current user's flows)
-$flowDetail = Invoke-RestMethod `
-  -Uri "https://api.flow.microsoft.com/providers/Microsoft.ProcessSimple/environments/$($profile.environmentId)/flows/{flowId}?api-version=2016-11-01" `
-  -Headers @{Authorization="Bearer $flowToken"}
-
-$definition = $flowDetail.properties.definition
-$connRefs = $flowDetail.properties.connectionReferences
-```
-
-Or via Dataverse (any user's flows):
-
-```powershell
-$wfDetail = Invoke-RestMethod `
-  -Uri "https://$($profile.dataverseOrg)/api/data/v9.2/workflows({workflowId})?`$select=clientdata,name" `
-  -Headers @{Authorization="Bearer $dvToken"}
-
-$clientdata = $wfDetail.clientdata | ConvertFrom-Json
-$definition = $clientdata.properties.definition
-```
-
-### 4b: Extract & Save Components
-
-For each trigger and action in the definition:
-
-1. Identify the connector and `operationId`
-2. Check if component already exists in `$SKILL_ROOT/components/`
-3. If new → create component JSON file with `template`, `parameters`, `learnedFrom`
-4. **Fetch Swagger** to extract `inputSchema` and `outputSchema`:
-   ```powershell
-   $swagger = Invoke-RestMethod `
-     -Uri "https://api.powerapps.com/providers/Microsoft.PowerApps/apis/{connectorName}?`$select=properties.swagger&api-version=2016-11-01" `
-     -Headers @{Authorization="Bearer $paToken"}
-   ```
-5. Update `$SKILL_ROOT/components/_catalog.json` with the new component entry
-
-### 4c: Workflow-specific Learning
-
-If the flow is a Workflow (has `associatedData.graph` in any trigger's metadata):
-1. Learn all triggers/actions/connectionReferences (same as regular flow)
-2. **Also save** the `associatedData.graph` structure for future Workflow generation reference
-3. Save the full flow JSON to `flows/{env}/workflow/` directory
-
-**Note**: Workflow trigger names are not fixed — scan ALL triggers for `metadata.associatedData.graph`.
-
-## Step 5: Report Results
-
-Present findings in a table format. For flow learning, report:
-- Number of new components learned
-- Number of existing components updated
-- Any components with missing Swagger schemas (mark `swaggerLearned: false`)
-
-## Scope Reference
-
-| Target | API | Token Scope |
+**ConnectionReferences** (M 条):
+| LogicalName | Connector | DisplayName |
 |---|---|---|
-| Flows | Flow Management API | `https://service.flow.microsoft.com/.default offline_access` |
-| Connectors | PowerApps API | `https://service.powerapps.com/.default offline_access` |
-| Connections | PowerApps API | `https://service.powerapps.com/.default offline_access` |
-| Connection Refs | Dataverse | `https://{dataverseOrg}/user_impersonation offline_access` |
-| Dataverse Workflows | Dataverse | `https://{dataverseOrg}/user_impersonation offline_access` |
+
+**Connectors in use** (K 个，去重):
+- shared_office365
+- shared_commondataserviceforapps
+- ...
+```
+
+### Step 6 — 学习模式（可选）
+
+如果用户进入 `learn` 模式：
+
+1. 对每个 flow 拉 `definition`（GET `/flows/{flowId}?$expand=...`）
+2. 遍历 triggers + actions，每个 connector+operationId 调 `/learn-component`
+3. 汇总报告：新增 X 个组件，跳过 Y 个已存在
+
+**对于 Workflow 类型**：额外拉 `associatedData.graph`，学新的 graph node config 模板。
+
+---
+
+## 输出落盘
+
+- 扫描结果 → 临时写到 `_scan_<envName>_<date>.json`（带 `_` 前缀，不进 git）
+- 学到的组件 → 直接更新 `components/` + `_catalog.json`
+- **不要**把 flow definition 永久落 `flows/` 目录（除非用户明确要"学习这个 flow 的部署形态"）
+
+---
+
+## 成功标志
+
+- [ ] 列出全量 flow 数 + connector 数 + connectionRef 数
+- [ ] learn 模式下报告新增 / 跳过的组件数
+- [ ] 无 token 失效 / 403 错误
+
+---
+
+## 禁止事项
+
+- ❌ DELETE 任何 flow（项目硬约束）
+- ❌ DELETE 任何 connectionReference
+- ❌ 把扫描结果直接同步到 DevTool（含敏感数据，必须先脱敏）
+- ❌ 用 `contains` 模糊匹配 Dataverse 字段
+
+---
+
+## 后置动作
+
+- 学完一批组件 → 提示 `/sync-to-devtool`
+- 发现 flow 失败 run → 提示用户是否查 run 详情（用 `scripts/_run_detail.ps1` 等调试工具，**不属于本 skill 范围**）

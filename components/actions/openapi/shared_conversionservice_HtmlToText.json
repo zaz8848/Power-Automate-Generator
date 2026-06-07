@@ -1,4 +1,4 @@
-﻿{
+{
     "id":  "shared_conversionservice_HtmlToText",
     "connector":  "shared_conversionservice",
     "connectorBase":  "shared_conversionservice",
@@ -16,7 +16,7 @@
     "learnedAt":  "2026-05-26",
     "verified":  true,
     "environment":  [
-                        "{dataverseOrg}"
+                        "<YOUR_ORG>.crm.dynamics.com"
                     ],
     "template":  {
                      "Html_to_text_1":  {

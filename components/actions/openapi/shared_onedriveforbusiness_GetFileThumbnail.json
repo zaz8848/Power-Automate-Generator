@@ -1,4 +1,4 @@
-﻿{
+{
     "id":  "shared_onedriveforbusiness_GetFileThumbnail",
     "connector":  "shared_onedriveforbusiness",
     "connectorBase":  "shared_onedriveforbusiness",
@@ -14,7 +14,7 @@
     "learnedAt":  "2026-05-26",
     "verified":  true,
     "environment":  [
-                        "{dataverseOrg}"
+                        "<YOUR_ORG>.crm.dynamics.com"
                     ],
     "template":  {
                      "Get_file_thumbnail":  {

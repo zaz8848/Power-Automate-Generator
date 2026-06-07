@@ -1,4 +1,4 @@
-﻿{
+{
     "id":  "shared_flowmanagement_GetFlow",
     "connector":  "shared_flowmanagement",
     "connectorBase":  "shared_flowmanagement",

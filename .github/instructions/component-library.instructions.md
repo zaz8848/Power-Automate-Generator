@@ -70,8 +70,68 @@ applyTo: "**"
 - `swaggerLearned` — 是否已从 Swagger 提取过 schema（true/false）
 - `verified` — 是否已在真实 flow 中验证
 - `graphConvertible` — clientdata→graph 可转换性（`true` / `"partial"` / `false`）
-- `graphNodeType` — 对应的 Copilot Studio graph node type（`connector` / `m365Copilot` / `agent` / `classify` / `builtinFunction` 等）
+- `graphNodeType` — 对应的 Copilot Studio graph node type（`connector` / `m365Copilot` / `agent` / `classify` / `builtinFunction` / `start` 等）
 - `graphNotes` — graph 转换时的注意事项（仅 partial 组件有）
+- `graphTemplate` — **Workflow 画布节点完整 config 模板**（2026-06-07 新增；详见下方"graphTemplate 字段规范"）
+- `graphTemplateVerified` — graphTemplate 是否经过 UI 抓包实测（true/false）
+- `graphTemplateSource` — graphTemplate 的来源说明（capture 文件路径或学习来源）
+
+## graphTemplate 字段规范（2026-06-07 新增）
+
+**作用**：让 `definition_to_graph.py` 不再"凭空推导"画布节点 config，而是直接复制组件文件里实测过的字段。
+
+**适用范围**：仅 Workflow（普通 PA Flow 不渲染画布，可忽略）。
+
+**Action 类型的 graphTemplate 结构**（参考 [components/actions/compose.json](components/actions/compose.json)）：
+
+```jsonc
+"graphTemplate": {
+  "type": "<graphNodeType>",          // builtinFunction / connector / agent / classify / m365Copilot
+  "version": 1,
+  "data": {
+    "config": {
+      "operationId": "...",            // 画布操作 ID
+      "operationName": "...",          // 同 operationId（多数情况）
+      "displayName": "...",            // 画布显示名
+      "category": "providers/Microsoft.ProcessSimple/operationGroups/<X>",
+      "categoryDisplayName": "...",
+      "iconUri": "https://...",
+      "brandColor": "#xxxxxx",
+      "description": "...",
+      "parameters": { /* 默认参数值或 <PLACEHOLDER> */ },
+      "parametersSchema": {            // 完整 JSON Schema
+        "type": "object",
+        "required": [...],
+        "properties": { ... }
+      }
+    },
+    "outcomes": [                       // 必须有，至少一个 default
+      { "id": "default", "label": "Default", "outcomeSchema": { ... } }
+    ]
+  },
+  "measured": { "width": 240, "height": 66 }
+}
+```
+
+**Trigger 类型的 graphTemplate 结构**（参考 [components/triggers/request-button.json](components/triggers/request-button.json)）：
+
+```jsonc
+"graphTemplate": {
+  "graphContainer": "trigger node's metadata.associatedData.graph (Workflow 才有)",
+  "startNodeTemplate": { /* type=start 节点完整结构 */ },
+  "nodeActionMappingSchema": { /* 描述 graph 节点 id 怎么映射到 definition.actions 名 */ },
+  "connectionReferencesSchema": "..."
+}
+```
+
+**生成 graph 时的取用顺序**：
+1. 组件文件有 `graphTemplate` → **直接用**，按节点 id 规则替换 guid
+2. 组件文件无 `graphTemplate` → fallback 到 Swagger 推导（标记 `_needsAI: true`）
+3. AI 不允许凭记忆编 `parametersSchema` 或 `outcomes`
+
+**学习新组件时**：
+- 先创建 `graphTemplate=null`、`graphTemplateVerified=false`
+- 实战部署成功后从 UI 抓包补齐，再改 `graphTemplateVerified=true`
 
 ## Swagger Schema 提取规则（2026-05-27 新增）
 

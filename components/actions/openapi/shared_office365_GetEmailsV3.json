@@ -1,4 +1,4 @@
-﻿{
+{
     "id":  "shared_office365_GetEmailsV3",
     "connector":  "shared_office365",
     "connectorBase":  "shared_office365",
@@ -14,7 +14,7 @@
     "learnedAt":  "2026-05-26",
     "verified":  true,
     "environment":  [
-                        "orgdf331f66.crm5.dynamics.com"
+                        "<YOUR_ORG>.crm.dynamics.com"
                     ],
     "template":  {
                      "Get_emails_(V3)":  {

@@ -1,0 +1,145 @@
+{
+    "id": "shared_advancedapprovals_RequestForInformation",
+    "connector": "shared_advancedapprovals",
+    "connectorBase": "shared_advancedapprovals",
+    "operationId": "RequestForInformation",
+    "apiId": "/providers/Microsoft.PowerApps/apis/shared_advancedapprovals",
+    "type": "OpenApiConnectionWebhook",
+    "learnedFrom": [
+        "<TEST_WORKFLOW_ENTITY_ID>"
+    ],
+    "learnedFromName": [
+        "[AutoGen] Service Email Workflow v5"
+    ],
+    "learnedAt": "2026-06-04",
+    "verified": true,
+    "description": "Native Human-in-the-loop approval/request-for-information webhook. Pauses the flow until user responds via Outlook or Teams. Returns structured data based on configured input fields (boolean, choice, text, etc.).",
+    "graphConvertible": true,
+    "graphNodeType": "connector",
+    "paletteIconHint": "humanReview",
+    "graphTemplate": {
+        "type": "connector",
+        "config": {
+            "apiName": "shared_advancedapprovals",
+            "operationName": "RequestForInformation",
+            "displayName": "Human review",
+            "paletteIconHint": "humanReview",
+            "operationType": "OpenApiConnectionWebhook",
+            "iconUri": "https://static.powerapps.com/resource/ppcr/releases/v1.0.1811/1.0.1811.4721/advancedapprovals/icon.png",
+            "connectionName": "shared_advancedapprovals",
+            "parameters": {
+                "RequestForInformationInput/channel": "Outlook",
+                "RequestForInformationInput/title": "REPLACE: short title",
+                "RequestForInformationInput/message": "REPLACE: what reviewer should check",
+                "RequestForInformationInput/assignedTo": "user@tenant.onmicrosoft.com",
+                "RequestForInformationInput/input": {
+                    "type": "object",
+                    "properties": {
+                        "boolean": {
+                            "title": "Yes/No",
+                            "type": "boolean",
+                            "x-ms-content-hint": "BOOLEAN",
+                            "x-ms-dynamically-added": true,
+                            "description": "Please select yes or no"
+                        }
+                    },
+                    "required": [
+                        "boolean"
+                    ]
+                }
+            },
+            "parametersSchema": {
+                "type": "object",
+                "properties": {
+                    "RequestForInformationInput": {
+                        "type": "object",
+                        "properties": {
+                            "title": {
+                                "type": "string",
+                                "title": "Title",
+                                "description": "Specify the title of the request.",
+                                "x-ms-visibility": "important",
+                                "x-ms-property-name-alias": "RequestForInformationInput/title"
+                            },
+                            "message": {
+                                "type": "string",
+                                "title": "Message",
+                                "description": "Specify the message for the request.",
+                                "x-ms-visibility": "important",
+                                "x-ms-property-name-alias": "RequestForInformationInput/message"
+                            },
+                            "assignedTo": {
+                                "type": "string",
+                                "title": "Assigned to (first to respond)",
+                                "format": "email",
+                                "description": "Recipient email addresses, UPNs, or Entra IDs separated by semicolons.",
+                                "x-ms-visibility": "important",
+                                "x-ms-property-name-alias": "RequestForInformationInput/assignedTo"
+                            },
+                            "channel": {
+                                "type": "string",
+                                "title": "Channel",
+                                "default": "Outlook",
+                                "enum": [
+                                    "Outlook",
+                                    "Teams"
+                                ],
+                                "x-ms-visibility": "important",
+                                "x-ms-property-name-alias": "RequestForInformationInput/channel"
+                            },
+                            "input": {
+                                "type": "object",
+                                "title": "Input",
+                                "properties": {},
+                                "required": [],
+                                "description": "Input definition.",
+                                "x-ms-visibility": "important",
+                                "x-ms-property-name-alias": "RequestForInformationInput/input"
+                            }
+                        },
+                        "required": [
+                            "assignedTo",
+                            "channel",
+                            "input",
+                            "message",
+                            "title"
+                        ],
+                        "description": "Request information",
+                        "x-ms-property-name-alias": "RequestForInformationInput"
+                    }
+                },
+                "required": [
+                    "RequestForInformationInput"
+                ]
+            }
+        },
+        "outcomes": [
+            {
+                "id": "default",
+                "label": "Default",
+                "outcomeSchema": {
+                    "type": "object",
+                    "properties": {
+                        "boolean": {
+                            "title": "Yes/No",
+                            "type": "boolean",
+                            "x-ms-content-hint": "BOOLEAN",
+                            "x-ms-dynamically-added": true,
+                            "description": "Please select yes or no"
+                        }
+                    },
+                    "required": [
+                        "boolean"
+                    ]
+                }
+            }
+        ]
+    },
+    "notes": [
+        "operationType is OpenApiConnectionWebhook (webhook pauses flow).",
+        "RequestForInformationInput/input is a JSON schema defining the user's response form. Default is single boolean. Can add choice/text fields.",
+        "Output references via @body('<action>')?['<inputFieldName>'] - e.g. ['boolean'] for the default Yes/No field.",
+        "channel: 'Outlook' or 'Teams'.",
+        "assignedTo: semicolon-separated emails."
+    ]
+}

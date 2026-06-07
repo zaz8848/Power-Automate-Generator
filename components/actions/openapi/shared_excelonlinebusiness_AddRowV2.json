@@ -1,4 +1,4 @@
-﻿{
+{
     "id":  "shared_excelonlinebusiness_AddRowV2",
     "connector":  "shared_excelonlinebusiness",
     "connectorBase":  "shared_excelonlinebusiness",
@@ -14,7 +14,7 @@
     "learnedAt":  "2026-05-26",
     "verified":  true,
     "environment":  [
-                        "{dataverseOrg}"
+                        "<YOUR_ORG>.crm.dynamics.com"
                     ],
     "template":  {
                      "Add_a_row_into_a_table":  {

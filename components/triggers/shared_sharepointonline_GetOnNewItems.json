@@ -1,4 +1,4 @@
-﻿{
+{
     "id":  "shared_sharepointonline_GetOnNewItems",
     "connector":  "shared_sharepointonline",
     "operationId":  "GetOnNewItems",
@@ -14,14 +14,14 @@
     "learnedAt":  "2026-05-26",
     "verified":  true,
     "environment":  [
-                        "orgdf331f66.crm5.dynamics.com"
+                        "<YOUR_ORG>.crm.dynamics.com"
                     ],
     "template":  {
                      "When_an_item_is_created":  {
                                                      "type":  "OpenApiConnection",
                                                      "inputs":  {
                                                                     "parameters":  {
-                                                                                       "dataset":  "https://contoso-my.sharepoint.com/personal/user_contoso_onmicrosoft_com",
+                                                                                       "dataset":  "https://<YOUR_TENANT>-my.sharepoint.com/personal/<YOUR_USER>_<YOUR_TENANT>_onmicrosoft_com",
                                                                                        "table":  "01082b07-47f6-4512-977d-efac656d6370"
                                                                                    },
                                                                     "host":  {

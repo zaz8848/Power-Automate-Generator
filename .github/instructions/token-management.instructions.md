@@ -19,26 +19,25 @@ applyTo: "**"
 ## Refresh Token 自动续期
 
 ```powershell
-# 推荐：使用 get-token.ps1 脚本自动处理（见 .github/skills/create-flow/get-token.ps1）
-# 手动刷新示例（credentials 从 profile JSON 读取，不要硬编码）：
-$profile = Get-Content "profiles/{profileName}.json" -Raw | ConvertFrom-Json
+# 从 .token-cache.json 读取 refresh token
+$cache = Get-Content ".token-cache.json" | ConvertFrom-Json
 $body = @{
     grant_type    = "refresh_token"
-    client_id     = $profile.clientId
-    client_secret = $profile.clientSecret
-    refresh_token = $profile.refreshToken
+    client_id     = "<YOUR_CLIENT_ID>"
+    client_secret = "<YOUR_CLIENT_SECRET>"
+    refresh_token = $cache.refresh_token
     scope         = "<目标 scope> offline_access"
 }
-$resp = Invoke-RestMethod -Uri "https://login.microsoftonline.com/$($profile.tenantId)/oauth2/v2.0/token" -Method POST -Body $body -ContentType "application/x-www-form-urlencoded"
+$resp = Invoke-RestMethod -Uri "https://login.microsoftonline.com/<YOUR_TENANT_ID>/oauth2/v2.0/token" -Method POST -Body $body -ContentType "application/x-www-form-urlencoded"
 # 用 $resp.access_token 调 API
-# 用 $resp.refresh_token 更新 profile
+# 用 $resp.refresh_token 更新 .token-cache.json
 ```
 
 ## Scope 对照表
 
 | 目标 API | scope |
 |---|---|
-| Dataverse Web API | `https://{dataverseOrg}/user_impersonation offline_access` |
+| Dataverse Web API | `https://<YOUR_ORG>.crm.dynamics.com/user_impersonation offline_access` |
 | Flow Management API | `https://service.flow.microsoft.com/.default offline_access` |
 | Power Platform API | `https://api.powerplatform.com/.default offline_access` |
 | SharePoint REST API | `https://<tenant>.sharepoint.com/.default offline_access` |
@@ -46,6 +45,27 @@ $resp = Invoke-RestMethod -Uri "https://login.microsoftonline.com/$($profile.ten
 | PowerApps API（含 Swagger） | `https://service.powerapps.com/.default offline_access`（注意：PowerShell 调需要在 URL 中加 `$filter=environment eq '{envId}'`）|
 
 **注意**：`.default` 和 resource-specific scope（如 `user_impersonation`）不能混在同一个请求中。每个 API 需要单独获取 token。
+
+## 一次性批量刷新多 scope（2026-06-04 固化）
+
+V5 测试场景需要同时调 Dataverse / Flow / Graph / PowerApps 4 个 API。批量刷的方式：**串行刷新，每次用上一步返回的 refresh_token**（refresh_token 每次刷新都会轮转）。
+
+参考实现：`scripts/_get_tokens.ps1`
+```powershell
+function Get-Token($scope, $rt) {
+    $b = @{ grant_type='refresh_token'; client_id=$clientId; client_secret=$secret; refresh_token=$rt; scope=$scope }
+    Invoke-RestMethod -Uri "https://login.microsoftonline.com/$tenant/oauth2/v2.0/token" -Method POST -Body $b -ContentType "application/x-www-form-urlencoded"
+}
+$dv = Get-Token "https://org81bb0a23.crm.dynamics.com/user_impersonation offline_access" $cache.refresh_token
+$cache.refresh_token = $dv.refresh_token
+$fl = Get-Token "https://service.flow.microsoft.com/.default offline_access" $cache.refresh_token
+$cache.refresh_token = $fl.refresh_token
+$gr = Get-Token "https://graph.microsoft.com/.default offline_access" $cache.refresh_token
+$cache.refresh_token = $gr.refresh_token
+# 写入 .token-cache.json 和临时 .tokens.tmp.json
+```
+
+输出到 `.tokens.tmp.json`（gitignore），后续脚本读取使用。
 
 ## 浏览器 MSAL 拦截（回退方案）
 
@@ -57,7 +77,7 @@ $resp = Invoke-RestMethod -Uri "https://login.microsoftonline.com/$($profile.ten
 
 **App 的唯一用途：用 OAuth2 token 调用 Power Platform / Dataverse / SharePoint API**
 
-App Registration 是为了让 AI 工具链能：
+App Registration `Automate-Generator-API` 是为了让 AI 工具链能：
 1. 通过 Client ID + Client Secret 获取 OAuth2 access token
 2. 用该 token 调用 Dataverse Web API（读写 workflow/connectionreference 等）
 3. 用该 token 调用 Flow Management API / Power Platform API（部署/更新/查询 flow）

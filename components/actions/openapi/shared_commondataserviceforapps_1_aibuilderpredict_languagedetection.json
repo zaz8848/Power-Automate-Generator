@@ -1,4 +1,4 @@
-﻿{
+{
     "id":  "shared_commondataserviceforapps_1_aibuilderpredict_languagedetection",
     "connector":  "shared_commondataserviceforapps_1",
     "connectorBase":  "shared_commondataserviceforapps",

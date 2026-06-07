@@ -1,4 +1,4 @@
-﻿{
+{
     "id":  "shared_sharepointonline_GetFileContentByPath",
     "connector":  "shared_sharepointonline",
     "connectorBase":  "shared_sharepointonline",
@@ -21,7 +21,7 @@
                                                          "type":  "OpenApiConnection",
                                                          "inputs":  {
                                                                         "parameters":  {
-                                                                                           "dataset":  "https://contoso.sharepoint.com/sites/AIBusinessProcessPortal",
+                                                                                           "dataset":  "https://<YOUR_TENANT>.sharepoint.com/sites/AIBusinessProcessPortal",
                                                                                            "path":  "@triggerOutputs()?[\u0027body/{FullPath}\u0027]",
                                                                                            "inferContentType":  true
                                                                                        },

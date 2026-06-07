@@ -1,4 +1,4 @@
-﻿{
+{
     "id":  "shared_office365_OnNewEmailV3",
     "connector":  "shared_office365",
     "operationId":  "OnNewEmailV3",
@@ -18,8 +18,8 @@
     "learnedAt":  "2026-05-26",
     "verified":  true,
     "environment":  [
-                        "{dataverseOrg}",
-                        "orgdf331f66.crm5.dynamics.com"
+                        "<YOUR_ORG>.crm.dynamics.com",
+                        "<YOUR_ORG>.crm.dynamics.com"
                     ],
     "template":  {
                      "When_a_new_email_arrives_(V3)":  {

@@ -1,4 +1,4 @@
-﻿{
+{
     "id":  "Http",
     "type":  "Http",
     "learnedFrom":  [
@@ -61,7 +61,7 @@
                                                         },
                                            "type":  "Http",
                                            "inputs":  {
-                                                          "uri":  "https://copilotstudio.preview.microsoft.com/environments/9ffec6fe-9e60-eaf8-921d-be20e366a19b/flows/new?template=8966f0978a80430098d992ce322095e3\u0026gallery=public",
+                                                          "uri":  "https://copilotstudio.preview.microsoft.com/environments/<YOUR_ENV_ID>/flows/new?template=8966f0978a80430098d992ce322095e3\u0026gallery=public",
                                                           "method":  "POST",
                                                           "body":  {
                                                                        "CardId":  "@{triggerBody()?[\u0027text\u0027]}"

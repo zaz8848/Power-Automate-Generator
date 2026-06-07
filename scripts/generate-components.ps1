@@ -1,4 +1,4 @@
-﻿# Generate component files from extracted raw data
+# Generate component files from extracted raw data
 # Reads _extracted_raw.json and creates structured component files
 
 $OutputDir = "d:\A_Code\Automate Generator\components"
@@ -273,8 +273,8 @@ $catalog = [ordered]@{
         totalTriggers = $triggerCatalog.Count
         totalBuiltinActions = $builtinCatalog.Count
         environments = @(
-            'orgdf331f66.crm5.dynamics.com'
-            '{dataverseOrg}'
+            '<YOUR_ORG>.crm.dynamics.com'
+            '<YOUR_ORG>.crm.dynamics.com'
             'orgc954877b.crm5.dynamics.com'
         )
         flowsAnalyzed = ($rawData.components.PSObject.Properties | ForEach-Object { $_.Value.learnedFrom } | ForEach-Object { $_ } | Select-Object -Unique).Count

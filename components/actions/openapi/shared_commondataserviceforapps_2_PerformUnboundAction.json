@@ -1,4 +1,4 @@
-﻿{
+{
     "id":  "shared_commondataserviceforapps_2_PerformUnboundAction",
     "connector":  "shared_commondataserviceforapps_2",
     "connectorBase":  "shared_commondataserviceforapps",
@@ -14,7 +14,7 @@
     "learnedAt":  "2026-05-26",
     "verified":  true,
     "environment":  [
-                        "orgdf331f66.crm5.dynamics.com"
+                        "<YOUR_ORG>.crm.dynamics.com"
                     ],
     "template":  {
                      "Perform_an_unbound_action:_Generate_Conversation_KPIs":  {

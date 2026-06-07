@@ -1,4 +1,4 @@
-﻿{
+{
     "id":  "shared_excelonlinebusiness_RunScriptProd",
     "connector":  "shared_excelonlinebusiness",
     "connectorBase":  "shared_excelonlinebusiness",
@@ -24,7 +24,7 @@
     "learnedAt":  "2026-05-26",
     "verified":  true,
     "environment":  [
-                        "{dataverseOrg}",
+                        "<YOUR_ORG>.crm.dynamics.com",
                         "org1cd97ca4.crm.dynamics.com"
                     ],
     "template":  {

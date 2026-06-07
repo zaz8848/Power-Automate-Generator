@@ -1,4 +1,4 @@
-﻿{
+{
     "id":  "shared_d365marketingforapps_Orchestration_EmitJourneyCreateRecordActionAnalyticEvent",
     "connector":  "shared_d365marketingforapps",
     "connectorBase":  "shared_d365marketingforapps",
@@ -22,7 +22,7 @@
     "learnedAt":  "2026-05-26",
     "verified":  true,
     "environment":  [
-                        "orgdf331f66.crm5.dynamics.com"
+                        "<YOUR_ORG>.crm.dynamics.com"
                     ],
     "template":  {
                      "5435ffff-e649-4504-a1da-63d005ca5072-Emit_Processed":  {

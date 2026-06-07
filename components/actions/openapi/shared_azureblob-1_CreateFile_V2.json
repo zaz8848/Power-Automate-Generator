@@ -1,4 +1,4 @@
-﻿{
+{
     "id":  "shared_azureblob-1_CreateFile_V2",
     "connector":  "shared_azureblob-1",
     "connectorBase":  "shared_azureblob",
