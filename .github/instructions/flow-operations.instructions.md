@@ -269,6 +269,27 @@ python scripts/definition_to_graph.py <flow.json> -o <output.json> [--conn-refs 
 | edges | — | 需要 `targetHandle: "input"`，classify 出口用 `category:{id}` 或 `default-category` |
 | node config | — | 需要 `parametersSchema` + `outcomeSchema` + `iconUri` + `brandColor` |
 
+### Graph node 类型对照表（AI 拼装 Workflow 时按需求选）
+
+| 需求 | graph node `type` | 对应组件文件 | definition 层 host.operationId |
+|---|---|---|---|
+| 任意 OpenAPI 连接器操作（Office365 / SharePoint / Dataverse CRUD 等） | `connector` | `components/actions/openapi/shared_<connector>_<op>.json` | 同 operationId |
+| 触发器：手动按钮 | `start` (子类 manual/button) | `components/triggers/request-button.json` | — |
+| 触发器：来自 connector（如 OnNewEmail） | `start` (子类 connector) | 对应 trigger 组件文件 | 同 trigger operationId |
+| 内置数据操作（Compose / ParseJson / Filter / Select / Join …） | `builtinFunction` | `components/actions/<name>.json` | 同 operationId |
+| If / 条件分支 | `ifElse` | `components/actions/condition.json` | — |
+| Switch / 多路分支 | `switch` | （内置） | — |
+| Foreach 循环 | `foreach` | `components/actions/foreach.json` | — |
+| **AI 分类邮件/文本到 N 个 category** | `classify` | `components/actions/openapi/shared_commondataserviceforapps_PerformBoundAction.json` (内联 GPT) | `PerformBoundAction` |
+| **AI 处理任务、可挂 MCP / 工具、可结构化输出** | **`agent`** | **`components/actions/agent-node.json`** ← **优先用这个** | `InvokeDefinition` (mode=inline) or `InvokeAgent` (mode=invoke) |
+| 触发 M365 Copilot（Office 文档总结等） | `m365Copilot` | `components/actions/openapi/shared_m365copilotv2_StartChat.json` | `StartChat` |
+
+**重点提示**：
+
+- `agent` 节点是 Copilot Studio Preview 引入的**画布原生节点**。它的 `data.config` 跟普通 `connector` 节点**完全不同**（含 `mode` / `inlineInstructions` / `inlineTools[]` / `simpleProperties` / `jsonSchema` / `instructionsRich` 等字段）。**永远从 `components/actions/agent-node.json` 取模板**，不要从 `shared_agentnode_InvokeDefinition.json` 凑（那个文件只描述 definition 层）。
+- `agent` 节点 `mode=inline` 时 definition 走 `InvokeDefinition`；`mode=invoke`（引用现有 agent）走 `InvokeAgent`。
+- `outputMode=structured-simple` 时下游 If/Switch 表达式直接用 `body('NodeName')?['structuredOutput/<field>']`，**不需要 ParseJson + int() 转换**（v6 已验证）。
+
 **组件文件中的 `graphConvertible` 字段**：
 - `true` — 脚本可自动转换（connector / m365Copilot / built-in）
 - `"partial"` — 结构可转但需要 AI 处理内容（classify 提取 categories、agent 解析 instructionsRich）

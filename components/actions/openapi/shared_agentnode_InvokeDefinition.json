@@ -73,5 +73,30 @@
                     ],
     "swaggerLearned":  true,
     "graphConvertible":  true,
-    "graphNodeType":  "connector"
+    "graphNodeType":  "connector",
+    "graphCanvasOverride": {
+        "useInstead": "components/actions/agent-node.json",
+        "useInsteadMode": "inline",
+        "note": "在 Copilot Studio Preview 中，clientdata definition 里的 InvokeDefinition 在画布层是 type='agent' 的原生节点（不是 connector）。AI 拼 graph 时请用 agent-node.json，本文件只描述 definition 层的 OpenApiConnection 形态。"
+    },
+    "clientdataTemplate": {
+        "<NodeName>": {
+            "type": "OpenApiConnection",
+            "inputs": {
+                "host": {
+                    "apiId": "/providers/Microsoft.PowerApps/apis/shared_agentnode",
+                    "operationId": "InvokeDefinition",
+                    "connectionName": "shared_agentnode"
+                },
+                "parameters": {
+                    "body/definition": "<inline agent JSON 对象，对应 graph 节点 inline 配置的 hydration>",
+                    "body/message": "<提示词，对应 graph 节点 inlineInstructions>"
+                }
+            },
+            "runAfter": {},
+            "metadata": {
+                "operationMetadataId": "<guid>"
+            }
+        }
+    }
 }

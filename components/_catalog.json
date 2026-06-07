@@ -437,6 +437,14 @@
       "id": "Wait",
       "type": "Wait",
       "file": "actions/workflow.json"
+    },
+    {
+      "id": "agent-node",
+      "name": "Copilot Studio Agent Node (Graph-native)",
+      "file": "actions/agent-node.json",
+      "graphNodeType": "agent",
+      "verified": true,
+      "notes": "Use for any AI/agent step in Workflow graph; supports inline (with tools/MCP/structured output) or invoke (existing agent) mode."
     }
   ],
   "openApiActions": [
@@ -1327,5 +1335,6 @@
       "connector": "shared_office365",
       "operationId": "ReplyToV3"
     }
-  ]
+  ],
+  "lastUpdated": "2026-06-07"
 }

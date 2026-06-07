@@ -43,6 +43,22 @@ applyTo: "**"
 | "有哪些已学习的组件？" | 读 `components/_catalog.json` → 列出所有已学习的连接器/触发器/action |
 | "XX 连接器支持哪些操作？" | 读 `components/connectors/<connector>.json` → 列出 operations |
 
+### Workflow 画布节点选择目录（AI 拼装 graph 时按这个表选组件文件）
+
+| 需求 | graph node `type` | 优先读哪个组件文件 |
+|---|---|---|
+| 任意 OpenAPI 连接器操作（Office365 / SharePoint / Dataverse CRUD …） | `connector` | `components/actions/openapi/shared_<connector>_<op>.json` |
+| 触发器（手动按钮 / 来自 connector） | `start` | `components/triggers/<对应文件>.json`（默认 `request-button.json`） |
+| 内置数据操作（Compose / ParseJson / Filter / Select / Join …） | `builtinFunction` | `components/actions/<name>.json` |
+| If / 条件分支 | `ifElse` | `components/actions/condition.json` |
+| Switch / 多路分支 | `switch` | （内置，无独立文件） |
+| Foreach 循环 | `foreach` | `components/actions/foreach.json` |
+| **AI 处理任务、可挂 MCP / 工具、可结构化输出** | **`agent`** | **`components/actions/agent-node.json`** ← 优先 |
+| AI 分类邮件/文本到多个 category | `classify` | `components/actions/openapi/shared_commondataserviceforapps_PerformBoundAction.json` |
+| 触发 M365 Copilot | `m365Copilot` | `components/actions/openapi/shared_m365copilotv2_StartChat.json` |
+
+**重点**：``agent-node.json`` 是 Copilot Studio Preview 的**画布原生节点**模板（带 inline 模式 / invoke 模式 / inlineTools / structured-simple 输出 / instructionsRich 等所有字段），跟普通 connector 节点完全不同。看到 connector 文件里有 ``graphCanvasOverride.useInstead`` 字段说明它在画布层应该走别的组件 — 听它的。详细对照见 `.github/instructions/flow-operations.instructions.md` "Graph node 类型对照表"。
+
 ### 生成时的组件库查询
 
 生成 flow 时，AI 必须先查组件库：
@@ -51,7 +67,8 @@ applyTo: "**"
 3. 读 `components/_catalog.json` 查找匹配组件
 4. **有** → 读对应 JSON 文件获取模板 → 填入参数
 5. **没有** → 问用户："我没学过 `<操作名>` 这个组件，你能指给我一个用了它的 flow 吗？学习后我就能用了。"
-6. **如果是 Workflow** → 除了生成 `definition`，还需生成 `associatedData.graph`（见 flow-operations SOP）
+6. **如果是 Workflow** → 除了生成 `definition`，还需生成 `associatedData.graph`（见 flow-operations SOP）；按上方"画布节点选择目录"选 graph 节点组件，**优先看组件文件的 `graphCanvasOverride.useInstead` 字段是否指向别的组件**
+
 
 ## 组件文件格式
 
