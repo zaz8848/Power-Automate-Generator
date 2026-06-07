@@ -1,220 +1,233 @@
 {
-  "id": "agent-node",
-  "type": "agent",
-  "category": "graphNativeNode",
-  "learnedFrom": ["7cc5c92a-79dd-d4b7-cd56-f5a4237ce162"],
-  "learnedFromName": ["AutoGen Service Email Workflow v6 (JiaqiDev, 2026-06-04)"],
-  "learnedAt": "2026-06-07",
-  "verified": true,
-  "graphConvertible": true,
-  "graphNodeType": "agent",
-  "graphTemplateVerified": true,
-  "graphTemplateSource": "flows/jiaqi-dev/workflow/service-email-workflow-v6.json",
-  "notes": "Copilot Studio Preview 引入的画布原生 AI 节点。graph 层是独立 type='agent' 节点（跟 connector / classify / m365Copilot / builtinFunction / ifElse / start 平级）；definition 层翻译成 OpenApiConnection -> shared_agentnode，operationId 取决于 mode 字段。AI 拼装 Workflow 时若需要 AI 处理 + 可选 MCP 工具 + 可选结构化输出，优先用本节点，不要直接拿 shared_agentnode_InvokeDefinition 的 connector 节点凑（画布渲染会缺字段）。",
-  "modes": {
-    "inline": {
-      "description": "在节点里直接写 instructions、挂工具、定义 schema；不引用任何已有的 Copilot Studio agent。",
-      "definitionMapping": {
-        "type": "OpenApiConnection",
-        "host.apiId": "/providers/Microsoft.PowerApps/apis/shared_agentnode",
-        "host.operationId": "InvokeDefinition"
-      },
-      "graphConfigRequired": [
-        "mode: 'inline'",
-        "inlineInstructions (可含 @{triggerOutputs()?['...']} 之类表达式)",
-        "inlineModel (如 'Sonnet46')",
-        "outputMode ('structured-simple' 或 'text')",
-        "connectionName ('shared_agentnode')"
-      ],
-      "graphConfigOptional": [
-        "inlineTools[]: 内联挂载工具，包括 MCP（isMcp=true + mcpToolMode='all'）和普通 connector operation",
-        "simpleProperties[]: outputMode=structured-simple 时，定义每个输出字段 (name, type, description)",
-        "jsonSchema: outputMode=structured-simple 时，等价于 simpleProperties 的 JSON Schema 表示",
-        "isHitlEscalationEnabled: 是否启用 human-in-the-loop",
-        "webSearchEnabled: 是否启用 web search",
-        "botSchemaName: 留空字符串"
-      ]
-    },
-    "invoke": {
-      "description": "调用一个已存在的 Copilot Studio agent（通过 botSchemaName 引用），instructions 是给该 agent 的输入消息。",
-      "definitionMapping": {
-        "type": "OpenApiConnection",
-        "host.apiId": "/providers/Microsoft.PowerApps/apis/shared_agentnode",
-        "host.operationId": "InvokeAgent"
-      },
-      "graphConfigRequired": [
-        "mode: 'invoke'",
-        "botSchemaName: 目标 agent 的 schema name（如 'cr8a6_TechAssistanceAgent'）",
-        "instructions: 发给 agent 的消息内容（可含表达式）",
-        "instructionsRich: instructions 的 token-aware 版本，segments 数组（static / token）",
-        "outputMode: 通常 'text'",
-        "inlineModel: 'Sonnet46'",
-        "connectionName: 'shared_agentnode'"
-      ],
-      "graphConfigOptional": [
-        "isHitlEscalationEnabled",
-        "webSearchEnabled",
-        "inlineInstructions: 留空字符串"
-      ]
-    }
-  },
-  "outcomesSchema": {
-    "structured-simple": {
-      "description": "outputMode='structured-simple' 时 outcomes[0].outcomeSchema 形态",
-      "schema": {
-        "type": "object",
-        "properties": {
-          "message": {
-            "type": "string",
-            "title": "Agent Response",
-            "description": "Aggregated message text emitted before the structured output (may be null)"
-          },
-          "activities": {
-            "type": "array",
-            "description": "Bot response activities (typing, message, and event types)"
-          },
-          "structuredOutput": {
-            "type": "object",
-            "properties": "<由 simpleProperties / jsonSchema 决定>",
-            "required": "<同 jsonSchema.required>"
-          }
-        },
-        "required": ["activities", "structuredOutput"]
-      },
-      "usageInIfExpression": "可以直接用 body('NodeName')?['structuredOutput/<fieldName>'] 访问字段；Logic Apps 表达式引擎自动处理 number 类型比较，不需要 int() / float() 转换"
-    },
-    "text": {
-      "description": "outputMode='text' 时 outcomes[0].outcomeSchema 形态",
-      "schema": {
-        "type": "object",
-        "properties": {
-          "result": {
-            "type": "string",
-            "description": "The agent response text"
-          },
-          "status": {
-            "type": "string",
-            "description": "The completion status (e.g., Completed)"
-          },
-          "conversationId": {
-            "type": "string",
-            "description": "Unique identifier for the conversation"
-          }
-        },
-        "required": ["result", "conversationId"]
-      },
-      "usageInIfExpression": "用 body('NodeName')?['result'] 拿文本；如果文本是 JSON 字符串，下游加 ParseJson 节点解析"
-    }
-  },
-  "inlineToolsSchema": {
-    "description": "graphTemplate.data.config.inlineTools[] 项的结构",
-    "example_mcp": {
-      "id": "<guid>",
-      "connectorId": "shared_commondataserviceforapps",
-      "operationId": "InvokeMCP",
-      "displayName": "Microsoft Dataverse MCP Server — Microsoft Dataverse MCP Server",
-      "description": "Provides Remote MCP Server access to Dataverse",
-      "connectionReferenceName": "<crLN, 如 shared-commondataser-b6eb3d2e-...>",
-      "connectionId": "<同 connectionReferenceName>",
-      "isMcp": true,
-      "iconUri": "https://content.powerapps.com/resource/makerx/static/pauto/images/designeroperations/commondataserviceforapps.9549842e.png",
-      "brandColor": "#088142",
-      "mcpToolMode": "all",
-      "mcpEnabledTools": []
-    },
-    "example_regular_connector": {
-      "id": "<guid>",
-      "connectorId": "shared_office365",
-      "operationId": "SendEmailV2",
-      "displayName": "Send an email (V2) — Office 365 Outlook",
-      "connectionReferenceName": "<crLN>",
-      "isMcp": false
-    }
-  },
-  "graphTemplate": {
+    "id": "agent-node",
     "type": "agent",
-    "version": 1,
-    "data": {
-      "config": {
-        "mode": "<inline | invoke>",
-        "instructions": "<invoke 模式下的提示词；inline 模式下留空字符串>",
-        "botSchemaName": "<invoke 模式下目标 agent schema name；inline 模式下留空字符串>",
-        "isHitlEscalationEnabled": false,
-        "webSearchEnabled": false,
-        "inlineInstructions": "<inline 模式下的提示词；invoke 模式下留空字符串>",
-        "outputMode": "<structured-simple | text>",
-        "inlineModel": "Sonnet46",
-        "connectionName": "shared_agentnode",
-        "inlineTools": [],
-        "simpleProperties": [],
-        "jsonSchema": {}
-      },
-      "outcomes": [
-        {
-          "id": "default",
-          "label": "Default",
-          "outcomeSchema": "<见 outcomesSchema 节按 outputMode 选择>"
+    "category": "graphNativeNode",
+    "learnedFrom": [
+        "7cc5c92a-79dd-d4b7-cd56-f5a4237ce162"
+    ],
+    "learnedFromName": [
+        "AutoGen Service Email Workflow v6 (JiaqiDev, 2026-06-04)"
+    ],
+    "learnedAt": "2026-06-07",
+    "verified": true,
+    "graphConvertible": true,
+    "graphNodeType": "agent",
+    "graphTemplateVerified": true,
+    "graphTemplateSource": "flows/jiaqi-dev/workflow/service-email-workflow-v6.json",
+    "notes": "Copilot Studio Preview 引入的画布原生 AI 节点。graph 层是独立 type='agent' 节点（跟 connector / classify / m365Copilot / builtinFunction / ifElse / start 平级）；definition 层翻译成 OpenApiConnection -> shared_agentnode，operationId 取决于 mode 字段。AI 拼装 Workflow 时若需要 AI 处理 + 可选 MCP 工具 + 可选结构化输出，优先用本节点，不要直接拿 shared_agentnode_InvokeDefinition 的 connector 节点凑（画布渲染会缺字段）。",
+    "modes": {
+        "inline": {
+            "description": "在节点里直接写 instructions、挂工具、定义 schema；不引用任何已有的 Copilot Studio agent。",
+            "definitionMapping": {
+                "type": "OpenApiConnection",
+                "host.apiId": "/providers/Microsoft.PowerApps/apis/shared_agentnode",
+                "host.operationId": "InvokeDefinition"
+            },
+            "graphConfigRequired": [
+                "mode: 'inline'",
+                "inlineInstructions (可含 @{triggerOutputs()?['...']} 之类表达式)",
+                "inlineModel (如 'Sonnet46')",
+                "outputMode ('structured-simple' 或 'text')",
+                "connectionName ('shared_agentnode')"
+            ],
+            "graphConfigOptional": [
+                "inlineTools[]: 内联挂载工具，包括 MCP（isMcp=true + mcpToolMode='all'）和普通 connector operation",
+                "simpleProperties[]: outputMode=structured-simple 时，定义每个输出字段 (name, type, description)",
+                "jsonSchema: outputMode=structured-simple 时，等价于 simpleProperties 的 JSON Schema 表示",
+                "isHitlEscalationEnabled: 是否启用 human-in-the-loop",
+                "webSearchEnabled: 是否启用 web search",
+                "botSchemaName: 留空字符串"
+            ]
+        },
+        "invoke": {
+            "description": "调用一个已存在的 Copilot Studio agent（通过 botSchemaName 引用），instructions 是给该 agent 的输入消息。",
+            "definitionMapping": {
+                "type": "OpenApiConnection",
+                "host.apiId": "/providers/Microsoft.PowerApps/apis/shared_agentnode",
+                "host.operationId": "InvokeAgent"
+            },
+            "graphConfigRequired": [
+                "mode: 'invoke'",
+                "botSchemaName: 目标 agent 的 schema name（如 'cr8a6_TechAssistanceAgent'）",
+                "instructions: 发给 agent 的消息内容（可含表达式）",
+                "instructionsRich: instructions 的 token-aware 版本，segments 数组（static / token）",
+                "outputMode: 通常 'text'",
+                "inlineModel: 'Sonnet46'",
+                "connectionName: 'shared_agentnode'"
+            ],
+            "graphConfigOptional": [
+                "isHitlEscalationEnabled",
+                "webSearchEnabled",
+                "inlineInstructions: 留空字符串"
+            ]
         }
-      ]
     },
-    "measured": { "width": 240, "height": 66 }
-  },
-  "clientdataTemplateInline": {
-    "description": "对应 definition.actions 里的 OpenApiConnection 项（inline 模式 → InvokeDefinition）",
-    "template": {
-      "<NodeName>": {
-        "type": "OpenApiConnection",
-        "inputs": {
-          "host": {
-            "apiId": "/providers/Microsoft.PowerApps/apis/shared_agentnode",
-            "operationId": "InvokeDefinition",
-            "connectionName": "shared_agentnode"
-          },
-          "parameters": {
-            "body/definition": "<inline agent 定义 JSON 对象>",
-            "body/message": "<提示词，从 graph 节点 inlineInstructions 推导>"
-          }
+    "outcomesSchema": {
+        "structured-simple": {
+            "description": "outputMode='structured-simple' 时 outcomes[0].outcomeSchema 形态",
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string",
+                        "title": "Agent Response",
+                        "description": "Aggregated message text emitted before the structured output (may be null)"
+                    },
+                    "activities": {
+                        "type": "array",
+                        "description": "Bot response activities (typing, message, and event types)"
+                    },
+                    "structuredOutput": {
+                        "type": "object",
+                        "properties": "<由 simpleProperties / jsonSchema 决定>",
+                        "required": "<同 jsonSchema.required>"
+                    }
+                },
+                "required": [
+                    "activities",
+                    "structuredOutput"
+                ]
+            },
+            "usageInIfExpression": "可以直接用 body('NodeName')?['structuredOutput/<fieldName>'] 访问字段；Logic Apps 表达式引擎自动处理 number 类型比较，不需要 int() / float() 转换"
         },
-        "runAfter": {},
-        "metadata": {
-          "operationMetadataId": "<guid>"
+        "text": {
+            "description": "outputMode='text' 时 outcomes[0].outcomeSchema 形态",
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "result": {
+                        "type": "string",
+                        "description": "The agent response text"
+                    },
+                    "status": {
+                        "type": "string",
+                        "description": "The completion status (e.g., Completed)"
+                    },
+                    "conversationId": {
+                        "type": "string",
+                        "description": "Unique identifier for the conversation"
+                    }
+                },
+                "required": [
+                    "result",
+                    "conversationId"
+                ]
+            },
+            "usageInIfExpression": "用 body('NodeName')?['result'] 拿文本；如果文本是 JSON 字符串，下游加 ParseJson 节点解析"
         }
-      }
-    }
-  },
-  "clientdataTemplateInvoke": {
-    "description": "对应 definition.actions 里的 OpenApiConnection 项（invoke 模式 → InvokeAgent）",
-    "template": {
-      "<NodeName>": {
-        "type": "OpenApiConnection",
-        "inputs": {
-          "host": {
-            "apiId": "/providers/Microsoft.PowerApps/apis/shared_agentnode",
-            "operationId": "InvokeAgent",
-            "connectionName": "shared_agentnode"
-          },
-          "parameters": {
-            "Copilot": "<botSchemaName，如 cr8a6_TechAssistanceAgent>",
-            "body/message": "<发给 agent 的消息>"
-          }
+    },
+    "inlineToolsSchema": {
+        "description": "graphTemplate.data.config.inlineTools[] 项的结构",
+        "example_mcp": {
+            "id": "<guid>",
+            "connectorId": "shared_commondataserviceforapps",
+            "operationId": "InvokeMCP",
+            "displayName": "Microsoft Dataverse MCP Server — Microsoft Dataverse MCP Server",
+            "description": "Provides Remote MCP Server access to Dataverse",
+            "connectionReferenceName": "<crLN, 如 shared-commondataser-b6eb3d2e-...>",
+            "connectionId": "<同 connectionReferenceName>",
+            "isMcp": true,
+            "iconUri": "https://content.powerapps.com/resource/makerx/static/pauto/images/designeroperations/commondataserviceforapps.9549842e.png",
+            "brandColor": "#088142",
+            "mcpToolMode": "all",
+            "mcpEnabledTools": []
         },
-        "runAfter": {},
-        "metadata": {
-          "operationMetadataId": "<guid>"
+        "example_regular_connector": {
+            "id": "<guid>",
+            "connectorId": "shared_office365",
+            "operationId": "SendEmailV2",
+            "displayName": "Send an email (V2) — Office 365 Outlook",
+            "connectionReferenceName": "<crLN>",
+            "isMcp": false
         }
-      }
+    },
+    "graphTemplate": {
+        "type": "agent",
+        "version": 1,
+        "data": {
+            "config": {
+                "mode": "<inline | invoke>",
+                "instructions": "<invoke 模式下的提示词；inline 模式下留空字符串>",
+                "botSchemaName": "<invoke 模式下目标 agent schema name；inline 模式下留空字符串>",
+                "isHitlEscalationEnabled": false,
+                "webSearchEnabled": false,
+                "inlineInstructions": "<inline 模式下的提示词；invoke 模式下留空字符串>",
+                "outputMode": "<structured-simple | text>",
+                "inlineModel": "Sonnet46",
+                "connectionName": "shared_agentnode",
+                "inlineTools": [],
+                "simpleProperties": [],
+                "jsonSchema": {}
+            },
+            "outcomes": [
+                {
+                    "id": "default",
+                    "label": "Default",
+                    "outcomeSchema": "<见 outcomesSchema 节按 outputMode 选择>"
+                }
+            ]
+        },
+        "measured": {
+            "width": 240,
+            "height": 66
+        }
+    },
+    "clientdataTemplateInline": {
+        "description": "对应 definition.actions 里的 OpenApiConnection 项（inline 模式 → InvokeDefinition）",
+        "template": {
+            "<NodeName>": {
+                "type": "OpenApiConnection",
+                "inputs": {
+                    "host": {
+                        "apiId": "/providers/Microsoft.PowerApps/apis/shared_agentnode",
+                        "operationId": "InvokeDefinition",
+                        "connectionName": "shared_agentnode"
+                    },
+                    "parameters": {
+                        "body/definition": "<inline agent 定义 JSON 对象>",
+                        "body/message": "<提示词，从 graph 节点 inlineInstructions 推导>"
+                    }
+                },
+                "runAfter": {},
+                "metadata": {
+                    "operationMetadataId": "<guid>"
+                }
+            }
+        }
+    },
+    "clientdataTemplateInvoke": {
+        "description": "对应 definition.actions 里的 OpenApiConnection 项（invoke 模式 → InvokeAgent）",
+        "template": {
+            "<NodeName>": {
+                "type": "OpenApiConnection",
+                "inputs": {
+                    "host": {
+                        "apiId": "/providers/Microsoft.PowerApps/apis/shared_agentnode",
+                        "operationId": "InvokeAgent",
+                        "connectionName": "shared_agentnode"
+                    },
+                    "parameters": {
+                        "Copilot": "<botSchemaName，如 cr8a6_TechAssistanceAgent>",
+                        "body/message": "<发给 agent 的消息>"
+                    }
+                },
+                "runAfter": {},
+                "metadata": {
+                    "operationMetadataId": "<guid>"
+                }
+            }
+        }
+    },
+    "selectionGuide": {
+        "title": "AI 拼装 Workflow 时如何选 agent 节点 vs connector 节点",
+        "rules": [
+            "需求里有 'AI 处理 / 让 GPT / 让 agent / 调 LLM' → 优先用 type=agent 节点（即本组件）",
+            "如果用户已经在 Copilot Studio 建好了一个 agent（有 botSchemaName）→ mode=invoke",
+            "如果是临时 prompt，没有现成 agent → mode=inline，instructions 直接写在 inlineInstructions 字段里",
+            "需要让 AI 调 Dataverse / SharePoint / 任何 connector → mode=inline + inlineTools[] 挂载（MCP 优先）",
+            "需要让 AI 输出结构化 JSON（供下游 If/Switch 用） → outputMode=structured-simple + 定义 simpleProperties + jsonSchema；下游用 body('Node')?['structuredOutput/<field>']",
+            "需要让 AI 直接返回文本（如邮件正文） → outputMode=text；下游用 body('Node')?['result']",
+            "禁止直接用 components/actions/openapi/shared_agentnode_InvokeDefinition.json 的 connector 节点去拼 graph（画布层会缺字段、Copilot Studio UI 渲染异常）—— 那个文件只描述 definition 层"
+        ]
     }
-  },
-  "selectionGuide": {
-    "title": "AI 拼装 Workflow 时如何选 agent 节点 vs connector 节点",
-    "rules": [
-      "需求里有 'AI 处理 / 让 GPT / 让 agent / 调 LLM' → 优先用 type=agent 节点（即本组件）",
-      "如果用户已经在 Copilot Studio 建好了一个 agent（有 botSchemaName）→ mode=invoke",
-      "如果是临时 prompt，没有现成 agent → mode=inline，instructions 直接写在 inlineInstructions 字段里",
-      "需要让 AI 调 Dataverse / SharePoint / 任何 connector → mode=inline + inlineTools[] 挂载（MCP 优先）",
-      "需要让 AI 输出结构化 JSON（供下游 If/Switch 用） → outputMode=structured-simple + 定义 simpleProperties + jsonSchema；下游用 body('Node')?['structuredOutput/<field>']",
-      "需要让 AI 直接返回文本（如邮件正文） → outputMode=text；下游用 body('Node')?['result']",
-      "禁止直接用 components/actions/openapi/shared_agentnode_InvokeDefinition.json 的 connector 节点去拼 graph（画布层会缺字段、Copilot Studio UI 渲染异常）—— 那个文件只描述 definition 层"
-    ]
-  }
 }

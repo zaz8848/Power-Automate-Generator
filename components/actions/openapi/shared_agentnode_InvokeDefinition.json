@@ -1,79 +1,79 @@
 {
-    "id":  "shared_agentnode_InvokeDefinition",
-    "template":  {
-                     "Query_Agent":  "agent-00000001-0003-4000-8000-000000000003"
-                 },
-    "learnedFrom":  [
-                        "5f2db147-0f90-2919-d689-64d1f7a6cb56"
-                    ],
-    "verified":  true,
-    "outputSchema":  {
-                         "type":  "object",
-                         "additionalProperties":  true
-                     },
-    "operationId":  "InvokeDefinition",
-    "apiId":  "/providers/Microsoft.PowerApps/apis/shared_agentnode",
-    "type":  "OpenApiConnection",
-    "connectorBase":  "shared_agentnode",
-    "connector":  "shared_agentnode",
-    "learnedFromName":  [
-                            "Email Quote Workflow"
-                        ],
-    "learnedAt":  "2026-05-29",
-    "inputSchema":  {
-                        "type":  "object",
-                        "properties":  {
-                                           "botDefinition":  {
-                                                                 "type":  "string",
-                                                                 "description":  "Agent definition as a JSON string.",
-                                                                 "x-ms-summary":  "Agent Definition (Legacy)"
-                                                             },
-                                           "definition":  {
-                                                              "type":  "object",
-                                                              "additionalProperties":  true,
-                                                              "description":  "Agent definition.",
-                                                              "x-ms-summary":  "Agent Definition"
-                                                          },
-                                           "message":  {
-                                                           "type":  "string",
-                                                           "description":  "User message to send to the agent",
-                                                           "x-ms-summary":  "Message"
-                                                       },
-                                           "locale":  {
-                                                          "type":  "string",
-                                                          "description":  "BCP-47 locale (e.g., en-US)",
-                                                          "x-ms-summary":  "Locale",
-                                                          "default":  "en-US",
-                                                          "x-ms-visibility":  "advanced"
-                                                      }
-                                       },
-                        "required":  [
-                                         "message"
-                                     ]
-                    },
-    "parameters":  {
-                       "body/message":  {
-                                            "description":  "User message to send to the agent",
-                                            "type":  "string",
-                                            "required":  true
-                                        },
-                       "body/locale":  {
-                                           "description":  "BCP-47 locale",
-                                           "default":  "en-US",
-                                           "type":  "string"
-                                       },
-                       "body/botDefinition":  {
-                                                  "description":  "Agent definition as JSON string (legacy)",
-                                                  "example":  "{\"model\":\"Sonnet46\",\"tools\":[]}",
-                                                  "type":  "string"
-                                              }
-                   },
-    "environment":  [
-                        "ZAF Prod"
-                    ],
-    "swaggerLearned":  true,
-    "graphConvertible":  true,
-    "graphNodeType":  "connector",
+    "id": "shared_agentnode_InvokeDefinition",
+    "template": {
+        "Query_Agent": "agent-00000001-0003-4000-8000-000000000003"
+    },
+    "learnedFrom": [
+        "5f2db147-0f90-2919-d689-64d1f7a6cb56"
+    ],
+    "verified": true,
+    "outputSchema": {
+        "type": "object",
+        "additionalProperties": true
+    },
+    "operationId": "InvokeDefinition",
+    "apiId": "/providers/Microsoft.PowerApps/apis/shared_agentnode",
+    "type": "OpenApiConnection",
+    "connectorBase": "shared_agentnode",
+    "connector": "shared_agentnode",
+    "learnedFromName": [
+        "Email Quote Workflow"
+    ],
+    "learnedAt": "2026-05-29",
+    "inputSchema": {
+        "type": "object",
+        "properties": {
+            "botDefinition": {
+                "type": "string",
+                "description": "Agent definition as a JSON string.",
+                "x-ms-summary": "Agent Definition (Legacy)"
+            },
+            "definition": {
+                "type": "object",
+                "additionalProperties": true,
+                "description": "Agent definition.",
+                "x-ms-summary": "Agent Definition"
+            },
+            "message": {
+                "type": "string",
+                "description": "User message to send to the agent",
+                "x-ms-summary": "Message"
+            },
+            "locale": {
+                "type": "string",
+                "description": "BCP-47 locale (e.g., en-US)",
+                "x-ms-summary": "Locale",
+                "default": "en-US",
+                "x-ms-visibility": "advanced"
+            }
+        },
+        "required": [
+            "message"
+        ]
+    },
+    "parameters": {
+        "body/message": {
+            "description": "User message to send to the agent",
+            "type": "string",
+            "required": true
+        },
+        "body/locale": {
+            "description": "BCP-47 locale",
+            "default": "en-US",
+            "type": "string"
+        },
+        "body/botDefinition": {
+            "description": "Agent definition as JSON string (legacy)",
+            "example": "{\"model\":\"Sonnet46\",\"tools\":[]}",
+            "type": "string"
+        }
+    },
+    "environment": [
+        "ZAF Prod"
+    ],
+    "swaggerLearned": true,
+    "graphConvertible": true,
+    "graphNodeType": "connector",
     "graphCanvasOverride": {
         "useInstead": "components/actions/agent-node.json",
         "useInsteadMode": "inline",

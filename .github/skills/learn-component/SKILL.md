@@ -105,6 +105,26 @@ $flow = Invoke-RestMethod -Uri "https://api.flow.microsoft.com/.../flows/$flowId
 # 遍历 actions / triggers，每个对应 connector + operationId 都跑 Step 2-4
 ```
 
+**特别注意：检查 graph 节点是否是「画布原生节点」**
+
+读取 flow 的 `clientdata.properties.definition.triggers.*.metadata.associatedData.graph.nodes[]` 时，**每个 node 的 `type` 字段**要跟下面这张表比对：
+
+| 画布 type | 定义层 type | 学习去向 |
+|---|---|---|
+| `connector` | OpenApiConnection | 按 Step 2-4 学 → `components/actions/openapi/<connector>_<op>.json` |
+| `start` | trigger | 按 Step 2-4 学 → `components/triggers/<name>.json` |
+| `builtinFunction` | Compose / ParseJson / Filter / Select 等 | 按 Step 2-4 学 → `components/actions/<name>.json` |
+| `ifElse` / `switch` / `foreach` | If / Switch / Foreach | 内置，无需新建组件 |
+| `m365Copilot` | OpenApiConnection (shared_m365copilotv2) | 按 Step 2-4 学 |
+| `classify` | OpenApiConnection (PerformBoundAction + GPT) | 学 connector，标 `graphConvertible="partial"` |
+| **`agent`** | OpenApiConnection (shared_agentnode/InvokeDefinition or InvokeAgent) | **⚠️ 不要按 Step 2-4 学单 connector，而是按 `components/actions/agent-node.json` 格式完整记录 mode / inlineTools / simpleProperties / jsonSchema / instructionsRich 等画布原生字段** |
+| 其它**陌生** type | — | **⚠️ 发现新画布原生节点！停下来报告用户，按 agent-node.json 范式建独立组件文件**（不是 connector 组件） |
+
+**判断"是不是画布原生节点"的硬规则**：
+- node `data.config` 里**没有** `apiName` 字段 → 多半是原生节点
+- node `data.config` 里有 `apiName="shared_xxx"` + `operationId` → 是 connector 节点，按 Step 2-4 走
+- 看到原生节点 → 优先看是否已存在 `components/actions/<type>-node.json` 或 `components/actions/<type>.json`，没有就新建；同时给对应的 connector 组件加 `graphCanvasOverride.useInstead` 指针
+
 ---
 
 ## 成功标志
