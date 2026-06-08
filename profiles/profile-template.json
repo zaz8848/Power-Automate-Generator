@@ -3,15 +3,11 @@
     "_name": "<tenant-short-name>",
     "_description": "<human note about this tenant>",
     "schemaVersion": 2,
-
     "tenantId": "<Azure AD tenant ID, GUID, from Azure Portal > Entra > Overview>",
     "clientId": "<Application (Client) ID from your App Registration's Overview page>",
     "clientSecret": "<Client Secret VALUE (not the secret ID) — generated once, copy immediately>",
-
     "refreshToken": "<auto-filled after first run of /configure-profile — initial value: 'TODO'>",
-
     "defaultEnvironment": "<name of the environment in the environments[] list below, used when no --env is specified>",
-
     "environments": [
         {
             "name": "<short name, e.g. 'dev' or 'ZAF Prod' — used to switch>",
@@ -20,7 +16,6 @@
             "_description": "<optional human note>"
         }
     ],
-
     "_app_registration_setup": {
         "_note": "If you don't have an App Registration yet, follow these steps in Azure Portal > Entra > App registrations > New registration",
         "name_suggestion": "Power-Automate-Generator-<your-tenant>",

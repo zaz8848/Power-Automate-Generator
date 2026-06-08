@@ -17,7 +17,9 @@ Describe what you want in natural language → AI assembles the Flow JSON → de
 ### 1. Clone this repository
 
 ```bash
-git clone https://github.com/your-username/automate-generator.git
+git clone https://github.com/zaz8848/Power-Automate-Generator.git
+cd Power-Automate-Generator
+pip install requests
 ```
 
 ### 2. Point your project to the skills **and** instructions
@@ -39,18 +41,44 @@ In your project's `.vscode/settings.json`:
 >
 > **Why both?** Skills (`.github/skills/`) are the slash-command entry points (`/create-flow`, etc.). Instructions (`.github/instructions/`) carry the deep SOP each skill calls into (token management, flow operations API endpoints, component-library rules, 30+ verified pitfalls). Without `chat.instructionsFilesLocations` the skills still load, but the agent loses the deep API knowledge and will hit avoidable bugs.
 
-### 3. Configure your environment
+### 3. Configure your tenant + environment(s)
 
-In VS Code Copilot Chat:
+```bash
+cp profiles/profile-template.json profiles/<your-tenant>.json
+# Edit profiles/<your-tenant>.json: fill tenantId, clientId, clientSecret
+# and add one or more entries to environments[]
+```
+
+Then in VS Code Copilot Chat:
 
 ```
 /configure-profile
 ```
 
-You'll need:
-- An **Azure App Registration** with API permissions for Dynamics CRM, SharePoint, Flow Service, and Microsoft Graph
-- Your **Power Platform Environment ID** and **Dataverse org URL**
-- A browser to complete the one-time Device Code authentication
+The skill walks you through:
+
+- Creating an **Azure App Registration** (5 minutes; needs Global Admin or Application Administrator to grant consent) with permissions for Dynamics CRM / Power Automate / PowerApps Service / Microsoft Graph (+ optional SharePoint / Approvals)
+- Filling the profile file with tenantId / clientId / clientSecret
+- Listing every Power Platform environment under that tenant in `environments[]`
+- Running `python scripts/configure_profile.py profiles/<your-tenant>.json` once to do the **Authorization Code Flow** in your browser and persist a `refreshToken`
+
+**Profile schema v2** — one file per Azure AD tenant. Top-level keys carry tenant-wide OAuth credentials; `environments[]` lists all Power Platform environments under that tenant. Switch envs at runtime without re-OAuth:
+
+```bash
+# List environments under this profile
+python scripts/configure_profile.py profiles/contoso.json --list
+
+# Change the default env (no OAuth)
+python scripts/configure_profile.py profiles/contoso.json --set-default "prod"
+
+# Get an access token for a specific env (uses the stored refreshToken)
+python scripts/configure_profile.py profiles/contoso.json --env "dev" --get-token
+
+# Sanity-check by calling Dataverse WhoAmI on that env
+python scripts/configure_profile.py profiles/contoso.json --env "dev" --whoami
+```
+
+For multiple tenants (e.g. Contoso + Fabrikam), create one profile file per tenant. `/create-flow` and `/scan-environment` read the default profile + default env unless you say "use the fabrikam profile, prod env" in chat.
 
 ### 4. Create your first flow
 
@@ -137,40 +165,36 @@ Skills are intentionally short (the "what"). Instructions carry the heavy detail
 ## Project Structure
 
 ```
-automate-generator/
+Power-Automate-Generator/
 ├── .github/
-│   ├── skills/                        ← Agent Skills (AI entry points)
-│   │   ├── create-flow/
-│   │   │   ├── SKILL.md               ← 17-step SOP: requirements → deploy
-│   │   │   ├── get-token.ps1          ← OAuth2 token refresh script
-│   │   │   └── flow-template.json     ← Base Flow JSON template
-│   │   ├── configure-profile/
-│   │   │   └── SKILL.md               ← 6-step profile setup + Device Code Flow
-│   │   └── scan-environment/
-│   │       └── SKILL.md               ← Environment discovery + component learning
-│   └── instructions/                  ← Detailed SOP references
-│       ├── flow-operations.instructions.md
-│       ├── token-management.instructions.md
-│       └── component-library.instructions.md
-├── components/                        ← Component library (learned from real flows)
-│   ├── _catalog.json                  ← Full index of all components
-│   ├── actions/openapi/               ← 111+ connector action templates
-│   ├── connectors/                    ← 24 connector definitions
+│   ├── skills/                        ← Agent Skills (`/`-triggered AI entry points)
+│   │   ├── create-flow/SKILL.md       ← NL → prototype → describe → learn → deploy
+│   │   ├── describe-component/SKILL.md   Component contract reader
+│   │   ├── learn-component/SKILL.md      Swagger → component file writer (with canvas-native node guard)
+│   │   ├── scan-environment/SKILL.md     3 modes: list / scan-all-workflows / learn-graph-templates
+│   │   ├── configure-profile/SKILL.md    Tenant onboarding + multi-env management
+│   │   └── report-issue/SKILL.md         Append sanitized feedback to your local rolling log
+│   └── instructions/                  ← Deep SOP (always-loaded via `chat.instructionsFilesLocations`)
+│       ├── flow-operations.instructions.md       Flow CRUD API + 30+ verified pitfalls
+│       ├── token-management.instructions.md      4-scope OAuth2 refresh template + scope table
+│       └── component-library.instructions.md     Component query / learning SOP + graphTemplate spec
+├── components/                        ← Component library (learned from 87+ real flows across 32 envs)
+│   ├── _catalog.json                  ← Full index
+│   ├── actions/                       ← 17 built-in + agent-node.json (canvas-native AI node)
+│   │   └── openapi/                   ← 113 connector action templates with graphTemplate fields
+│   ├── connectors/                    ← 29 connector definitions (with swaggerUrl)
 │   ├── triggers/                      ← 21 trigger templates
-│   └── patterns/                      ← Multi-step composition patterns
-├── profiles/                          ← Tenant credentials (gitignored)
-│   └── profile-template.json          ← Template for new profiles
-├── scripts/                           ← Utility scripts
-│   ├── definition_to_graph.py         ← Convert Flow definition → Copilot Studio graph
-│   ├── extract-components.ps1         ← Extract components from Dataverse
-│   └── generate-components.ps1        ← Generate component template files
-├── flow-templates/                    ← Complete flow JSON examples
-│   ├── manual-hello-world.json        ← Simplest flow (button + Compose)
-│   ├── email-auto-reply.json          ← Email trigger + connector pattern
-│   └── scheduled-sharepoint-to-teams.json  ← Recurrence + multi-connector
+│   └── patterns/                      ← 2 multi-step composition patterns
+├── profiles/                          ← Tenant credentials (gitignored — schema v2: tenant + environments[])
+│   └── profile-template.json          ← Copy + fill this; one file per tenant
+├── scripts/                           ← Utility scripts (all Python; PowerShell legacy phased out)
+│   ├── configure_profile.py           ← OAuth + multi-env CLI (5 subcommands)
+│   ├── scan_all_envs.py               ← Pull Workflow JSON from every env in environments.json
+│   ├── extract_graph_templates.py     ← Mine graphTemplate from local workflow JSON → component files
+│   ├── definition_to_graph.py         ← Convert Flow definition → Copilot Studio graph (Workflow only)
+│   └── generate_test_pdf.py           ← Generate test PDF knowledge files
 ├── docs/
-│   └── INTEGRATION_GUIDE.md           ← How to add skills to your project
-├── environments-example.json          ← Example environment scan output
+│   └── INTEGRATION_GUIDE.md           ← How to wire skills + instructions into your project
 └── README.md
 ```
 
@@ -178,11 +202,12 @@ automate-generator/
 
 | Requirement | Purpose |
 |---|---|
-| **VS Code** with GitHub Copilot | Runs the Agent Skills |
-| **Windows PowerShell** | Executes API calls (built into Windows) |
-| **Azure App Registration** | OAuth2 tokens for Power Platform APIs |
+| **VS Code** with GitHub Copilot Chat | Loads the Agent Skills + Instructions |
+| **PowerShell 5.1 / 7** | Built into Windows; used by some helper scripts |
+| **Python 3.10+** with `requests` | OAuth flow, env scanning, graph template extraction, definition→graph conversion |
+| **Azure App Registration** | OAuth2 tokens for Power Platform APIs (see `/configure-profile` SKILL) |
 | **Power Automate license** | Required in the target tenant |
-| **Python 3.x** (optional) | Only for Workflow graph generation |
+| **Global Admin / Application Administrator** (one-time) | To grant admin consent on the App Registration's API permissions |
 
 ## Supported Flow Types
 
