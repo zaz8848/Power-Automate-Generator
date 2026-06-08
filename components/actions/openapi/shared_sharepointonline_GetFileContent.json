@@ -20,7 +20,7 @@
     "environment":  [
                         "<YOUR_ORG>.crm.dynamics.com",
                         "<YOUR_ORG>.crm.dynamics.com",
-                        "org1cd97ca4.crm.dynamics.com"
+                        "<YOUR_ORG>.crm.dynamics.com"
                     ],
     "template":  {
                      "Get_file_content":  {
@@ -58,7 +58,7 @@
                         {
                             "name":  "dataset",
                             "in":  "path",
-                            "description":  "Example: https://contoso.sharepoint.com/sites/sitename.",
+                            "description":  "Example: https://<YOUR_TENANT>.sharepoint.com/sites/sitename.",
                             "required":  true,
                             "x-ms-summary":  "Site Address",
                             "x-ms-dynamic-values":  {
@@ -73,7 +73,7 @@
                             "x-ms-url-encoding":  "double",
                             "x-ms-ai-sensitivity":  "high",
                             "x-ms-name-for-model":  "get_file_content_dataset",
-                            "x-ms-description-for-model":  "Set to the full HTTPS URL of the SharePoint site that contains the target list, not the list URL. Example: https://contoso.sharepoint.com/sites/PMO.",
+                            "x-ms-description-for-model":  "Set to the full HTTPS URL of the SharePoint site that contains the target list, not the list URL. Example: https://<YOUR_TENANT>.sharepoint.com/sites/PMO.",
                             "type":  "string"
                         },
                         {

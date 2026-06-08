@@ -56,7 +56,7 @@ function Get-Token($scope, $rt) {
     $b = @{ grant_type='refresh_token'; client_id=$clientId; client_secret=$secret; refresh_token=$rt; scope=$scope }
     Invoke-RestMethod -Uri "https://login.microsoftonline.com/$tenant/oauth2/v2.0/token" -Method POST -Body $b -ContentType "application/x-www-form-urlencoded"
 }
-$dv = Get-Token "https://org81bb0a23.crm.dynamics.com/user_impersonation offline_access" $cache.refresh_token
+$dv = Get-Token "https://<YOUR_ORG>.crm.dynamics.com/user_impersonation offline_access" $cache.refresh_token
 $cache.refresh_token = $dv.refresh_token
 $fl = Get-Token "https://service.flow.microsoft.com/.default offline_access" $cache.refresh_token
 $cache.refresh_token = $fl.refresh_token

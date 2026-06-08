@@ -275,7 +275,7 @@ $catalog = [ordered]@{
         environments = @(
             '<YOUR_ORG>.crm.dynamics.com'
             '<YOUR_ORG>.crm.dynamics.com'
-            'orgc954877b.crm5.dynamics.com'
+            '<YOUR_ORG>.crm.dynamics.com'
         )
         flowsAnalyzed = ($rawData.components.PSObject.Properties | ForEach-Object { $_.Value.learnedFrom } | ForEach-Object { $_ } | Select-Object -Unique).Count
     }

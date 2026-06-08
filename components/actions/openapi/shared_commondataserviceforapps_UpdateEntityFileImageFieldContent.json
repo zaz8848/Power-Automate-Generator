@@ -33,7 +33,7 @@
     "verified":  true,
     "environment":  [
                         "<YOUR_ORG>.crm.dynamics.com",
-                        "org1cd97ca4.crm.dynamics.com"
+                        "<YOUR_ORG>.crm.dynamics.com"
                     ],
     "template":  {
                      "Upload_Conversation_Transcript":  {

@@ -21,7 +21,7 @@
     "verified":  true,
     "environment":  [
                         "<YOUR_ORG>.crm.dynamics.com",
-                        "org1cd97ca4.crm.dynamics.com"
+                        "<YOUR_ORG>.crm.dynamics.com"
                     ],
     "template":  {
                      "Invoke_an_HTTP_request":  {
@@ -40,7 +40,7 @@
                                                                             },
                                                                    "parameters":  {
                                                                                       "request/method":  "GET",
-                                                                                      "request/url":  "https://powervamg.as-il102.gateway.prod.island.powerapps.com/api/botauthoring/v1/environments/a72e299f-1672-e71c-83dd-bac0f2c17991/bots/11d5a4fb-9687-f011-b4cc-000d3a080cec/authorstate/0b2b5171-9cdf-4de5-a802-2eb1317f2dbb"
+                                                                                      "request/url":  "https://<POWERAPPS_INTERNAL_URL>"
                                                                                   },
                                                                    "authentication":  {
                                                                                           "type":  "Raw",

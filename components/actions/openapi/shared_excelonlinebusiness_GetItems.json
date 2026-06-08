@@ -23,7 +23,7 @@
     "verified":  true,
     "environment":  [
                         "<YOUR_ORG>.crm.dynamics.com",
-                        "org1cd97ca4.crm.dynamics.com"
+                        "<YOUR_ORG>.crm.dynamics.com"
                     ],
     "template":  {
                      "List_rows_present_in_a_table":  {

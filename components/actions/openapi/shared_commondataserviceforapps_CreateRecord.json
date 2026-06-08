@@ -65,7 +65,7 @@
     "verified": true,
     "environment": [
         "<YOUR_ORG>.crm.dynamics.com",
-        "org1cd97ca4.crm.dynamics.com"
+        "<YOUR_ORG>.crm.dynamics.com"
     ],
     "template": {
         "Add_a_new_row": {

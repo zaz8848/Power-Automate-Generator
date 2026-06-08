@@ -59,7 +59,7 @@
                         {
                             "name":  "dataset",
                             "in":  "path",
-                            "description":  "Example: https://contoso.sharepoint.com/sites/sitename",
+                            "description":  "Example: https://<YOUR_TENANT>.sharepoint.com/sites/sitename",
                             "required":  true,
                             "x-ms-summary":  "Site Address",
                             "x-ms-url-encoding":  "double",
@@ -74,7 +74,7 @@
                                                         "value-title":  "DisplayName"
                                                     },
                             "x-ms-name-for-model":  "post_item_dataset",
-                            "x-ms-description-for-model":  "Set to the full HTTPS site URL of the SharePoint site that contains the target list, not the list URL. Example: https://contoso.sharepoint.com/sites/PMO.",
+                            "x-ms-description-for-model":  "Set to the full HTTPS site URL of the SharePoint site that contains the target list, not the list URL. Example: https://<YOUR_TENANT>.sharepoint.com/sites/PMO.",
                             "type":  "string"
                         },
                         {

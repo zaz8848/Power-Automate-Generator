@@ -17,7 +17,7 @@
     "verified":  true,
     "environment":  [
                         "<YOUR_ORG>.crm.dynamics.com",
-                        "org1cd97ca4.crm.dynamics.com"
+                        "<YOUR_ORG>.crm.dynamics.com"
                     ],
     "template":  {
                      "Perform_a_bound_action:_Run_AI_Builder_Analysis":  {

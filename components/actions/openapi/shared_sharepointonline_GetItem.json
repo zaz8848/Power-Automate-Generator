@@ -51,7 +51,7 @@
                         {
                             "name":  "dataset",
                             "in":  "path",
-                            "description":  "Example: https://contoso.sharepoint.com/sites/sitename",
+                            "description":  "Example: https://<YOUR_TENANT>.sharepoint.com/sites/sitename",
                             "required":  true,
                             "x-ms-summary":  "Site Address",
                             "x-ms-url-encoding":  "double",

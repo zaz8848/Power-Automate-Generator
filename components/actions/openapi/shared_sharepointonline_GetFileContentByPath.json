@@ -14,7 +14,7 @@
     "learnedAt":  "2026-05-26",
     "verified":  true,
     "environment":  [
-                        "org1cd97ca4.crm.dynamics.com"
+                        "<YOUR_ORG>.crm.dynamics.com"
                     ],
     "template":  {
                      "Get_file_content_using_path":  {
@@ -50,7 +50,7 @@
                         {
                             "name":  "dataset",
                             "in":  "path",
-                            "description":  "Example: https://contoso.sharepoint.com/sites/sitename.",
+                            "description":  "Example: https://<YOUR_TENANT>.sharepoint.com/sites/sitename.",
                             "required":  true,
                             "x-ms-summary":  "Site Address",
                             "x-ms-dynamic-values":  {

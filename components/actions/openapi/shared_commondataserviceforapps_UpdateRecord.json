@@ -58,7 +58,7 @@
     "environment":  [
                         "<YOUR_ORG>.crm.dynamics.com",
                         "<YOUR_ORG>.crm.dynamics.com",
-                        "org1cd97ca4.crm.dynamics.com"
+                        "<YOUR_ORG>.crm.dynamics.com"
                     ],
     "template":  {
                      "Update_status_to_Non_Compliant_after_failure_time":  {

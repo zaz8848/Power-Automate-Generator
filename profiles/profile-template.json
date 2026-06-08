@@ -1,11 +1,39 @@
 {
-    "_name": "PROFILE_NAME",
-    "_comment": "描述这个环境的用途",
-    "tenantId": "YOUR_TENANT_ID",
-    "clientId": "YOUR_APP_CLIENT_ID",
-    "clientSecret": "YOUR_APP_CLIENT_SECRET",
-    "environmentId": "YOUR_ENVIRONMENT_ID",
-    "dataverseOrg": "org12345.crm.dynamics.com",
-    "redirectUri": "https://localhost/callback",
-    "refreshToken": ""
+    "_comment": "Profile schema v2: one file per Azure AD tenant. App Registration credentials sit at the top level; environments[] lists every Power Platform environment under this tenant. Switch environments at runtime with --env <name> or by changing defaultEnvironment. Copy this file to profiles/<tenant-name>.json and fill in real values. See .github/skills/configure-profile/SKILL.md for how to obtain each field.",
+    "_name": "<tenant-short-name>",
+    "_description": "<human note about this tenant>",
+    "schemaVersion": 2,
+
+    "tenantId": "<Azure AD tenant ID, GUID, from Azure Portal > Entra > Overview>",
+    "clientId": "<Application (Client) ID from your App Registration's Overview page>",
+    "clientSecret": "<Client Secret VALUE (not the secret ID) — generated once, copy immediately>",
+
+    "refreshToken": "<auto-filled after first run of /configure-profile — initial value: 'TODO'>",
+
+    "defaultEnvironment": "<name of the environment in the environments[] list below, used when no --env is specified>",
+
+    "environments": [
+        {
+            "name": "<short name, e.g. 'dev' or 'ZAF Prod' — used to switch>",
+            "environmentId": "<Power Platform Environment ID, GUID>",
+            "dataverseUrl": "https://<your-org>.crm.dynamics.com",
+            "_description": "<optional human note>"
+        }
+    ],
+
+    "_app_registration_setup": {
+        "_note": "If you don't have an App Registration yet, follow these steps in Azure Portal > Entra > App registrations > New registration",
+        "name_suggestion": "Power-Automate-Generator-<your-tenant>",
+        "account_types": "Accounts in this organizational directory only (single tenant)",
+        "redirect_uri": "Type: Web, URL: https://localhost/callback",
+        "required_api_permissions": [
+            "Dynamics CRM > user_impersonation (Delegated) — to call Dataverse Web API",
+            "Microsoft Graph > User.Read (Delegated) — to identify the user",
+            "Power Automate > Flows.Manage.All (Delegated, if available) — to create / update flows",
+            "Power Apps Service > User (Delegated) — to call PowerApps API for Swagger + connector data",
+            "SharePoint > AllSites.FullControl (Delegated, only if you'll work with SharePoint connectors)"
+        ],
+        "admin_consent": "Required — click 'Grant admin consent' button in the API permissions page after adding the above",
+        "secret_creation": "Certificates & secrets > Client secrets > New client secret > pick 6-month expiration > save the VALUE column immediately (you can never see it again)"
+    }
 }

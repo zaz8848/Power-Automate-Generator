@@ -34,7 +34,7 @@
     "environment":  [
                         "<YOUR_ORG>.crm.dynamics.com",
                         "<YOUR_ORG>.crm.dynamics.com",
-                        "org1cd97ca4.crm.dynamics.com"
+                        "<YOUR_ORG>.crm.dynamics.com"
                     ],
     "template":  {
                      "Sends_a_prompt_to_the_specified_copilot_for_processing":  {

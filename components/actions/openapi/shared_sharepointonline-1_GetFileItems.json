@@ -53,7 +53,7 @@
                  },
     "inputSchema":  {
                         "dataset":  {
-                                        "description":  "Example: https://contoso.sharepoint.com/sites/sitename",
+                                        "description":  "Example: https://<YOUR_TENANT>.sharepoint.com/sites/sitename",
                                         "in":  "path",
                                         "type":  "string",
                                         "required":  true
