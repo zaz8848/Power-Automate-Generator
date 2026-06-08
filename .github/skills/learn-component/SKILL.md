@@ -36,10 +36,16 @@ applyTo: '**'
 $conn = Get-Content "components\connectors\<connector>.json" -Raw | ConvertFrom-Json
 $swaggerUrl = $conn.swaggerUrl
 
-# 2) 拉 Swagger（需要 PowerApps token）
-.\scripts\_get_tokens.ps1
-$swagger = Invoke-RestMethod -Uri $swaggerUrl -Headers @{Authorization="Bearer $powerappsToken"}
+# 2) 拉 Swagger（需要 PowerApps token，scope: service.powerapps.com/.default）
+#    从当前 profile 手动刷一个：
+$profile = Get-Content "profiles/<tenant>.json" -Raw | ConvertFrom-Json
+$body = @{ grant_type='refresh_token'; client_id=$profile.clientId; client_secret=$profile.clientSecret; refresh_token=$profile.refreshToken; scope='https://service.powerapps.com/.default offline_access' }
+$paToken = (Invoke-RestMethod -Uri "https://login.microsoftonline.com/$($profile.tenantId)/oauth2/v2.0/token" -Method POST -Body $body -ContentType "application/x-www-form-urlencoded").access_token
+
+$swagger = Invoke-RestMethod -Uri $swaggerUrl -Headers @{Authorization="Bearer $paToken"}
 ```
+
+详见 `token-management.instructions.md` “一次性批量刷多 scope” 节（根据用户需要的 API 拿对应 token）。
 
 ### Step 2 — 提取指定 operation 的 schema
 

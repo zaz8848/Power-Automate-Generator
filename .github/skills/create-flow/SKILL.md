@@ -95,16 +95,25 @@ flowchart TD
 只有 Step 1-3 全过才能：
 
 1. **拼 clientdata JSON**（用每个组件的 `template` 字段填参数）
-2. **获取 token**：
+2. **选 profile + env，拿 token**：
    ```powershell
-   .\scripts\_get_tokens.ps1   # 刷 4 scope: DV / Flow / Graph / PowerApps
+   # 从当前 profile（默认 profiles/<tenant>.json）读 env：
+   #   - 用户说了 “在 prod / --env prod” → 用该 env
+   #   - 没说 → 用 $profile.defaultEnvironment
+   # 拿 Dataverse access token（本 skill 的主要 token）：
+   $dvToken = (python scripts/configure_profile.py "profiles/<tenant>.json" --env <envName> --get-token)[-1]
+
+   # 如果还需 Flow Management / Graph / PowerApps API，参考
+   # `.github/instructions/token-management.instructions.md` 中的 4-scope 批量模板
    ```
-3. **查 connectionReference**（从 Dataverse `connectionreferences` 表）
+   详见 `token-management.instructions.md` 的 “Profile schema 速读” + “一次性批量刷多 scope” 节。
+3. **查 connectionReference**（从 Dataverse `{orgUrl}/api/data/v9.2/connectionreferences`）
 4. **POST Flow Management API**：
    ```powershell
    POST https://api.flow.microsoft.com/providers/Microsoft.ProcessSimple/environments/{envId}/flows?api-version=2016-11-01
    Authorization: Bearer $flowToken
    ```
+   `{envId}` = 上面选中的 env 的 `environmentId`。
 5. **Workflow 类型额外步骤**：
    - 调 `scripts/definition_to_graph.py` 生成 `associatedData.graph`
    - 部署后 PATCH Dataverse `modernflowtype=1` 切换 Copilot Studio Plan

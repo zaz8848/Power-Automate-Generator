@@ -37,12 +37,14 @@ applyTo: '**'
 ## 共同前置
 
 ```powershell
-# 1. environments.json 必须存在（否则跑 /configure-profile）
-$envs = (Get-Content "environments.json" -Raw | ConvertFrom-Json).environments
+# 1. profile 文件必须存在（否则跑 /configure-profile）
+$profile = Get-Content "profiles/<tenant>.json" -Raw | ConvertFrom-Json
+$envs    = $profile.environments    # schema v2: 环境列表在 profile 里
 
-# 2. .token-cache.json 必须存在且 refresh_token 有效（90 天内）
-# 不存在 / 过期 → 用 Authorization Code Flow 重建（详见 token-management.instructions.md）
+# 2. profile.refreshToken 必须不是 "TODO"（否则跑 /configure-profile 走 OAuth）
 ```
+
+> **lab 内部可选**：如果项目根目录有 ``environments.json``（lab 通过其它途径拉的全租户环境总清单），模式 2 ``scan-all-workflows`` 可以扫这个清单的所有环境（即使不在 profile.environments[] 里）。**外部用户场景下永远以 profile.environments[] 为准**。
 
 ---
 
@@ -51,13 +53,17 @@ $envs = (Get-Content "environments.json" -Raw | ConvertFrom-Json).environments
 ### Step 1 — 解析环境
 
 ```powershell
-$env = $envs | Where-Object {
-  $_.displayName -eq $envName -or $_.id -eq $envId
-} | Select-Object -First 1
-$orgUrl = $env.linkedEnvironmentMetadata.instanceUrl.TrimEnd('/')
+$envName = $EnvNameOverride ?? $profile.defaultEnvironment
+$env     = $profile.environments | Where-Object { $_.name -eq $envName } | Select-Object -First 1
+$orgUrl  = $env.dataverseUrl.TrimEnd('/')
+$envId   = $env.environmentId
 ```
 
-### Step 2 — 刷 Dataverse token（按这个环境的 orgUrl）
+### Step 2 — 刷 Dataverse token
+
+```powershell
+$dvToken = (python scripts/configure_profile.py "profiles/<tenant>.json" --env $envName --get-token)[-1]
+```
 
 详见 `.github/instructions/token-management.instructions.md`。
 
@@ -93,11 +99,18 @@ Connectors in use (去重后)
 直接调脚本：
 
 ```powershell
-python scripts/scan_all_envs.py
+# 默认：用 profile.environments[]（或 lab 根目录 environments.json 如存在）
+python scripts/scan_all_envs.py profiles/<tenant>.json
+
+# 只扫单个 env
+python scripts/scan_all_envs.py profiles/<tenant>.json --env "ZAF Prod"
+
+# 显式指定 env 来源文件
+python scripts/scan_all_envs.py profiles/<tenant>.json --envs-file my-envs.json
 ```
 
 脚本行为：
-- 遍历 `environments.json` 里所有有 `linkedEnvironmentMetadata.instanceUrl` 的环境
+- 遍历环境源：**优先**拼 lab 项目根目录的 `environments.json`（如存在，含 lab 查到的所有环境）；**否则 fallback** 到 `profile.environments[]`
 - 对每个环境刷一次 scope 为 `{orgUrl}/user_impersonation offline_access` 的 access_token
 - GET `workflows?$filter=category eq 5 and modernflowtype eq 1&$top=200`
 - 跳过 `[AutoGen]` / `[TO-DELETE]` 前缀的 flow（项目硬约束）
@@ -156,7 +169,7 @@ NO MATCH 的组件需要手工跑 `/learn-component` 单独学。
 - ❌ 把 `_scan_*.json` / `flows/` 直接同步到 DevTool（含 connection ID 等敏感数据）
 - ❌ 用 `contains` 模糊匹配 Dataverse 字段
 - ❌ 模式 3 跑 `--apply` 时覆盖 `graphTemplateVerified=true` 的组件
-- ❌ 扫描期间硬编码任何环境的 orgUrl / envId（一律从 `environments.json` 读）
+- ❌ 扫描期间硬编码任何环境的 orgUrl / envId（一律从 `profile.environments[]` 读；lab 内部可选 fallback `environments.json`）
 
 ---
 

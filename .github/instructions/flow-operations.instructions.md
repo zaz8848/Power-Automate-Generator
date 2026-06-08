@@ -19,9 +19,14 @@ applyTo: "**"
 
 ## API 端点参考
 
+> **所有 `{orgUrl}` / `{envId}` 占位符**都从用户当前 profile 读取：
+> `{orgUrl} = profile.environments[<envName>].dataverseUrl`
+> `{envId} = profile.environments[<envName>].environmentId`
+> 详见 `.github/instructions/token-management.instructions.md` “Profile schema 速读” 节。
+
 | 操作 | 方法 | 端点 | Token scope |
 |---|---|---|---|
-| **创建 flow / workflow (首选)** | POST | `https://<YOUR_ORG>.crm.dynamics.com/api/data/v9.2/workflows` | `{orgUrl}/user_impersonation` |
+| **创建 flow / workflow (首选)** | POST | `{orgUrl}/api/data/v9.2/workflows` | `{orgUrl}/user_impersonation` |
 | **创建 flow (旧路径)** | POST | `https://api.flow.microsoft.com/providers/Microsoft.ProcessSimple/environments/{envId}/flows?api-version=2016-11-01` | `service.flow.microsoft.com` |
 | **保存后 lint 校验** | POST | `https://{envIdNoDash}.{region}.environment.api.powerplatform.com/powerautomate/flows/{flowId}/checkFlowAlerts?api-version=1` | `service.flow.microsoft.com` |
 | **修改 flow** | PATCH | `https://api.flow.microsoft.com/providers/Microsoft.ProcessSimple/environments/{envId}/flows/{flowId}?api-version=2016-11-01` | `service.flow.microsoft.com` |
@@ -30,12 +35,16 @@ applyTo: "**"
 | **查看 run history** | GET | 同上 `/{flowId}/runs?api-version=2016-11-01` | 同上 |
 | **查看 run action** | GET | 同上 `/{flowId}/runs/{runId}/actions?api-version=2016-11-01` | 同上 |
 | **Resubmit run** | POST | 同上 `/{flowId}/triggers/{triggerName}/histories/{runId}/resubmit?api-version=2016-11-01` | 同上 |
-| **读 Dataverse workflow** | GET | `https://<YOUR_ORG>.crm.dynamics.com/api/data/v9.2/workflows({workflowid})` | `<YOUR_ORG>.crm.dynamics.com` |
-| **查 connectionReference** | GET | `https://<YOUR_ORG>.crm.dynamics.com/api/data/v9.2/connectionreferences` | 同上 |
+| **读 Dataverse workflow** | GET | `{orgUrl}/api/data/v9.2/workflows({workflowid})` | 同 Dataverse 一行 |
+| **查 connectionReference** | GET | `{orgUrl}/api/data/v9.2/connectionreferences` | 同上 |
 
-## 环境 ID
+## 环境选择
 
-- ZAF Prod: `<YOUR_ENV_ID>`
+在 chat 里用户说 “在 ZAF Prod / 在 prod / 用 contoso / --env prod” 时，AI 按这个优先级选：
+
+1. 用户明说的 env name → 查当前 profile `environments[].name` 匹配
+2. 用户没说 → 用 `profile.defaultEnvironment`
+3. 用户说了某个不在 environments[] 中的 env → 提示用户先编辑 profile 加进去（或跳 `/configure-profile`）
 
 ## 创建 Flow
 
@@ -89,8 +98,15 @@ applyTo: "**"
 
 #### Phase 6：部署（2026-06-07 重写 - Dataverse 直写路径）
 
-19. **获取 token** — `scope: https://<YOUR_ORG>.crm.dynamics.com/user_impersonation offline_access`（从 `.token-cache.json` 刷新）
-20. **POST 创建** — `POST https://<YOUR_ORG>.crm.dynamics.com/api/data/v9.2/workflows`。body 6 个顶层字段：
+19. **读 profile + 获取 token** —
+    ```powershell
+    $profile = Get-Content "profiles/$ProfileName.json" -Raw | ConvertFrom-Json
+    $env     = $profile.environments | Where-Object { $_.name -eq ($EnvName ?? $profile.defaultEnvironment) } | Select -First 1
+    $orgUrl  = $env.dataverseUrl.TrimEnd('/')
+    # 拿 Dataverse access token（scope 必须是 $orgUrl/user_impersonation，不是别的 env 的）
+    $dvToken = (python scripts/configure_profile.py "profiles/$ProfileName.json" --env $env.name --get-token)[-1]
+    ```
+20. **POST 创建** — `POST $orgUrl/api/data/v9.2/workflows`。body 6 个顶层字段：
     ```jsonc
     {
       "name": "[AutoGen] My Workflow",
@@ -183,7 +199,7 @@ Workflow 必须切换到 **Copilot Studio plan** 才是真正的 Workflow。通�
 ```powershell
 # 1. 部署 flow 后，获取 workflowEntityId（从 Flow API 返回的 properties.workflowEntityId）
 # 2. PATCH Dataverse workflows 表的 modernflowtype 字段
-PATCH https://<YOUR_ORG>.crm.dynamics.com/api/data/v9.2/workflows({workflowEntityId})
+PATCH {orgUrl}/api/data/v9.2/workflows({workflowEntityId})
 Body: {"modernflowtype": 1}
 ```
 
