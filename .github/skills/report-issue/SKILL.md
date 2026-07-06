@@ -2,18 +2,24 @@
 name: report-issue
 description: |
   当用户在使用 Power-Automate-Generator 的 skill / 组件库 / instructions 时
-  遇到问题、踩坑、不准确、想提建议，用这个 skill 把反馈记录到 **用户自己项目里
-  的单个滚动反馈文件** ``.copilot-feedback/power-automate-generator.md``。
-  用户可定期把这个文件分享给 Power-Automate-Generator 的维护方（lab）做 triage。
+  遇到问题、踩坑、不准确、想提建议，用这个 skill 把反馈写到 **工具库仓里
+  `feedback/` 文件夹下、以「当前使用它的消费方项目名」命名的那个反馈文件**
+  （如 `feedback/Echo-Service.md`）。追加式，每个消费方项目一个文件。
+  维护方（lab）定期用 `/triage-feedback` 归集这些文件做 triage。
 applyTo: '**'
 ---
 
-# /report-issue — 反馈到本地单文件 SOP
+# /report-issue — 反馈到工具库 feedback/{项目名}.md SOP
 
-> **核心约束**：本 skill 只往**用户自己 workspace 根目录**的
-> ``.copilot-feedback/power-automate-generator.md`` **append** 一条反馈。
-> 不会修改 Power-Automate-Generator 仓本身、不会发外网请求、不会上传用户数据。
-> 用户可以反馈 N 次，永远写同一个文件。
+> **核心约束**：本 skill 只往**工具库仓**的 `feedback/{消费方项目名}.md`
+> **append** 一条反馈。不发外网请求、不上传用户数据、不改工具库的
+> skills / components / instructions 本身（那是维护方 triage 后才做的）。
+> 每个消费方项目一个文件，可反馈 N 次，永远追加到同名文件。
+>
+> **前提（方案 A）**：消费方本地必须有工具库仓的**可写 clone**（不是只通过
+> `chat.agentSkillsLocations` 远引用）。定位工具库根 = 本 skill 文件所在目录
+> 向上三级（`.github/skills/report-issue/SKILL.md` → 工具库根）。
+> 若工具库不可写，退回让用户手动把反馈粘给维护方。
 
 ---
 
@@ -50,18 +56,21 @@ applyTo: '**'
 
 如果发现敏感数据：替换为 ``<redacted-xxx>`` 占位符并提醒用户复核。
 
-### Step 3 — 追加到单文件
+### Step 3 — 追加到工具库 feedback/{项目名}.md
 
-文件路径：`{workspaceRoot}/.copilot-feedback/power-automate-generator.md`
+1. **定位工具库根**：本 skill 文件所在目录向上三级
+   （`.github/skills/report-issue/` → 工具库根）。
+2. **取消费方项目名**：当前消费方 workspace 的根文件夹名（如 `Echo-Service`）。
+3. **组合路径**：`{工具库根}/feedback/{消费方项目名}.md`。
 
-如果文件不存在，先创建并写入文件头（仅一次）：
+如果该文件不存在，先创建并写入文件头（仅一次）：
 
 ```markdown
-# Power-Automate-Generator 反馈日志
+# {消费方项目名} — Power-Automate-Generator 反馈日志
 
-> 本文件是单一滚动反馈文件，永远 **append**。
-> 由 ``/report-issue`` skill 自动维护。
-> 分享给 Power-Automate-Generator 维护方时直接发整个文件即可。
+> 本文件记录 **{消费方项目名}** 项目使用 Power-Automate-Generator 时的反馈。
+> 由 ``/report-issue`` skill 追加维护，永不删除历史。
+> 已脱敏（无 token / connectionId / orgUrl / 个人邮箱 / 租户 GUID）。
 
 ```
 
@@ -95,18 +104,18 @@ applyTo: '**'
 
 告知用户：
 
-- ✅ 追加成功，当前文件已有 N 条反馈
+- ✅ 追加成功，`feedback/{消费方项目名}.md` 当前已有 N 条反馈
 - 复述写入的关键字段（不再展示敏感数据）
-- 提示：可随时把整个文件分享给 Power-Automate-Generator 维护方
+- 提示：维护方会用 `/triage-feedback` 定期归集处理
 
 ---
 
 ## 禁止事项
 
-- ❌ 创建多个反馈文件（永远只写
-  ``.copilot-feedback/power-automate-generator.md`` 一个）
-- ❌ 修改 Power-Automate-Generator 仓里的任何文件（你只是它的"用户"，
-  无权改它）
+- ❌ 把不同消费方项目的反馈混写到同一个文件（每个项目**独立**一个
+  `feedback/{项目名}.md`；也不要建 `.copilot-feedback/` 之类旧路径）
+- ❌ 修改工具库的 skills / components / instructions（只允许写 `feedback/`；
+  改进是维护方 triage 后才做的）
 - ❌ 发外网 / GitHub Issue / Email
 - ❌ 跳过脱敏自检
 - ❌ 输出 entry 前不让用户确认（要在 chat 里展示草稿、得到 "OK / 改" 后再写）
@@ -115,7 +124,7 @@ applyTo: '**'
 
 ## 成功标志
 
-- [ ] 文件 ``.copilot-feedback/power-automate-generator.md`` 存在或被新建
+- [ ] 文件 ``feedback/{消费方项目名}.md`` 存在或被新建（在工具库仓内）
 - [ ] 文件末尾有一条带 ISO 时间戳的新 entry
 - [ ] 用户在 chat 里看到 "已追加，当前 N 条" 的回执
 
@@ -123,12 +132,11 @@ applyTo: '**'
 
 ## 维护方如何收
 
-Power-Automate-Generator 仓的维护方有一个对应的内部 skill
-``/triage-feedback``（不公开），用户可以选择：
+反馈直接落在工具库仓的 `feedback/{消费方项目名}.md`。维护方有一个对应的内部
+skill ``/triage-feedback``（不公开），会：
 
-- 直接把 ``.copilot-feedback/power-automate-generator.md`` 文件粘到 chat
-- 用 ``gh issue create`` 把这个文件贴成一条 GitHub Issue
-- 邮件发给维护方
+- 扫 `feedback/` 下所有 `{项目名}.md` 文件
+- 按文件里的 entry 排优先级、改 skill / 组件 / instructions
+- 脱敏同步回 Power-Automate-Generator 公开仓，下次 fetch 就有改进
 
-维护方拿到后，会按文件里的 entry 排优先级、改 skill / 组件 / instructions，
-脱敏同步回 Power-Automate-Generator 公开仓。下次 fetch 就有改进。
+若消费方本地工具库不可写（只是远引用 skills），退回让用户手动把反馈粘给维护方。

@@ -17,6 +17,15 @@ applyTo: "**"
 3. **`checkFlowAlerts` 是独立后端** —— 不是前端校验，是 Copilot Studio 保存后调的 lint API，详见下面《校验 API》章节。
 4. **graph node 的 `data.config` 有完整字段集** —— 原本我们只存了 `operationId`，现实测还要 `operationName` / `displayName` / `category` / `categoryDisplayName` / `iconUri` / `brandColor` / `description` / `parametersSchema` / `outcomes[].outcomeSchema`。组件库要补 `graphTemplate` 字段装这些，详见 `component-library.instructions.md`。
 
+## ⛔ 硬规则：禁止给 trigger 加 concurrency control（2026-06-22 用户反馈）
+
+**绝对禁止**在 flow trigger 上加 `runtimeConfiguration: { concurrency: { runs: N } }`（触发器并发控制），**除非用户明确主动要求**。
+
+- **为什么禁**：`concurrency.runs=1` 会把触发器串行化，多条触发互相排队堵死，下游依赖状态/事件触发的 flow 看起来像"漏触发"（实为被前面的运行卡住）。实战中（Echo 状态机）就是因为某 AI 自作主张加了 `concurrency:{runs:1}` 导致整条链阻塞。
+- **平台陷阱（关键）**：**一旦 trigger 启用了 concurrency，就无法再用 PATCH/update 关掉它** —— 平台报 `CannotDisableTriggerConcurrency`。唯一移除办法是**删除并重建该 flow**（delete + POST create + 重新激活），代价大。所以**一开始就别加**。
+- **AI 行为约束**：生成 / 修改任何 flow 时，trigger 节点**不得**带 concurrency runtimeConfiguration。`runtimeConfiguration` 只允许出现在 **action** 节点上用于 `contentTransfer: { transferMode: 'Chunked' }`（大文件分块上传）这类正当用途，**不得**用于 trigger 并发。
+- **例外**：用户在对话里明确说"给这个触发器加并发限制/concurrency"时才加，并按用户给的 runs 值。
+
 ## API 端点参考
 
 > **所有 `{orgUrl}` / `{envId}` 占位符**都从用户当前 profile 读取：
@@ -506,3 +515,20 @@ https://make.powerautomate.com/environments/{envId}/approvals/received
 发测试邮件时，**不要在正文里写金额、日期、订单号等 Agent 应该从 Dataverse 自查的数据**。否则无法验证 Agent 是真的通过 MCP 查数据，还是从邮件正文直接抄。
 
 正确写法：邮件只描述"我要退某个产品"或"我有什么问题"，让 Agent 自己从发件人邮箱 → account → salesorder/incident 全链路查。
+
+### 数据事件触发器必须显式设 filteringattributes（Echo-Service 反馈 2026-06-18 ⚠️ 高频坑）
+
+Dataverse 数据事件触发器（`OpenApiConnectionWebhook` / `SubscribeWebhookTrigger`，即"当一行被更新/新建时"）**必须**在 `subscriptionRequest/filteringattributes` 里显式列出触发列。
+
+- **不设的后果**：默认**任意列变化都触发**。状态机 / 单实体多段 flow 自己写回非触发列（如 confidence、aicontext、状态字段）时，因触发条件仍满足，会**反复触发自己** → 重复执行（实测每段跑 2 次 → 重复发邮件、重复建单）。
+- **修复**：加 `'subscriptionRequest/filteringattributes': '<触发列逻辑名>'`（多列逗号分隔），只在指定列变化时触发。干净测试验证每段恢复只跑 1 次。
+- **AI 行为约束**：生成任何 Dataverse 数据事件触发的 flow 时，trigger 必须带 `filteringattributes`，绝不留空。尤其状态机 / 会写回同实体的 flow。
+
+### 表达式嵌套：内层表达式不能再带 `@`（Echo-Service 反馈 2026-06-18）
+
+在 `@if(...)` / `@concat(...)` 等外层表达式里嵌套 `@body(...)` / 其它函数时，**内层要用不带 `@` 的裸表达式**。
+
+- ❌ 错：`@if(@body('X')?['y'], ...)` → 部署报 `TemplateValidationError ... '@' at position N is not expected`
+- ✅ 对：`@if(body('X')?['y'], ...)`（内层 `body(...)` 不带 `@`，只有最外层一个 `@`）
+- 适用所有嵌套：`@concat`、`@if`、`@and`、`@equals` 等外层函数里的内层引用都去掉 `@`。
+

@@ -188,6 +188,9 @@
                         "body/message": "<提示词，从 graph 节点 inlineInstructions 推导>"
                     }
                 },
+                "limit": {
+                    "timeout": "P1D"
+                },
                 "runAfter": {},
                 "metadata": {
                     "operationMetadataId": "<guid>"
@@ -207,9 +210,12 @@
                         "connectionName": "shared_agentnode"
                     },
                     "parameters": {
-                        "Copilot": "<botSchemaName，如 cr8a6_TechAssistanceAgent>",
+                        "Copilot": "<botSchemaName，如 cr8a6_TechAssistanceAgent（schemaName 非 botid GUID）>",
                         "body/message": "<发给 agent 的消息>"
                     }
+                },
+                "limit": {
+                    "timeout": "P1D"
                 },
                 "runAfter": {},
                 "metadata": {
@@ -217,6 +223,35 @@
                 }
             }
         }
+    },
+    "knownPitfalls": {
+        "source": "Echo-Service 反馈 2026-06-18 / 06-22",
+        "items": [
+            {
+                "id": "agentId-must-be-schemaName",
+                "severity": "bug",
+                "summary": "InvokeAgent 的 body/agentId（Copilot 参数）必须填 agent 的 schemaName，不是 botid GUID",
+                "detail": "填 botid GUID（如 2a7cec85-...）→ 运行报 AgentNotFound（'agent was not found ... or published'），极具误导性（让人以为没发布）。正确填 bots 表的 schemaname（如 crff8_echointentclassifier_o7aBiR）→ 立即成功。"
+            },
+            {
+                "id": "structuredOutput-nested",
+                "severity": "bug",
+                "summary": "InvokeAgent 结构化输出是嵌套的 structuredOutput/<field>，不是顶层",
+                "detail": "返回 body = {conversationId, status, result(markdown 字符串), structuredOutput{...}}。读字段用 body('Run_agent')?['structuredOutput/serialNumber']，写顶层 ['serialNumber'] 读到 null。"
+            },
+            {
+                "id": "structuredOutput-nonascii-corruption",
+                "severity": "bug",
+                "summary": "structuredOutput 对非 ASCII 字符（em-dash –、emoji 等）有编码损坏",
+                "detail": "同一次调用：result（markdown 字符串字段）里的 – 正常；structuredOutput.subject 里同一个 – 变成乱码。影响：直接把 structuredOutput 的 subject/body 发邮件，客户会收到带乱码的主题/正文。绕行：含特殊排版的文本优先从 result 字段取，或在 agent instruction 里限制只用 ASCII 标点。"
+            },
+            {
+                "id": "action-timeout-P1D",
+                "severity": "enhancement",
+                "summary": "Run agent 类节点（InvokeAgent / InvokeDefinition）默认加 limit.timeout=P1D",
+                "detail": "agent 调用偶发很慢（文本几十秒~10 分钟，挂 SharePoint 知识库/PDF 更久）。平台默认 action timeout 较短时长调用会被超时中断整段 flow 失败。加 limit:{timeout:'P1D'} 后长调用不被误超时。本组件 clientdataTemplateInline / clientdataTemplateInvoke 已默认带上。"
+            }
+        ]
     },
     "selectionGuide": {
         "title": "AI 拼装 Workflow 时如何选 agent 节点 vs connector 节点",
