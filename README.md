@@ -95,7 +95,7 @@ For multiple tenants (e.g. Contoso + Fabrikam), create one profile file per tena
 | `/learn-component` | learn component, 学习组件 | Pull Swagger → write `components/actions/openapi/*.json` → update `_catalog.json`. Marks `verified=false` until a real deployment confirms. |
 | `/scan-environment` | scan environment, list flows, 扫环境, learn flow | Discover flows / connectors / connection references; optional `learn` mode batches `/learn-component`. |
 | `/configure-profile` | configure profile, add tenant, 配置环境 | Set up OAuth2 credentials for a new tenant (Device Code Flow). |
-| `/report-issue` | report issue, 反馈, this skill is wrong, 报个 bug | Append a feedback entry to **a single rolling file** in *your* workspace: `.copilot-feedback/power-automate-generator.md`. Auto-sanitizes tokens/URLs/emails. Share that file with the maintainer when convenient. |
+| `/report-issue` | report issue, 反馈, this skill is wrong, 报个 bug | Append a feedback entry to **`feedback/{your-project-name}.md`** in this tool repo (one file per consuming project, append-only). Auto-sanitizes tokens/URLs/emails. Requires a writable local clone of this repo. |
 
 ## Feedback Loop
 
@@ -103,9 +103,9 @@ Found a pitfall? Component schema looks off? A skill's SOP is unclear? Run `/rep
 
 1. Collect context (which skill/component/error, expected vs actual, repro steps)
 2. Strip secrets (Bearer tokens, client_secret, org URLs, emails)
-3. Show you the draft, then **append** it to `.copilot-feedback/power-automate-generator.md` in your workspace
+3. Show you the draft, then **append** it to `feedback/{your-project-name}.md` in this tool repo
 
-Same file, every time — feedback accumulates as a single rolling log you fully control. When you're ready, share the file with the maintainer (paste, attach to a GitHub Issue at [zaz8848/Power-Automate-Generator](https://github.com/zaz8848/Power-Automate-Generator/issues), or email). Improvements are triaged in the private lab repo and synced back here, so a future `git pull` brings the fix.
+One file per consuming project (e.g. `feedback/Echo-Service.md`), append-only — a rolling log you fully control. The maintainer triages all `feedback/*.md` files in the private lab repo and syncs fixes back here, so a future `git pull` brings the fix. (Requires a writable local clone; if you only reference the skills remotely, paste the feedback to the maintainer or open a GitHub Issue at [zaz8848/Power-Automate-Generator](https://github.com/zaz8848/Power-Automate-Generator/issues).)
 
 ## Three-layer Design
 

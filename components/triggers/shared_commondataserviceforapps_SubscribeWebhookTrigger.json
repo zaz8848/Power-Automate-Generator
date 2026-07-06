@@ -64,7 +64,8 @@
                                                                                      "parameters":  {
                                                                                                         "subscriptionRequest/message":  4,
                                                                                                         "subscriptionRequest/entityname":  "cre47_atestdocument",
-                                                                                                        "subscriptionRequest/scope":  4
+                                                                                                        "subscriptionRequest/scope":  4,
+                                                                                                        "subscriptionRequest/filteringattributes":  "<触发列逻辑名，多列逗号分隔 — 见 knownPitfalls>"
                                                                                                     },
                                                                                      "host":  {
                                                                                                   "apiId":  "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
@@ -73,5 +74,16 @@
                                                                                               }
                                                                                  }
                                                                   }
-                 }
+                 },
+    "knownPitfalls":  {
+                          "source":  "Echo-Service 反馈 2026-06-18",
+                          "items":  [
+                                        {
+                                            "id":  "filteringattributes-mandatory",
+                                            "severity":  "bug",
+                                            "summary":  "数据事件触发器必须显式设 subscriptionRequest/filteringattributes",
+                                            "detail":  "不设 → 默认任意列变化都触发。状态机 / 单实体多段 flow 自己写回非触发列（如 confidence、aicontext、状态字段）时，因触发条件仍满足，会反复触发自己 → 重复执行（实测每段跑 2 次 → 重复发邮件、重复建单）。修复：加 subscriptionRequest/filteringattributes='<触发列逻辑名>'（多列逗号分隔），只在指定列变化时触发。生成任何 Dataverse 数据事件触发的 flow 时 trigger 必须带此参数，绝不留空。"
+                                        }
+                                    ]
+                      }
 }
